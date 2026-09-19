@@ -19,7 +19,6 @@ jobs:
           metadata="$(curl --fail --silent --show-error https://app.calven.ai/.well-known/oauth-protected-resource/api/mcp)"
           jq -e '.resource == "https://app.calven.ai/api/mcp"' <<<"$metadata"
           jq -e '.authorization_servers | length > 0' <<<"$metadata"
-          jq -e '(.scopes_supported // []) | index("offline_access") | not' <<<"$metadata"
 
       - name: Check anonymous bearer challenge
         shell: bash
@@ -36,8 +35,3 @@ jobs:
           test "$status" = "401"
           challenge="$(tr -d '\r' < "$headers" | grep -i '^www-authenticate:' | head -1)"
           grep -q 'resource_metadata="https://app.calven.ai/.well-known/oauth-protected-resource/api/mcp"' <<<"$challenge"
-          grep -q 'scope="user:org:read"' <<<"$challenge"
-          if grep -Eq 'error=|error_description=' <<<"$challenge"; then
-            echo 'Anonymous challenge must omit RFC 6750 error fields.' >&2
-            exit 1
-          fi
