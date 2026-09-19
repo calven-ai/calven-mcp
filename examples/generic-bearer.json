@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "calven": {
+      "type": "streamable-http",
+      "url": "https://app.calven.ai/api/mcp",
+      "headers": {
+        "Authorization": "Bearer ${CALVEN_MCP_KEY}"
+      }
+    }
+  }
+}

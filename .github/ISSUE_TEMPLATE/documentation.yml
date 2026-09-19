@@ -1,0 +1,23 @@
+name: Documentation correction
+description: Report stale, unclear, or incorrect public documentation.
+title: "[Docs]: "
+labels: [documentation]
+body:
+  - type: input
+    id: page
+    attributes:
+      label: Page or file
+      placeholder: docs/authentication.md
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What is incorrect or unclear
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence or suggested correction
+      description: Do not include credentials, customer data, or private workspace content.

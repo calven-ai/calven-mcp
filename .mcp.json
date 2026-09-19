@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "calven": {
+      "type": "http",
+      "url": "https://app.calven.ai/api/mcp"
+    }
+  }
+}

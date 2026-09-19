@@ -1,0 +1,22 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "calven",
+  "version": "1.0.0",
+  "description": "Connect AI agents to Calven and add sourced workflows for briefs, competitive analysis, and persona review.",
+  "author": {
+    "name": "Calven",
+    "url": "https://calven.ai"
+  },
+  "homepage": "https://calven.ai/mcp",
+  "repository": "https://github.com/calven-ai/calven-mcp",
+  "license": "Apache-2.0",
+  "keywords": [
+    "calven",
+    "mcp",
+    "product-marketing",
+    "competitive-intelligence",
+    "customer-intelligence",
+    "positioning",
+    "messaging"
+  ]
+}

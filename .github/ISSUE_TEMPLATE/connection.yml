@@ -1,0 +1,45 @@
+name: Connection problem
+description: Report a client setup, authentication, discovery, or compatibility problem.
+title: "[Connection]: "
+labels: [connection]
+body:
+  - type: markdown
+    attributes:
+      value: Do not include an MCP key, OAuth token, customer name, tenant identifier, or private workspace content.
+  - type: input
+    id: client
+    attributes:
+      label: Client and version
+      placeholder: Claude Code 1.2.3
+    validations:
+      required: true
+  - type: input
+    id: operating-system
+    attributes:
+      label: Operating system
+      placeholder: macOS 15.6
+    validations:
+      required: true
+  - type: dropdown
+    id: authentication
+    attributes:
+      label: Authentication path
+      options:
+        - OAuth
+        - Personal MCP key
+        - Not sure
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Reproduction steps
+      description: Include the stage that failed and redacted output.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true

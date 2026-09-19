@@ -1,0 +1,43 @@
+name: Smoke production discovery
+
+on:
+  schedule:
+    - cron: "43 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check protected resource metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          metadata="$(curl --fail --silent --show-error https://app.calven.ai/.well-known/oauth-protected-resource/api/mcp)"
+          jq -e '.resource == "https://app.calven.ai/api/mcp"' <<<"$metadata"
+          jq -e '.authorization_servers | length > 0' <<<"$metadata"
+          jq -e '(.scopes_supported // []) | index("offline_access") | not' <<<"$metadata"
+
+      - name: Check anonymous bearer challenge
+        shell: bash
+        run: |
+          set -euo pipefail
+          headers="$(mktemp)"
+          body="$(mktemp)"
+          status="$(curl --silent --show-error --dump-header "$headers" --output "$body" --write-out '%{http_code}' \
+            --request POST \
+            --header 'Content-Type: application/json' \
+            --header 'Accept: application/json, text/event-stream' \
+            --data '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2026-07-28","capabilities":{},"clientInfo":{"name":"calven-public-smoke","version":"1.0.0"}}}' \
+            https://app.calven.ai/api/mcp)"
+          test "$status" = "401"
+          challenge="$(tr -d '\r' < "$headers" | grep -i '^www-authenticate:' | head -1)"
+          grep -q 'resource_metadata="https://app.calven.ai/.well-known/oauth-protected-resource/api/mcp"' <<<"$challenge"
+          grep -q 'scope="user:org:read"' <<<"$challenge"
+          if grep -Eq 'error=|error_description=' <<<"$challenge"; then
+            echo 'Anonymous challenge must omit RFC 6750 error fields.' >&2
+            exit 1
+          fi
