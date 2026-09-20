@@ -7,7 +7,7 @@ Calven supports two authentication paths for the hosted MCP server.
 Use OAuth for clients that support authorization discovery for remote MCP servers.
 
 ```text
-Resource: https://app.calven.ai/api/mcp
+Resource: https://api.calven.ai/mcp
 Transport: Streamable HTTP
 PKCE method: S256
 ```

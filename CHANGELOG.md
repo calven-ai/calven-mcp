@@ -4,6 +4,10 @@ All notable changes to the public MCP distribution and Agent Plugin are recorded
 
 ## [Unreleased]
 
+- Move the canonical MCP endpoint to `https://api.calven.ai/mcp`.
+- Rework the README around connection, plugin workflows, and PMM outcomes.
+- Change the repository license from Apache-2.0 to MIT.
+
 ## [1.0.0] - 2026-09-19
 
 - Add the Official MCP Registry descriptor for the hosted Streamable HTTP server.

@@ -23,4 +23,4 @@ Calven will acknowledge the report and coordinate validation and disclosure thro
 
 ## Scope
 
-This repository contains documentation, manifests, examples, validation scripts, and workflow skills. The hosted MCP server runs at `https://app.calven.ai/api/mcp`; its source is not published here.
+This repository contains documentation, manifests, examples, validation scripts, and workflow skills. The hosted MCP server runs at `https://api.calven.ai/mcp`; its source is not published here.

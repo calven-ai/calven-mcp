@@ -7,7 +7,7 @@ This repository is the public distribution surface for Calven's hosted MCP serve
 - `server.json` is the Official MCP Registry descriptor.
 - `plugin.json`, `mcp.json`, and `skills/` are the portable Agent Plugin.
 - `docs/tool-catalog.md` documents the public tools exposed by production.
-- `https://app.calven.ai/api/mcp` is the only production endpoint.
+- `https://api.calven.ai/mcp` is the only production endpoint.
 
 Keep `mcp.json`, `.mcp.json`, examples, documentation, and skills aligned with that endpoint. Run `node scripts/validate.mjs` after every change.
 

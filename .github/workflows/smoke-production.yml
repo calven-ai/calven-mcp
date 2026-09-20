@@ -16,8 +16,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          metadata="$(curl --fail --silent --show-error https://app.calven.ai/.well-known/oauth-protected-resource/api/mcp)"
-          jq -e '.resource == "https://app.calven.ai/api/mcp"' <<<"$metadata"
+          metadata="$(curl --fail --silent --show-error https://api.calven.ai/.well-known/oauth-protected-resource/mcp)"
+          jq -e '.resource == "https://api.calven.ai/mcp"' <<<"$metadata"
           jq -e '.authorization_servers | length > 0' <<<"$metadata"
 
       - name: Check anonymous bearer challenge
@@ -31,7 +31,7 @@ jobs:
             --header 'Content-Type: application/json' \
             --header 'Accept: application/json, text/event-stream' \
             --data '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2026-07-28","capabilities":{},"clientInfo":{"name":"calven-public-smoke","version":"1.0.0"}}}' \
-            https://app.calven.ai/api/mcp)"
+            https://api.calven.ai/mcp)"
           test "$status" = "401"
           challenge="$(tr -d '\r' < "$headers" | grep -i '^www-authenticate:' | head -1)"
-          grep -q 'resource_metadata="https://app.calven.ai/.well-known/oauth-protected-resource/api/mcp"' <<<"$challenge"
+          grep -q 'resource_metadata="https://api.calven.ai/.well-known/oauth-protected-resource/mcp"' <<<"$challenge"

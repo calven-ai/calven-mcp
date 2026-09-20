@@ -5,7 +5,7 @@
 Confirm the URL is exactly:
 
 ```text
-https://app.calven.ai/api/mcp
+https://api.calven.ai/mcp
 ```
 
 The hosted server uses Streamable HTTP. A stdio-only client needs a trusted bridge or another client.

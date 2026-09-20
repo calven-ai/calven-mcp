@@ -1,110 +1,112 @@
 # Calven MCP
 
-Give AI agents governed access to the product marketing intelligence your team keeps in Calven.
+Bring the&nbsp;product marketing intelligence your team keeps in&nbsp;Calven into ChatGPT, Claude, Codex, Cursor, and&nbsp;other MCP clients.
+
+## 1. Connect with MCP
+
+MCP lets your AI assistant work with Calven without copy-pasting strategy, customer evidence, or&nbsp;competitive research between tools.
+
+When your client asks for an&nbsp;MCP server URL, paste:
 
 ```text
-https://app.calven.ai/api/mcp
+https://api.calven.ai/mcp
 ```
 
-This is the public distribution repository for Calven's hosted Model Context Protocol server and portable Agent Plugin. The production server is operated by Calven. Its implementation is maintained in a private product repository.
+Choose **OAuth** and&nbsp;sign in&nbsp;to&nbsp;Calven. Your assistant gets the&nbsp;same workspace access and&nbsp;permissions you have.
 
-## Connect
+If your client does not support OAuth, create a&nbsp;personal key in&nbsp;[Calven → Settings → API & MCP](https://app.calven.ai/settings/api). See the&nbsp;[authentication guide](docs/authentication.md) for&nbsp;the&nbsp;key setup.
 
-Use OAuth when your client supports remote MCP authentication:
-
-```text
-MCP URL: https://app.calven.ai/api/mcp
-Transport: Streamable HTTP
-Authentication: OAuth 2.1 with PKCE
-```
-
-Two common command-line setups:
+<details>
+<summary>Command-line setup</summary>
 
 ```sh
-claude mcp add --transport http calven https://app.calven.ai/api/mcp
-codex mcp add calven --url https://app.calven.ai/api/mcp
+claude mcp add --transport http calven https://api.calven.ai/mcp
+codex mcp add calven --url https://api.calven.ai/mcp
 ```
 
-Clients that support custom headers can use a personal Calven MCP key instead. Create one in [Settings → API & MCP](https://app.calven.ai/settings/api), copy it once, and keep it outside source control.
+</details>
 
-```json
-{
-  "mcpServers": {
-    "calven": {
-      "type": "streamable-http",
-      "url": "https://app.calven.ai/api/mcp",
-      "headers": {
-        "Authorization": "Bearer ${CALVEN_MCP_KEY}"
-      }
-    }
-  }
-}
-```
+## 2. Add the&nbsp;Calven plugin
 
-See [authentication](docs/authentication.md) and the [client support matrix](docs/client-support.md) before rolling Calven out to a team.
+MCP connects your assistant to&nbsp;Calven. The&nbsp;plugin adds repeatable workflows for&nbsp;the&nbsp;PMM work you do with that intelligence.
 
-## What agents can do
+Install this repository in&nbsp;a&nbsp;client that supports [Agent Plugins 1.0](https://agent-plugins.org/). The&nbsp;plugin connects the&nbsp;same Calven MCP server and&nbsp;adds three skills:
 
-- Read the workspace overview and product catalog.
-- Read positioning, messaging, ICP, product, and win/loss documents.
-- Build competitive briefs from dossiers, battle cards, and recent signals.
-- Query customer voice, market research, product changes, claims, and permitted CRM records.
-- Review a draft against named personas through an asynchronous review task.
+- **Workspace brief:** turn strategy, market, customer, and&nbsp;win/loss evidence into a&nbsp;sourced brief.
+- **Competitive brief:** compare positioning, proof points, objections, deal evidence, and&nbsp;recent competitor moves.
+- **Persona copy review:** pressure-test copy against the&nbsp;buyer, stakeholder, and&nbsp;user personas in&nbsp;your workspace.
 
-Calven exposes 11 focused tools. Ten are read-only. `review_against_personas` starts a review task and returns a task ID; it does not publish content. See the [tool catalog](docs/tool-catalog.md).
+Direct MCP users get the&nbsp;same Calven data and&nbsp;actions. The&nbsp;plugin adds the&nbsp;workflow instructions. See [plugin setup](docs/plugin.md).
 
-## Agent Plugin
+## 3. What your agents can do
 
-The repository root is an [Agent Plugins 1.0](https://agent-plugins.org/) package:
-
-- `plugin.json` describes the package.
-- `mcp.json` connects the hosted Calven server.
-- `skills/` adds three sourced PMM workflows.
-
-Import the repository root in a client that implements Agent Plugins 1.0. Direct MCP users get the same server tools without the workflow skills. See [plugin packaging](docs/plugin.md).
-
-## Example requests
+### Start with the&nbsp;full picture
 
 ```text
-Build a sourced workspace brief for our payments product.
-
-Compare our positioning with Acme. Separate documented evidence from gaps.
-
-Review this landing-page draft against our buyer personas. Show the findings and do not rewrite it yet.
+Build a sourced brief for our payments product. Show our positioning, ICP,
+customer themes, market shifts, and the evidence gaps I should resolve.
 ```
 
-## Trust boundaries
-
-- Every request is authenticated as a Calven user and evaluated against that user's workspace role and permissions.
-- MCP keys are personal credentials. They are shown once, stored hashed by Calven, and can be regenerated or revoked.
-- Empty results are reported as gaps. The skills tell agents not to fill missing workspace evidence from model memory.
-- The public repository contains no production credentials and no private server source.
-
-Read [data handling](docs/data-handling.md), [security reporting](SECURITY.md), and [conformance](docs/conformance.md) for the complete public contract.
-
-## Repository map
+### Prepare for&nbsp;a&nbsp;competitive deal
 
 ```text
-server.json              Official MCP Registry descriptor
-plugin.json              Agent Plugin manifest
-mcp.json                 Portable remote MCP configuration
-skills/                  Reusable PMM workflows
-docs/                    Auth, tools, trust, compatibility, and operations
-examples/                Copyable connection configurations
-scripts/validate.mjs     Manifest and drift checks
-.github/workflows/       Validation and public production smoke tests
+Compare us with Acme for an enterprise buyer. Give me where we win, where they
+win, the proof points to use, and the objections our deal evidence supports.
 ```
 
-## Support
+### Pull the&nbsp;voice of&nbsp;the&nbsp;customer into messaging
 
-- Product and setup guide: [calven.ai/mcp](https://calven.ai/mcp)
-- Connection problems: [open an issue](https://github.com/calven-ai/calven-mcp/issues/new/choose)
-- Security reports: follow [SECURITY.md](SECURITY.md)
-- Privacy: [calven.ai/privacy](https://calven.ai/privacy)
-- Terms: [calven.ai/terms](https://calven.ai/terms)
+```text
+Show the strongest customer themes and quotes behind our onboarding message.
+Keep each conclusion tied to its source.
+```
 
-## Contributing
+### Pressure-test a&nbsp;draft
 
-Documentation, compatibility results, examples, and workflow-skill improvements are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request.
+```text
+Review this landing-page draft against our buyer personas. Rank the findings by
+severity and show me the revision priorities before rewriting anything.
+```
 
-Licensed under Apache 2.0. See [LICENSE](LICENSE).
+Your agents can also read positioning, messaging, ICP, product, and&nbsp;win/loss documents; inspect battle cards and&nbsp;competitor dossiers; query claims and&nbsp;product changes; and&nbsp;work with permitted CRM records. See the&nbsp;[capability guide](docs/tool-catalog.md) for&nbsp;the&nbsp;complete list.
+
+## Grounded in&nbsp;your workspace
+
+- Every request runs with your Calven identity, role, and&nbsp;workspace permissions.
+- Answers stay tied to&nbsp;the&nbsp;strategy and&nbsp;evidence your team keeps in&nbsp;Calven.
+- Missing evidence stays a&nbsp;gap. The&nbsp;skills tell agents not to&nbsp;replace it&nbsp;with model memory.
+- Persona review starts a&nbsp;review task. It&nbsp;does not publish or&nbsp;rewrite your copy without being asked.
+
+Read [data handling](docs/data-handling.md) and&nbsp;[security reporting](SECURITY.md) for&nbsp;the&nbsp;public trust boundary.
+
+## Setup help
+
+- [MCP setup and&nbsp;product guide](https://calven.ai/mcp)
+- [Authentication](docs/authentication.md)
+- [Client support](docs/client-support.md)
+- [Troubleshooting](docs/troubleshooting.md)
+- [Open a&nbsp;connection issue](https://github.com/calven-ai/calven-mcp/issues/new/choose)
+
+## For&nbsp;developers and&nbsp;admins
+
+This repository is&nbsp;the&nbsp;public distribution surface for&nbsp;Calven's hosted MCP server. The&nbsp;production server implementation remains private.
+
+| Path | Purpose |
+| --- | --- |
+| `server.json` | Official MCP Registry descriptor |
+| `plugin.json` | Agent Plugin manifest |
+| `mcp.json` | Portable MCP connection |
+| `skills/` | PMM workflow skills |
+| `docs/` | Authentication, capabilities, compatibility, trust, and&nbsp;operations |
+| `scripts/validate.mjs` | Manifest, endpoint, credential, skill, and&nbsp;catalog checks |
+
+Run the&nbsp;public checks with:
+
+```sh
+npm ci
+npm run validate
+```
+
+Documentation, compatibility results, examples, and&nbsp;skill improvements are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a&nbsp;pull request.
+
+Licensed under the&nbsp;MIT License. See [LICENSE](LICENSE).

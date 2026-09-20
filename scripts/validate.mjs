@@ -6,7 +6,7 @@ import Ajv2020 from 'ajv/dist/2020.js';
 import addFormats from 'ajv-formats';
 
 const ROOT = path.resolve(import.meta.dirname, '..');
-const ENDPOINT = 'https://app.calven.ai/api/mcp';
+const ENDPOINT = 'https://api.calven.ai/mcp';
 const EXPECTED_TOOLS = [
   'get_workspace_overview',
   'list_products',

@@ -9,7 +9,7 @@
   },
   "homepage": "https://calven.ai/mcp",
   "repository": "https://github.com/calven-ai/calven-mcp",
-  "license": "Apache-2.0",
+  "license": "MIT",
   "keywords": [
     "calven",
     "mcp",
