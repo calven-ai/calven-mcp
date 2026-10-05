@@ -17,6 +17,9 @@ const EXPECTED_TOOLS = [
   'get_record',
   'get_competitor',
   'get_persona',
+  'get_insights',
+  'get_insights_overview',
+  'get_insight_detail',
   'review_against_personas',
   'get_task',
 ];
@@ -106,6 +109,35 @@ async function validateSkills() {
   }
 }
 
+const USE_CASE_SECTIONS = [
+  '## What the team is trying to do',
+  '## The work, end to end',
+  '## Recommended prompts',
+  '## Ad hoc questions',
+  '## Good practice',
+  '## Not covered today',
+];
+
+async function validateUseCases() {
+  const dir = path.join(ROOT, 'use-cases');
+  let count = 0;
+  for (const absolute of await filesUnder(dir)) {
+    const relative = path.relative(ROOT, absolute);
+    if (!relative.endsWith('.md') || path.basename(relative) === 'README.md' || relative === 'use-cases/prompt-patterns.md') continue;
+    const source = await readFile(absolute, 'utf8');
+    count += 1;
+    for (const section of USE_CASE_SECTIONS) {
+      check(source.includes(`\n${section}\n`), `${relative}: missing section "${section}"`);
+    }
+    for (const match of source.matchAll(/\]\(([^)]+\.md)(?:#[^)]*)?\)/g)) {
+      const target = path.resolve(path.dirname(absolute), match[1]);
+      check(await readFile(target, 'utf8').then(() => true, () => false), `${relative}: broken link ${match[1]}`);
+    }
+  }
+  check(count > 0, 'use-cases/: no pages found');
+  return count;
+}
+
 const server = await json('server.json');
 const plugin = await json('plugin.json');
 const portableMcp = await json('mcp.json');
@@ -127,6 +159,7 @@ const catalogTools = [...catalog.matchAll(/^\| `([a-z0-9_]+)` \|/gm)].map((match
 check(JSON.stringify(catalogTools) === JSON.stringify(EXPECTED_TOOLS), 'docs/tool-catalog.md: tool list or order drift');
 
 await validateSkills();
+await validateUseCases();
 await validateSchemas([
   ['server.json', server],
   ['plugin.json', plugin],
@@ -147,4 +180,4 @@ if (failures.length > 0) {
   process.exit(1);
 }
 
-console.log(`Validated ${EXPECTED_TOOLS.length} tools, 3 manifests, and the portable skills.`);
+console.log(`Validated ${EXPECTED_TOOLS.length} tools, 3 manifests, the portable skills, and the use-case library.`);
