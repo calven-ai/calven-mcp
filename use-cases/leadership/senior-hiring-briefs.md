@@ -1,32 +1,20 @@
 # Senior hiring briefs
 
-**Team:** Leadership · also people and talent, product marketing
-**Impact:** Medium. Interviewing a VP of Sales, a CMO or a head of product means testing whether they understand the buyer, the competition and the market. Calven gives the interviewer the brief and the questions; it also gives the candidate pack the approved story.
-**Prerequisites:** strategy documents approved (ICP, positioning, messaging), competitors tracked. Better with win/loss surveys (the real loss reasons to probe) and call transcripts.
 
-## What the team is trying to do
+You're interviewing a VP of Sales, a CMO or a head of product, and you need to test whether they really get the buyer, the competition and why deals are lost. You get an interviewer brief, a question set with answers the evidence supports, and a candidate pre-read with the approved positioning. Calven brings the ICP, personas, competitors and open strategic questions, so you're judging the candidate against the company's actual situation.
 
-Interview senior GTM and product candidates against the company's actual situation: the ICP, the personas, the competitors, why deals are lost, and the open strategic questions. Done means an interviewer brief, a question set with answers the evidence supports, and a candidate pre-read with the approved positioning.
+## Prompts
 
-## The work, end to end
-
-| # | Step | What the team does | Where Calven helps | Pulls from |
-|---|---|---|---|---|
-| 1 | The interviewer brief | What the interviewer should know | ICP summary, personas, Tier 1 competitors, win/loss headline, top loss reasons | ICP document, persona, competitors, Insights overview |
-| 2 | The question set | Case questions with evidence-backed answers | Loss reasons, product gaps, competitor strengths, trends | Deal drivers, Insights overview, competitor deep dive, trends |
-| 3 | The candidate pre-read | What we share before the final round | Positioning, messaging boilerplate, product brief overview | Positioning, messaging, product brief |
-| 4 | Scorecard | What good answers contain | The same evidence | |
-| 5 | Interviews, references, offer | The rest | Calven does not help here | |
-
-## Recommended prompts
-
-### Step 1 and 2: interviewer brief and questions
+### Build the interviewer brief and case questions
 
 ```
-Using Calven MCP, brief me for interviewing a [role] candidate.
+Using Calven MCP, brief me for interviewing a candidate for the role below.
+
+FILL IN
+- Role: [role]
 
 CONTEXT
-I am interviewing for [role]. I want to test whether they understand our buyer, our competition and why we lose, and I want questions with answers our evidence supports.
+I am interviewing for the role. I want to test whether they understand our buyer, our competition and why we lose, and I want questions with answers our evidence supports.
 
 PULL FROM THE UNIVERSE
 - The ICP summary and segment tiers; the primary personas and their pains.
@@ -43,14 +31,15 @@ The brief and the question set.
 
 GROUNDING
 Use only the Universe, cited with samples. Do not include financials.
-
-[name the role]
 ```
 
-### Step 3: the candidate pre-read
+### Assemble the finalist pre-read
 
 ```
-Using Calven MCP, assemble the candidate pre-read for the [role] final round.
+Using Calven MCP, assemble the candidate pre-read for the final round for the role below.
+
+FILL IN
+- Role: [role]
 
 CONTEXT
 We share a short pack with finalists: who we are, who we serve, how we position, what the product does. Nothing confidential.
@@ -66,17 +55,19 @@ The pack.
 
 GROUNDING
 Use only the approved documents, cited. Exclude win rates, deal data, competitor weaknesses and anything from the CRM.
-
-[name the role]
 ```
 
-### Step 4: score a candidate's answers against the evidence
+### Score a candidate's answers against the evidence
 
 ```
 Using Calven MCP, score this candidate's answers against what our evidence says.
 
+FILL IN
+- Role: [role]
+- Notes: [paste your interview notes]
+
 CONTEXT
-Below are my notes from the [role] interview: the case questions and what the candidate said about our buyer, our competition, why we lose and what they would change first.
+The notes are from the interview for the role: the case questions and what the candidate said about our buyer, our competition, why we lose and what they would change first.
 
 PULL FROM THE UNIVERSE
 - The ICP summary and the primary personas' pains.
@@ -94,8 +85,6 @@ A scorecard table, then three lines on whether they understand our situation.
 
 GROUNDING
 Judge only against the Universe, cited with samples. Mark a question as "no evidence either way" rather than scoring on opinion. Do not include financials.
-
-[paste your interview notes]
 ```
 
 ## Ad hoc questions
@@ -109,14 +98,3 @@ Judge only against the Universe, cited with samples. Mark a question as "no evid
 - What is our positioning statement?
 - Which segment does the ICP dashboard say we should expand into, and would a [role] candidate know why?
 - What is our competitive win rate against [competitor], with n?
-
-## Good practice
-
-- Build the questions from real loss reasons and gaps; candidates who have done the job recognise them.
-- Keep the pre-read to approved documents. Interview content and CRM data stay internal.
-- Reuse the brief for every candidate in the search.
-
-## Not covered today
-
-- Candidate sourcing, references, compensation.
-- Anything about the candidate's current employer, even if tracked as a competitor; keep that to the public record.

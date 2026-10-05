@@ -1,39 +1,24 @@
 # Content gap analysis and editorial planning
 
-**Team:** Content marketing · also product marketing, demand generation, SEO
-**Impact:** High. The quarterly plan decides where three months of writing go. A plan built from the objections buyers raise, the pains with no content and the trends the company has a view on fills the funnel where it leaks; a plan built from keyword volume alone fills the blog.
-**Prerequisites:** strategy documents approved (messaging with its persona × stage matrix, positioning, ICP), personas approved. Better with call transcripts ingested (themes, objections), market research run (trends, opportunities) and win/loss surveys running (loss drivers to pre-empt). Keyword demand stays in the SEO tool.
 
-## What the team is trying to do
+It's time to decide what to write next quarter and why. You walk away with a calendar where every piece names its persona, stage, message and evidence, and the team can defend each slot. Calven does the gap analysis your content inventory can't: the under-served personas and stages, the objections and pains no asset answers, the trends that deserve a point of view and the competitors that need a page.
 
-Decide what to write next quarter and why: which personas and stages are under-served, which objections and pains no asset answers, which trends deserve a point of view, which competitor needs a page. Done means a calendar where every piece names its persona, stage, message and the evidence it will carry, and the team can defend each slot. The hard part is the gap analysis: the content inventory says what exists, nothing says what buyers are asking for and not finding.
+## Prompts
 
-## The work, end to end
-
-| # | Step | What the team does | Where Calven helps | Pulls from |
-|---|---|---|---|---|
-| 1 | Inventory by persona and stage | Map existing assets to the matrix | Calven does not hold the assets. It supplies the matrix to map against | Messaging matrix |
-| 2 | Demand gaps | Keyword and topic opportunities | Calven does not help here | |
-| 3 | Buyer gaps | Questions, pains and objections with no content | Themes by mention count, objections by persona, the objections messaging does not cover, language gaps | Themes, quotes, persona canvases, messaging dashboard |
-| 4 | Revenue gaps | What costs deals that content could pre-empt | Loss drivers, costly objections, product gaps buyers name | Win/loss dashboard, voice-of-customer (tied to revenue), deal drivers |
-| 5 | Market gaps | Trends and opportunities with no point of view | Trends by severity and horizon, opportunities by impact | Trends, market opportunities, analyst findings |
-| 6 | Competitive gaps | Competitors without a comparison page | Competitors by deal frequency and win rate | Competitive intelligence dashboard, competitors |
-| 7 | Prioritise | Score and pick | Rank by evidence volume, stage, revenue at stake | All of the above |
-| 8 | Build the calendar | Slots with persona, stage, message, evidence, format | A calendar entry per piece with its brief inputs | Messaging matrix, persona, quotes |
-| 9 | Brief | See [content briefs](content-briefs.md) | | |
-
-## Recommended prompts
-
-### Step 3: buyer gaps
+### Find the buyer gaps in your content
 
 ```
 Using Calven MCP, find the questions, pains and objections our content should answer.
 
+FILL IN
+- Window: [time window, e.g. quarter]
+- Inventory: [paste the inventory]
+
 CONTEXT
-Below is our content inventory mapped to persona and stage (title, persona, stage, topic). I want the buyer-side gaps.
+The inventory is our content mapped to persona and stage (title, persona, stage, topic). I want the buyer-side gaps.
 
 PULL FROM THE UNIVERSE
-- The voice-of-customer themes with the most mentions this [window]: pains, jobs, movers.
+- The voice-of-customer themes with the most mentions in the window: pains, jobs, movers.
 - Each persona's objections from its canvas, and which objections our messaging covers.
 - The language gaps between how customers talk and how our messaging talks.
 
@@ -47,20 +32,21 @@ A gap table and the messaging list, with sources.
 
 GROUNDING
 Use only themes, canvases and messaging in the Universe and cite them with mention counts. Do not add topics from your own knowledge of the category.
-
-[paste the inventory]
 ```
 
-### Step 4: revenue gaps
+### Find losses content could pre-empt
 
 ```
 Using Calven MCP, find what costs us deals that content could pre-empt.
+
+FILL IN
+- Window: [time window, e.g. last two quarters]
 
 CONTEXT
 I am planning next quarter's content. I want the pieces that address why we lose.
 
 PULL FROM THE UNIVERSE
-- The top loss drivers and costly objections from win/loss, last [window], with n.
+- The top loss drivers and costly objections from win/loss in the window, with n.
 - The product gaps buyers name most, with the deals they touched.
 - Loss reasons by segment and by competitor.
 
@@ -75,13 +61,16 @@ GROUNDING
 Use only win/loss and voice-of-customer data in the Universe and cite n and the window. Do not claim content will fix a product gap; mark those for product.
 ```
 
-### Step 5 and 6: market and competitive gaps
+### Find trends and competitors with no content
 
 ```
 Using Calven MCP, find the trends and competitors we have no content for.
 
+FILL IN
+- Existing content: [paste the list of existing pieces and pages]
+
 CONTEXT
-Below are our published point-of-view pieces and comparison pages. I want the ones missing.
+The existing content is our published point-of-view pieces and comparison pages. I want the ones missing.
 
 PULL FROM THE UNIVERSE
 - Trends by severity and horizon, and opportunities by impact, with their "so what".
@@ -97,17 +86,21 @@ Two ranked lists with sources.
 
 GROUNDING
 Use only trends, positioning and competitive data in the Universe and cite them. Do not add trends or competitors from your own knowledge.
-
-[paste the list of existing pieces and pages]
 ```
 
-### Step 7 and 8: the quarterly calendar
+### Build next quarter's editorial calendar
 
 ```
 Using Calven MCP, build next quarter's editorial calendar.
 
+FILL IN
+- Gap lists: [paste the gap lists]
+- Keywords: [paste the keyword opportunities]
+- Capacity: [number] pieces per month
+- Format mix: [the team's format mix]
+
 CONTEXT
-Below are the gap lists from the buyer, revenue, market and competitive passes, the keyword opportunities from the SEO tool, and our capacity: [number] pieces per month. Mix: [the team's format mix].
+The gap lists come from the buyer, revenue, market and competitive passes; the keyword opportunities come from the SEO tool.
 
 PULL FROM THE UNIVERSE
 - The messaging matrix, so every slot has a persona, stage and message.
@@ -123,20 +116,22 @@ The calendar as a table and the backlog beneath it, with sources.
 
 GROUNDING
 Use only the matrix, canvases and the pasted gap lists, and cite them. Keep the keyword data as I gave it. Do not invent personas or stages the matrix does not have.
-
-[paste the gap lists, the keyword opportunities, capacity and format mix]
 ```
 
-### Mid-quarter check
+### Check what changed mid-quarter
 
 ```
 Using Calven MCP, tell me what has changed since we set the calendar.
 
+FILL IN
+- Date set: [date the calendar was set]
+- Open slots: [paste the open slots]
+
 CONTEXT
-The calendar was set on [date]. Below are the slots still open. I want to know whether to swap any.
+The open slots are the ones still unfilled. I want to know whether to swap any.
 
 PULL FROM THE UNIVERSE
-- Themes that moved most since [date], and new objections on calls.
+- Themes that moved most since the calendar was set, and new objections on calls.
 - New or escalated trends and competitor signals.
 - New loss drivers.
 
@@ -148,9 +143,7 @@ OUTPUT
 A swap list with the reason and the source, or "no change".
 
 GROUNDING
-Use only changes recorded in the Universe since [date] and cite them.
-
-[paste the open slots and the date]
+Use only changes recorded in the Universe since the calendar was set and cite them.
 ```
 
 ## Ad hoc questions
@@ -167,19 +160,3 @@ Use only changes recorded in the Universe since [date] and cite them.
 - Where does [persona] read and gather, so I know where to distribute?
 - What were the costliest objections last quarter?
 - Which opportunity has the highest impact rating and no content?
-
-## Good practice
-
-- Run the four gap passes separately, then merge. Each has its own evidence and its own owner.
-- Rank on evidence volume and deals, not on what the team wants to write.
-- Give the PMM the list of objections messaging does not cover. The gap is in the framework before it is in the content.
-- Keep the keyword data in the plan but let the buyer gaps set the order.
-- Every calendar slot carries its persona, stage and evidence. The brief is then half written.
-- Rerun the mid-quarter check once. Themes and signals move faster than calendars.
-
-## Not covered today
-
-- The content inventory and keyword demand. Paste them in.
-- The calendar tool and assignments.
-- Updating the messaging matrix when a gap is found. The messaging agent and the PMM do that in Calven.
-- Search demand for a trend. Calven says the trend matters to buyers; the SEO tool says whether anyone searches it.

@@ -1,35 +1,20 @@
 # Feedback routing to product
 
-**Team:** Customer support · also customer success, product management, product marketing
-**Impact:** High. Support hears every request and complaint first. Routing the pattern instead of the loudest ticket, with how often it comes up and what it costs in deals, is what gets product to act.
-**Prerequisites:** call transcripts ingested (themes, quotes). Better with win/loss surveys running (deal drivers, product gaps) and own website monitored (product changes, so a "bug" that is actually a change is recognised).
 
-## What the team is trying to do
+Support's feedback report is anecdotes from the ticket queue, and product discounts it. You get a weekly report product and leadership trust: the top three requests with counts, quotes and revenue context, which themes cost deals, and the verbatim behind each. Calven puts tickets on the same evidence base as sales calls and win/loss, so product sees the same themes in all three.
 
-Turn individual tickets into a weekly report product and leadership trust: which themes customers raise, how often, with what sentiment, which ones cost deals, and the verbatim behind each. Done means the top three requests this week are named with counts, quotes and revenue context, and product can see the same themes in sales calls and win/loss. Without a shared evidence base, support's report is anecdotes from the ticket queue and product discounts it.
+## Prompts
 
-## The work, end to end
-
-| # | Step | What the team does | Where Calven helps | Pulls from |
-|---|---|---|---|---|
-| 1 | Tag the ticket | Categorise the feedback: request, complaint, confusion, praise | Which existing theme it belongs to, so tags match the company's taxonomy | Themes |
-| 2 | Recognise the pattern | Check whether this is new or a known theme | The theme's mention count, sentiment and momentum; the quotes under it from calls | Themes, quotes, voice-of-customer dashboard |
-| 3 | Check it is not a change | Rule out that the "bug" is a recent product change | Product changes in the window, with the customer-facing documents they left stale | Product changes, drift findings |
-| 4 | Size the cost | Find whether the theme shows up in deals | Product gaps and loss reasons that match, with deals touched and amount at stake | Win/loss dashboard, deal drivers, CRM deals (product feedback) |
-| 5 | Pick the verbatims | Choose the quotes that make the case | The strongest customer quotes per theme, attributed | Quotes |
-| 6 | Write the weekly report | Top themes, counts, trend, cost, quotes, recommendation | A draft report from the call-side evidence, which the agent merges with the ticket-side counts | Themes, quotes, win/loss dashboard |
-| 7 | Post and discuss | Share with product, join the feedback review | Calven does not help here | |
-| 8 | Close the loop | Tell customers when the request ships | Which product change answers which theme | Product changes, themes |
-
-## Recommended prompts
-
-### Step 1 and 2: place a ticket in the taxonomy
+### Tag a ticket to a customer theme
 
 ```
 Using Calven MCP, tell me which customer-voice theme this ticket belongs to and how common it is.
 
+FILL IN
+- Ticket: [paste the ticket]
+
 CONTEXT
-Below is a ticket. I want to tag it consistently with how the company already groups customer feedback, and know whether it is a known pattern.
+I want to tag the ticket consistently with how the company already groups customer feedback, and know whether it is a known pattern.
 
 PULL FROM THE UNIVERSE
 - The customer-voice themes, with mentions, sentiment and category.
@@ -45,20 +30,23 @@ The tag, the count and the quotes, with sources.
 
 GROUNDING
 Use only themes and quotes in the Universe. Do not create a theme name that does not exist; say "new" instead.
-
-[paste the ticket]
 ```
 
-### Step 3: rule out a product change
+### Rule out a recent product change
 
 ```
 Using Calven MCP, check whether the issue in this ticket is a recent product change.
 
+FILL IN
+- Behaviour: [what stopped working or changed]
+- Feature: [feature]
+- Ticket: [paste the ticket]
+
 CONTEXT
-A customer reports that [behaviour] stopped working or changed. Before I escalate as a bug I want to know whether we changed it on purpose.
+A customer reports that the behaviour stopped working or changed. Before I escalate as a bug I want to know whether we changed it on purpose.
 
 PULL FROM THE UNIVERSE
-- Product changes in the last 60 days that touch [feature], with the evidence quote and source.
+- Product changes in the last 60 days that touch the feature, with the evidence quote and source.
 - Any help article or published document the change left stale.
 
 ANSWER
@@ -70,17 +58,18 @@ A three-line answer and the list of stale documents.
 
 GROUNDING
 Cite the change record. If no change matches, say so and treat it as a bug.
-
-[paste the ticket]
 ```
 
-### Step 4 and 5: size the cost with evidence
+### Size what a request costs
 
 ```
-Using Calven MCP, tell me what [theme or request] costs us.
+Using Calven MCP, tell me what the theme or request below costs us.
+
+FILL IN
+- Theme: [theme or request]
 
 CONTEXT
-Support keeps hearing [theme or request]. I want to show product what it is worth, not only how often it comes up.
+Support keeps hearing this theme. I want to show product what it is worth, not only how often it comes up.
 
 PULL FROM THE UNIVERSE
 - The theme's mentions and sentiment from calls.
@@ -98,11 +87,9 @@ A half-page case with sources and the window used.
 
 GROUNDING
 Numbers come from the dashboards, never from adding rows. Cite n and the window. If the theme does not appear in deals, say so plainly.
-
-[name the theme or request]
 ```
 
-### Step 6: the weekly feedback report
+### Draft the weekly feedback report
 
 ```
 Using Calven MCP, draft this week's customer feedback report for product.
@@ -129,7 +116,7 @@ GROUNDING
 Cite every count with n and window. Do not merge my ticket numbers into Calven counts; keep the two sources separate.
 ```
 
-### Step 8: close the loop
+### Find themes recent changes answered
 
 ```
 Using Calven MCP, which customer themes did recent product changes answer?
@@ -165,19 +152,3 @@ Match only where the change record and the theme clearly describe the same thing
 - Which help articles went stale after the last release?
 - What do customers say about onboarding, in their words?
 - Which product feedback categories appear most on lost deals?
-
-## Good practice
-
-- Use the company's theme names. A ticket tagged in Calven's taxonomy can be compared with calls and deals; a free-text tag cannot.
-- Report the count and the cost together. Mentions get sympathy; deals touched get a decision.
-- Keep ticket counts and call counts separate in the report. They are different samples and product will ask.
-- Check product changes before escalating a bug. Half the "it broke" tickets after a release are deliberate changes with stale articles.
-- Quote verbatim and attribute. A paraphrased complaint is an opinion.
-- Run the close-the-loop prompt monthly. Customers who asked and were told are the ones who renew.
-
-## Not covered today
-
-- Ticket volume, tags and trends from the help desk. Calven holds call and survey evidence; the agent merges the two.
-- Posting the report or opening a product ticket.
-- Product analytics and usage. Calven knows what customers said, not what they clicked.
-- Creating a new theme. The voice-of-customer agent clusters themes from the evidence in Calven.

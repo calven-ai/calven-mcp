@@ -1,35 +1,23 @@
 # Deal desk and pricing feedback
 
-**Team:** Sales leadership · also finance and investor relations, product marketing, revenue operations
-**Impact:** Medium. Discount approvals and the quarterly pricing conversation with finance both run on anecdote; what buyers said about price in surveys, how often "pricier" deals still close, and where competitors moved their pricing turn it into evidence.
-**Prerequisites:** win/loss surveys running (pricing verdicts, drivers), CRM connected (deals with price feedback), competitors tracked (pricing in dossiers, pricing signals). Product brief approved for our own packaging.
 
-## What the team is trying to do
+A discount request is on your desk, and finance and PMM want the quarterly pricing conversation. You get a deal-desk check that takes a minute and a one-page pricing read with samples and the buyer's words: where buyers place us against competitors, whether price actually decides deals, and what competitors changed. Calven turns both from anecdote into evidence.
 
-Decide a discount request with the pattern behind it, and give finance and PMM a quarterly read on price: where buyers place us against competitors, whether price actually decides deals, and what competitors changed. Done means a one-page pricing read with samples and the buyer's words, and a deal-desk check that takes a minute.
+## Prompts
 
-## The work, end to end
-
-| # | Step | What the team does | Where Calven helps | Pulls from |
-|---|---|---|---|---|
-| 1 | The pricing picture | Where buyers place us | Pricing verdicts (cheaper, on par, pricier) and the deals behind each | Win/loss dashboard (surveys: pricing and legal), pricing deals drill-down |
-| 2 | Does price decide | Price as a deciding driver | Commercials drivers on won and lost deals, with quotes | Deal drivers, win/loss (deciding forces) |
-| 3 | Competitor pricing | What they charge and changed | Pricing and packaging in dossiers; pricing signals | Competitor deep dive, competitive signals, competitive intelligence (market movement) |
-| 4 | Deal-desk check | Should this discount be approved | Similar deals' price feedback and outcome; what the battlecard says about the competitor's pricing | CRM deals, competitor battlecard |
-| 5 | Our packaging | What the plan includes | Pricing and packaging in the product brief | Product brief |
-| 6 | Decide and record | Approve, counter, decline | Calven does not help here | |
-
-## Recommended prompts
-
-### Steps 1 to 3: the quarterly pricing read
+### Build the quarterly pricing read
 
 ```
-Using Calven MCP, build the pricing read for [quarter] for finance and PMM.
+Using Calven MCP, build the pricing read for the quarter below for finance and PMM.
+
+FILL IN
+- Quarter: [quarter]
+- Competitors: [the two competitors to compare]
 
 PULL FROM THE UNIVERSE
 - The pricing verdicts from win/loss surveys (cheaper, on par, pricier) and the win rate within each bucket, with samples.
 - The commercials drivers on won and lost deals, with the buyer's words.
-- Pricing and packaging for [competitor] and [competitor] from their dossiers, and any pricing signals this quarter.
+- Pricing and packaging for the competitors from their dossiers, and any pricing signals this quarter.
 - Our pricing and packaging from the product brief.
 
 BUILD
@@ -43,14 +31,16 @@ A one-page read with samples and sources.
 
 GROUNDING
 Use only the Universe, cited with n. Verbatim quotes. Do not estimate competitor pricing the dossier does not state; say "not disclosed".
-
-[name the quarter and the competitors]
 ```
 
-### Step 4: a discount request
+### Decide one discount request
 
 ```
-Using Calven MCP, should I approve a [percent] discount on [deal]?
+Using Calven MCP, should I approve the discount below on the deal below?
+
+FILL IN
+- Deal: [deal]
+- Discount: [percent]
 
 PULL FROM THE UNIVERSE
 - The deal: segment, size band, competitor, price feedback, stage.
@@ -62,17 +52,18 @@ The pattern in three lines and the question to ask the rep before approving.
 
 GROUNDING
 Use only CRM records and the battlecard in the Universe, cited with samples. This is a pattern check, not a margin decision.
-
-[name the deal and the discount]
 ```
 
-### Step 2: does price decide
+### See how often price decides deals
 
 ```
 Using Calven MCP, how often does price actually decide a deal for us?
 
+FILL IN
+- Window: [time window, e.g. last two quarters]
+
 PULL FROM THE UNIVERSE
-- The deciding forces read (competitive, capability, experience, commercials) for [window].
+- The deciding forces read (competitive, capability, experience, commercials) for the window.
 - Commercials drivers ranked as deciding, won and lost, with quotes.
 
 OUTPUT
@@ -80,8 +71,6 @@ The share of deals decided by commercials, the top three commercials drivers eac
 
 GROUNDING
 Dashboard figures only, cited with n; verbatim quotes.
-
-[name the window]
 ```
 
 ## Ad hoc questions
@@ -96,17 +85,3 @@ Dashboard figures only, cited with n; verbatim quotes.
 - Which segment names price as the loss reason most?
 - What commercial terms came up as drivers besides price?
 - What does the battlecard say about [competitor]'s cost traps?
-
-## Good practice
-
-- Ask for the bucket win rates first. "Pricier and still won" is the figure that changes discount policy.
-- Keep margin, floors and approval limits in the deal desk tool; Calven gives the pattern.
-- Quote buyers verbatim to finance. "Too expensive" and "expensive but worth it" are different decisions.
-- Treat competitor pricing from dossiers as dated; ask for the signal date.
-- Send the quarterly read to PMM as well; packaging changes start there.
-
-## Not covered today
-
-- Margins, discount floors, approval workflow and the quote itself.
-- Competitor list prices beyond what the dossier recorded.
-- Changing our pricing or packaging; the product brief is edited in Calven.

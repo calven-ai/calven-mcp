@@ -1,31 +1,11 @@
 # Comparison and alternatives pages
 
-**Team:** Content marketing · also product marketing, competitive intelligence, legal
-**Impact:** High. Comparison pages meet buyers at the decision and convert at a multiple of a blog post. One built from the battlecard and real loss reasons holds up with buyers, sales and legal; one built from a feature checklist gets rewritten after the first complaint.
-**Prerequisites:** competitors tracked (battlecards, deep dives, signals), strategy documents approved (positioning, product brief). Better with win/loss surveys running (deal drivers, competitor win rates) and call transcripts ingested (competitor mentions, quotes from switchers).
 
-## What the team is trying to do
+You're publishing a vs page, an alternatives page or a category comparison a buyer in evaluation trusts: honest about where the competitor wins, specific about where we win, with proof from customers who chose us. You walk away with a page sales sends to prospects, every claim signed off by legal, and updated when the competitor moves. Calven hands you the battlecard and the win/loss data, the competitive truth a writer usually has none of.
 
-Publish a "[us] vs [competitor]" page, a "[competitor] alternatives" page, or a category comparison that a buyer in evaluation trusts: honest about where the competitor wins, specific about where we win, with proof from customers who chose us. Done means sales sends the page to prospects, legal has signed off on every claim, and the page is updated when the competitor moves. The hard part is that the competitive truth lives in the battlecard, the win/loss data and the heads of the sellers, and the writer has none of it.
+## Prompts
 
-## The work, end to end
-
-| # | Step | What the team does | Where Calven helps | Pulls from |
-|---|---|---|---|---|
-| 1 | Choose the competitors | Pick the three to five rivals worth a page | Which competitors appear most in deals, our win rate against each, fight or avoid | Competitive intelligence dashboard, competitors |
-| 2 | Pick the page type and intent | "X vs Y", "Y alternatives", category comparison | The ICP segment and persona that evaluates us against this rival | ICP, personas, deal drivers by competitor |
-| 3 | Build the comparison matrix | Features, pricing, integrations, support, fit | The feature comparison and pricing sections of the dossier, our product brief | Competitor deep dive, product brief |
-| 4 | Find where we win and lose | The honest read | "How we win", "where we lose", landmines, bullshit detector from the battlecard; loss and win drivers against this competitor | Battlecard, deal drivers, win/loss head-to-head |
-| 5 | Collect switcher proof | Customers who chose us over the rival | Quotes with a competitor mention, displacement wins, proof points | Quotes (Competitor mention), battlecard proof points |
-| 6 | Write the page | Headline, the buyer's problem, the comparison, the honest trade-offs, proof, CTA | Draft from steps 3 to 5 in the buyer's words | All of the above |
-| 7 | Fact and claims check | Every claim about us and about them | Product brief for us, dossier for them, the claims register | Product brief, deep dive, claims |
-| 8 | Legal review | Comparative advertising rules, trademark use | Calven does not help here. The page carries the sources legal needs | |
-| 9 | Publish and distribute | CMS, sales enablement, paid | Calven does not help here | |
-| 10 | Keep it current | Update on competitor moves | Recent signals for this competitor; which claims on the page a signal invalidates | Competitive signals, claims |
-
-## Recommended prompts
-
-### Step 1 and 2: which pages to build
+### Decide which comparison pages to build
 
 ```
 Using Calven MCP, tell me which comparison pages are worth building.
@@ -50,19 +30,24 @@ GROUNDING
 Use only the dashboard numbers and win/loss drivers in the Universe and cite n and the window. Do not infer a competitor's importance from your own knowledge of the market. If win/loss has too few deals against a competitor, say so.
 ```
 
-### Step 3 and 4: the comparison and the honest read
+### Build the matrix and the honest read
 
 ```
-Using Calven MCP, build the comparison matrix and the honest read for a [us] vs [competitor] page.
+Using Calven MCP, build the comparison matrix and the honest read for a page comparing us with the competitor below.
+
+FILL IN
+- Competitor: [competitor]
+- Persona: [persona]
+- Segment: [segment]
 
 CONTEXT
-The page is for [persona] in [segment] at the evaluation stage. It must be credible to a buyer who has demoed both.
+The page is for the persona in the segment at the evaluation stage. It must be credible to a buyer who has demoed both.
 
 PULL FROM THE UNIVERSE
-- The dossier for [competitor]: product, pricing and packaging, feature comparison, strengths, weaknesses.
-- The battlecard for [competitor]: how we win, where we lose, landmines, bullshit detector.
+- The competitor's dossier: product, pricing and packaging, feature comparison, strengths, weaknesses.
+- The competitor's battlecard: how we win, where we lose, landmines, bullshit detector.
 - Our product brief: capabilities, integrations, pricing, differentiators and known weaknesses.
-- Win and loss drivers against [competitor], with the buyer's words.
+- Win and loss drivers against the competitor, with the buyer's words.
 
 BUILD
 - A comparison table on the dimensions this persona decides on, with what each side offers and the source.
@@ -75,22 +60,23 @@ The matrix and the two lists, with a source per cell.
 
 GROUNDING
 Use only the dossier, battlecard, product brief and win/loss evidence in the Universe and cite them. Do not add competitor facts from your own knowledge; the dossier's "Sources & Freshness" section says how current it is. Mark any dimension where the dossier is thin as "unverified".
-
-[name the competitor, persona and segment]
 ```
 
-### Step 5: switcher proof
+### Collect the switcher proof
 
 ```
-Using Calven MCP, collect the proof for a page comparing us with [competitor].
+Using Calven MCP, collect the proof for a page comparing us with the competitor below.
+
+FILL IN
+- Competitor: [competitor]
 
 CONTEXT
-I need evidence from customers who chose us over [competitor] or left them for us.
+I need evidence from customers who chose us over the competitor or left them for us.
 
 PULL FROM THE UNIVERSE
-- Customer quotes that mention [competitor], with the speaker's role and account.
+- Customer quotes that mention the competitor, with the speaker's role and account.
 - Displacement wins and proof points from the battlecard.
-- Win drivers against [competitor] with the evidence quote behind each.
+- Win drivers against the competitor with the evidence quote behind each.
 
 BUILD
 - Five quotes usable on the page, verbatim and attributed as far as the workspace allows.
@@ -102,20 +88,24 @@ A proof section, verbatim quotes only.
 
 GROUNDING
 Use only quotes recorded in the Universe and cite each. Do not paraphrase a quote into something stronger. If there are fewer than five, say how many exist.
-
-[name the competitor]
 ```
 
-### Step 6: write the page
+### Write the comparison page
 
 ```
-Using Calven MCP, write a [us] vs [competitor] page for [persona] in [segment].
+Using Calven MCP, write a page comparing us with the competitor below, for the persona in the segment below.
+
+FILL IN
+- Competitor: [competitor]
+- Persona: [persona]
+- Segment: [segment]
+- Inputs: [paste the matrix, the honest read and the proof]
 
 CONTEXT
-Below are the comparison matrix, the honest read and the proof from the previous steps. Structure: the buyer's problem, when to pick us, when to pick them, the comparison table, three non-feature reasons we win, one switcher story, FAQ, CTA. Under 1,200 words. Competitor named in plain text, never linked.
+The inputs are the comparison matrix, the honest read and the proof from the previous steps. Structure: the buyer's problem, when to pick us, when to pick them, the comparison table, three non-feature reasons we win, one switcher story, FAQ, CTA. Under 1,200 words. Competitor named in plain text, never linked.
 
 PULL FROM THE UNIVERSE
-- The [persona] canvas: pains, jobs to be done, objections, how they talk.
+- The persona's canvas: pains, jobs to be done, objections, how they talk.
 - Our positioning: category frame and unique attributes.
 - Our messaging objection handling for the objections this competitor's customers raise.
 
@@ -130,21 +120,23 @@ The full page in markdown with a comparison table, plus a list of every claim an
 
 GROUNDING
 Ground every claim in the Universe and cite it. Do not overstate; do not invent a weakness of the competitor; do not state a price for them that the dossier does not record. Flag any line that needs legal review.
-
-[paste the matrix, the honest read and the proof]
 ```
 
-### Step 7: claims check
+### Check every claim on the page
 
 ```
 Using Calven MCP, check every claim on this comparison page.
 
+FILL IN
+- Competitor: [competitor]
+- Page: [paste the page]
+
 CONTEXT
-Below is the page. Legal will review it next. I need every claim about us and about [competitor] marked.
+Legal will review the page next. I need every claim about us and about the competitor marked.
 
 PULL FROM THE UNIVERSE
 - Our product brief and the claims register.
-- The dossier and battlecard for [competitor], including "Sources & Freshness".
+- The competitor's dossier and battlecard, including "Sources & Freshness".
 - Recent product changes on our side that may have made a claim stale.
 
 CHECK
@@ -157,22 +149,25 @@ The page annotated inline, then two lists: claims to fix and claims legal must r
 
 GROUNDING
 Judge only against the Universe and cite the section. Where the Universe is silent, write "unverified", never "true".
-
-[paste the page and name the competitor]
 ```
 
-### Step 10: keep it current
+### Check the page is still right
 
 ```
-Using Calven MCP, tell me whether our [competitor] comparison page is still right.
+Using Calven MCP, tell me whether our comparison page for the competitor below is still right.
+
+FILL IN
+- Competitor: [competitor]
+- Publish date: [publish date]
+- Page: [paste the live page]
 
 CONTEXT
-Below is the live page. I want to know what [competitor] has done since it was published and which lines no longer hold.
+I want to know what the competitor has done since the page was published and which lines no longer hold.
 
 PULL FROM THE UNIVERSE
-- Competitive signals for [competitor] since [date]: launches, pricing changes, messaging shifts.
+- Competitive signals for the competitor since the publish date: launches, pricing changes, messaging shifts.
 - The current battlecard and dossier.
-- Our product changes since [date].
+- Our product changes since the publish date.
 
 CHECK
 - Each signal: does it change a claim on the page, and which one.
@@ -184,17 +179,20 @@ A change list: line on the page, what changed, the suggested rewrite, the source
 
 GROUNDING
 Use only signals and documents in the Universe and cite them with dates. If nothing has changed, say so.
-
-[paste the page and the publish date, name the competitor]
 ```
 
-### Alternatives page
+### Draft a competitor alternatives page
 
 ```
-Using Calven MCP, draft a "[competitor] alternatives" page.
+Using Calven MCP, draft an alternatives page for the competitor below.
+
+FILL IN
+- Competitor: [competitor]
+- Persona: [persona]
+- Segment: [segment]
 
 CONTEXT
-The reader is building a shortlist and has not narrowed to us. The page lists us first, then the other alternatives we track, each judged fairly. For [persona] in [segment].
+The reader is building a shortlist and has not narrowed to us. The page lists us first, then the other alternatives we track, each judged fairly. For the persona in the segment.
 
 PULL FROM THE UNIVERSE
 - The competitors we track and their tier, descriptions and categories.
@@ -203,7 +201,7 @@ PULL FROM THE UNIVERSE
 - Our positioning: unique attributes and best-fit customer characteristics.
 
 WRITE
-- Why people look for an alternative to [competitor], from the loss reasons and quotes.
+- Why people look for an alternative to the competitor, from the loss reasons and quotes.
 - Us: who we fit, where we win, honest limits.
 - Each other alternative: who it fits, where it is strong, in neutral language.
 - A "how to choose" section built on the ICP attributes.
@@ -213,8 +211,6 @@ The page in markdown, competitors in plain text, with a source list.
 
 GROUNDING
 Describe every alternative only from its dossier in the Universe and cite it. Do not describe a competitor we do not track. Do not invent pricing.
-
-[name the competitor, persona and segment]
 ```
 
 ## Ad hoc questions
@@ -233,21 +229,3 @@ Describe every alternative only from its dossier in the Universe and cite it. Do
 - Is "[claim about competitor]" supported by anything in the dossier?
 - Who should buy [competitor] instead of us, honestly?
 - What is [competitor]'s target buyer, according to the dossier?
-
-## Good practice
-
-- Build the honest read before writing. A page that admits where the competitor wins is the one buyers and legal accept.
-- Ask for n and the window on every win rate and keep them off the public page unless the company publishes numbers.
-- Keep competitor names in plain text and never link to their site.
-- Ask for the dossier's freshness date and put the page on the review list when a new signal lands.
-- Keep every quote verbatim and get customer approval before a name goes on the page.
-- Run the claims check before legal, with the source list attached. Legal reviews faster when every line has a citation.
-- Rerun the "keep it current" prompt quarterly and after any competitor launch.
-
-## Not covered today
-
-- Keyword research, the ranking pages and the page's performance.
-- Live competitor facts. The dossier is as current as the competitive intelligence agent's last run; MCP does not browse the competitor's site.
-- Legal sign-off on comparative claims and trademark use.
-- Publishing, redirects, paid promotion and sales distribution.
-- Updating the battlecard when a page exposes a gap. That happens in Calven with the competitive intelligence agent.

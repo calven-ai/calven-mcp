@@ -1,42 +1,26 @@
 # Objection libraries
 
-**Team:** Sales enablement · also product marketing, BDRs
-**Impact:** High. The objection library is the asset reps open mid-call. Built from the objections buyers actually raise, ranked by the deals they touch, with answers drawn from deals we won, it replaces the list someone brainstormed two years ago.
-**Prerequisites:** call transcripts ingested (customer quotes, themes), messaging approved (objection handling). Better with win/loss surveys running (deal drivers, loss reasons) and competitors tracked (battlecard objection handling).
 
-## What the team is trying to do
+Reps open the objection library mid-call, and yours was brainstormed two years ago. You want one current list: what buyers object to, how often, which deals it cost, and the approved answer with its proof, plus a gap list for PMM. Calven ranks it from the objections buyers actually raise and ties every answer to a document or a won deal.
 
-Keep one current list of the objections buyers raise, how often, which deals they cost, and the approved answer with its proof. Done means a library ordered by impact, every answer tied to a document or a won deal, and a gap list for PMM. Without the company's own knowledge the library is generic ("too expensive", "no budget") and the answers are opinions.
+## Prompts
 
-## The work, end to end
-
-| # | Step | What the team does | Where Calven helps | Pulls from |
-|---|---|---|---|---|
-| 1 | Collect the objections | Ask reps, review calls, read loss notes | Objections buyers raised on calls, verbatim, with frequency and sentiment; objections in the voice-of-customer read tied to lost deals | Quotes (Objection), themes, voice-of-customer dashboard (costly objections) |
-| 2 | Rank them | Decide which objections matter most | Deals each objection touched and whether it decided the deal | Deal drivers, CRM deals (loss reasons) |
-| 3 | Group them | Cluster by theme: price, capability, integration, trust, timing, competitor | Themes already clustered; competitor mentions tagged | Themes, quotes (Competitor mention) |
-| 4 | Write the answers | Draft or confirm the response per objection | The approved objection handling in the messaging; "They say, you say" lines in battlecards; what persuaded buyers who had the same objection and bought | Messaging, battlecards, deal drivers (direction helped), quotes |
-| 5 | Attach proof | Add the quote, the number or the case behind each answer | Customer quotes with highlight (quantified outcome, time to value, competitive win); positioning proof points | Quotes, positioning |
-| 6 | Check the claims | Make sure no answer over-promises | Product brief, claims register | Product brief, claims |
-| 7 | Review as the buyer | Hear how the persona reads each answer | Persona review of the answers | `review_against_personas` |
-| 8 | Publish | Load into the enablement platform or the battlecard tool | Calven does not help here | |
-| 9 | Maintain | Add new objections, retire old ones | New objections in the window; objections not heard for two quarters | Quotes, themes |
-
-## Recommended prompts
-
-### Step 1 to 3: the ranked list
+### Rank the objections buyers raise
 
 ```
 Using Calven MCP, build the ranked list of objections buyers raise.
 
+FILL IN
+- Window: [time window, e.g. last two quarters]
+
 CONTEXT
-I am rebuilding the objection library. I need every objection heard in [window], grouped, ranked by the deals it touched, with the buyer's words.
+I am rebuilding the objection library. I need every objection heard in the window, grouped, ranked by the deals it touched, with the buyer's words.
 
 PULL FROM THE UNIVERSE
-- Customer quotes with category Objection in [window], with account, persona and sentiment.
+- Customer quotes with category Objection in the window, with account, persona and sentiment.
 - The themes those quotes cluster into.
-- Deal drivers in [window] with direction hurt, their category and rank, and the deals behind them.
-- The voice-of-customer dashboard's costly objections for [window].
+- Deal drivers in the window with direction hurt, their category and rank, and the deals behind them.
+- The voice-of-customer dashboard's costly objections for the window.
 
 BUILD
 - One row per objection group: the objection in the buyer's words, calls (n), deals touched, deals where it decided the outcome, the personas who raise it, the competitors it comes with.
@@ -47,17 +31,18 @@ The table, then the three objections to fix first.
 
 GROUNDING
 Counts of deals come from the dashboard and the deal drivers with n and window; do not sum rows yourself. Quote buyers verbatim and cite each.
-
-[name the window]
 ```
 
-### Step 4 and 5: the answers and proof
+### Write the answer and proof per objection
 
 ```
 Using Calven MCP, write the answer and proof for each objection in this list.
 
+FILL IN
+- Objections: [paste the ranked list]
+
 CONTEXT
-Below is the ranked objection list. For each I need the approved answer, the proof, and what changed the mind of buyers who raised it and bought.
+For each objection in the ranked list I need the approved answer, the proof, and what changed the mind of buyers who raised it and bought.
 
 PULL FROM THE UNIVERSE
 - The objection handling section of our messaging.
@@ -74,17 +59,18 @@ The library entries, then the objections with no approved answer for PMM.
 
 GROUNDING
 Use only approved lines and recorded quotes, cited. Do not write an answer the messaging does not support; mark the gap.
-
-[paste the ranked list]
 ```
 
-### Step 6 and 7: check and review
+### Check the library for over-claims
 
 ```
 Using Calven MCP, check this objection library for over-claims and read it as our personas.
 
+FILL IN
+- Library: [paste the library]
+
 CONTEXT
-Below is the draft library. First confirm every product claim, then run the persona review on the answers.
+The library is a draft. First confirm every product claim, then run the persona review on the answers.
 
 PULL FROM THE UNIVERSE
 - The product brief and the claims register.
@@ -99,17 +85,18 @@ The library annotated, then the list of answers to rewrite.
 
 GROUNDING
 Judge only against the Universe. If the brief is silent on a claim, say so rather than passing it.
-
-[paste the library]
 ```
 
-### Step 9: maintain
+### Decide what to add and retire
 
 ```
 Using Calven MCP, tell me what to add to and retire from the objection library.
 
+FILL IN
+- Library: [paste the library's objection list]
+
 CONTEXT
-Below is the current library. I review it quarterly.
+The library is the current one. I review it quarterly.
 
 PULL FROM THE UNIVERSE
 - Objections raised on calls in the last quarter, with frequency.
@@ -126,8 +113,6 @@ The three lists.
 
 GROUNDING
 Cite the quotes and changes. Do not retire an entry on a guess; show the absence.
-
-[paste the library's objection list]
 ```
 
 ## Ad hoc questions
@@ -144,18 +129,3 @@ Cite the quotes and changes. Do not retire an entry on a guess; show the absence
 - Did any objection appear for the first time this month?
 - Is our answer to "[objection]" still true after the last release?
 - Which discovery question surfaces "[objection]" before the demo?
-
-## Good practice
-
-- Rank by deals decided, not by how loud the objection is. The dashboard's costly objections are the list to start with.
-- Keep the buyer's phrasing as the entry title. Reps recognise "we already have something that does this" faster than "incumbent".
-- Every answer has a proof and a source. An answer without proof is a rebuttal, and buyers hear the difference.
-- Split competitor-linked objections out and point them to the battlecard, so one update fixes both.
-- Send the "no approved answer" list to PMM every quarter. The library grows from what the field hears.
-- Run the persona review before publishing. An answer that satisfies the rep can still read as defensive to the buyer.
-
-## Not covered today
-
-- Publishing the library into the enablement platform or the CRM, and tracking which entries reps open.
-- Writing new approved lines into the messaging document. That is the messaging agent's and the PMM's work in Calven.
-- Objections from the open web (review sites, analyst reports) in real time. The market research and competitive agents record what they find; the AI tool reads those records.

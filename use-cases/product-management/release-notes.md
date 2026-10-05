@@ -1,33 +1,22 @@
 # Release notes
 
-**Team:** Product management · also product marketing, customer success, support
-**Impact:** Medium. Release notes written from the ticket list describe the change. Written from the messaging and the customer's words, checked against the brief, they tell the buyer why it matters and stay true. The same recipe covers deprecation notices.
-**Prerequisites:** strategy documents approved (product brief, messaging), own website and docs monitored (product changes, claims, drift). Better with call transcripts (quotes on the problem) and personas approved (the reader).
 
-## What the team is trying to do
+Something shipped or something's being removed, and customers need to hear it in their words, without overclaiming, and with enough notice and a path for anything going away. You walk away with release notes per release and a message map per deprecation. Calven checks each one against the product brief and the claims register.
 
-Tell customers what shipped and why it matters, in their words, without overclaiming, and tell them what is being removed with enough notice and a path. Done means release notes per release and a message map per deprecation, each checked against the product brief and the claims register.
+## Prompts
 
-## The work, end to end
-
-| # | Step | What the team does | Where Calven helps | Pulls from |
-|---|---|---|---|---|
-| 1 | List what shipped | From the release, decide what customers need to know | Product changes recorded from our own site and docs, as a cross-check | Product changes |
-| 2 | Write for the reader | Lead with the problem each item solves, for the persona who has it | Messaging pillars and value propositions; persona pains; customer quotes on the problem | Messaging, persona canvas, quotes |
-| 3 | Fact-check | Confirm each claim | Product brief, claims register | Product brief, claims |
-| 4 | Find the stale documents | Which published documents the release contradicts | Drift findings per product change | Product drift findings |
-| 5 | Deprecations | Write the notice: what, when, why, the path, who is affected | Product brief for the replacement path; accounts and deals that use or asked for the capability; objections in messaging | Product brief, CRM deals, quotes, messaging |
-| 6 | Publish | Docs, email, in-app | Calven does not help here | |
-
-## Recommended prompts
-
-### Step 2 and 3: write the notes
+### Write the release notes
 
 ```
-Using Calven MCP, write the release notes for [release].
+Using Calven MCP, write the release notes for the release below.
+
+FILL IN
+- Release: [release]
+- Personas: [the two reader personas]
+- Shipped list: [paste the shipped list]
 
 CONTEXT
-Below is the list of what shipped, in engineering's words. The readers are [persona] and [persona]. I want each item to open with the problem it solves, in the customer's words, and to claim nothing the brief does not support.
+The shipped list is in engineering's words. The readers are the personas above. I want each item to open with the problem it solves, in the customer's words, and to claim nothing the brief does not support.
 
 PULL FROM THE UNIVERSE
 - The messaging pillar and value proposition each item supports.
@@ -44,14 +33,16 @@ The release notes, with the pillar per item noted for the PMM.
 
 GROUNDING
 Use only claims the product brief supports and quotes from the Universe, cited. No outcomes or numbers we have not recorded.
-
-[paste the shipped list and name the personas]
 ```
 
-### Step 4: what the release makes stale
+### List the documents the release makes stale
 
 ```
-Using Calven MCP, list the published documents that [release] makes stale.
+Using Calven MCP, list the published documents that the release below makes stale.
+
+FILL IN
+- Release: [release]
+- Areas: [the product areas it touches]
 
 CONTEXT
 I want to fix documentation and sales material in the same week as the release.
@@ -67,22 +58,24 @@ OUTPUT
 The stale-documents table.
 
 GROUNDING
-Use only drift findings and claims in the Universe. If the change is not recorded yet, say so and list the documents mentioning the area as candidates.
-
-[name the release and the areas it touches]
+Use only drift findings and claims in the Universe. If the change is not recorded yet, say so and list the documents mentioning the areas as candidates.
 ```
 
-### Step 5: a deprecation notice
+### Write a deprecation notice
 
 ```
-Using Calven MCP, write the deprecation notice for [capability].
+Using Calven MCP, write the deprecation notice for the capability below.
+
+FILL IN
+- Capability: [capability]
+- Date: [removal date]
 
 CONTEXT
-We are removing [capability] on [date]. I need the customer notice, the internal message map and the list of accounts most affected.
+We are removing the capability on the date above. I need the customer notice, the internal message map and the list of accounts most affected.
 
 PULL FROM THE UNIVERSE
 - The product brief: the replacement path and what the product does instead.
-- Customer quotes and deal drivers that mention [capability], to see who relied on it and why.
+- Customer quotes and deal drivers that mention the capability, to see who relied on it and why.
 - Accounts and deals that named it as a requirement.
 - Objection handling in our messaging that applies.
 
@@ -96,17 +89,18 @@ The notice, the map and the list.
 
 GROUNDING
 Use only the brief, quotes and deals in the Universe, cited. If the pipeline category is restricted, say so and omit the account list.
-
-[name the capability and the date]
 ```
 
-### Review mode: fact-check drafted notes
+### Fact-check drafted release notes
 
 ```
 Using Calven MCP, fact-check these release notes.
 
+FILL IN
+- Notes: [paste the notes]
+
 CONTEXT
-Below are the notes as drafted. Every capability, integration and pricing claim must be right.
+The notes are as drafted. Every capability, integration and pricing claim must be right.
 
 PULL FROM THE UNIVERSE
 - The product brief and the claims register.
@@ -119,8 +113,6 @@ The notes annotated.
 
 GROUNDING
 Confirm only against the Universe and cite the section.
-
-[paste the notes]
 ```
 
 ## Ad hoc questions
@@ -134,15 +126,3 @@ Confirm only against the Universe and cite the section.
 - Who relied on [capability], according to customer quotes?
 - What is the replacement for [capability] in the brief?
 - How would [persona] read this release note: "[paste]"?
-
-## Good practice
-
-- Write for the persona, not the ticket. Ask for the pain before the description.
-- Fact-check the final text. Edits add claims.
-- Run the stale-documents prompt on release day; drift findings are per document and easy to assign.
-- For deprecations, get the affected accounts before writing the notice; the quotes tell you what they will ask.
-
-## Not covered today
-
-- Publishing to docs, email or in-app. Those tools own delivery.
-- Updating the product brief and the documents flagged stale. The product intelligence agent and PMM do that in Calven.

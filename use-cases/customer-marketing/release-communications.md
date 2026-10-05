@@ -1,38 +1,25 @@
 # Release communications
 
-**Team:** Customer marketing · also product marketing, customer success
-**Impact:** Medium. Every release gets an email, an in-app note and a CSM talking point. Writing them from what changed, in the approved messaging, in the words of the persona who uses the feature, is routine work that Calven makes fast and accurate.
-**Prerequisites:** own website and docs monitored (product changes), strategy documents approved (messaging, product brief), personas approved. Call transcripts ingested adds the customers who asked for the change.
 
-## What the team is trying to do
+Something shipped, and existing customers need to hear what changed, why it matters to them and what to do next, without overstating it. You get a release note, an email and a CSM line that match the product and the messaging, plus the customers who asked for it. Calven keeps the story out of engineering's words and closes the loop with the people who requested it.
 
-Tell existing customers what changed, why it matters to them, and what to do next, without overstating it or missing the customers who asked for it. Done means a release note, an email and a CSM line that match the product and the messaging. Without the company's own product record, release comms describe the feature in engineering's words and never close the loop with the customers who requested it.
+## Prompts
 
-## The work, end to end
-
-| # | Step | What the team does | Where Calven helps | Pulls from |
-|---|---|---|---|---|
-| 1 | Collect what changed | Gather the release from product and engineering | Product changes detected on our own site and docs, with summary, severity and evidence | Product changes |
-| 2 | Decide who cares | Which personas and segments the change serves | The persona whose jobs to be done and pains the change addresses | Personas, persona canvas |
-| 3 | Close the loop | Which customers asked for it | Quotes tagged product feedback or job to be done on that capability, by account | Quotes |
-| 4 | Write | Release note, email, in-app copy, CSM talking point | Drafts on the messaging pillars and the product brief, in the persona's words | Messaging, product brief |
-| 5 | Check what went stale | Which published documents the change contradicts | Drift findings for the change | Product drift findings |
-| 6 | Fact-check and review | Claims and persona reaction | Product brief, persona review | Product brief, review_against_personas |
-| 7 | Send | Email, in-app, docs update | Calven does not help here | |
-
-## Recommended prompts
-
-### Step 1 to 4: the release note and email
+### Write the release note, email and CSM line
 
 ```
-Using Calven MCP, write the customer communication for [release or change].
+Using Calven MCP, write the customer communication for the release or change below.
+
+FILL IN
+- Change: [release or change]
+- Persona: [persona]
 
 CONTEXT
-We shipped [change]. I need a release note (80 words), a customer email (120 words) and a two-line CSM talking point.
+We shipped the change. I need a release note (80 words), a customer email (120 words) and a two-line CSM talking point.
 
 PULL FROM THE UNIVERSE
-- The product change record for [change]: summary, what it replaces, evidence.
-- The persona whose jobs or pains it serves, with their messaging hooks.
+- The product change record for the change: summary, what it replaces, evidence.
+- The persona's jobs or pains the change serves, with their messaging hooks.
 - The messaging pillar it supports, and the product brief entry it updates.
 
 WRITE
@@ -45,20 +32,21 @@ The three pieces, each with the pillar it leans on.
 
 GROUNDING
 Use only the product change and brief in the Universe and cite them. Do not describe capabilities beyond the change record.
-
-[name the change and the persona]
 ```
 
-### Step 3: close the loop with customers who asked
+### Tell the customers who asked for it
 
 ```
-Using Calven MCP, find the customers who asked for [capability] so we can tell them it shipped.
+Using Calven MCP, find the customers who asked for the capability below so we can tell them it shipped.
+
+FILL IN
+- Capability: [capability]
 
 CONTEXT
-[capability] shipped this week. I want a personal note to every customer who requested it.
+The capability shipped this week. I want a personal note to every customer who requested it.
 
 PULL FROM THE UNIVERSE
-- Customer quotes tagged product feedback, job to be done or gain that mention [capability], with speaker, account and date.
+- Customer quotes tagged product feedback, job to be done or gain that mention the capability, with speaker, account and date.
 - The contact's role from the CRM.
 
 BUILD
@@ -70,20 +58,21 @@ The table and the template.
 
 GROUNDING
 Use only quotes in the Universe, verbatim and cited. Do not include accounts whose quote is about something else.
-
-[name the capability]
 ```
 
-### Step 5: what the change made stale
+### Find what the change made wrong
 
 ```
-Using Calven MCP, tell me which published materials [change] made wrong.
+Using Calven MCP, tell me which published materials the change below made wrong.
+
+FILL IN
+- Change: [release or change]
 
 CONTEXT
-Before we announce [change], I want to know what else now says the wrong thing.
+Before we announce the change, I want to know what else now says the wrong thing.
 
 PULL FROM THE UNIVERSE
-- Drift findings linked to the product change for [change], with the document, the verdict and the rationale.
+- Drift findings linked to the product change, with the document, the verdict and the rationale.
 - Claims that reference the old behaviour.
 
 BUILD
@@ -94,8 +83,6 @@ The list.
 
 GROUNDING
 Use only drift findings and claims in the Universe and cite them.
-
-[name the change]
 ```
 
 ## Ad hoc questions
@@ -109,15 +96,3 @@ Use only drift findings and claims in the Universe and cite them.
 - Write a two-line CSM note about [change] for a [persona].
 - Which accounts asked for [capability] and should hear about it first?
 - Did [change] close a product gap that cost us deals? How many?
-
-## Good practice
-
-- Start from the product change record, not from the engineering ticket. It carries the evidence and the so-what.
-- Name the persona. A release note for "users" says nothing; one for the persona's job says what to do.
-- Always run the closing-the-loop prompt. Telling a customer their request shipped is the cheapest advocacy there is.
-- Check drift before sending. The announcement should not point at a page that still describes the old behaviour.
-
-## Not covered today
-
-- Sending the email, updating the docs and the in-app note happen outside.
-- The internal release process, tickets and timelines are not in Calven.

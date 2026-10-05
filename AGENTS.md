@@ -8,7 +8,7 @@ This repository is the public distribution surface for Calven's hosted MCP serve
 - `plugin.json`, `mcp.json`, and `skills/` are the portable Agent Plugin.
 - `docs/tool-catalog.md` documents the public tools exposed by production.
 - `use-cases/` is exported from Calven's internal source by `export_public.py` and replaced whole on every sync. Do not hand-edit a page here; fix the source and re-export. `README.md` inside it is generated too.
-- `docs/assets/hero.png` is rendered from Calven's brand library (`templates/hero.html`, preset `github-social`); re-render rather than edit.
+- `docs/assets/mcp-diagram.png` (README) and `docs/assets/hero.png` (GitHub social preview) are rendered from Calven's brand library (`templates/mcp-diagram.html`, preset `github-readme-diagram`; `templates/hero.html`, preset `github-social`); re-render rather than edit.
 - `https://api.calven.ai/mcp` is the only production endpoint.
 
 Keep `mcp.json`, `.mcp.json`, examples, documentation, and skills aligned with that endpoint. Run `node scripts/validate.mjs` after every change.

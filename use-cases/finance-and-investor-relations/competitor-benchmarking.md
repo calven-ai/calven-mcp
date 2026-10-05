@@ -1,40 +1,26 @@
 # Competitor benchmarking
 
-**Team:** Finance and investor relations · also leadership, product marketing
-**Impact:** Medium. Investors and the board ask for the comparison every round and every plan. The dossiers already hold pricing, packaging, funding and analyst standing per rival; finance needs it as one table with dates.
-**Prerequisites:** competitors tracked (rows, dossiers, signals). Better with win/loss surveys running (win rate per rival) and analyst reports uploaded.
 
-## What the team is trying to do
+The board or a new round wants the competitor comparison again, and you'd rather not rebuild it from memory. You get one table of tracked rivals (size and funding where recorded, pricing model and price points, packaging, analyst standing, recent moves, our win rate against each) with a source and date per cell and an honest "unknown" where the dossier is silent. Calven's dossiers already hold most of it, so you can say when each price point was last checked.
 
-Produce a benchmark table of tracked rivals for the fundraise, the plan or the board: company size and funding where recorded, pricing model and price points, packaging, analyst standing, recent moves, and our win rate against each. Done means one table with a source and date per cell and an honest "unknown" where the dossier is silent. Without the company's own knowledge the table is rebuilt from memory each time and nobody can say when a price point was last checked.
+## Prompts
 
-## The work, end to end
-
-| # | Step | What the team does | Where Calven helps | Pulls from |
-|---|---|---|---|---|
-| 1 | Pick the set | Which rivals matter for this audience | Competitor rows by tier and category | Competitors |
-| 2 | Company facts | Size, funding, footprint | Company Snapshot and At-a-glance sections of each dossier | Competitor deep dives |
-| 3 | Pricing and packaging | Model, tiers, price points | Pricing & Packaging section per dossier; pricing signals | Competitor deep dives, competitive signals |
-| 4 | Analyst standing | Where analysts place them | Analyst & Market Standing section; analyst findings naming them | Competitor deep dives, analyst findings |
-| 5 | Recent moves | Launches, pricing changes, hires, funding | Competitive signals by competitor, severity and date | Competitive signals |
-| 6 | Head to head | How we do against each | Win rate per competitor, fight or avoid, loss reasons | Competitive intelligence dashboard |
-| 7 | Assemble | One table, one page of notes | A draft table with source and date per cell | All of the above |
-| 8 | Financial comparables | Revenue multiples, public comps | Calven does not help here | |
-
-## Recommended prompts
-
-### Steps 1 to 6: the benchmark table
+### Build the competitor benchmark table
 
 ```
-Using Calven MCP, build a competitor benchmark table for [the audience].
+Using Calven MCP, build a competitor benchmark table for the audience below.
+
+FILL IN
+- Audience: [where this goes: the board pack, the fundraising deck or the annual plan]
+- Window: [time window for signals, e.g. last 12 months]
 
 CONTEXT
-This goes into [the board pack / the fundraising deck / the annual plan]. One row per competitor, a source and date per cell, "unknown" where the dossier is silent.
+This goes into the document named above. One row per competitor, a source and date per cell, "unknown" where the dossier is silent.
 
 PULL FROM THE UNIVERSE
 - Every Tier 1 and Tier 2 competitor: description, categories, size.
 - From each dossier: company snapshot, pricing and packaging, analyst and market standing.
-- Competitive signals in [window] per competitor, with severity and date.
+- Competitive signals in the window per competitor, with severity and date.
 - Our win rate against each, with n, and the top loss reason against each.
 
 BUILD
@@ -46,20 +32,21 @@ The table and the notes, with sources.
 
 GROUNDING
 Use only competitor rows, dossiers, signals and dashboards in the Universe and cite each with its date. Write "unknown" rather than estimating. Do not add a competitor we do not track.
-
-[name the audience and the window]
 ```
 
-### Step 5: what moved this period
+### List what moved since the last refresh
 
 ```
-Using Calven MCP, list the competitor moves since [date] that change our benchmark.
+Using Calven MCP, list the competitor moves since the date below that change our benchmark.
+
+FILL IN
+- Date: [date]
 
 CONTEXT
 I refresh the benchmark table each quarter. I only want what changed.
 
 PULL FROM THE UNIVERSE
-- Competitive signals since [date], by competitor, with signal type, severity, summary, "so what" and source.
+- Competitive signals since the date, by competitor, with signal type, severity, summary, "so what" and source.
 - Any pricing or packaging change among them.
 
 BUILD
@@ -70,17 +57,18 @@ The list with sources.
 
 GROUNDING
 Use only recorded signals and cite each. Do not infer a move the feed does not carry.
-
-[name the date]
 ```
 
-### Step 7: review a benchmark slide
+### Check a competitor slide against the dossiers
 
 ```
 Using Calven MCP, check this competitor slide against our dossiers.
 
+FILL IN
+- Slide: [paste the slide text]
+
 CONTEXT
-Below is the competitor comparison slide. I want every cell verified or flagged.
+The slide is our competitor comparison slide. I want every cell verified or flagged.
 
 PULL FROM THE UNIVERSE
 - The dossiers and signals for each competitor on the slide.
@@ -95,8 +83,6 @@ The slide annotated, then the corrected version.
 
 GROUNDING
 Judge only against the Universe and cite each flag. Do not fill a blank cell from your own knowledge.
-
-[paste the slide text]
 ```
 
 ## Ad hoc questions
@@ -110,16 +96,3 @@ Judge only against the Universe and cite each flag. Do not fill a blank cell fro
 - Which competitor raised money this year, per our signals?
 - Which dossier is thinnest, so I know where the table will have gaps?
 - Is there an analyst finding that ranks us against [competitor]?
-
-## Good practice
-
-- Ask for the date with every cell. A benchmark without dates is a liability in front of investors.
-- Keep "unknown" in the table. It is more credible than a guess and it tells the competitive intelligence agent what to research next.
-- Limit the set to the rivals the audience will ask about. Tier 1 for the board, Tier 1 and 2 for diligence.
-- Refresh with the "what moved" prompt rather than rebuilding each quarter.
-
-## Not covered today
-
-- Public financials, valuation and revenue multiples.
-- Live competitor websites and news. The competitive intelligence agent records signals in the app.
-- Rivals not yet tracked. Add them in Calven first.

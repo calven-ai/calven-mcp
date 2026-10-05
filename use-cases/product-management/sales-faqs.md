@@ -1,29 +1,17 @@
 # Sales FAQs
 
-**Team:** Product management · also sales enablement, product marketing, solutions engineering, customer support
-**Impact:** Medium. The same twenty questions reach the PM every week. An FAQ answered from the product brief, with what we do not do, stops the interruptions and the overclaims.
-**Prerequisites:** strategy documents approved (product brief, messaging objection handling). Better with vendor quotes and deal drivers (the questions reps actually get) and competitors tracked (battlecard objections).
 
-## What the team is trying to do
+Prospects keep asking reps the same product questions: what it does, what it doesn't, integrations, security, packaging, how it compares. You get one FAQ with true answers that reps and their AI tool can answer from, refreshed when the product changes. Calven builds it from the product brief, so the FAQ is the brief in question shape.
 
-Give sales one place with true answers to the questions prospects ask about the product: what it does, what it does not, integrations, security, packaging, how it compares. Done means an FAQ that reps and the AI tool can answer from, refreshed when the product changes. The product brief is the source; the FAQ is its question-shaped view.
+## Prompts
 
-## The work, end to end
-
-| # | Step | What the team does | Where Calven helps | Pulls from |
-|---|---|---|---|---|
-| 1 | Collect the questions | What reps ask, what prospects ask | Rep discovery and caveat quotes, deal drivers in the Capability category, objections in messaging | Vendor quotes, deal drivers, messaging |
-| 2 | Answer from the brief | True answers, including what we do not do | The product brief: capabilities, integrations, architecture, pricing and packaging, known weaknesses | Product brief |
-| 3 | Add the competitive answers | "How do you compare with X" | Battlecard objection handling and talk track | Battlecard |
-| 4 | Fact-check an existing FAQ | Find stale answers | Product changes and drift findings; claims register | Product changes, product drift findings, claims |
-| 5 | Publish and maintain | In the enablement tool; refresh per release | Calven does not publish; the fact-check prompt is the refresh | |
-
-## Recommended prompts
-
-### Step 1 and 2: build the FAQ
+### Build the sales FAQ
 
 ```
-Using Calven MCP, build the sales FAQ for [product].
+Using Calven MCP, build the sales FAQ for the product below.
+
+FILL IN
+- Product: [product]
 
 CONTEXT
 Reps ask the same questions every week. I want an FAQ answered from the product brief, honest about what we do not do.
@@ -42,45 +30,48 @@ The FAQ.
 
 GROUNDING
 Answer only from the product brief and messaging in the Universe and cite the section. Where the brief is silent, write "not in the brief; ask product" instead of answering.
-
-[name the product]
 ```
 
-### Step 3: the comparison answers
+### Add the competitive answers
 
 ```
 Using Calven MCP, add the competitive questions to the sales FAQ.
 
+FILL IN
+- Competitor: [competitor]
+
 CONTEXT
-Prospects ask how we compare with [competitor]. I want FAQ answers that match the battlecard.
+Prospects ask how we compare with the competitor. I want FAQ answers that match the battlecard.
 
 PULL FROM THE UNIVERSE
-- The battlecard for [competitor]: objection handling, how we win, where we lose, talk track.
+- The competitor's battlecard: objection handling, how we win, where we lose, talk track.
 - The product brief's known weaknesses.
 
 WRITE
-- Five questions prospects ask about [competitor], each with the battlecard answer and the honest caveat where we lose.
+- Five questions prospects ask about the competitor, each with the battlecard answer and the honest caveat where we lose.
 
 OUTPUT
 The five FAQ entries.
 
 GROUNDING
 Use only the battlecard and brief, cited. Do not claim capabilities the brief does not list.
-
-[name the competitor]
 ```
 
-### Step 4: refresh an existing FAQ
+### Fact-check an existing FAQ
 
 ```
 Using Calven MCP, fact-check this sales FAQ.
 
+FILL IN
+- FAQ: [paste the FAQ]
+- Window: [time window since it was published, e.g. last six months]
+
 CONTEXT
-Below is the FAQ as published. Our product changed since. I need every stale or wrong answer found.
+The FAQ is as published. Our product changed since. I need every stale or wrong answer found.
 
 PULL FROM THE UNIVERSE
 - The product brief as published.
-- Product changes in the last [window] and the drift findings on published documents.
+- Product changes in the window and the drift findings on published documents.
 - The claims register for the claims the FAQ makes.
 
 CHECK
@@ -91,8 +82,6 @@ The FAQ annotated, then the list of answers to rewrite.
 
 GROUNDING
 Confirm only against the brief, changes and claims in the Universe, cited.
-
-[paste the FAQ]
 ```
 
 ## Ad hoc questions
@@ -110,15 +99,3 @@ Confirm only against the brief, changes and claims in the Universe, cited.
 - What is our honest answer on [known weakness]?
 - What do we say when a buyer asks about [security topic]?
 - Which questions came up on calls this month that we have no answer for?
-
-## Good practice
-
-- Start from the questions reps actually ask. Rep quotes and deal drivers hold them.
-- Keep "not in the brief" answers. They tell the PM what the brief is missing.
-- Refresh with the fact-check prompt after each release.
-- Put the known weaknesses in the FAQ. Reps who know what we do not do stop losing deals on overclaims.
-
-## Not covered today
-
-- Publishing to the enablement tool or the wiki.
-- Updating the product brief. The product intelligence agent and PMM do that in Calven.

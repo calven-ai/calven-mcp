@@ -1,37 +1,25 @@
 # Customer education content
 
-**Team:** Customer success · also customer marketing, product marketing, enablement
-**Impact:** Medium. Training outlines, adoption guides and role-based onboarding for the customer's users are written again for every account. Drafting them from the product brief and the persona's jobs to be done makes them accurate and reusable.
-**Prerequisites:** product brief approved (use cases, capabilities, integrations), personas approved (user personas with jobs to be done), own website and docs monitored (product changes). Call transcripts ingested adds the questions customers actually ask.
 
-## What the team is trying to do
+Each customer role needs a short, accurate guide to getting value, and without the brief and personas education turns into the feature tour. You get a training outline per persona, an adoption guide per use case, and an FAQ built on questions customers really asked. Calven writes it in the words of the person doing the job and flags what needs updating after a release.
 
-Give each customer role a short, accurate guide to getting value from the product: what to do first, why, and what good looks like, in the words of the person doing the job. Done means a training outline per persona, an adoption guide per use case, and a FAQ built on real questions. Without the company's own brief and personas, education is the feature tour.
+## Prompts
 
-## The work, end to end
-
-| # | Step | What the team does | Where Calven helps | Pulls from |
-|---|---|---|---|---|
-| 1 | Pick the audience | Which user persona and use case | User personas with jobs to be done; the product use cases | Personas (users), product brief |
-| 2 | Outline the training | What to learn, in what order | The use case's capabilities from the brief, ordered by the persona's jobs | Product brief, persona canvas |
-| 3 | Write the guide | Steps, why, what good looks like | Drafts with the persona's language and the outcome from customer quotes | Product brief, quotes (time to value, ease of use) |
-| 4 | Build the FAQ | The questions users ask | Questions from ingested calls and support notes; the brief's answers | Quotes, product brief |
-| 5 | Keep it current | After each release | Product changes and drift findings that touch the guide | Product changes, product drift findings |
-| 6 | Deliver | LMS, docs, sessions | Calven does not help here | |
-
-## Recommended prompts
-
-### Step 1 to 3: training outline and guide
+### Write an adoption guide for one role
 
 ```
-Using Calven MCP, write an adoption guide for [user persona] on [use case].
+Using Calven MCP, write an adoption guide for the user persona below on the use case below.
+
+FILL IN
+- Persona: [user persona]
+- Use case: [use case]
 
 CONTEXT
-New users in the [user persona] role need to get value from [use case] in their first two weeks. 600 words, steps with a why for each.
+New users in the persona's role need to get value from the use case in their first two weeks. 600 words, steps with a why for each.
 
 PULL FROM THE UNIVERSE
-- The product brief: the [use case] section and the capabilities it uses, integrations involved.
-- The [user persona] canvas: jobs to be done, pains, goals and KPIs.
+- The product brief: the use case's section and the capabilities it uses, integrations involved.
+- The persona's canvas: jobs to be done, pains, goals and KPIs.
 - Quotes from customers tagged ease of use, time to value or job to be done on this use case.
 
 WRITE
@@ -42,20 +30,21 @@ The guide.
 
 GROUNDING
 Use only the Universe and cite it. Do not describe a capability beyond the brief. Do not invent screens or steps the brief does not support; mark them for me to add.
-
-[name the user persona and use case]
 ```
 
-### Step 4: the FAQ from real questions
+### Build an FAQ from real questions
 
 ```
-Using Calven MCP, build a customer FAQ for [use case] from what customers actually asked.
+Using Calven MCP, build a customer FAQ for the use case below from what customers actually asked.
+
+FILL IN
+- Use case: [use case]
 
 CONTEXT
 I want ten questions users ask, answered from the brief.
 
 PULL FROM THE UNIVERSE
-- Customer quotes tagged job to be done, product feedback or objection on [use case], with the question or confusion they express.
+- Customer quotes tagged job to be done, product feedback or objection on the use case, with the question or confusion they express.
 - The product brief answers on each.
 
 BUILD
@@ -66,17 +55,18 @@ The FAQ and the unanswered list for product marketing.
 
 GROUNDING
 Use only the Universe and cite it.
-
-[name the use case]
 ```
 
-### Step 5: keep it current
+### Find guides that need updating
 
 ```
 Using Calven MCP, tell me what in our customer education needs updating after this month's releases.
 
+FILL IN
+- Guides: [paste the guide list, by use case]
+
 CONTEXT
-Our guides are listed below by use case.
+The guide list names our guides by use case.
 
 PULL FROM THE UNIVERSE
 - Product changes this month, by severity.
@@ -90,8 +80,6 @@ The list.
 
 GROUNDING
 Use only the Universe and cite it. Guides not published in Calven are matched by use case name only; say so.
-
-[paste the guide list]
 ```
 
 ## Ad hoc questions
@@ -105,15 +93,3 @@ Use only the Universe and cite it. Guides not published in Calven are matched by
 - Which integrations are involved in [use case]?
 - Which published guides did the last product change leave stale, according to the drift findings?
 - What do customers say onboarding was like, with quotes tagged onboarding or implementation?
-
-## Good practice
-
-- Write for the user persona, not the buyer. The canvases are separate; use the right one.
-- Order steps by the persona's jobs to be done, not by the menu.
-- Use one customer quote as proof per guide. It tells the user the outcome is real.
-- Rerun the currency prompt monthly. Education goes stale faster than marketing.
-
-## Not covered today
-
-- Screenshots, in-product tours, the LMS and session delivery are outside Calven.
-- Product documentation is in the record only if the docs site is monitored or ingested.

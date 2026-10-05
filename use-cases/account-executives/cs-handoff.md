@@ -1,40 +1,30 @@
 # CS handoff
 
-**Team:** Account executives · also customer success, solutions engineering
-**Impact:** Medium. The handoff note is written in a hurry after close, and the promise that was made on call three is the one that churns the account.
-**Prerequisites:** CRM connected (pipeline category on for MCP), call transcripts ingested. Better with win/loss surveys running (the won-deal survey), product brief approved.
 
-## What the team is trying to do
+The deal's closed and customer success needs everything without having to re-ask you. You hand over a one-page note the CSM reads before kickoff: why the customer bought, what was promised, what nearly stopped the deal, who matters and how they define success, in the customer's words. Calven adds the recorded deal, so the note isn't your memory of a four-month cycle.
 
-Hand customer success what they need and nothing they have to re-ask: why the customer bought, what was promised, what nearly stopped the deal, who matters and how they define success, in the customer's words. Done means a one-page note the CSM reads before the kickoff. Without the company's own record, the note is the AE's memory of a four-month deal.
+## Prompts
 
-## The work, end to end
-
-| # | Step | What the team does | Where Calven helps | Pulls from |
-|---|---|---|---|---|
-| 1 | Why they bought | The drivers and the words | The won deal's survey summary and drivers; the quotes from the deal's calls | Surveyed deals, deal drivers, quotes |
-| 2 | What was promised | Capabilities, integrations, timelines mentioned | Vendor quotes from our reps on this account's calls tagged value claim, proof point or next step, checked against the product brief | Vendor quotes, product brief |
-| 3 | What nearly stopped it | The objections raised and how they were resolved | Objections in the deal's quotes and drivers that hurt us | Quotes (Objection), deal drivers |
-| 4 | Who matters | The buying group and their roles | Contacts on the account with buying role | CRM contacts |
-| 5 | How they define success | Their metric and goal | Quotes tagged Goal or Gain; the persona's KPIs | Quotes, persona canvas |
-| 6 | Contract facts | Plan, seats, dates, terms | Calven does not help here beyond amount and close date on the deal | |
-| 7 | Write and hand over | The note, the kickoff | A drafted note from the above | All |
-
-## Recommended prompts
-
-### Step 1 to 5 and 7: the handoff note
+### Write the customer success handoff note
 
 ```
-Using Calven MCP, write the customer success handoff note for [account].
+Using Calven MCP, write the customer success handoff note for the account below.
+
+FILL IN
+- Account: [account]
+- Deal: [deal]
+- Close date: [date]
+- Contract: [paste the contract facts: plan, seats, dates]
+- Recollections: [paste anything you remember promising that may not be on a recorded call]
 
 CONTEXT
-[Deal] closed on [date]. Below are the contract facts (plan, seats, dates) and anything I remember promising that may not be on a recorded call.
+The deal closed on the date above. The contract facts and my recollections are in the FILL IN block.
 
 PULL FROM THE UNIVERSE
 - The won deal: survey summary, drivers, and the customer quotes from its calls.
 - Our own reps' statements on those calls tagged value claim, proof point or next step, checked against the product brief.
 - The objections raised during the deal and how they were resolved.
-- The contacts at [account] with buying role.
+- The contacts at the account with buying role.
 - The customer's stated goals and the KPIs of their persona.
 
 BUILD
@@ -49,21 +39,22 @@ OUTPUT
 A one-page note with sources.
 
 GROUNDING
-Quotes verbatim. Promises only as recorded or as I state below; mark anything not in the product brief. Do not invent success criteria.
-
-[name the account and deal; paste the contract facts and your own recollections]
+Quotes verbatim. Promises only as recorded or as I state in my recollections; mark anything not in the product brief. Do not invent success criteria.
 ```
 
-### Step 2: what did we promise
+### List and check every promise we made
 
 ```
-Using Calven MCP, what did we promise [account] during the deal?
+Using Calven MCP, what did we promise the account below during the deal?
+
+FILL IN
+- Account: [account]
 
 CONTEXT
 I want every statement our reps made about capabilities, timelines or outcomes, checked.
 
 PULL FROM THE UNIVERSE
-- Vendor quotes from [account]'s calls, by category.
+- Vendor quotes from the account's calls, by category.
 - The product brief and recent product changes.
 
 CHECK
@@ -74,22 +65,24 @@ A table with a verdict per promise.
 
 GROUNDING
 Only recorded statements. If the deal's calls were not ingested, say so.
-
-[name the account]
 ```
 
-### Step 3 to 5: review a note I already wrote
+### Review a handoff note written from memory
 
 ```
-Using Calven MCP, review my handoff note for [account] against what was actually said on the deal.
+Using Calven MCP, review my handoff note for the account below against what was actually said on the deal.
+
+FILL IN
+- Account: [account]
+- Note: [paste your note]
 
 CONTEXT
-Below is the note I drafted from memory. I want to know what it gets wrong, what it leaves out, and what the customer would not recognise.
+I drafted the note from memory. I want to know what it gets wrong, what it leaves out, and what the customer would not recognise.
 
 PULL FROM THE UNIVERSE
 - The won deal's survey summary and drivers.
-- The customer quotes from [account]'s calls tagged Objection, Goal or Gain.
-- The contacts at [account] with buying role.
+- The customer quotes from the account's calls tagged Objection, Goal or Gain.
+- The contacts at the account with buying role.
 
 CHECK
 - Each claim in my note: matches the record, differs from it, or not recorded.
@@ -101,8 +94,6 @@ The note annotated inline, then the three additions that matter most to the CSM.
 
 GROUNDING
 Compare only against what the Universe holds and cite it. Where the calls were not ingested, say the record is silent rather than confirming my memory.
-
-[paste your note and name the account]
 ```
 
 ## Ad hoc questions
@@ -115,16 +106,3 @@ Compare only against what the Universe holds and cite it. Where the calls were n
 - What is the [persona]'s KPI, according to their canvas?
 - Did anything we said to [account] fall outside the product brief?
 - What did the win/loss survey on [deal] say?
-
-## Good practice
-
-- Paste the contract facts and your own recollections. Calven holds what was recorded; the unrecorded promise is the one to write down.
-- Ask for promises marked against the brief. The CSM needs to know which ones are safe.
-- Write the note the day of close. The quotes are the same next month; your memory is not.
-- Share the note with the SE for the technical promises.
-
-## Not covered today
-
-- Contract terms, seats, dates, billing. Those are the CRM and the order form.
-- Writing the note into the CRM or the CS tool. Calven reads the mirror.
-- Calls that were never ingested. If the deal's calls are not in the Universe, the note is the AE's memory and should say so.

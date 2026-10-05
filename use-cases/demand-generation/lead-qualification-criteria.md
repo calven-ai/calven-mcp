@@ -1,34 +1,20 @@
 # Lead qualification criteria
 
-**Team:** Demand generation · also revenue operations, business development, sales leadership
-**Impact:** Medium. The MQL definition decides what sales works and what marketing is measured on; criteria built from the ICP and from what actually predicts a win end the quarterly argument.
-**Prerequisites:** ICP approved, CRM connected (accounts with fit, deals with outcomes). Better with persona dashboard data (which roles convert).
 
-## What the team is trying to do
+Marketing and sales need to agree which leads get passed over and in what order: the firmographic and persona criteria, the triggers that raise priority, the disqualifiers and the scoring inputs. You walk away with a definition both teams sign, the evidence behind each criterion, and routing rules that follow it. Calven ties each criterion to the ICP and what wins, so nobody's stuck with last year's definition and no memory of why.
 
-Define which leads marketing passes to sales and in what order: the firmographic and persona criteria, the triggers that raise priority, the disqualifiers, and the scoring inputs. Done means a qualification definition both teams sign, with the evidence behind each criterion, and routing rules that follow it. Without the Universe the definition is last year's and nobody remembers why.
+## Prompts
 
-## The work, end to end
-
-| # | Step | What the team does | Where Calven helps | Pulls from |
-|---|---|---|---|---|
-| 1 | Read the ICP | Attributes, tiers, disqualifiers, scorecard | The ICP document | ICP |
-| 2 | Read what predicts a win | Which attributes and tech signals correlate with wins | ICP dashboard: win predictors, win rate by attribute, segments | ICP dashboard |
-| 3 | Read which roles convert | Personas on won deals, contact roles by lifecycle | Persona dashboard, contacts | Persona dashboard, crm_contacts |
-| 4 | Read the triggers | Which triggers accounts had when they bought | Account triggers on won deals | Crm_accounts, crm_deals |
-| 5 | Draft the criteria | Fit, role, trigger, disqualifiers, score weights | Drafted from the above | |
-| 6 | Check current leads against it | What share of recent leads qualify | Fit tier distribution | ICP dashboard (reality check), crm_accounts |
-| 7 | Agree with sales and configure | Scoring and routing in the automation tool | Calven does not help here | |
-
-## Recommended prompts
-
-### Step 1 to 5: the definition
+### Draft the lead qualification criteria
 
 ```
 Using Calven MCP, draft our lead qualification criteria from the ICP and what wins.
 
+FILL IN
+- Product: [product, or leave blank for all]
+
 CONTEXT
-Marketing and sales will sign this. Each criterion needs the evidence behind it.
+Marketing and sales will sign this. Each criterion needs the evidence behind it. If a product is named, scope everything to it.
 
 PULL FROM THE UNIVERSE
 - The ICP: firmographic, technographic and behavioural attributes, segment tiers, buying triggers, disqualifiers, the fit scorecard.
@@ -48,18 +34,19 @@ A qualification definition with sources, and a one-page version for sales.
 
 GROUNDING
 Numbers from the dashboards with n and window. Criteria only from the ICP and dashboards; mark any criterion below the floor as unproven.
-
-[name the product if scoped]
 ```
 
-### Step 6: reality check
+### Measure recent leads against the criteria
 
 ```
 Using Calven MCP, show me how recent leads measure against the criteria.
 
+FILL IN
+- Window: [time window, e.g. last quarter]
+
 PULL FROM THE UNIVERSE
 - The ICP dashboard reality check: fit score distribution and pipeline gap.
-- CRM accounts created in [window] by fit tier.
+- CRM accounts created in the window by fit tier.
 
 BUILD
 The share of recent accounts in each fit tier, how much open pipeline is in profile, and where leads fall outside.
@@ -69,17 +56,18 @@ Five lines with the numbers.
 
 GROUNDING
 Numbers from the dashboards with n and window.
-
-[name the window]
 ```
 
-### Step 5: review the definition we already use
+### Review the criteria you already use
 
 ```
 Using Calven MCP, review our current lead qualification criteria against the ICP and what actually wins.
 
+FILL IN
+- Definition: [paste the current definition]
+
 CONTEXT
-Below is the definition marketing and sales signed last year: the fit rules, the role rules, the triggers and the disqualifiers.
+The definition is the one marketing and sales signed last year: the fit rules, the role rules, the triggers and the disqualifiers.
 
 PULL FROM THE UNIVERSE
 - The ICP: attributes, segment tiers, buying triggers, disqualifiers, the fit scorecard.
@@ -96,8 +84,6 @@ The definition annotated with a verdict per criterion, then the changes to propo
 
 GROUNDING
 Judge only against the ICP and dashboard numbers, with n and window. Do not add a criterion the Universe does not support.
-
-[paste the current definition]
 ```
 
 ## Ad hoc questions
@@ -110,14 +96,3 @@ Judge only against the ICP and dashboard numbers, with n and window. Do not add 
 - Which triggers were present on accounts we won?
 - Do accounts with [technology] in the stack win more?
 - Which segment should we expand the ICP into, per the dashboard?
-
-## Good practice
-
-- Start from the dashboard's predictors, then confirm with the ICP document. Where they disagree, the ICP needs a refresh in Calven.
-- Keep criteria that are unproven marked as such; sales will ask.
-- Rerun the reality check quarterly before the routing review.
-
-## Not covered today
-
-- Scoring configuration, routing rules and lead data in the automation tool and CRM.
-- Behavioural signals (web visits, content downloads) not in the CRM mirror.

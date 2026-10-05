@@ -1,35 +1,20 @@
 # Partner kickoff briefing
 
-**Team:** Partnerships · also sales enablement, product marketing
-**Impact:** High. A reseller's reps pitch without anyone from the company in the room. What they absorb in the kickoff is what customers hear for the next year. The deck quote: "Brief me on our positioning before the reseller kickoff."
-**Prerequisites:** strategy documents approved (positioning, messaging, ICP, product brief), personas approved, competitors tracked.
 
-## What the team is trying to do
+A new partner's team needs to know who you are, who you're for, how you win and what to say, and the latest sales deck is written for your own reps and three months out of date. You give them one session and one document they keep, so their reps can describe the positioning in their own words, name the ICP and personas, and know the three competitors they'll meet. Calven builds it from your positioning and strips what should stay internal.
 
-Brief a new partner's team on what the company is, who it is for, how it wins and what to say, in one session and one document they keep. Done means the partner's reps can describe the positioning in their own words, name the ICP and the personas, and know the three competitors they will meet. The partner manager usually builds this from the latest sales deck, which is written for the company's own reps and is three months out of date.
+## Prompts
 
-## The work, end to end
-
-| # | Step | What the team does | Where Calven helps | Pulls from |
-|---|---|---|---|---|
-| 1 | Refresh themselves | Re-read the current story before briefing someone else | The approved positioning and messaging as of today | Positioning, messaging |
-| 2 | Define the audience | Who at the partner attends: sellers, SEs, marketing | Calven does not help here | |
-| 3 | Build the briefing document | Positioning, ICP, personas, product, competitors, proof | Each section from its approved document, in a partner-safe form | Positioning, ICP, personas, product brief, battlecards |
-| 4 | Decide what not to share | Internal-only content: pricing floors, where we lose, deal data | Which sections are internal (battlecard "where we lose", pricing input) so they are left out or softened | Battlecards, product brief |
-| 5 | Add proof | Customer evidence a partner can repeat | Marketing-ready quotes and displacement wins | Quotes, deal drivers |
-| 6 | Prepare the Q&A | What the partner will ask | Objection handling and the partner FAQ (see partner-faq.md) | Messaging |
-| 7 | Run the session | Present, discuss, record | Calven does not help here | |
-| 8 | Follow up | Send the document, set the certification date | Calven does not help here (partner portal) | |
-
-## Recommended prompts
-
-### Step 1: refresh before the briefing
+### Refresh yourself on positioning first
 
 ```
 Using Calven MCP, brief me on our positioning before the reseller kickoff.
 
+FILL IN
+- Partner: [partner]
+
 CONTEXT
-I run the kickoff with [partner] tomorrow. I want the current approved story in my head, not last quarter's deck.
+I run the kickoff with the partner tomorrow. I want the current approved story in my head, not last quarter's deck.
 
 PULL FROM THE UNIVERSE
 - Our positioning: statement, category, competitive alternatives, unique attributes, value themes, why now.
@@ -46,17 +31,20 @@ A one-page refresher with document references.
 
 GROUNDING
 Use only the approved documents in the Universe and cite sections. Do not add positioning the documents do not contain.
-
-[name the partner]
 ```
 
-### Step 3: the briefing document
+### Build the partner kickoff briefing
 
 ```
-Using Calven MCP, build the kickoff briefing document for [partner], a [reseller / referral / implementation / technology] partner.
+Using Calven MCP, build the kickoff briefing document for the partner below.
+
+FILL IN
+- Partner: [partner]
+- Partner type: [reseller, referral, implementation or technology]
+- Readers: [sellers, SEs or marketing]
 
 CONTEXT
-Their [sellers / SEs / marketing] will read it after the session and keep it. Partner-safe: nothing internal.
+The readers will read it after the session and keep it. Partner-safe: nothing internal.
 
 PULL FROM THE UNIVERSE
 - Positioning: statement, category, unique attributes, value themes, proof points.
@@ -79,17 +67,19 @@ The document in that order, with a short glossary of our terms.
 
 GROUNDING
 Use only approved documents and cite each section. Leave out anything marked internal, pricing floors and deal data. If a section is missing in the Universe (no canvas for a persona, no battlecard for a competitor), say so instead of filling it.
-
-[name the partner and the partner type]
 ```
 
-### Step 4: the partner-safe check
+### Strip internal content from the briefing
 
 ```
 Using Calven MCP, check this partner briefing for anything that should stay internal.
 
+FILL IN
+- Partner: [partner]
+- Briefing: [paste the briefing]
+
 CONTEXT
-Below is the briefing I am about to send to [partner]. I want to catch internal-only content before it leaves.
+I am about to send the briefing to the partner. I want to catch internal-only content before it leaves.
 
 PULL FROM THE UNIVERSE
 - The battlecards, to identify "where we lose", landmines and internal talk-track notes.
@@ -105,11 +95,9 @@ The briefing annotated, then the clean version.
 
 GROUNDING
 Judge only against the documents in the Universe. If a passage is on-document, say so.
-
-[paste the briefing]
 ```
 
-### Step 5: proof a partner can repeat
+### Gather proof a partner can quote
 
 ```
 Using Calven MCP, give me the customer proof a partner may quote.
@@ -145,18 +133,3 @@ Include only quotes in an approved state and proof the positioning document list
 - Which verticals are priority and which are disqualified?
 - How do we describe the product in one paragraph?
 - What is internal in the battlecard that a partner must not see?
-
-## Good practice
-
-- Refresh yourself first. The person briefing a partner on stale positioning is the one who did not check.
-- Build the document from the documents, then cut. A partner needs the story, the ICP, the personas and three talk tracks, not the whole Universe.
-- Run the partner-safe check every time. "Where we lose" is for our reps.
-- Attribute every proof point as the company is allowed to. A partner will say the customer's name on a call.
-- Reissue the briefing when positioning changes. Partners keep the version they got.
-
-## Not covered today
-
-- The partner contract, program tiers, margins and portal access.
-- Presenting, recording or certifying.
-- Partner-specific pricing. Only list pricing is in the brief.
-- Partners asking Calven directly. That needs a workspace membership for the partner's reps; the workspace's transcripts and pipeline toggles then apply to them like any member.

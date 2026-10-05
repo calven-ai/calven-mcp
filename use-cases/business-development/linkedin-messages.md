@@ -1,37 +1,24 @@
 # LinkedIn messages
 
-**Team:** Business development · also account executives, demand generation
-**Impact:** Medium. LinkedIn carries the warmth in a multi-channel sequence; a connection note and a follow-up that read as the persona's problem get accepted and answered, the pitch gets ignored.
-**Prerequisites:** personas approved, messaging approved. Better with call transcripts ingested (customer language).
 
-## What the team is trying to do
+You've got 300 characters on LinkedIn and still want to say something specific to the persona. You get a connection request, a first message and a follow-up that reference a real pain in the buyer's words and ask for nothing on the first touch. Calven adds the company's knowledge, so you're not sending the email, shortened.
 
-Write a connection request, a first message and a follow-up that fit a 300-character limit and still say something specific to the persona. Done means messages that reference a real pain in the buyer's words and ask for nothing on the first touch. Without the company's knowledge the BDR sends the email, shortened.
+## Prompts
 
-## The work, end to end
-
-| # | Step | What the team does | Where Calven helps | Pulls from |
-|---|---|---|---|---|
-| 1 | Pick the hook | One pain or trigger per message | The persona's messaging hooks and top pains, in customer language | Persona canvas, quotes |
-| 2 | Write the connection note | Under 300 characters, no ask | A note built on the hook | Persona canvas |
-| 3 | Write the first message | After acceptance, one idea | The pain, one proof, one question | Quotes, deal drivers |
-| 4 | Write the follow-up | Day 5 to 7, new angle | A second pain or a customer story | Themes, surveyed deals |
-| 5 | Test on the buyer | Would they accept and reply? | Persona review | `review_against_personas` |
-| 6 | Check the profile and posts | Personalise from what they wrote | Calven does not help here | |
-| 7 | Send and track | Acceptance, replies | Calven does not help here | |
-
-## Recommended prompts
-
-### Steps 1 to 4: the three messages
+### Write the connection note and two messages
 
 ```
-Using Calven MCP, write my LinkedIn connection note, first message and follow-up for [persona] at [account].
+Using Calven MCP, write my LinkedIn connection note, first message and follow-up for the persona below at this account.
+
+FILL IN
+- Persona: [persona]
+- Account: [account]
 
 CONTEXT
 Outbound, part of a sequence that also has email and calls. The connection note has no ask. The first message carries one idea. The follow-up changes the angle.
 
 PULL FROM THE UNIVERSE
-- The [persona] canvas: pains by impact, messaging hooks, watering holes.
+- The persona's canvas: pains by impact, messaging hooks, watering holes.
 - The phrases customers use for the top pain, with one quote.
 - One won deal in a similar segment and what decided it.
 
@@ -45,37 +32,41 @@ The three messages with the source for each hook.
 
 GROUNDING
 Use only canvas content, quotes and deals in the Universe and cite them. Do not invent a shared connection or a customer name.
-
-[name the persona and the account]
 ```
 
-### Step 5: test
+### Test the messages as the persona
 
 ```
-Using Calven MCP, read these LinkedIn messages as [persona].
+Using Calven MCP, read these LinkedIn messages as the persona below.
+
+FILL IN
+- Persona: [persona]
+- Messages: [paste the three messages]
 
 CONTEXT
-The three messages are at the bottom. Would they accept, would they reply, and where does it read as a pitch?
+Would they accept, would they reply, and where does it read as a pitch?
 
 PULL FROM THE UNIVERSE
-- The [persona] canvas, and run the persona review.
+- The persona's canvas, and run the persona review.
 
 OUTPUT
 A verdict per message and the one line to change.
 
 GROUNDING
 React only from what the Universe says about this persona.
-
-[paste the messages]
 ```
 
-### Step 4: a new angle for the follow-up
+### Find a new angle for the follow-up
 
 ```
-Using Calven MCP, give me a different angle for my LinkedIn follow-up to [persona].
+Using Calven MCP, give me a different angle for my LinkedIn follow-up to the persona below.
+
+FILL IN
+- Persona: [persona]
+- Pain used: [the pain the first message was about]
 
 CONTEXT
-The first message was about [pain] and got no reply.
+The first message was about the pain above and got no reply.
 
 PULL FROM THE UNIVERSE
 - The persona's other high-impact pains and jobs to be done.
@@ -86,8 +77,6 @@ Two alternative angles with a quote each, and a 60-word follow-up on the stronge
 
 GROUNDING
 Use only canvas and quote content in the Universe.
-
-[name the persona and the pain you already used]
 ```
 
 ## Ad hoc questions
@@ -102,17 +91,3 @@ Use only canvas and quote content in the Universe.
 - Give me a follow-up angle that is not [pain].
 - What does [persona] care about that our emails never mention?
 - Which proof point fits in one sentence for [persona]?
-
-## Good practice
-
-- Give the character limits. The AI tool writes long unless told.
-- No ask in the connection note. Ask for it explicitly.
-- One idea per message. Two pains in 80 words reads as a pitch.
-- Personalise from the profile yourself. Calven supplies the pain and proof; the person's own post is yours to add.
-- Test before sending the first batch, then reuse.
-
-## Not covered today
-
-- Reading the prospect's profile, posts or activity.
-- Sending, connection tracking, reply tracking.
-- Social selling tools and their data.

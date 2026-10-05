@@ -1,35 +1,24 @@
 # Feature naming
 
-**Team:** Product management · also product marketing, design
-**Impact:** Medium. A name that uses the customer's words gets understood on the first read; a name that collides with a competitor's confuses the buyer and the search results. Calven holds both the customer's vocabulary and the competitors' product names.
-**Prerequisites:** call transcripts ingested (quotes, themes), competitors tracked (dossiers with product and feature names). Strategy documents approved for the naming conventions (portfolio messaging: naming and nomenclature).
 
-## What the team is trying to do
+You're naming a feature, module or plan and want customers to recognise what it does. You get a shortlist with the customer evidence behind each candidate, fitted to the company's naming conventions and checked for collisions with rivals. Calven pulls the candidates from your customers' own words.
 
-Name a feature, module or plan so that customers recognise what it does, it fits the company's naming conventions, and it does not echo a rival. Done means a shortlist with the customer evidence behind each candidate and the competitor collisions checked.
+## Prompts
 
-## The work, end to end
-
-| # | Step | What the team does | Where Calven helps | Pulls from |
-|---|---|---|---|---|
-| 1 | Collect the customer's words | How customers describe the problem and the thing | Quotes and themes on the topic; persona jobs to be done | Quotes, themes, persona canvas |
-| 2 | Check conventions | Fit with existing product and feature names | The product brief and the portfolio messaging's naming and nomenclature | Product brief, messaging |
-| 3 | Check collisions | Names competitors already use | Competitor dossiers: product, feature comparison, positioning and messaging | Competitor deep dive |
-| 4 | Shortlist and test | Candidate names with rationale; test with personas | Persona review on the candidate list in context | `review_against_personas` |
-| 5 | Trademark and domain checks | Legal clearance | Calven does not help here | |
-
-## Recommended prompts
-
-### Step 1 to 3: the naming shortlist
+### Propose names from customers' words
 
 ```
-Using Calven MCP, propose names for [feature] from our customers' words.
+Using Calven MCP, propose names for the feature below from our customers' words.
+
+FILL IN
+- Feature: [feature]
+- What it does: [what it does]
 
 CONTEXT
-[feature] does [what it does]. I want names customers would understand on first read, consistent with how we name things, and distinct from competitors.
+I want names customers would understand on first read, consistent with how we name things, and distinct from competitors.
 
 PULL FROM THE UNIVERSE
-- Customer quotes and themes about the problem and the job [feature] serves: the nouns and verbs they use.
+- Customer quotes and themes about the problem and the job the feature serves: the nouns and verbs they use.
 - Our product brief and the naming conventions in our messaging.
 - The product and feature names in our tracked competitors' dossiers.
 
@@ -42,20 +31,22 @@ The candidate table and the shortlist.
 
 GROUNDING
 Use only customer language and competitor names from the Universe, cited. Do not invent customer phrases. Flag collisions you cannot check because the dossier is silent.
-
-[name the feature and what it does]
 ```
 
-### Step 4: test the shortlist with the persona
+### Test the shortlist as the persona
 
 ```
-Using Calven MCP, test these feature names as [persona].
+Using Calven MCP, test these feature names as the persona below.
+
+FILL IN
+- Persona: [persona]
+- Names: [paste the three names with descriptions]
 
 CONTEXT
-Below are three candidate names, each with a one-line description as it would appear in the product. I want to know which the persona understands without the description.
+The names are three candidates, each with a one-line description as it would appear in the product. I want to know which the persona understands without the description.
 
 PULL FROM THE UNIVERSE
-- The [persona] canvas, and run the persona review on the list.
+- The persona's canvas, and run the persona review on the list.
 
 REACT
 - For each name: what the persona thinks it does before reading the description, and whether that matches.
@@ -66,20 +57,21 @@ The verdict per name.
 
 GROUNDING
 React only from the canvas. Do not invent preferences the persona profile does not support.
-
-[paste the three names with descriptions]
 ```
 
-### Review mode: check an existing name
+### Check whether an existing name works
 
 ```
-Using Calven MCP, check whether the name "[name]" works.
+Using Calven MCP, check whether the feature name below works.
+
+FILL IN
+- Name: [name of the feature]
 
 CONTEXT
-We shipped [name] last quarter. Support says customers do not understand it.
+We shipped the feature under this name last quarter. Support says customers do not understand it.
 
 PULL FROM THE UNIVERSE
-- Customer quotes that mention [name] or describe the capability without using it.
+- Customer quotes that mention the name or describe the capability without using it.
 - Competitor names close to it.
 
 CHECK
@@ -91,8 +83,6 @@ A short read and two alternatives from the customer's vocabulary.
 
 GROUNDING
 Use only quotes and dossiers in the Universe, cited.
-
-[name the feature]
 ```
 
 ## Ad hoc questions
@@ -106,15 +96,3 @@ Use only quotes and dossiers in the Universe, cited.
 - Which existing feature names in the product brief would [name] sit next to?
 - Does any theme or quote already use "[name]" to mean something else?
 - Run the persona review on this feature description with the name "[name]": [paste]
-
-## Good practice
-
-- Start from quotes, not from a brainstorm. The customer's noun is usually the name.
-- Check every candidate against the dossiers of all Tier 1 competitors, not one.
-- Test names without their descriptions. If the persona needs the description, the name fails.
-- Keep the shortlist to three before legal review.
-
-## Not covered today
-
-- Trademark, domain and app store checks.
-- Search volume for the name. The SEO tooling owns that.

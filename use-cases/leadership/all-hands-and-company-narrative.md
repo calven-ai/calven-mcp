@@ -1,32 +1,20 @@
 # All-hands and company narrative
 
-**Team:** Leadership · also product marketing, people, brand and communications
-**Impact:** Medium. The company story drifts between the all-hands, the careers page and the sales pitch. Calven holds the approved positioning, messaging and boilerplate, the customer's words and the win/loss evidence, so every telling starts from the same source.
-**Prerequisites:** strategy documents approved (positioning, messaging). Better with call transcripts (quotes), win/loss surveys (wins to celebrate with the buyer's words), competitors tracked.
 
-## What the team is trying to do
+The company story drifts between the all-hands, the careers page and the sales pitch, and you want one version everyone tells. You get a company narrative that matches the approved positioning, plus a monthly all-hands segment: a customer quote, a win and why we won it, a competitor move, a market shift. Calven holds the positioning, messaging, boilerplate and win/loss evidence, so every telling starts from the same source.
 
-Tell the company story the same way to employees, recruits and customers, and keep the monthly all-hands grounded in what customers and the market are saying. Done means the company narrative document aligned with positioning, and an all-hands segment each month: a customer quote, a win and why we won it, a competitor move, a market shift.
+## Prompts
 
-## The work, end to end
-
-| # | Step | What the team does | Where Calven helps | Pulls from |
-|---|---|---|---|---|
-| 1 | The narrative | Who we are, who we serve, why we exist, how we win | Positioning statement and narrative, messaging core narrative and one-liner, boilerplate | Positioning, messaging |
-| 2 | Check for drift | Whether the internal story matches the approved one | Positioning and messaging compared with the draft | Positioning, messaging |
-| 3 | The all-hands segment | Customer voice, a win, the competition, the market | Marketing-ready quotes; won deals and their drivers; competitor signals; trends | Quotes, deal drivers, competitive signals, trends |
-| 4 | The win story | Why a deal was won, in the buyer's words | Surveyed deal summary and drivers | Surveyed deals, deal drivers |
-| 5 | Deliver | The meeting, the doc | Calven does not help here | |
-
-## Recommended prompts
-
-### Step 1 and 2: align the company narrative
+### Align the company narrative with positioning
 
 ```
 Using Calven MCP, align our company narrative with the approved positioning.
 
+FILL IN
+- Narrative: [paste the narrative]
+
 CONTEXT
-Below is the narrative we use in all-hands and recruiting. I want it checked against the positioning and messaging and rewritten where it drifts.
+The narrative is the one we use in all-hands and recruiting. I want it checked against the positioning and messaging and rewritten where it drifts.
 
 PULL FROM THE UNIVERSE
 - The positioning: statement, category, unique attributes, value themes, proof points.
@@ -41,14 +29,15 @@ The annotated draft, then the clean version.
 
 GROUNDING
 Judge only against the positioning and messaging in the Universe, cited. If the narrative is on-positioning, say so.
-
-[paste the narrative]
 ```
 
-### Step 3 and 4: the all-hands segment
+### Build this month's all-hands segment
 
 ```
 Using Calven MCP, build the customer and market segment for this month's all-hands.
+
+FILL IN
+- Month: [month]
 
 CONTEXT
 Five minutes, same shape every month: what a customer said, a deal we won and why, what a competitor did, what moved in the market.
@@ -67,14 +56,15 @@ The segment.
 
 GROUNDING
 Use only the Universe, cited. Keep quotes verbatim. Respect withheld deal names and amounts.
-
-[name the month]
 ```
 
-### Step 4: the win story told in the buyer's words
+### Tell a win story in the buyer's words
 
 ```
-Using Calven MCP, write the win story for [deal] for the all-hands.
+Using Calven MCP, write the win story for the deal below for the all-hands.
+
+FILL IN
+- Deal: [deal]
 
 CONTEXT
 I want to tell the company why we won this deal in the buyer's words, not the rep's. Two minutes, no slides. The rep will stand up after, so leave them something to add.
@@ -96,8 +86,6 @@ A 200-word story with the sources on a notes line.
 
 GROUNDING
 Quotes verbatim and attributed as the workspace allows. Respect withheld deal names and amounts. Do not add a reason the survey or the calls do not record.
-
-[name the deal]
 ```
 
 ## Ad hoc questions
@@ -110,14 +98,3 @@ Quotes verbatim and attributed as the workspace allows. Respect withheld deal na
 - Which trend strengthened last quarter?
 - What are our value themes?
 - Does this sentence match our positioning: "[sentence]"?
-
-## Good practice
-
-- Use the same four-slide segment every month. Repetition is how the story sticks.
-- Keep quotes verbatim and named as the workspace allows.
-- Check the narrative against positioning whenever positioning changes.
-
-## Not covered today
-
-- Company metrics, hiring and financial updates.
-- Presenting or recording the all-hands.

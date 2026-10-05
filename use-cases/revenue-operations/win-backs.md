@@ -1,37 +1,23 @@
 # Win-backs
 
-**Team:** Revenue operations · also sales leadership, BDRs, product marketing
-**Impact:** High. Closed-lost accounts are the cheapest pipeline there is, if the reason they said no has changed. Calven knows the loss reason in the buyer's words, what the product has shipped since, and whether the champion is still listed.
-**Prerequisites:** CRM connected (deals with loss reason and lost to, contacts), win/loss surveys running (deal drivers, responses). Better with own website monitored (product changes) and competitors tracked.
 
-## What the team is trying to do
+Every closed-lost deal older than six months isn't a win-back list. You want the ones whose loss reason no longer applies, with what changed, who to contact and the angle, ready to route to the BDRs. Calven checks each original reason against what's moved since: the feature shipped, the price changed, the competitor stumbled, the champion moved into a buying role.
 
-Build a re-engagement list of lost deals whose loss reason no longer applies: the feature shipped, the price changed, the competitor stumbled, the champion moved into a buying role. Done means the list with the original reason, what changed, who to contact and the angle, routed to the BDRs. Without the company's own knowledge the win-back list is every closed-lost deal older than six months.
+## Prompts
 
-## The work, end to end
-
-| # | Step | What the team does | Where Calven helps | Pulls from |
-|---|---|---|---|---|
-| 1 | Pull the losses | Closed-lost deals in the window | Deals by loss reason, lost to, segment, size and close date | CRM deals |
-| 2 | Hear the real reason | Go beyond the CRM pick list | Deal drivers that decided the loss, with the buyer's evidence quote; the survey response | Deal drivers, survey responses, surveyed deals |
-| 3 | Find what changed | Match reasons to changes | Product changes since the loss; pricing in the product brief; competitive signals about the winner | Product changes, product brief, competitive signals |
-| 4 | Check the people | Is the champion still there, who else is listed | Contacts at the account with role and lifecycle stage | CRM contacts |
-| 5 | Rank | Fit first, then likelihood the reason is gone | ICP fit tier; win rate against the competitor they chose | CRM accounts, competitive dashboard |
-| 6 | Write the angle | One line per account | The changed fact, in terms of the buyer's original words | Deal drivers, product changes |
-| 7 | Route and sequence | Assign to BDRs, build the sequence | Calven does not help here; see business development for the outreach prompts | |
-
-## Recommended prompts
-
-### Step 1 to 3: the list of losses whose reason changed
+### Find lost deals worth another try
 
 ```
 Using Calven MCP, find the closed-lost deals we should try again.
 
+FILL IN
+- Window: [time window of the losses, e.g. last 12 months]
+
 CONTEXT
-I want deals lost in [window] where the reason we lost may no longer hold: a capability we have since shipped, a price we have since changed, or a competitor whose position has moved.
+I want deals lost in the window where the reason we lost may no longer hold: a capability we have since shipped, a price we have since changed, or a competitor whose position has moved.
 
 PULL FROM THE UNIVERSE
-- Closed-lost deals in [window] with loss reason, lost to, account industry and size, ICP fit tier.
+- Closed-lost deals in the window with loss reason, lost to, account industry and size, ICP fit tier.
 - Deal drivers on those deals with direction hurt and rank "decided", with the evidence quote.
 - Product changes since the earliest loss, and the product brief's current capabilities and pricing.
 - Competitive signals for the competitors we lost to since the loss.
@@ -44,17 +30,18 @@ The table, reason-gone deals first.
 
 GROUNDING
 Match a loss to a change only when the driver names the thing that changed. Do not assume a release fixed a loss it does not mention. If no driver exists for a deal, use the CRM loss reason and say the buyer's words are not recorded.
-
-[name the window]
 ```
 
-### Step 4 and 5: the people and the rank
+### Rank win-backs by who's still there
 
 ```
 Using Calven MCP, check who is still at these accounts and rank the win-backs.
 
+FILL IN
+- Deals: [paste the reason-gone and reason-weakened deals]
+
 CONTEXT
-Below are the reason-gone and reason-weakened deals. I want the contact situation and a final rank.
+I want the contact situation for the deals and a final rank.
 
 PULL FROM THE UNIVERSE
 - Contacts at each account with role and lifecycle stage, and whether the original primary contact is still listed.
@@ -70,17 +57,18 @@ The ranked list with contact and role.
 
 GROUNDING
 Use only mirrored contacts and dashboard rates with n and window. If contacts are restricted, rank without them and say so.
-
-[paste the deals]
 ```
 
-### Step 6: the angle per account
+### Write the re-engagement angle per account
 
 ```
 Using Calven MCP, write the re-engagement angle for each win-back account.
 
+FILL IN
+- Ranked list: [paste the ranked list with the buyer's original words and what changed]
+
 CONTEXT
-Below is the ranked list with the buyer's original words and what changed. I need one line per account a BDR can open with, in the buyer's own terms, plus one reusable template.
+I need one line per account on the ranked list a BDR can open with, in the buyer's own terms, plus one reusable template.
 
 PULL FROM THE UNIVERSE
 - The driver quote for each deal.
@@ -96,8 +84,6 @@ The table and the template.
 
 GROUNDING
 Use only recorded changes and quotes. Do not promise anything the product brief does not state.
-
-[paste the ranked list]
 ```
 
 ## Ad hoc questions
@@ -112,18 +98,3 @@ Use only recorded changes and quotes. Do not promise anything the product brief 
 - Which accounts lost on "No decision" show a new trigger now?
 - How many closed-lost deals have a completed win/loss survey?
 - What changed at [competitor] since we lost [deal] to them?
-
-## Good practice
-
-- Match the change to the buyer's words, not to the CRM pick list. "Missing feature" is only a win-back if it was the feature we shipped.
-- Separate reason gone from reason weakened. The first gets a direct angle; the second gets a conversation.
-- Check the champion before routing. A win-back with no one to call is a cold account.
-- Rank by fit first. A reason-gone deal at a Tier 3 account is still a Tier 3 account.
-- Hand the BDRs the buyer's original quote. The opener that quotes the buyer back to themselves gets replies.
-- Rerun after every release and every quarter's win/loss results.
-
-## Not covered today
-
-- Routing, assignment, sequencing and sending. See business development for the outreach prompts.
-- News about the account itself (funding, hires) beyond the triggers mirrored from the CRM.
-- Writing the win-back status or a task into the CRM.

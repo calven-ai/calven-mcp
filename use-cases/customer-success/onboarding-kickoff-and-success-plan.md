@@ -1,41 +1,29 @@
 # Onboarding kickoff and success plan
 
-**Team:** Customer success · also implementation, sales
-**Impact:** High. Customers who do not reach first value in the first month churn at a multiple of those who do. A kickoff built on why they bought and a success plan in their words gets the first milestone agreed on day one.
-**Prerequisites:** CRM connected (deal, contacts), win/loss surveys running or call transcripts ingested (the stated outcomes), personas approved (what each stakeholder is measured on), product brief approved (what the product does for the use case).
 
-## What the team is trying to do
+You're about to run the kickoff and you don't want to re-ask what sales already heard. You get a kickoff agenda, a success plan the customer edits instead of writing, and a 30-60-90 plan, all built on the outcome they bought. Calven drafts them from what the customer told you during the sale, so the plan isn't a template.
 
-Run a kickoff that confirms the outcome the customer bought, names the milestones, assigns owners and dates on both sides, and agrees what first value looks like. Done means a kickoff agenda, a success plan draft the customer edits rather than writes, and a 30-60-90 plan. Without the company's own record, the kickoff re-asks what sales already heard and the success plan is a template.
+## Prompts
 
-## The work, end to end
-
-| # | Step | What the team does | Where Calven helps | Pulls from |
-|---|---|---|---|---|
-| 1 | Confirm what sales assumed | Goals, stakeholders, go-live date, prerequisites | The account brief: drivers, quotes, contacts, promises | See account briefing and handoff |
-| 2 | Define outcomes | The business outcome and the metric | The buyer's stated gains and goals, verbatim; the persona's KPIs | Quotes (goal, gain), survey responses, persona canvas |
-| 3 | Map use cases | Which product use cases serve those outcomes | The product brief's use cases and capabilities, mapped to the persona's jobs to be done | Product brief, persona canvas |
-| 4 | Draft the success plan | Outcomes, milestones, owners, dates, risks | A plan with the customer's words and the product's use cases | All above |
-| 5 | Build the kickoff agenda | Roles, goals, definition of done, cadence, next steps | The agenda with the questions that confirm rather than re-ask | Quotes, contacts |
-| 6 | Set the 30-60-90 | First value, adoption, review | Milestones built from use cases and what similar customers said about time to value | Product brief, quotes (time to value) |
-| 7 | Run the kickoff | Facilitate, capture | Calven does not help here (ingest the call after) | |
-| 8 | Track | Milestones, usage, tickets | Calven does not help here | |
-
-## Recommended prompts
-
-### Step 2 to 4: success plan draft
+### Draft the success plan from their words
 
 ```
-Using Calven MCP, draft the success plan for [account].
+Using Calven MCP, draft the success plan for the account below.
+
+FILL IN
+- Account: [account]
+- Product: [product]
+- Signed: [signature date]
+- Kickoff: [kickoff date]
 
 CONTEXT
-[account] signed for [product] on [date]. The kickoff is on [kickoff date]. I want a plan built on what they told us they want, so they edit rather than start from blank.
+The account signed for the product on the signature date. The kickoff is on the kickoff date. I want a plan built on what they told us they want, so they edit rather than start from blank.
 
 PULL FROM THE UNIVERSE
-- Quotes from [account] tagged goal, gain, job to be done or buying trigger, with speaker and role.
+- Quotes from the account tagged goal, gain, job to be done or buying trigger, with speaker and role.
 - The buyer's survey answers and the deal drivers that decided the deal.
 - The persona canvas for each contact: goals and KPIs.
-- The product brief: use cases and capabilities for [product].
+- The product brief: use cases and capabilities for the product.
 
 BUILD
 - Outcomes: three business outcomes in the customer's words, each with the KPI the persona is measured on.
@@ -49,17 +37,19 @@ The success plan as a one-page document with sources.
 
 GROUNDING
 Use only the Universe and cite it. Do not invent outcomes; if the record has none, mark the section as "to confirm at kickoff".
-
-[name the account, product and dates]
 ```
 
-### Step 5: kickoff agenda
+### Write the kickoff agenda
 
 ```
-Using Calven MCP, write the kickoff agenda for [account].
+Using Calven MCP, write the kickoff agenda for the account below.
+
+FILL IN
+- Account: [account]
+- Attendees: [who is attending]
 
 CONTEXT
-45 minutes with [contacts]. I want to confirm what we know and fill the gaps, not re-run discovery.
+45 minutes with the attendees. I want to confirm what we know and fill the gaps, not re-run discovery.
 
 PULL FROM THE UNIVERSE
 - The contacts and their buying roles and personas.
@@ -76,17 +66,20 @@ The agenda.
 
 GROUNDING
 Use only the Universe and cite it.
-
-[name the account and who is attending]
 ```
 
-### Step 6: the 30-60-90
+### Build the 30-60-90 day plan
 
 ```
-Using Calven MCP, build the 30-60-90 day plan for [account] on [product].
+Using Calven MCP, build the 30-60-90 day plan for the account below on the product below.
+
+FILL IN
+- Account: [account]
+- Product: [product]
+- Outcomes: [paste the success plan outcomes]
 
 CONTEXT
-I want first value inside 30 days. The success plan outcomes are below.
+I want first value inside 30 days. Build from the success plan outcomes.
 
 PULL FROM THE UNIVERSE
 - The product brief: the use cases and the capabilities each needs.
@@ -104,21 +97,24 @@ The plan as a table.
 
 GROUNDING
 Use only the Universe and cite it. Do not promise timelines the product brief or customer evidence does not support.
-
-[paste the outcomes and name the product]
 ```
 
-### Review: an existing success plan
+### Check a success plan against the record
 
 ```
-Using Calven MCP, review this success plan against what [account] actually told us.
+Using Calven MCP, review this success plan against what the account actually told us.
+
+FILL IN
+- Plan: [paste the plan]
+- Account: [account]
+- Product: [product]
 
 CONTEXT
-Below is the plan we drafted. I want to know where it drifts from the customer's own words and from what the product does.
+I want to know where the plan drifts from the customer's own words and from what the product does.
 
 PULL FROM THE UNIVERSE
-- Quotes and survey answers from [account] on goals, gains and jobs to be done.
-- The product brief for [product].
+- Quotes and survey answers from the account on goals, gains and jobs to be done.
+- The product brief for the product.
 
 CHECK
 - Each outcome: does the customer evidence support it, in those words?
@@ -130,8 +126,6 @@ The plan annotated, then the three edits.
 
 GROUNDING
 Use only the Universe and cite it.
-
-[paste the plan and name the account]
 ```
 
 ## Ad hoc questions
@@ -146,17 +140,3 @@ Use only the Universe and cite it.
 - Which capabilities does the [use case] need, according to the product brief?
 - What did [contact] say they personally need from this?
 - Write the definition of done for [account] in their words.
-
-## Good practice
-
-- Draft the plan before the kickoff and send it as a pre-read. Customers edit a plan in their words; they ignore a template.
-- Use the persona's KPIs as the outcome metric. It is what the sponsor will report on.
-- Set milestones from product use cases, not features. The brief lists them.
-- Ingest the kickoff call. The success plan review prompt then reads what was agreed.
-- Rerun the review prompt at 90 days. Drift between plan and record is the first churn signal.
-
-## Not covered today
-
-- Implementation tasks, tickets, technical prerequisites and the project tool are outside Calven.
-- Usage and adoption numbers are not in Calven.
-- Calven does not store the success plan; keep it in the CS tool and paste it for review.

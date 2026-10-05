@@ -1,33 +1,21 @@
 # Campaign retros
 
-**Team:** Demand generation · also product marketing, content marketing, revenue operations
-**Impact:** Medium. The numbers say what happened; the Universe says why. A retro that reads the losing assets against the personas, the customer's language and the objections turns a report into the next brief.
-**Prerequisites:** personas approved, messaging approved. Better with transcripts ingested (quotes, language gaps), CRM connected (what the campaign's leads became).
 
-## What the team is trying to do
+The campaign's numbers are in and you need to explain why it performed as it did and decide what to change. You walk away with a retro: your numbers, a diagnosis per weak asset grounded in the persona and the calls, the fit of the leads it produced, and the changes to the next brief. Calven brings the persona and the call evidence, so the retro is more than a dashboard screenshot and opinions.
 
-Explain why a campaign performed as it did and decide what to change. Done means a retro with the numbers the person brings, the diagnosis per weak asset grounded in the persona and the calls, the fit of the leads it produced, and the changes to the next brief. Without the Universe the retro is a dashboard screenshot and opinions.
+## Prompts
 
-## The work, end to end
-
-| # | Step | What the team does | Where Calven helps | Pulls from |
-|---|---|---|---|---|
-| 1 | Gather the numbers | By asset and channel | Calven does not help here; the person pastes them | |
-| 2 | Judge lead quality | Were the leads in profile | Accounts from the campaign by fit tier; deals they became | Crm_accounts, crm_deals |
-| 3 | Diagnose weak assets | Why the persona did not respond | Persona canvas, objections, language gaps | Personas, quotes, messaging dashboard |
-| 4 | Diagnose strong assets | What to repeat | The pain or quote it rested on | Quotes, themes |
-| 5 | Check message drift | Did assets stray from the brief | Messaging | Messaging |
-| 6 | Write the retro and the changes | For the next brief | Drafted from the above | |
-
-## Recommended prompts
-
-### Step 2: lead quality
+### Judge whether the leads were worth having
 
 ```
-Using Calven MCP, tell me whether the [campaign] leads were worth having.
+Using Calven MCP, tell me whether the leads from the campaign below were worth having.
+
+FILL IN
+- Campaign: [campaign]
+- Accounts: [paste the account list]
 
 CONTEXT
-Below are the accounts the campaign produced.
+The accounts are the ones the campaign produced.
 
 PULL FROM THE UNIVERSE
 - Each account's ICP fit tier and score and the attributes behind it.
@@ -42,21 +30,26 @@ A short table and three lines.
 
 GROUNDING
 Only the CRM mirror and dashboard, cited. Accounts not in the CRM are "unknown fit".
-
-[paste the account list]
 ```
 
-### Step 3 to 5: diagnosis
+### Diagnose the campaign results
 
 ```
-Using Calven MCP, diagnose the [campaign] results.
+Using Calven MCP, diagnose the results of the campaign below.
+
+FILL IN
+- Campaign: [campaign]
+- Persona: [the brief's persona]
+- Message: [the brief's message]
+- Window: [time window, e.g. the campaign's run]
+- Assets: [paste the assets with their numbers]
 
 CONTEXT
-Below are the assets with their numbers: the winners, the losers, and the brief's persona and message.
+The assets come with their numbers: the winners and the losers.
 
 PULL FROM THE UNIVERSE
-- The [persona] canvas: pains, objections, how they talk.
-- Themes and quotes on the campaign's topic in [window].
+- The persona's canvas: pains, objections, how they talk.
+- Themes and quotes on the campaign's topic in the window.
 - Our messaging for the persona and stage, and the language gaps the messaging dashboard shows.
 
 DIAGNOSE
@@ -69,21 +62,27 @@ The diagnosis per asset and the five changes to the next brief.
 
 GROUNDING
 Ground every diagnosis in the Universe and cite it. Where the Universe cannot explain a result, say so and suggest the test.
-
-[paste the assets, numbers, persona and message]
 ```
 
-### Step 6: the next brief
+### Turn the retro into the next brief
 
 ```
-Using Calven MCP, turn the [campaign] retro into the brief for the next one.
+Using Calven MCP, turn the retro of the campaign below into the brief for the next one.
+
+FILL IN
+- Campaign: [campaign]
+- Persona: [persona]
+- Segment: [segment]
+- Stage: [buying stage]
+- Window: [time window, e.g. last quarter]
+- Retro: [paste the retro]
 
 CONTEXT
-Below is the retro: the diagnosis per asset and the changes we agreed. The next campaign targets [persona] in [segment] at the [stage] stage.
+The retro holds the diagnosis per asset and the changes we agreed. The next campaign targets the persona in the segment at the stage.
 
 PULL FROM THE UNIVERSE
-- The [persona] canvas and the messaging matrix entry for this persona and stage.
-- The pains and buying triggers customers in [segment] named most in [window], with a quote for each.
+- The persona's canvas and the messaging matrix entry for this persona and stage.
+- The pains and buying triggers customers in the segment named most in the window, with a quote for each.
 - The objection the last campaign failed to pre-empt, and how our messaging answers it.
 
 BUILD
@@ -96,8 +95,6 @@ A one-page brief the writer can start from, with sources.
 
 GROUNDING
 Carry only the changes the retro supports and the evidence the Universe holds. Do not invent a new angle the quotes do not back.
-
-[paste the retro and name the persona, segment and stage]
 ```
 
 ## Ad hoc questions
@@ -111,14 +108,3 @@ Carry only the changes the retro supports and the evidence the Universe holds. D
 - What should the next [segment] campaign open on?
 - Did the leads from [campaign] close at the in-profile win rate or below it?
 - Which of the campaign's claims are not in the product brief?
-
-## Good practice
-
-- Bring the numbers; the Universe has none. Paste assets with their results.
-- Judge leads by fit before judging the creative. A winning ad that pulled Tier 3 is a loser.
-- Ask for the fix per asset, then roll the fixes into the next brief.
-
-## Not covered today
-
-- Attribution, funnel and ad-platform data.
-- Accounts not in the CRM.

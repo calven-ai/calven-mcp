@@ -1,35 +1,20 @@
 # Territory planning
 
-**Team:** Revenue operations · also sales leadership, finance
-**Impact:** High. Territories built on geography and employee count are territories built on what the CRM happens to store. Built on ICP fit, segment tiers and what actually predicts a win, they balance by opportunity, not by account count.
-**Prerequisites:** CRM connected (accounts with fit score and tier, deals), ICP approved. Better with win/loss surveys running (win predictors) and personas approved.
 
-## What the team is trying to do
+You're designing or rebalancing territories and the pool is sorted by region and headcount. You get the account pool scored and segmented, the imbalance quantified, and the proposed moves with reasons, so each territory carries comparable potential. The assignment happens in the CRM or the planning tool; Calven shows where the strong fits are and the whitespace where you win.
 
-Design or rebalance territories so each carries comparable potential: enough strong-fit accounts, the right segment mix, whitespace where we win. Done means the account pool scored and segmented, the imbalance quantified, and the proposed moves with reasons. Territory assignment itself happens in the CRM or the planning tool. Without the company's own knowledge the pool is sorted by region and headcount.
+## Prompts
 
-## The work, end to end
-
-| # | Step | What the team does | Where Calven helps | Pulls from |
-|---|---|---|---|---|
-| 1 | Confirm the ICP and tiers | The criteria territories are built on | The approved ICP: segment tiers, priority and secondary verticals, disqualifiers | ICP document |
-| 2 | Score the pool | Every account's fit and tier | Fit score and tier per account, with industry, size, region, funding stage | CRM accounts |
-| 3 | Find where we win | Which attributes predict a win | Win rate by attribute, predictive attributes, segment win rates, deal size lift | ICP dashboard |
-| 4 | Measure the current balance | Potential per territory | Accounts by tier and segment per owner or region; open and won pipeline per segment | CRM accounts, CRM deals |
-| 5 | Model the moves | What to shift to balance | Calven does not model; it supplies the scored pool and the win rates the model weights | |
-| 6 | Explain to reps | Why each territory looks as it does | The reason per account (tier, attributes, triggers) and the win-rate evidence | CRM accounts, ICP dashboard |
-| 7 | Assign | Load into the CRM, set quotas | Calven does not help here | |
-| 8 | Review quarterly | Catch drift | Accounts whose tier changed since the plan; segments whose win rate moved | CRM accounts, ICP dashboard |
-
-## Recommended prompts
-
-### Step 1 to 3: the scored pool and the win predictors
+### Score and segment the account pool
 
 ```
 Using Calven MCP, give me the account pool for territory planning, scored and segmented.
 
+FILL IN
+- Planning period: [year or quarter]
+
 CONTEXT
-I am rebuilding territories for [year or quarter]. I need every account by tier, segment and region, and the evidence of which attributes predict a win so I can weight potential.
+I am rebuilding territories for the planning period. I need every account by tier, segment and region, and the evidence of which attributes predict a win so I can weight potential.
 
 PULL FROM THE UNIVERSE
 - Our ICP: segment tiers, priority and secondary verticals, disqualifiers.
@@ -46,17 +31,18 @@ The pool tables and the weight table.
 
 GROUNDING
 Tiers and attributes from the rows; rates from the ICP dashboard with n and window. Do not invent weights the dashboard does not support.
-
-[name the planning period]
 ```
 
-### Step 4: the current balance
+### Show how potential splits across territories
 
 ```
 Using Calven MCP, show me how potential is distributed across the current territories.
 
+FILL IN
+- Territory mapping: [paste the mapping of owner or region to accounts, or write "use region"]
+
 CONTEXT
-Below is the current mapping of owner or region to accounts (or use the region on the account). I want potential per territory, not account count.
+Use the territory mapping, or the region on the account if it says "use region". I want potential per territory, not account count.
 
 PULL FROM THE UNIVERSE
 - CRM accounts by region (or by the owner on their deals) with fit tier and segment.
@@ -71,22 +57,24 @@ The balance table and the imbalance lines.
 
 GROUNDING
 Use only mirrored rows. Owner data comes from deals, not accounts; say so where an account has no deal and therefore no owner.
-
-[paste the territory mapping, or say "use region"]
 ```
 
-### Step 6 and 8: explain and review
+### Explain a territory to its rep
 
 ```
-Using Calven MCP, explain territory [name] to its rep and flag what changed since the plan.
+Using Calven MCP, explain the territory below to its rep and flag what changed since the plan.
+
+FILL IN
+- Territory: [territory name]
+- Plan date: [date the plan was set]
 
 CONTEXT
-The plan was set on [date]. The rep wants to know why their territory looks as it does, and I want the drift.
+The plan was set on the plan date. The rep wants to know why their territory looks as it does, and I want the drift.
 
 PULL FROM THE UNIVERSE
-- The accounts in [territory] with tier, attributes and triggers.
+- The accounts in the territory with tier, attributes and triggers.
 - The ICP dashboard's segment win rates for the segments in the territory.
-- Accounts whose tier or attributes changed since [date], if the CRM mirror shows it.
+- Accounts whose tier or attributes changed since the plan date, if the CRM mirror shows it.
 
 BUILD
 - The rep's page: the territory in numbers, the ten accounts to work first with reasons, the segments where we win.
@@ -97,8 +85,6 @@ The rep page, then the drift list.
 
 GROUNDING
 Reasons come from the account attributes and the ICP; rates from the dashboard with n. Do not promise potential beyond what the rows show.
-
-[name the territory and the plan date]
 ```
 
 ## Ad hoc questions
@@ -113,18 +99,3 @@ Reasons come from the account attributes and the ICP; rates from the dashboard w
 - Which accounts changed tier this quarter?
 - How much won pipeline came from [region] in the last four quarters?
 - Which accounts in [territory] show a trigger right now?
-
-## Good practice
-
-- Build on tiers and win predictors, not on headcount. The ICP dashboard tells you which attributes to weight.
-- Count untouched Tier 1 accounts per territory. That is the potential reps feel.
-- Keep the disqualified list out of the pool. It is the fastest way to shrink an argument.
-- Give reps the reason per account. A territory they understand is a territory they work.
-- Review quarterly with the drift prompt; a full rebuild is annual.
-- Keep assignment in the CRM. Calven supplies the scoring; the tool of record holds the map.
-
-## Not covered today
-
-- Capacity modelling, quota setting and compensation.
-- Writing owners or territories into the CRM.
-- Third-party account data (intent, technographics beyond the CRM's tech stack field). Enrich in the CRM; Calven mirrors what is there.

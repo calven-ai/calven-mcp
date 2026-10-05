@@ -1,34 +1,23 @@
 # Technical win reports and product feedback
 
-**Team:** Solutions engineering · also product management, product marketing, sales leadership
-**Impact:** Medium. The SE hears every technical gap first and reports it last, in a monthly roundup written from memory.
-**Prerequisites:** win/loss surveys running, CRM connected (pipeline category on for MCP), call transcripts ingested. Better with product brief approved, competitors tracked.
 
-## What the team is trying to do
+An evaluation just closed, and you heard every technical gap first. You get a one-page closeout per deal (what you proved, what you couldn't, what the buyer said) and a quarterly gap list ranked by the deals and dollars behind each, in the buyer's words, that product can act on. Calven turns feedback to product from anecdote versus anecdote into a record.
 
-Close each technical evaluation with a short report (what we proved, what we could not, what the buyer said) and turn the quarter's evaluations into a ranked list of product gaps with the deals and dollars behind each, in the buyer's words, for product management. Done means a one-page closeout per deal and a quarterly gap list product can act on. Without the company's own record, feedback to product is anecdote versus anecdote.
+## Prompts
 
-## The work, end to end
-
-| # | Step | What the team does | Where Calven helps | Pulls from |
-|---|---|---|---|---|
-| 1 | Close out the deal | What was proved, what was not, the buyer's verdict | The deal record and its survey summary and drivers; quotes from the evaluation calls; vendor quotes with caveats made | CRM deals, surveyed deals, deal drivers, quotes, vendor quotes |
-| 2 | Tag the gaps | Which requirement failed and why | Product feedback tags on the deal; capability drivers that hurt | CRM deals, deal drivers |
-| 3 | Aggregate the quarter | Gaps ranked by deals touched and amount at risk | Product gaps on the insights overview; product feedback distribution on lost deals; drivers grouped by capability | Insights overview (product gaps), win/loss surveys (product), deal drivers |
-| 4 | Compare with the competitor | Which gaps the rival already fills | Feature comparison and signals | Deep dive, competitive signals |
-| 5 | Quote the buyers | The verbatim behind each gap | Quotes and survey verbatims | Quotes, win/loss verbatims |
-| 6 | Write for product | The roundup | A drafted gap list with evidence per row | All |
-| 7 | Track what shipped | Whether a gap closed | Product changes since the gap was raised; drift findings on sales documents | Product changes, product drift findings |
-
-## Recommended prompts
-
-### Step 1 and 2: the closeout per deal
+### Write the technical closeout for a deal
 
 ```
-Using Calven MCP, write the technical closeout for [deal] at [account].
+Using Calven MCP, write the technical closeout for the deal and account below.
+
+FILL IN
+- Deal: [deal]
+- Account: [account]
+- Outcome: [won, lost, no decision]
+- Results: [paste the criteria, results and notes]
 
 CONTEXT
-The evaluation ended [won, lost, no decision]. Below are the POC criteria and results and my notes on what the evaluators said.
+The evaluation ended with the outcome given. The results hold the POC criteria and results and my notes on what the evaluators said.
 
 PULL FROM THE UNIVERSE
 - The deal record: outcome, competitor, loss reason, product feedback tags.
@@ -47,23 +36,26 @@ A one-page closeout with sources.
 
 GROUNDING
 Quotes verbatim. Outcome and drivers from the record. Do not infer reasons the buyer did not state.
-
-[paste the criteria, results and notes; name the deal and account]
 ```
 
-### Step 3 to 6: the quarterly gap list for product
+### Build the quarterly product gap list
 
 ```
-Using Calven MCP, build the product gap list for [quarter] from technical evaluations.
+Using Calven MCP, build the product gap list for the quarter from technical evaluations.
+
+FILL IN
+- Quarter: [quarter]
+- Competitor: [competitor]
+- Product: [product, or leave blank if you have only one]
 
 CONTEXT
-For product management. They want gaps ranked by deals touched and amount at stake, each with the buyer's words, and whether [competitor] already fills it.
+For product management. They want gaps ranked by deals touched and amount at stake, each with the buyer's words, and whether the competitor already fills it. If a product is given, limit the list to it.
 
 PULL FROM THE UNIVERSE
-- The product gaps from the insights overview for [quarter], with deals and amount at risk and the note on what the amount covers.
+- The product gaps from the insights overview for the quarter, with deals and amount at risk and the note on what the amount covers.
 - The product feedback distribution on lost deals and the capability drivers that hurt, with n.
 - The verbatims behind the top gaps.
-- The [competitor] feature comparison for each gap.
+- The competitor's feature comparison for each gap.
 
 BUILD
 - A ranked table: gap, deals touched, amount at stake, won versus lost, competitor fills it yes or no, the strongest verbatim.
@@ -75,20 +67,23 @@ The table and a half-page note, with sources.
 
 GROUNDING
 Numbers from the dashboards only, with n and window; state that amount at risk covers won and lost deals. Quotes verbatim. Competitor coverage only from the dossier.
-
-[name the quarter, the competitor and the product if you have several]
 ```
 
-### Step 7: did it ship, and did sales notice
+### Check which gaps have closed
 
 ```
-Using Calven MCP, which gaps from [quarter]'s list have closed?
+Using Calven MCP, which gaps from the list below have closed?
+
+FILL IN
+- Quarter: [quarter the list covers]
+- List: [paste the list]
+- Date: [date of the list]
 
 CONTEXT
-Below is last quarter's gap list.
+The list is the gap list for the quarter.
 
 PULL FROM THE UNIVERSE
-- Product changes since [date] that touch each gap.
+- Product changes since the date that touch each gap.
 - Drift findings on battlecards, the brief and other sales documents from those changes.
 
 CHECK
@@ -100,17 +95,18 @@ The list annotated, then the documents to update.
 
 GROUNDING
 Only recorded changes and findings, cited. No availability claims beyond the record.
-
-[paste the list and name the date]
 ```
 
-### Review mode: check my feedback note
+### Check your feedback note before sending
 
 ```
 Using Calven MCP, check my product feedback note before I send it.
 
+FILL IN
+- Note: [paste the note]
+
 CONTEXT
-Below is my roundup for product. Make sure every claim has a deal and a quote behind it.
+The note is my roundup for product. Make sure every claim has a deal and a quote behind it.
 
 PULL FROM THE UNIVERSE
 - The deal records, drivers and quotes for the deals I name.
@@ -124,8 +120,6 @@ The note annotated, then the clean version.
 
 GROUNDING
 Only the Universe, cited.
-
-[paste the note]
 ```
 
 ## Ad hoc questions
@@ -139,16 +133,3 @@ Only the Universe, cited.
 - Which battlecards went stale after the last release?
 - What caveats did our SEs make on won deals this quarter?
 - What did the win/loss survey say about product on [deal]?
-
-## Good practice
-
-- Close out every evaluation, including wins. The caveats on won deals are next year's churn.
-- Rank by deals and amount, then quote the buyer. Product acts on evidence, not volume of complaint.
-- Say what the amount covers. The dashboard's amount at risk includes won deals.
-- Rerun the "did it ship" check before each roundup. Half the list may be closed.
-
-## Not covered today
-
-- Filing feedback into the product tool. Calven reads the record; the SE posts the note.
-- Usage data, support tickets and feature requests from existing customers. Those are product's own sources; the win/loss and call evidence is the SE's contribution.
-- Future plans and timing. The AI tool reports recorded changes and nothing about what is coming.

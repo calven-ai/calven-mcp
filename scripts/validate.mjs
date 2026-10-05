@@ -109,14 +109,8 @@ async function validateSkills() {
   }
 }
 
-const USE_CASE_SECTIONS = [
-  '## What the team is trying to do',
-  '## The work, end to end',
-  '## Recommended prompts',
-  '## Ad hoc questions',
-  '## Good practice',
-  '## Not covered today',
-];
+const USE_CASE_SECTIONS = ['## Prompts', '## Ad hoc questions'];
+const INTERNAL_SECTIONS = ['## What the team is trying to do', '## The work, end to end', '## Good practice', '## Not covered today'];
 
 async function validateUseCases() {
   const dir = path.join(ROOT, 'use-cases');
@@ -129,6 +123,10 @@ async function validateUseCases() {
     for (const section of USE_CASE_SECTIONS) {
       check(source.includes(`\n${section}\n`), `${relative}: missing section "${section}"`);
     }
+    for (const section of INTERNAL_SECTIONS) {
+      check(!source.includes(`\n${section}\n`), `${relative}: internal section "${section}" must not be published`);
+    }
+    check(!/^### (Steps?|Review mode)\b/m.test(source), `${relative}: prompt headline names a step, not what the prompt gets you`);
     for (const match of source.matchAll(/\]\(([^)]+\.md)(?:#[^)]*)?\)/g)) {
       const target = path.resolve(path.dirname(absolute), match[1]);
       check(await readFile(target, 'utf8').then(() => true, () => false), `${relative}: broken link ${match[1]}`);

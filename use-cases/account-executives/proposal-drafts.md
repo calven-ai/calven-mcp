@@ -1,47 +1,40 @@
 # Proposal drafts
 
-**Team:** Account executives · also solutions engineering, sales leadership
-**Impact:** Medium. The proposal is read by people who were never on a call, and it is where overclaims get written down.
-**Prerequisites:** positioning and product brief approved, messaging approved. Better with win/loss surveys running (proof), competitors tracked.
 
-## What the team is trying to do
+You need a proposal narrative that's more than last quarter's template with the logo swapped. You get a draft the SE and your manager edit rather than rewrite: the buyer's problem as they stated it, our approach, why us over the alternatives they're weighing, the proof, the packaging and the plan. Calven adds the company's approved story, with every product and pricing statement traceable to the brief.
 
-Write the proposal narrative: the buyer's problem as they stated it, our approach, why us against the alternatives they are weighing, the proof, the packaging and the plan. Done means a draft the SE and manager edit rather than rewrite, with every product and pricing statement traceable to the brief. Without the company's approved story, proposals are last quarter's template with the logo swapped.
+## Prompts
 
-## The work, end to end
-
-| # | Step | What the team does | Where Calven helps | Pulls from |
-|---|---|---|---|---|
-| 1 | Restate the problem | In the buyer's words, with their metric | The persona's pains and the phrases customers use | Persona canvas, quotes |
-| 2 | Describe the approach | What we do and how, for this buyer | Product brief: overview, capabilities, use cases, integrations | Product brief |
-| 3 | Position against the alternatives | Why us, honestly | Positioning: competitive alternatives, unique attributes, value themes; the battlecard for the named competitor | Positioning document, battlecard |
-| 4 | Bring proof | Customer evidence for each claim | Proof points in positioning; quotes by highlight | Positioning, quotes |
-| 5 | State the packaging | Plan, inclusions, pricing framing | Pricing & Packaging | Product brief |
-| 6 | Add the plan | Implementation, timeline, success criteria | Calven does not help here; the SE supplies it | |
-| 7 | Commercial terms | Discounts, legal, terms | Calven does not help here | |
-| 8 | Fact-check | Every claim against the brief | Product brief, claims, product changes | Product brief, claims, drift findings |
-
-## Recommended prompts
-
-### Step 1 to 5: the narrative
+### Draft the proposal narrative
 
 ```
-Using Calven MCP, draft the proposal narrative for [deal] at [account].
+Using Calven MCP, draft the proposal narrative for the deal below.
+
+FILL IN
+- Deal: [deal]
+- Account: [account]
+- Segment: [segment]
+- Competitor: [competitor]
+- Champion persona: [champion's persona]
+- Economic buyer persona: [economic buyer's persona]
+- Problem: [the problem they stated]
+- Metric: [the metric they gave]
+- Shown: [what we showed]
 
 CONTEXT
-[Account], a [segment] company, is choosing between us and [competitor]. The champion is a [persona]; the economic buyer is a [persona]. Below are the problem they stated, the metric they gave, and what we showed.
+The account, a company in the segment, is choosing between us and the competitor. The champion and economic buyer personas, the problem, the metric and what we showed are above.
 
 PULL FROM THE UNIVERSE
-- The [persona] pains and the words customers use for them.
+- The champion persona's pains and the words customers use for them.
 - The product brief: overview, the capabilities and integrations relevant to what we showed, pricing and packaging.
 - Our positioning: unique attributes, value themes, competitive alternatives, proof points.
-- The [competitor] battlecard: where we win, honestly where we lose.
+- The competitor's battlecard: where we win, honestly where we lose.
 - Two proof quotes from similar accounts, verbatim.
 
 WRITE
 - The problem, in their words, with their metric.
 - Our approach, in plain terms.
-- Why us against [competitor], with the trade-off stated.
+- Why us against the competitor, with the trade-off stated.
 - The proof.
 - The packaging we propose and what it includes.
 
@@ -50,17 +43,18 @@ The narrative sections, ready for the SE to add the implementation plan, with a 
 
 GROUNDING
 Every product and pricing statement from the brief, cited. Positioning claims from the positioning document. Quotes verbatim. Do not invent timelines, outcomes or features.
-
-[paste the problem, metric and what you showed; name the deal, personas and competitor]
 ```
 
-### Step 8: fact-check the proposal
+### Fact-check every claim in the proposal
 
 ```
 Using Calven MCP, fact-check this proposal.
 
+FILL IN
+- Proposal: [paste the full proposal]
+
 CONTEXT
-Below is the full proposal. I need every product, integration, pricing and proof claim checked.
+I need every product, integration, pricing and proof claim in the proposal checked.
 
 PULL FROM THE UNIVERSE
 - The product brief, recent product changes and drift findings, and the claims register.
@@ -75,20 +69,22 @@ The proposal annotated, then the list a human must still confirm.
 
 GROUNDING
 Against the Universe only, cited. Silence in the brief is "not in the brief", never a pass.
-
-[paste the proposal]
 ```
 
-### Review mode: read it as the economic buyer
+### Read the proposal as the economic buyer
 
 ```
-Using Calven MCP, read this proposal as [economic buyer persona].
+Using Calven MCP, read this proposal as the economic buyer persona below.
+
+FILL IN
+- Persona: [economic buyer persona]
+- Proposal: [paste the proposal]
 
 CONTEXT
-Below is the proposal. The person who signs is a [persona] who was not on the calls.
+The person who signs is the persona above and was not on the calls.
 
 PULL FROM THE UNIVERSE
-- The [persona] canvas, and run the persona review on the text.
+- The persona's canvas, and run the persona review on the text.
 
 REACT
 - What they would skip, what they would doubt, what they would need to see.
@@ -99,8 +95,6 @@ Findings with severity, then the three edits.
 
 GROUNDING
 React only from the canvas. Do not invent reactions it does not support.
-
-[paste the proposal and name the persona]
 ```
 
 ## Ad hoc questions
@@ -113,15 +107,3 @@ React only from the canvas. Do not invent reactions it does not support.
 - Where do we honestly lose to [competitor]?
 - Does the brief say we integrate with [system]?
 - What is the approved boilerplate?
-
-## Good practice
-
-- Paste the problem and metric as the buyer stated them. The narrative is theirs, not ours.
-- Keep the honest trade-off in. A proposal that admits where the competitor is stronger survives the comparison the buyer will run anyway.
-- Fact-check the whole document after the SE adds their sections.
-- Read it as the economic buyer before sending. They were not on the calls.
-
-## Not covered today
-
-- Implementation plans, timelines, SOW language, terms and discounts. Those come from the SE, the deal desk and legal.
-- The document template and formatting.

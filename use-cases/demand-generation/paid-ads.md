@@ -1,39 +1,30 @@
 # Paid ads
 
-**Team:** Demand generation · also product marketing, agencies
-**Impact:** High. Ad copy is tested with budget; copy written in the customer's words and tested on the persona before spend cuts the cost of learning what lands.
-**Prerequisites:** personas approved, messaging approved, product brief approved. Better with transcripts ingested (customer language, pains), win/loss (what decides deals in the segment).
 
-## What the team is trying to do
+You need headlines, body copy and CTAs for search, social and display that stop the right buyer, say what they already think and promise only what the product does. You walk away with variants per persona and angle, ranked by the persona's reaction, fact-checked and ready to load. With Calven you're not testing the writer's guesses with money.
 
-Write headlines, body copy and CTAs for search, social and display that stop the right buyer, say what they already think, and promise only what the product does. Done means a set of variants per persona and angle, ranked by the persona's reaction, fact-checked, ready to load. Without the Universe the variants are the writer's guesses, tested with money.
+## Prompts
 
-## The work, end to end
-
-| # | Step | What the team does | Where Calven helps | Pulls from |
-|---|---|---|---|---|
-| 1 | Pick the audience and angle | Persona, segment, the pain or trigger | Top pains and triggers by persona, with quotes | Themes, quotes, voice-of-customer dashboard |
-| 2 | Set the message and offer | Pillar, value prop, CTA | Messaging matrix | Messaging |
-| 3 | Write variants | Headlines, body, CTA per channel | In the customer's words | Quotes, persona messaging hooks |
-| 4 | Test on the persona | Which variant they would click | Persona review | `review_against_personas` |
-| 5 | Fact-check | Claims in 30 characters still have to be true | Product brief, claims | Product brief, claims |
-| 6 | Competitive and brand terms | Ads on rival terms | Battlecard landmines, safe claims | Battlecards, deep dive |
-| 7 | Load and run | Ad platform, audiences, budget | Calven does not help here | |
-| 8 | Read results and iterate | Winners, losers, why | Persona and language read on losers | Quotes, persona canvas |
-
-## Recommended prompts
-
-### Step 1 to 4: variants, tested
+### Write ad variants and rank them
 
 ```
-Using Calven MCP, write ad variants for [persona] in [segment] and tell me which they would pick.
+Using Calven MCP, write ad variants for the persona in the segment below and tell me which they would pick.
+
+FILL IN
+- Persona: [persona]
+- Segment: [segment]
+- Stage: [buying stage]
+- Channel: [search / LinkedIn / display]
+- Offer: [the CTA]
+- Headline limit: [n] characters
+- Body limit: [n] characters
 
 CONTEXT
-Channel: [search / LinkedIn / display]. Offer: [the CTA]. Limits: headline [n] characters, body [n] characters.
+Write for the channel and the offer above, within the headline and body limits.
 
 PULL FROM THE UNIVERSE
-- The pain [persona] names most, with the verbatim quotes.
-- Our value proposition and pillar for [persona] at the [stage] stage.
+- The pain the persona names most, with the verbatim quotes.
+- Our value proposition and pillar for the persona at the stage.
 - The product brief entry for what the ad promises.
 - Then run the persona review on the variants.
 
@@ -47,17 +38,18 @@ The variants ranked by verdict, with the quote each one came from.
 
 GROUNDING
 Use only pains and phrases grounded in quotes and claims in the product brief, cited. Do not promise outcomes the brief does not support.
-
-[name the persona, segment, channel, offer and limits]
 ```
 
-### Step 6: competitor-term ads
+### Write ads for competitor searches
 
 ```
-Using Calven MCP, write ads for buyers searching for [competitor].
+Using Calven MCP, write ads for buyers searching for the competitor below.
+
+FILL IN
+- Competitor: [competitor]
 
 PULL FROM THE UNIVERSE
-- The battlecard for [competitor]: where we win, landmines, where we lose.
+- The competitor's battlecard: where we win, landmines, where we lose.
 - Why buyers switched from them, with quotes.
 - The claims register, for comparative claims already flagged.
 
@@ -70,21 +62,26 @@ OUTPUT
 The headlines with sources and the "do not claim" list.
 
 GROUNDING
-Only the battlecard, deals and quotes, cited. No claim about [competitor] the dossier does not hold.
-
-[name the competitor]
+Only the battlecard, deals and quotes, cited. No claim about the competitor the dossier does not hold.
 ```
 
-### Step 8: why a variant lost
+### Diagnose why an ad lost
 
 ```
-Using Calven MCP, tell me why this ad underperformed for [persona].
+Using Calven MCP, tell me why this ad underperformed for the persona below.
+
+FILL IN
+- Persona: [persona]
+- Variant: [the losing variant's headline / body]
+- Variant click rate: [rate]
+- Winner: [the winning variant's text]
+- Winner click rate: [rate]
 
 CONTEXT
-Variant: "[headline / body]". Click rate [rate] vs the winner's [rate]. The winner: "[text]".
+The variant's click rate is below the winner's.
 
 PULL FROM THE UNIVERSE
-- The [persona] canvas and the pains they name most.
+- The persona's canvas and the pains they name most.
 - Customer language on the topic, and the language gaps in our messaging.
 
 DIAGNOSE
@@ -92,8 +89,6 @@ Why the loser missed, in three lines, grounded in the persona and quotes. Then t
 
 GROUNDING
 If the Universe does not explain the difference, say so and suggest what to test.
-
-[paste both variants and the numbers]
 ```
 
 ## Ad hoc questions
@@ -108,17 +103,3 @@ If the Universe does not explain the difference, say so and suggest what to test
 - Which words in our messaging do customers never use?
 - What proof fits a 90-character body line about [outcome]?
 - Which persona responds to [trigger] most?
-
-## Good practice
-
-- One persona per set. A headline for two personas lands with neither.
-- Open every headline on a quote. The reviewer then has a source for the choice.
-- Run the persona review before the budget, not after the first week.
-- Keep a "do not claim" list per campaign from the fact-check.
-- Feed losers back with their numbers; the diagnosis improves the next set.
-
-## Not covered today
-
-- Audiences, bidding, budgets and the ad platforms.
-- Creative and video.
-- Performance numbers, which the person pastes in.

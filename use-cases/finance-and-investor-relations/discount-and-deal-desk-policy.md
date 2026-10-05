@@ -1,32 +1,18 @@
 # Discount and deal desk policy
 
-**Team:** Finance and investor relations · also revenue operations, sales leadership
-**Impact:** Medium. Discount bands are set once a year and tested on every non-standard deal. Evidence on which discounts won and which did not, by segment and competitor, turns the approval matrix from a negotiation into a policy.
-**Prerequisites:** win/loss surveys running (Commercials drivers, pricing verdicts), CRM connected (deals with price feedback, competitors, outcome). Better with competitors tracked (rival pricing moves).
 
-## What the team is trying to do
+You're setting discount bands for the year and you don't want the policy to be the last big deal's exception. You get a band per segment and deal size with the deals behind it, and a deal desk checklist that asks for the competitive context before anyone approves. Calven shows where a concession decided a win, where we discounted and lost anyway, which competitors force the discount and which segments expect one.
 
-Set discount thresholds and the approval matrix on evidence: where a concession decided a win, where we discounted and lost anyway, which competitors force the discount and which segments expect one. Done means a band per segment and deal size with the deals behind it, and a deal desk checklist that asks for the competitive context before approving. Without the company's own knowledge the policy is the last big deal's exception, generalised.
+## Prompts
 
-## The work, end to end
-
-| # | Step | What the team does | Where Calven helps | Pulls from |
-|---|---|---|---|---|
-| 1 | Pull the current policy | Thresholds, approvers, SLA | Calven does not help here | |
-| 2 | Where concessions decided deals | Did a commercial concession help or hurt, and did it decide | Commercials drivers by direction and rank, with outcome and segment | Deal drivers, win/loss dashboard (surveys: pricing & legal) |
-| 3 | Discount-and-lost deals | Deals where we were cheaper or on par and still lost | Deals in the cheaper and on par pricing buckets with a lost outcome, their loss reasons and winner | `get_insight_detail` pricing deals, CRM deals |
-| 4 | By segment and competitor | Who expects a discount | Lost deals on Price by account size, industry, deal size band and lost_to; win rate against each competitor | CRM deals, competitive intelligence dashboard |
-| 5 | Rival pricing pressure | Which competitors cut price this year | Pricing signals with dates | Competitive signals |
-| 6 | Draft the matrix | Bands per segment and size, approvers, required context | A draft grounded in steps 2 to 5 | All of the above |
-| 7 | Deal desk checklist | What a request must include | The battlecard's pricing traps and objection handling for the competitor in the deal | Battlecards |
-| 8 | Approve and publish | Agree with sales leadership, load into the CPQ or CRM | Calven does not help here | |
-
-## Recommended prompts
-
-### Steps 2 and 3: did discounts win
+### Show whether discounts won deals
 
 ```
-Using Calven MCP, show me whether our discounts won deals in [window].
+Using Calven MCP, show me whether our discounts won deals in the window below.
+
+FILL IN
+- Window: [time window, e.g. last two quarters]
+- Product: [product, or leave blank for all]
 
 CONTEXT
 I set the discount policy. I want to know when a commercial concession decided a deal and when we discounted and lost anyway.
@@ -46,14 +32,15 @@ The three tables with sources, and a four-line read.
 
 GROUNDING
 Use only win/loss, deal driver and CRM data in the Universe and cite it. Use the dashboard's counts. Say where amounts are withheld.
-
-[name the window and product]
 ```
 
-### Step 4: by segment and competitor
+### Break price losses down by segment and competitor
 
 ```
 Using Calven MCP, break price losses down by segment and competitor.
+
+FILL IN
+- Window: [time window, e.g. last two quarters]
 
 CONTEXT
 I am setting discount bands per segment. I need to see who actually forces a discount.
@@ -72,17 +59,18 @@ The table and the shortlist.
 
 GROUNDING
 Use only CRM and dashboard data in the Universe and cite it. Do not compute a win rate from rows; use the dashboard's.
-
-[name the window]
 ```
 
-### Step 6: draft the matrix
+### Draft the discount approval matrix
 
 ```
 Using Calven MCP, draft a discount approval matrix from our evidence.
 
+FILL IN
+- Matrix: [paste the current matrix]
+
 CONTEXT
-Below is the current matrix. I want a revised one where each band and each required approval is tied to what the deals show.
+The matrix is the current one. I want a revised one where each band and each required approval is tied to what the deals show.
 
 PULL FROM THE UNIVERSE
 - Commercials drivers by outcome and segment.
@@ -98,17 +86,20 @@ The matrix and the checklist, with sources.
 
 GROUNDING
 Ground each band in the Universe and cite it. Where the evidence is thin for a segment, keep the current band and say why.
-
-[paste the current matrix]
 ```
 
-### Step 7: deal desk review of one request
+### Review one discount request
 
 ```
 Using Calven MCP, review this discount request.
 
+FILL IN
+- Discount: [discount]
+- Deal: [deal]
+- Request: [paste the request]
+
 CONTEXT
-Sales asks for [discount] on [deal]. Below is the request. I want the competitive context and the evidence before I approve.
+Sales asks for the discount on the deal, as set out in the request. I want the competitive context and the evidence before I approve.
 
 PULL FROM THE UNIVERSE
 - The deal: stage, competitors, contact roles, ICP fit tier, account size.
@@ -124,8 +115,6 @@ A half-page recommendation: approve, counter, or decline, with the evidence.
 
 GROUNDING
 Use only the deal record, battlecard and win/loss evidence in the Universe and cite them. Do not invent the buyer's position.
-
-[paste the request]
 ```
 
 ## Ad hoc questions
@@ -140,17 +129,3 @@ Use only the deal record, battlecard and win/loss evidence in the Universe and c
 - Is [deal] in profile, and who is in it from the competition?
 - What price feedback did the buyer give on [deal]?
 - How many deals had "More expensive" feedback and still closed won?
-
-## Good practice
-
-- Ask the three questions separately: did the concession decide, did we lose despite price, who forces it. One prompt blurs them.
-- Tie every band to a segment and a competitor; a flat threshold ignores where the pressure comes from.
-- Make the battlecard part of the deal desk checklist. Most price requests are a competitive objection in disguise.
-- Keep margin and revenue recognition out of the prompt. They are the finance stack's job.
-
-## Not covered today
-
-- Margin, revenue recognition and payment terms.
-- The CPQ or approval workflow.
-- The discount actually granted on a deal, unless the CRM carries it as a field.
-- Live competitor price pages.

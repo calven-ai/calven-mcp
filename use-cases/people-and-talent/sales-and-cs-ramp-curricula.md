@@ -1,37 +1,22 @@
 # Sales and CS ramp curricula
 
-**Team:** People and talent · also sales enablement, customer success leadership, sales leadership
-**Impact:** High. Ramp time is the most expensive line in a GTM hire. A 30-60-90 curriculum built from the approved story, personas, battlecards and real call evidence, with certification, cuts the weeks a rep spends learning the pitch from colleagues' memory.
-**Prerequisites:** strategy documents approved, personas approved, competitors tracked. Better with call transcripts ingested (real objections, how top reps pitch), win/loss surveys running (why we win and lose), CRM connected (the deals a new rep inherits).
 
-## What the team is trying to do
+You've got a new AE, SDR, SE or CSM starting, and you want them working on their own in 90 days instead of learning the pitch by eavesdropping. You get a curriculum the manager can run across four pillars (product, buyers and market, sales or success process, competition), study materials, quizzes with answer keys, role plays and certification at 30, 60 and 90 days. Calven builds it from the approved story, personas, battlecards and real call evidence.
 
-Take a new AE, SDR, SE or CSM from day one to independent work in 90 days with a curriculum in four pillars (product, buyers and market, sales or success process, competition), a shadowing and practice plan, and certification at 30, 60 and 90 days. Done means a curriculum the manager can run, materials the hire can study, quizzes with answer keys, and role plays built on real personas and rivals. Without the company's own knowledge the curriculum is a folder of decks and the hire learns the real pitch by eavesdropping.
+## Prompts
 
-## The work, end to end
-
-| # | Step | What the team does | Where Calven helps | Pulls from |
-|---|---|---|---|---|
-| 1 | Ramp plan | 30-60-90 milestones and who owns each | Calven does not help here, beyond the content pillars | |
-| 2 | Product pillar | What it does, use cases, integrations, pricing, known weaknesses | Product brief sections at role depth; recent product changes | Product brief, product changes |
-| 3 | Buyers and market pillar | ICP, personas, pains, how buyers talk | ICP, persona canvases, top themes and quotes per persona | ICP, personas, themes, quotes |
-| 4 | Process pillar | Discovery, qualification, demo, objection handling, renewal | Discovery questions from battlecards, ICP fit scorecard, messaging objection handling, how top reps phrase value | Battlecards, ICP, messaging, vendor quotes |
-| 5 | Competition pillar | Who we meet, how we win, where we lose, traps | Battlecards, win rate per competitor, loss drivers with verbatims | Battlecards, competitive intelligence dashboard, deal drivers |
-| 6 | Role plays | Weekly practice scenarios | Scenarios from personas and battlecards (see interview exercises page) | Personas, battlecards, quotes |
-| 7 | Certification | Quizzes at 30, 60, 90 days | Quizzes with answer keys from the Universe | All of the above |
-| 8 | Shadowing and live deals | Calls to shadow, first accounts | Open deals and accounts the hire inherits, with ICP fit and competitors | CRM deals, CRM accounts |
-| 9 | Manager coaching | Weekly 1:1 on live deals | The battlecard and persona for each live deal | Battlecards, personas |
-| 10 | Measure ramp | Time to first deal, certification scores | Calven does not help here | |
-
-## Recommended prompts
-
-### Steps 2 to 5: the curriculum
+### Build the 30-60-90 ramp curriculum
 
 ```
-Using Calven MCP, build the 30-60-90 ramp curriculum for a new [role].
+Using Calven MCP, build the 30-60-90 ramp curriculum for the new hire's role below.
+
+FILL IN
+- Role: [role]
+- Motion: [sales / success]
+- Product: [product, or leave blank for all]
 
 CONTEXT
-Four pillars: product, buyers and market, [sales / success] process, competition. Days 1 to 30 are learning and shadowing, 31 to 60 practice and supervised work, 61 to 90 independent work with coaching. Each module needs study material from our approved sources and a check.
+Four pillars: product, buyers and market, the motion's process, competition. Days 1 to 30 are learning and shadowing, 31 to 60 practice and supervised work, 61 to 90 independent work with coaching. Each module needs study material from our approved sources and a check. If a product is given, scope the curriculum to it.
 
 PULL FROM THE UNIVERSE
 - Product brief: overview, capabilities, use cases, integrations, pricing, known weaknesses.
@@ -50,21 +35,26 @@ The curriculum as a table by week, then the three certifications.
 
 GROUNDING
 Use only the approved documents, battlecards and dashboards in the Universe and cite each module's sources. Do not invent process steps the messaging and battlecards do not support.
-
-[name the role and the product if we scope]
 ```
 
-### Step 6: weekly role play
+### Write this week's role play
 
 ```
-Using Calven MCP, write this week's role play for the ramping [role].
+Using Calven MCP, write this week's role play for the ramping hire in the role below.
+
+FILL IN
+- Role: [role]
+- Week: [week of ramp]
+- Focus: [discovery / objection handling / competitive / renewal]
+- Persona: [persona]
+- Competitor: [competitor]
 
 CONTEXT
-Week [n] of ramp. The focus is [discovery / objection handling / competitive / renewal]. Twenty minutes, the manager plays the buyer.
+The week and focus are given above. Twenty minutes, the manager plays the buyer.
 
 PULL FROM THE UNIVERSE
-- The [persona] canvas and three verbatim quotes of how they describe the problem.
-- The [competitor] battlecard: objections buyers raise when they are in play, landmines.
+- The persona's canvas and three verbatim quotes of how they describe the problem.
+- The competitor's battlecard: objections buyers raise when they are in play, landmines.
 - The messaging objection handling for the objections in scope.
 
 BUILD
@@ -75,14 +65,16 @@ A two-page role play kit with sources.
 
 GROUNDING
 Use only the Universe for the persona's lines and the competitor's position, cited. Use a profile, not a real account.
-
-[name the week, focus, persona and competitor]
 ```
 
-### Step 7: certification
+### Write the day 30, 60 or 90 certification
 
 ```
-Using Calven MCP, write the day-[30 / 60 / 90] certification for [role].
+Using Calven MCP, write the certification below for the role below.
+
+FILL IN
+- Day: [30 / 60 / 90]
+- Role: [role]
 
 CONTEXT
 Ten to fifteen questions the manager grades. Day 30 tests the story, ICP and personas. Day 60 adds objections, competitors and process. Day 90 adds a written deal plan or account plan.
@@ -99,17 +91,19 @@ The certification and the answer key.
 
 GROUNDING
 Every answer is a direct reading of the Universe, cited.
-
-[name the role and the day]
 ```
 
-### Steps 8 and 9: first accounts and coaching
+### Brief the new hire on inherited accounts
 
 ```
-Using Calven MCP, prepare the ramping [role] for the accounts they inherit.
+Using Calven MCP, prepare the ramping hire in the role below for the accounts they inherit.
+
+FILL IN
+- Role: [role]
+- Accounts: [paste the account list]
 
 CONTEXT
-Below is the list of accounts or deals handed to the new hire. I want a one-page brief per account the manager can coach from.
+The accounts or deals are the ones handed to the new hire. I want a one-page brief per account the manager can coach from.
 
 PULL FROM THE UNIVERSE
 - Each account: ICP fit tier, industry, size, triggers; contacts and their roles; open deals, stage, competitors, loss reasons on past deals.
@@ -124,8 +118,6 @@ One brief per account with sources.
 
 GROUNDING
 Use only CRM rows, battlecards, personas and quotes in the Universe and cite them. Say where names or amounts are withheld.
-
-[paste the account list]
 ```
 
 ## Ad hoc questions
@@ -141,18 +133,3 @@ Use only CRM rows, battlecards, personas and quotes in the Universe and cite the
 - What changed in the product in the last quarter that the training deck gets wrong?
 - Which accounts in the new rep's book are Tier 1 fit?
 - What proof points can the new rep use against [competitor]?
-
-## Good practice
-
-- Build the curriculum once per role and regenerate each quarter. The Universe moves; the decks do not.
-- Make every module point to a Universe section, so the hire reads the approved version rather than a summary of it.
-- Certify on reasoning, not recall: a scenario with a persona and a competitor beats a list of features.
-- Use the ramping rep's real book for coaching briefs, with the manager, from week eight.
-- Keep role plays weekly and short. One persona, one competitor, one trap.
-
-## Not covered today
-
-- Tools training (CRM, dialler, demo environment) and process policies.
-- Compensation, quota and ramp targets.
-- The learning management system and attendance tracking.
-- Call recordings to shadow; Calven holds extracted quotes, not the recordings.

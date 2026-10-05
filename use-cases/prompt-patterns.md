@@ -1,21 +1,27 @@
 # Prompt patterns
 
 
+Most people start by typing a question and seeing what comes back. Good instinct. That's the first way to prompt Calven MCP. The second is a saved recipe for work that comes round every week. This page covers both, the template behind the recipe, and the placeholders the use-case pages use, so you can write your own.
+
 ## Two flavours
 
-**Ad hoc questions** are what people type when they have a question mid-task. One line, natural, specific. They work because the AI tool reads the tool descriptions and picks the right call.
+**Ad hoc questions** are what you type mid-task. One line, plain words, specific. You don't need to know which Calven tool answers it; your AI tool reads the tool descriptions and picks.
 
 > Which objections came up most on calls with [persona] this quarter, and does our messaging cover them?
 
-**Workflow prompts** are reusable recipes for a recognisable piece of work. They name the context, what to pull, what to build, the output format and the grounding rule, so the result is the same whoever runs it and whichever AI tool they use. People save them as snippets or project instructions.
+**Workflow prompts** are recipes for work you do again and again. They spell out the context, what to pull, what to build, the format and the grounding rule, so the result holds up whoever runs it and whichever AI tool they use. Save them as a snippet or a project instruction.
 
 ## The workflow template
 
 ```
 Using Calven MCP, <what we are doing, in one line>.
 
+FILL IN
+- <Label>: [placeholder]
+- <Label>: [paste ...]
+
 CONTEXT
-<who the output is for, what situation we are in, what the person will paste in>
+<who the output is for, what situation we are in, what the person pasted>
 
 PULL FROM THE UNIVERSE
 - <document, record kind or dashboard, in plain words>
@@ -30,18 +36,18 @@ OUTPUT
 GROUNDING
 Ground every point in the Universe and cite the source. Do not invent <the thing this prompt could invent>.
 If something is missing, say what is missing rather than filling it in.
-
-[what to paste or name at the bottom]
 ```
 
 Rules:
 
 - The first line starts with "Using Calven MCP" so the AI tool knows where to look and the prompt reads the same on a slide, a web page and in a chat.
-- PULL FROM THE UNIVERSE is written in the user's words ("the battlecard for [competitor]", "every lost deal with loss reason Price"), never tool names. The AI tool maps it to the tools.
+- PULL FROM THE UNIVERSE is written in the user's words ("the competitor's battlecard", "every lost deal with loss reason Price"), never tool names. The AI tool maps it to the tools.
 - Name the three sources this work most often needs. A list of eight dilutes the answer.
 - One OUTPUT. Offer the alternative format in one clause ("if I say deck, make slides").
 - GROUNDING names the specific invention risk of this prompt: numbers, product capabilities, quotes, persona reactions, competitor moves.
-- Say what the person pastes or names at the bottom in square brackets.
+- Every value the person supplies, pasted text included, goes in the FILL IN block, one labelled line each. Nothing else in the prompt has square brackets, so the person edits one block and sends.
+- The rest of the prompt is static: it refers back by label ("the persona", "the competitor's battlecard", "the transcript"), never repeats a placeholder.
+- A prompt with nothing to supply has no FILL IN block.
 
 ## Three modes
 

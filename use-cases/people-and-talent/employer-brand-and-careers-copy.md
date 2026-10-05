@@ -1,28 +1,11 @@
 # Employer brand and careers copy
 
-**Team:** People and talent · also brand and communications, product marketing
-**Impact:** Medium. The careers page and candidate outreach tell the company story to people who have never heard it. When that story matches the positioning and uses customer evidence, candidates arrive already understanding the market, and the employer brand stops drifting from the product brand.
-**Prerequisites:** strategy documents approved (positioning, messaging boilerplate). Better with call transcripts ingested (customer quotes as proof), market research run (why now), win/loss surveys running.
 
-## What the team is trying to do
+You're writing the careers page, the candidate-facing story and outreach to passive candidates, and you want it to sound like the company customers know. You get an employer narrative consistent with positioning, a proof section in real customer language, and outreach a candidate in the market finds specific. Calven keeps the careers page from saying "fast-growing startup" while the real story waits for the interview.
 
-Write the careers page, the candidate-facing company narrative, and the outreach messages to passive candidates so they say what the company does, for whom, why it matters now, and what the evidence is, in the same words customers and the website use. Done means an employer narrative consistent with positioning, a proof section with real customer language, and outreach a candidate in the market finds specific. Without the company's own knowledge the careers page says "fast-growing startup" and the candidate learns the real story at the interview.
+## Prompts
 
-## The work, end to end
-
-| # | Step | What the team does | Where Calven helps | Pulls from |
-|---|---|---|---|---|
-| 1 | Employer value proposition | What it is like to work here, who thrives | Calven does not help here, except the mission from positioning | Positioning |
-| 2 | Company narrative for candidates | What we do, for whom, why now | Positioning statement, category, "why now" trends, core narrative | Positioning, messaging, trends |
-| 3 | Proof | Customer outcomes, market standing | Customer quotes with outcomes, analyst findings naming us, win drivers | Quotes, analyst findings, deal drivers |
-| 4 | Careers page copy | Mission, story, proof, roles, culture | Drafts of the story and proof sections | Positioning, messaging, quotes |
-| 5 | Candidate outreach | Messages to passive candidates per role | Role-specific narrative: the persona they would sell to, the category, the competitive context | Personas, positioning, competitors |
-| 6 | Consistency | Keep careers copy on-message | A check against positioning and the claims register | Positioning, claims |
-| 7 | Culture, values, benefits | The people stack's content | Calven does not help here | |
-
-## Recommended prompts
-
-### Steps 2 and 3: the candidate-facing narrative
+### Write the careers page company story
 
 ```
 Using Calven MCP, write the company story section of our careers page.
@@ -43,14 +26,15 @@ The section with the sources below it.
 
 GROUNDING
 Use only positioning, messaging and quotes in the Universe, cited. Do not claim traction, growth or customer names the Universe does not hold.
-
-[nothing to paste]
 ```
 
-### Step 5: candidate outreach
+### Write outreach to a passive candidate
 
 ```
-Using Calven MCP, write an outreach message to a passive candidate for [role].
+Using Calven MCP, write an outreach message to a passive candidate for the role below.
+
+FILL IN
+- Role: [role]
 
 CONTEXT
 LinkedIn message, under 120 words. The candidate works in our market and should recognise the job from the buyers, the category and the competitive context.
@@ -68,17 +52,18 @@ The three messages.
 
 GROUNDING
 Use only the Universe for the market facts and cite them. No claims about growth, funding or customers beyond the boilerplate.
-
-[name the role]
 ```
 
-### Step 6: consistency check
+### Check the careers page against positioning
 
 ```
 Using Calven MCP, check our careers page against our positioning and claims.
 
+FILL IN
+- Copy: [paste the careers page copy]
+
 CONTEXT
-Below is the current careers page copy. I want anything off-message or unsupported flagged.
+The copy is the current careers page. I want anything off-message or unsupported flagged.
 
 PULL FROM THE UNIVERSE
 - Positioning, messaging boilerplate, the claims register.
@@ -92,8 +77,6 @@ The copy annotated, then a clean version.
 
 GROUNDING
 Judge only against the Universe and cite each flag.
-
-[paste the careers page copy]
 ```
 
 ## Ad hoc questions
@@ -106,16 +89,3 @@ Judge only against the Universe and cite each flag.
 - Are there analyst findings that name us?
 - Is "[claim]" on the careers page supported anywhere in the Universe?
 - What problem do we solve, in customers' words?
-
-## Good practice
-
-- Reuse the website's story. The careers page is a reader of positioning, not a second version of it.
-- Keep proof verbatim and attributed as the workspace settings allow.
-- Write outreach per role with the persona and category, not with company adjectives.
-- Run the consistency check whenever positioning changes.
-
-## Not covered today
-
-- Culture, values, benefits, team photos and employee testimonials.
-- Employer review sites and their content.
-- The ATS careers page itself.

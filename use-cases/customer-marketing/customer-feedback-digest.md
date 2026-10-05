@@ -1,35 +1,23 @@
 # Customer feedback digest
 
-**Team:** Customer marketing · also customer success, product marketing, product management
-**Impact:** Medium. A monthly read of what customers said, by theme and sentiment, is the shared starting point for campaigns, CS plays and product input. Calven computes it; the AI tool writes it for the audience.
-**Prerequisites:** call transcripts ingested (quotes, themes, conversations). CRM connected adds the account and deal context. Win/loss surveys running adds buyer answers.
 
-## What the team is trying to do
+The monthly digest to marketing, CS and product is due. You get one page with sources: the themes that grew and faded, the costly objections, the quotes worth reusing, cut by segment where the numbers allow. Calven reads from the company's themed record, so it's more than anecdotes from whoever spoke last in the meeting.
 
-Publish a short monthly digest to marketing, CS and product: the themes that grew, the ones that faded, the costly objections, the quotes worth reusing, by segment where the numbers allow. Done means a one-page digest with sources that each team can act on. Without the company's own themed record, feedback is anecdotes from whoever spoke last in the meeting.
+## Prompts
 
-## The work, end to end
-
-| # | Step | What the team does | Where Calven helps | Pulls from |
-|---|---|---|---|---|
-| 1 | Pull the month | Themes, sentiment, movers | The voice-of-customer dashboard: themes by mentions and sentiment, movers, costly objections, buying triggers, net sentiment | Voice-of-customer dashboard |
-| 2 | Read the evidence | The quotes behind the top themes | Quotes per theme with speaker, account and sentiment | Quotes, themes |
-| 3 | Cut by segment | Where the numbers allow | Quotes and conversations by account segment via the CRM | Quotes, CRM accounts |
-| 4 | Write the digest | For each audience | A one-page digest with a section per team | All above |
-| 5 | Route the actions | Who does what | Calven does not help here | |
-
-## Recommended prompts
-
-### Step 1 and 2: the monthly read
+### Build this month's feedback digest
 
 ```
-Using Calven MCP, build the customer feedback digest for [month].
+Using Calven MCP, build the customer feedback digest for the month below.
+
+FILL IN
+- Month: [month]
 
 CONTEXT
 Readers are marketing, CS and product leads. One page. They want what changed, with the quotes.
 
 PULL FROM THE UNIVERSE
-- The voice-of-customer dashboard for [month] compared with the month before: themes by mentions and sentiment, movers, costly objections, buying triggers, net sentiment, conversations analyzed.
+- The voice-of-customer dashboard for the month compared with the month before: themes by mentions and sentiment, movers, costly objections, buying triggers, net sentiment, conversations analyzed.
 - For the top five themes: three representative quotes each with speaker, role and account.
 - Marketing-ready quotes suggested this month.
 
@@ -44,20 +32,21 @@ The digest.
 
 GROUNDING
 Use only the Universe and cite it. Take every number from the dashboard, never by counting rows. Cite n with every rate. If a list is below the floor, say so.
-
-[name the month]
 ```
 
-### Step 3: cut by segment
+### Compare feedback across segments
 
 ```
-Using Calven MCP, tell me how customer feedback differs by [segment attribute] this quarter.
+Using Calven MCP, tell me how customer feedback differs by the segment attribute below this quarter.
+
+FILL IN
+- Attribute: [segment attribute, e.g. size, industry or region]
 
 CONTEXT
-I want to know whether enterprise and mid-market customers raise different themes.
+I want to know whether customers in different segments, for example enterprise and mid-market, raise different themes.
 
 PULL FROM THE UNIVERSE
-- Customer quotes this quarter with their account's size, industry or region from the CRM.
+- Customer quotes this quarter with their account's value for the attribute from the CRM.
 - The themes those quotes belong to.
 
 BUILD
@@ -69,11 +58,9 @@ The table and the three differences that matter.
 
 GROUNDING
 Use only the Universe and cite it. Do not compute rates on small samples; show counts and say when a cell has fewer than five quotes.
-
-[name the attribute]
 ```
 
-### Gap: what nobody is talking about
+### Find the pillars customers never mention
 
 ```
 Using Calven MCP, show me which of our messaging pillars customers never mention.
@@ -106,15 +93,3 @@ Use only the Universe and cite it.
 - Which buying triggers came up most?
 - Which pillar has the least customer language behind it?
 - What did customers in [segment] complain about most?
-
-## Good practice
-
-- Take numbers from the dashboard, never by counting quotes. The AI tool must cite n and the window.
-- Lead with movers. Totals change slowly; the digest is about what changed.
-- One section per audience, three items each. Longer digests get skimmed.
-- Keep the quotes verbatim. The digest is where marketing finds its next proof line.
-
-## Not covered today
-
-- NPS, CSAT, support tickets and usage are not in Calven; add them from their tools if the digest needs them.
-- Routing actions to owners happens in the backlog or CRM.

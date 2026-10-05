@@ -1,38 +1,25 @@
 # Customer events and webinars
 
-**Team:** Customer marketing · also demand generation, product marketing
-**Impact:** Medium. A customer webinar or user-group session works when the topic is the pain customers are naming now and the speaker is a customer who solved it. Both are in the record.
-**Prerequisites:** call transcripts ingested (quotes, themes), personas approved. Market research run adds the trend hook. CRM connected adds the speaker shortlist by account.
 **Related:** [Webinars](../demand-generation/webinars.md) covers prospect-facing sessions.
 
-## What the team is trying to do
+You're planning a customer session and want one people attend and talk about: a topic they care about, a peer on stage, an abstract in their words. You walk away with a topic shortlist with evidence, a speaker shortlist with the story each would tell, and an abstract and invitation that pass the persona check. Calven brings the company's own evidence, so the topic isn't whatever product wants to demo.
 
-Run sessions customers attend and talk about: a topic they care about, a peer on stage, an abstract in their words. Done means a topic shortlist with evidence, a speaker shortlist with the story each would tell, and an abstract and invitation that pass the persona check. Without the company's own evidence, the topic is whatever product wants to demo.
+## Prompts
 
-## The work, end to end
-
-| # | Step | What the team does | Where Calven helps | Pulls from |
-|---|---|---|---|---|
-| 1 | Choose the topic | What customers want to learn | The pains and jobs to be done with the most mentions; the persona's watering holes and learning habits; a trend with a so-what | Themes, persona canvas, trends |
-| 2 | Find the speaker | A customer with the story | Accounts with quotes on the topic, especially outcomes; the contact and role | Quotes, CRM contacts |
-| 3 | Write the abstract and invite | Title, abstract, email | Drafts in the persona's words on the messaging pillars | Messaging, persona canvas, quotes |
-| 4 | Build the run of show | Agenda, demo, Q&A | Product brief for the demo claims; the objections to prepare for | Product brief, messaging (objection handling) |
-| 5 | Promote | Email, social, CSM outreach | Calven does not help here beyond the copy | |
-| 6 | Run and follow up | Session, recording, follow-up email | The follow-up in the persona's words with the proof shown | Messaging, quotes |
-
-## Recommended prompts
-
-### Step 1: topic shortlist
+### Shortlist topics for the next webinar
 
 ```
 Using Calven MCP, propose topics for our next customer webinar.
 
+FILL IN
+- Persona: [persona]
+
 CONTEXT
-The audience is existing customers, mostly [persona]. I want topics they are already asking about.
+The audience is existing customers, mostly the persona. I want topics they are already asking about.
 
 PULL FROM THE UNIVERSE
 - The customer themes with the most mentions this quarter (pains, jobs to be done), each with a representative quote.
-- The [persona] canvas: jobs to be done and where they learn.
+- The persona's canvas: jobs to be done and where they learn.
 - Approved market trends with a so-what for this persona.
 
 BUILD
@@ -43,46 +30,54 @@ The five topics ranked.
 
 GROUNDING
 Use only the Universe and cite it. Do not propose a topic with no evidence.
-
-[name the persona]
 ```
 
-### Step 2: speaker shortlist
+### Find customer speakers for a session
 
 ```
-Using Calven MCP, find customer speakers for a session on [topic].
+Using Calven MCP, find customer speakers for a session on the topic below.
+
+FILL IN
+- Topic: [topic]
+- Persona: [persona]
 
 CONTEXT
-I want a customer who has lived [topic] and talked about the outcome.
+I want a customer who has lived the topic and talked about the outcome.
 
 PULL FROM THE UNIVERSE
-- Customer quotes on [topic] tagged quantified outcome, time to value or competitive win, with speaker, role and account.
+- Customer quotes on the topic tagged quantified outcome, time to value or competitive win, with speaker, role and account.
 - The contact's title and buying role from the CRM.
 
 BUILD
-- A table: contact, account, the story in one line, the quote, why they would be credible to [persona].
+- A table: contact, account, the story in one line, the quote, why they would be credible to the persona.
 
 OUTPUT
 The table with your top three.
 
 GROUNDING
 Use only quotes and CRM data in the Universe, cited. Willingness to speak is not in Calven.
-
-[name the topic and the persona]
 ```
 
-### Step 3: abstract and invitation
+### Write the abstract and invitation
 
 ```
-Using Calven MCP, write the abstract and invitation for [session title].
+Using Calven MCP, write the abstract and invitation for the session below.
+
+FILL IN
+- Session: [session title]
+- Format: [format]
+- Topic: [topic]
+- Persona: [persona]
+- Speaker: [speaker]
+- Account: [speaker's account]
 
 CONTEXT
-A [format] on [topic] for [persona], with [speaker] from [account]. Abstract 80 words, invitation email 120 words.
+The session is in the format above, on the topic, for the persona, with the speaker from their account. Abstract 80 words, invitation email 120 words.
 
 PULL FROM THE UNIVERSE
 - The pain in the persona's words, with a quote.
 - The messaging pillar the session supports.
-- [speaker]'s own quotes on the topic.
+- The speaker's own quotes on the topic.
 
 WRITE
 - A title, the abstract, three takeaways, the invitation.
@@ -92,8 +87,6 @@ The four pieces.
 
 GROUNDING
 Use only the Universe and cite it. Do not promise content the speaker has not agreed to.
-
-[name the session, topic, persona, speaker and format]
 ```
 
 ## Ad hoc questions
@@ -107,15 +100,3 @@ Use only the Universe and cite it. Do not promise content the speaker has not ag
 - Draft the follow-up email for attendees of [session].
 - Which claims in this run of show are not in the product brief: [paste]?
 - Which [persona] contacts at Tier 1 customer accounts should get the invite first?
-
-## Good practice
-
-- Pick the topic from themes, then confirm with two CSMs. Evidence first, then relationship.
-- Invite the speaker with their own words. They already told the story once.
-- Keep the demo claims inside the product brief. A webinar promise is a public promise.
-- Ingest the session recording afterwards. The Q&A is customer voice.
-
-## Not covered today
-
-- Speaker willingness, logistics, registration and attendance live outside Calven.
-- Promotion and recording tools are separate.

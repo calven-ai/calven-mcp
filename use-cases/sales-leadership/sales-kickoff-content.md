@@ -1,29 +1,11 @@
 # Sales kickoff content
 
-**Team:** Sales leadership · also sales enablement, product marketing
-**Impact:** Medium. The kickoff sets the story the team tells all year; sessions built from the approved positioning, what changed in the market, the competitors to watch and what buyers said last year keep the kickoff about this market, not about motivation.
-**Prerequisites:** strategy documents approved (positioning, messaging, ICP, product brief), competitors tracked, win/loss surveys running. Better with call transcripts ingested and market research run.
 
-## What the team is trying to do
+You're planning the content for the kickoff or mid-year refresh: the state of the market, the year in win/loss, the competitors, the story we tell, who we sell to. You get an agenda with a brief per session, so enablement and PMM build from the same facts. Calven grounds each session in the current documents and last year's evidence, so the kickoff doesn't recycle last year's deck with new dates.
 
-Plan and write the content sessions of the kickoff or mid-year refresh: the state of the market, the year in win/loss, the competitors, the story we tell, who we sell to. Done means an agenda with a brief per session, each grounded in the current documents and last year's evidence, so enablement and PMM build from the same facts. Without the company's data the kickoff recycles last year's deck with new dates.
+## Prompts
 
-## The work, end to end
-
-| # | Step | What the team does | Where Calven helps | Pulls from |
-|---|---|---|---|---|
-| 1 | Set the agenda | Which sessions, in what order | Calven does not help here | |
-| 2 | State of the market | Trends and opportunities | Approved trends with so-what, opportunities, analyst findings | Trends, market opportunities, analyst findings |
-| 3 | The year in win/loss | What buyers said | Scoreboard, drivers, competitor results, product gaps, quotes | Win/loss dashboard, deal drivers |
-| 4 | The competitors | Who to watch and how to win | Battlecards, signals of the year, win rates | Competitor battlecards, competitive signals, competitive intelligence dashboard |
-| 5 | The story | Positioning and messaging as approved | Positioning, messaging pillars, the one-liner | Positioning, messaging |
-| 6 | Who we sell to | ICP and personas | ICP tiers, top personas with pains and objections | ICP, persona canvases |
-| 7 | Certification | A quiz on the above | Quiz questions from the documents | Strategy documents, battlecards |
-| 8 | Build and run | Slides, speakers, logistics | Calven does not help here | |
-
-## Recommended prompts
-
-### Steps 2 to 6: the session briefs
+### Write the kickoff session briefs
 
 ```
 Using Calven MCP, write the content briefs for our sales kickoff.
@@ -48,14 +30,17 @@ GROUNDING
 Use only the Universe, cited with n where a rate appears. Verbatim quotes. Do not add market claims the trends do not hold.
 ```
 
-### Step 7: the certification quiz
+### Write the kickoff certification quiz
 
 ```
 Using Calven MCP, write a twenty-question certification quiz for the kickoff.
 
+FILL IN
+- Competitors: [the two competitors to cover]
+
 PULL FROM THE UNIVERSE
 - Positioning, messaging (pillars, objection handling), ICP (tiers, disqualifiers), product brief (packaging).
-- The battlecards for [competitor] and [competitor].
+- The battlecards for the competitors.
 
 BUILD
 - Twenty questions with answers and the document section each comes from: five on the story, five on the ICP and personas, five on competitors, five on the product and packaging.
@@ -65,11 +50,9 @@ The quiz and the answer key.
 
 GROUNDING
 Every answer must be in the Universe, cited.
-
-[name the competitors]
 ```
 
-### Step 4: the competitor session
+### Build the kickoff competitor session
 
 ```
 Using Calven MCP, build the competitor session for the kickoff.
@@ -96,17 +79,3 @@ Use only battlecards, dashboards and signals in the Universe, cited with dates a
 - What did buyers say about our sales process last year?
 - Which segment should reps prioritise this year according to the ICP?
 - Which objection should every rep be able to answer, and the approved line?
-
-## Good practice
-
-- Ask for briefs, not slides. Speakers and enablement build the sessions; the briefs keep them on the same facts.
-- Set the window to last year and ask for comparison with the year before.
-- Keep quotes verbatim; buyer words are the most memorable thing in a kickoff.
-- Run the quiz prompt again after the kickoff for the mid-year refresh.
-- Send the briefs to PMM for a read before they go to speakers.
-
-## Not covered today
-
-- Agenda, logistics, speakers and the slide files.
-- Motivation, comp plans and awards.
-- Anything the documents do not hold; a thin dossier makes a thin session.

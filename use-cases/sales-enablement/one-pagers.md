@@ -1,30 +1,18 @@
 # One-pagers
 
-**Team:** Sales enablement · also product marketing, solutions engineering
-**Impact:** Medium. The one-pager is the asset reps forward. One built from the approved story for a persona, a segment, a competitor or a release is on-message by construction and fact-checked before it leaves.
-**Prerequisites:** strategy documents approved. Better with personas approved, competitors tracked and call transcripts ingested (customer quotes as proof).
 
-## What the team is trying to do
+A rep needs a one-pager for a persona, a segment, a competitor or a release, and the fallback is the last one with the name changed. You get a draft in the format (the problem, what we do, proof, what to say next) with every claim sourced and reviewed as the buyer. Calven builds it from the approved story, so it's on-message before it leaves.
 
-Produce a one-page rep-facing or buyer-facing asset fast: the problem, what we do, proof, what to say next. Done means a draft in the format, every claim sourced, reviewed as the buyer. Without the company's own knowledge the one-pager is the last one with the name changed.
+## Prompts
 
-## The work, end to end
-
-| # | Step | What the team does | Where Calven helps | Pulls from |
-|---|---|---|---|---|
-| 1 | Define the audience and the job | Persona, segment, competitor or release; rep-facing or buyer-facing | The persona canvas or segment definition; the messaging variation | Persona, ICP, messaging |
-| 2 | Draft | Problem, what we do, proof, next step | A draft from positioning, messaging and the product brief, with a verbatim quote as proof | Positioning, messaging, product brief, quotes |
-| 3 | Fact-check | Confirm every claim | Product brief, claims register | Product brief, claims |
-| 4 | Review as the buyer | Hear how the persona reads it | Persona review | `review_against_personas` |
-| 5 | Design and publish | Lay out, store, distribute | Calven does not help here | |
-| 6 | Refresh | Update when the story moves | Drift findings name the one-pagers a product change made stale, if they are published documents; otherwise rerun the fact-check | Drift findings, product changes |
-
-## Recommended prompts
-
-### Step 1 and 2: draft
+### Draft a sourced one-pager
 
 ```
-Using Calven MCP, draft a one-pager for [persona / segment / competitor / release], [rep-facing or buyer-facing].
+Using Calven MCP, draft a one-pager for the audience below.
+
+FILL IN
+- Audience: [persona / segment / competitor / release]
+- Facing: [rep-facing or buyer-facing]
 
 CONTEXT
 Format: headline, the problem in the buyer's words, what we do (three points), proof (one quote, one number if we have one), the next step. Under 300 words.
@@ -44,17 +32,19 @@ The draft, ready for design.
 
 GROUNDING
 Every claim and quote comes from the Universe, cited. Do not invent numbers; if there is no quantified outcome recorded, use the quote alone.
-
-[name the audience and whether it is rep- or buyer-facing]
 ```
 
-### Step 3 and 4: check and review
+### Fact-check it and review it as the buyer
 
 ```
-Using Calven MCP, fact-check this one-pager and review it as [persona].
+Using Calven MCP, fact-check this one-pager and review it as the persona.
+
+FILL IN
+- Persona: [persona]
+- Draft: [paste the draft]
 
 CONTEXT
-Below is the draft. Confirm every claim, then run the persona review.
+Confirm every claim in the draft, then run the persona review.
 
 PULL FROM THE UNIVERSE
 - The product brief and the claims register.
@@ -69,17 +59,18 @@ The annotated draft, then the clean version.
 
 GROUNDING
 Judge only against the Universe. Say "not in the brief" rather than passing an unverified claim.
-
-[paste the draft and name the persona]
 ```
 
-### Gap mode: which one-pagers are missing
+### Find the one-pagers you're missing
 
 ```
 Using Calven MCP, tell me which one-pagers we should have and do not.
 
+FILL IN
+- Current list: [paste the one-pagers we have: title, audience, date]
+
 CONTEXT
-Below is the list of one-pagers we have (title, audience, date). I want the gaps by persona, Tier 1 competitor and priority vertical.
+I want the gaps in the current list by persona, Tier 1 competitor and priority vertical.
 
 PULL FROM THE UNIVERSE
 - Approved personas, Tier 1 competitors and the ICP's priority verticals.
@@ -93,8 +84,6 @@ The gap list in priority order.
 
 GROUNDING
 Rank by dashboard numbers with n and window. Do not invent personas or verticals the documents do not list.
-
-[paste the current list]
 ```
 
 ## Ad hoc questions
@@ -108,16 +97,3 @@ Rank by dashboard numbers with n and window. Do not invent personas or verticals
 - What is our boilerplate paragraph?
 - How does [persona] describe the problem we solve?
 - Which one-pagers did the last release make stale?
-
-## Good practice
-
-- One audience per page. A one-pager for "IT and finance" lands with neither.
-- Lead with the problem in the buyer's words from a real quote, not with the product.
-- Fact-check before design, not after. Design changes are what stop a correction from shipping.
-- Keep the source list in the working draft even if it is cut from the final. The next refresh starts there.
-- Use the gap matrix once a quarter so the set covers every persona and Tier 1 competitor.
-
-## Not covered today
-
-- Layout, brand templates, the content library and distribution.
-- Numbers Calven does not hold (ROI claims, benchmarks). Use recorded customer quotes or leave the number out.

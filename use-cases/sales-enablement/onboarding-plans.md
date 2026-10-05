@@ -1,33 +1,17 @@
 # Onboarding plans
 
-**Team:** Sales enablement · also sales managers, people and talent
-**Impact:** High. Ramp time is enablement's clearest number. A new rep who learns the approved ICP, personas, competitors and story in week one, from the current version, ramps faster and unlearns less.
-**Prerequisites:** strategy documents approved, personas approved, competitors tracked. Better with call transcripts ingested (real objections to practise) and win/loss surveys running (win stories).
 
-## What the team is trying to do
+A new AE or SDR starts Monday, and you want them certified and carrying quota with milestones at 30, 60 and 90 days. You get a plan the manager can run and a reading pack on the market, the buyer, the product, the competitors and the pitch, in that order. Calven builds it from the current approved documents, so every new hire learns the same story instead of the oldest deck in the shared drive.
 
-Take a new AE or SDR from day one to a certified, quota-carrying rep with a plan that covers the market, the buyer, the product, the competitors and the pitch, in that order, with milestones at 30, 60 and 90 days. Done means a plan the manager can run and a reading pack built from the approved documents, not from the oldest deck in the shared drive. Without the company's own knowledge every new hire gets a different story depending on who sat next to them.
+## Prompts
 
-## The work, end to end
-
-| # | Step | What the team does | Where Calven helps | Pulls from |
-|---|---|---|---|---|
-| 1 | Define the ramp milestones | Decide what a rep must know and do by day 30, 60, 90 | Calven does not set milestones. It supplies what there is to learn, so the milestones cover it | Workspace overview |
-| 2 | Build the reading pack | Collect the documents a rep must read | The approved positioning, messaging, ICP, product brief, persona canvases, battlecards, in reading order | Strategy documents, personas, competitors |
-| 3 | Write the week-one briefs | Summarise each document for a new rep | Briefs written from the documents with the source per section | Strategy documents |
-| 4 | Build the persona module | Teach who we sell to | Persona cheat sheets and the discovery questions per persona | Persona canvases |
-| 5 | Build the competitive module | Teach who we sell against | Battlecards, where we win and lose, the landmines, win rates per competitor | Battlecards, competitive dashboard |
-| 6 | Build the practice set | Objections and calls to rehearse | Real objections from calls, with the approved answers; role-play as the persona | Quotes, messaging, persona canvas |
-| 7 | Build the certification | Questions and a scoring key | Question bank with answers tied to the source | Strategy documents, battlecards |
-| 8 | Assign and track | Load into the LMS, pair a buddy, hold the 30-60-90 reviews | Calven does not help here | |
-| 9 | Refresh | Update the plan when the story changes | Product changes and drift findings show what went stale since the last cohort | Product changes, drift findings |
-
-## Recommended prompts
-
-### Step 2 and 3: the reading pack and week-one briefs
+### Build the week-one reading pack
 
 ```
-Using Calven MCP, build the week-one reading pack for a new [AE / SDR].
+Using Calven MCP, build the week-one reading pack for a new rep in the role below.
+
+FILL IN
+- Role: [AE / SDR]
 
 CONTEXT
 A new rep starts Monday. By Friday they should be able to explain who we sell to, what we sell, how we position it and who we sell against. I need the pack in reading order with a one-page brief per document.
@@ -46,11 +30,9 @@ The pack as one document with the briefs, ready to paste into the onboarding pla
 
 GROUNDING
 Write only from the documents in the Universe and cite sections. Do not add context from your own knowledge of the category. Where a document is missing, say so.
-
-[name the role]
 ```
 
-### Step 4 to 6: the modules
+### Build the persona, competitive and practice modules
 
 ```
 Using Calven MCP, build the persona, competitive and practice modules for the 30-day plan.
@@ -75,7 +57,7 @@ GROUNDING
 Cite the canvas, battlecard, dashboard or quote behind every item. Do not invent objections or answers; if the messaging has no answer to an objection, mark it "no approved answer yet".
 ```
 
-### Step 7: the certification
+### Write the 30-day certification
 
 ```
 Using Calven MCP, write the 30-day certification for a new rep.
@@ -98,18 +80,22 @@ GROUNDING
 Every question is answerable from the Universe. Do not write questions about things the documents do not state.
 ```
 
-### Step 9: refresh the plan for the next cohort
+### Refresh the plan for the next cohort
 
 ```
 Using Calven MCP, tell me what changed since the last onboarding cohort.
 
+FILL IN
+- Date: [the last cohort's start date]
+- Plan: [paste the plan]
+
 CONTEXT
-The last cohort started on [date]. Below is the plan they used. I need to know what went stale.
+The last cohort started on the date and used the plan. I need to know what went stale.
 
 PULL FROM THE UNIVERSE
-- Product changes detected since [date] and the published documents they left stale.
-- Competitive signals since [date] with high severity.
-- Strategy documents updated since [date] (version and date).
+- Product changes detected since the date and the published documents they left stale.
+- Competitive signals since the date with high severity.
+- Strategy documents updated since the date (version and date).
 
 CHECK
 - Each plan section: still current, update needed (what changed), or remove.
@@ -119,8 +105,6 @@ The plan annotated, then the list of sections to rebuild.
 
 GROUNDING
 Use only recorded changes and document versions. Do not assume a section is stale without a recorded change.
-
-[paste the plan and the last cohort's start date]
 ```
 
 ## Ad hoc questions
@@ -137,18 +121,3 @@ Use only recorded changes and document versions. Do not assume a section is stal
 - Which verticals do we prioritise and which do we not sell into?
 - What proof points can a new rep use in week one?
 - Write a role-play brief where I play [persona] evaluating us against [competitor].
-
-## Good practice
-
-- Build the pack from the documents, not from the last cohort's deck. The deck is the thing that goes stale.
-- Keep briefs to one page with the source per section. A rep who knows where a fact lives can check it later.
-- Put real objections in the practice set. Ten verbatim buyer objections teach more than a list of likely ones.
-- Role-play as the persona in the AI tool before the first real call. The debrief names what to fix.
-- Tie every certification answer to a document section so any manager grades the same way.
-- Rerun the refresh prompt before each cohort. It takes a minute and catches the stale claim.
-
-## Not covered today
-
-- The LMS, the schedule, buddy pairing, 30-60-90 reviews and tracking completion.
-- Methodology and tools training (MEDDIC, the CRM, the sequencer). Calven holds the market and product knowledge, not the sales process.
-- Updating a document the refresh flags as stale. That is done in Calven by its owner.

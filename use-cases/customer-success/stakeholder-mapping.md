@@ -1,43 +1,31 @@
 # Stakeholder mapping
 
-**Team:** Customer success · also account management, sales
-**Impact:** Medium. Single-threaded accounts churn when the champion leaves. Mapping every contact to a persona and a buying role, and naming who is missing, is a ten-minute task with Calven and a renewal risk without it.
-**Prerequisites:** CRM connected (contacts with role and lifecycle stage), personas approved. Call transcripts ingested adds what each person said. Persona dashboard adds the multi-threading evidence.
 
-## What the team is trying to do
+Right now the stakeholder map is your memory. You get a map per account with who's there, what each person cares about, who holds the budget, which role nobody on your side talks to, and a plan to fill the gaps. Calven matches the contacts to the persona canvases and the CRM mirror.
 
-Know who is on the account, what each person cares about, who holds the budget, and which role nobody on our side talks to. Done means a stakeholder map per account with the gaps and a plan to fill them. Without the company's own persona canvases and CRM mirror, the map is the CSM's memory.
+## Prompts
 
-## The work, end to end
-
-| # | Step | What the team does | Where Calven helps | Pulls from |
-|---|---|---|---|---|
-| 1 | List the contacts | Who is on the account | Contacts with title, buying role, lifecycle stage | CRM contacts |
-| 2 | Map to personas | What each person is measured on and cares about | The persona each maps to, with KPIs, pains, objections | Personas, persona canvas |
-| 3 | Read what they said | Their own words | Quotes by speaker | Quotes |
-| 4 | Find the gaps | Roles with no contact | The buying roles present on won deals in the segment; the personas usually in the buying group | Persona dashboard (buying group), CRM deals |
-| 5 | Plan the outreach | How to reach the missing role | The persona's messaging hooks and watering holes | Persona canvas |
-| 6 | Update the CRM | Add contacts and roles | Calven does not help here | |
-
-## Recommended prompts
-
-### Step 1 to 4: the map
+### Map the stakeholders on one account
 
 ```
-Using Calven MCP, map the stakeholders at [account].
+Using Calven MCP, map the stakeholders at the account below.
+
+FILL IN
+- Account: [account]
+- Segment: [segment]
 
 CONTEXT
 I want to know who I have, what each cares about, and who is missing.
 
 PULL FROM THE UNIVERSE
-- The contacts at [account] with title, buying role and lifecycle stage.
+- The contacts at the account with title, buying role and lifecycle stage.
 - The persona each contact maps to, with goals and KPIs, pains and objections.
 - Each contact's quotes.
-- The buying-group dynamics from the persona dashboard: which personas sit on won deals in [segment], and the multi-threading win rate with n.
+- The buying-group dynamics from the persona dashboard: which personas sit on won deals in the segment, and the multi-threading win rate with n.
 
 BUILD
 - A table: contact, title, buying role, persona, what they care about, what they said.
-- The gaps: buying roles and personas on a typical won deal in [segment] that have no contact here.
+- The gaps: buying roles and personas on a typical won deal in the segment that have no contact here.
 - A risk line: single-threaded or not.
 
 OUTPUT
@@ -45,21 +33,23 @@ The map and the gaps.
 
 GROUNDING
 Use only the Universe and cite it. Mark a contact whose title fits no persona as unknown.
-
-[name the account and segment]
 ```
 
-### Step 5: reaching the missing role
+### Reach the role nobody talks to
 
 ```
-Using Calven MCP, help me reach the [persona] at [account].
+Using Calven MCP, help me reach the persona below at the account below.
+
+FILL IN
+- Persona: [persona]
+- Account: [account]
 
 CONTEXT
 We have no contact in that role. I want an angle and a message.
 
 PULL FROM THE UNIVERSE
-- The [persona] canvas: company objectives, KPIs, pains, messaging hooks, watering holes.
-- Quotes from [account] that mention this role or its concerns.
+- The persona's canvas: company objectives, KPIs, pains, messaging hooks, watering holes.
+- Quotes from the account that mention this role or its concerns.
 - The value proposition for this persona.
 
 WRITE
@@ -70,17 +60,18 @@ The three pieces.
 
 GROUNDING
 Use only the Universe and cite it.
-
-[name the persona and account]
 ```
 
-### Gap across the book
+### Find single-threaded accounts in your book
 
 ```
 Using Calven MCP, show me which of my accounts are single-threaded.
 
+FILL IN
+- Accounts: [paste the account list]
+
 CONTEXT
-My accounts are listed below.
+Check every account in the list.
 
 PULL FROM THE UNIVERSE
 - Contacts per account by buying role.
@@ -95,8 +86,6 @@ The table.
 
 GROUNDING
 Use only the Universe and cite it.
-
-[paste the account list]
 ```
 
 ## Ad hoc questions
@@ -109,15 +98,3 @@ Use only the Universe and cite it.
 - What has [contact] said on calls?
 - Where does [persona] learn and gather?
 - Write an intro message to a [persona] that my champion can forward.
-
-## Good practice
-
-- Map at kickoff and again before every QBR. Contacts change; the map should too.
-- Use the buying-group data from won deals to define "complete". It is your segment's evidence, not a template.
-- Ask the champion to make the introduction with a message in the missing persona's language.
-- Add new contacts to the CRM so the next map sees them.
-
-## Not covered today
-
-- Org charts, LinkedIn and job changes are not in Calven; the CRM mirror holds what sales and CS entered.
-- Updating contacts and roles happens in the CRM.

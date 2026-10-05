@@ -1,39 +1,25 @@
 # Market and competitive briefings
 
-**Team:** Leadership · also product marketing, sales leadership, product management, finance
-**Impact:** High. Executives want to stay current on competitors and the market without reading everything. Calven holds the dated, sourced signals and the synthesized trends, so a weekly or monthly briefing is one question, not an afternoon of reading.
-**Prerequisites:** competitors tracked (signals, dossiers), market research run (trends, opportunities, market signals). Better with win/loss surveys (so moves can be tied to deals) and analyst reports uploaded.
 
-## What the team is trying to do
+You want to know what changed among competitors and in the market since the last briefing, without reading everything. You get a short briefing in the same shape each time: moves ranked by severity with dates and sources, the trend changes, the deals affected, and two questions for the leadership meeting. Calven holds the dated signals and the synthesized trends, so it's one question instead of an afternoon of reading.
 
-Know what changed among competitors and in the market since the last briefing, what it means for us, and what to decide or ask about. Done means a short briefing in the same shape each time: moves ranked by severity, with dates and sources, the trend changes, the deals affected, and the two questions for the leadership meeting.
+## Prompts
 
-## The work, end to end
-
-| # | Step | What the team does | Where Calven helps | Pulls from |
-|---|---|---|---|---|
-| 1 | Competitor moves | Launches, pricing, messaging, people, funding since last time | Competitive signals by severity, type and date, with the so-what | Competitive signals |
-| 2 | Market moves | Trends that strengthened or appeared, new opportunities | Trends and opportunities with status and last-seen; market signals | Trends, market opportunities, market signals |
-| 3 | What it touches | Deals and segments exposed | Open deals against the competitor; win rate trend | CRM deals, competitive intelligence dashboard |
-| 4 | Analyst view | New analyst findings | Analyst findings by date | Analyst findings |
-| 5 | The so-what and the asks | Decisions or questions for the leadership meeting | The signal's so-what, the battlecard's where-we-lose | Competitive signals, battlecard |
-| 6 | Deep read on request | One competitor or one trend in full | Dossier; trend record | Competitor deep dive, trends |
-| 7 | Distribute | Slack, email, the meeting pre-read | Calven does not send from the AI tool | |
-
-## Recommended prompts
-
-### Step 1 to 5: the briefing
+### Write the competitive and market briefing
 
 ```
-Using Calven MCP, write the competitive and market briefing for [window].
+Using Calven MCP, write the competitive and market briefing for the window below.
+
+FILL IN
+- Window: [time window, e.g. last two weeks]
 
 CONTEXT
 The audience is the leadership team. Same shape every time: what competitors did, what moved in the market, what it touches, and what we should decide.
 
 PULL FROM THE UNIVERSE
-- Competitive signals in [window], ranked by severity, with type, date, source and so-what.
-- Trends whose status or severity changed, and new opportunities, in [window].
-- Analyst findings published in [window].
+- Competitive signals in the window, ranked by severity, with type, date, source and so-what.
+- Trends whose status or severity changed, and new opportunities, in the window.
+- Analyst findings published in the window.
 - Open deals against the competitors who moved, and the win-rate trend against them.
 
 BUILD
@@ -47,22 +33,25 @@ A one-page briefing with sources and dates.
 
 GROUNDING
 Use only signals, trends, findings and deals in the Universe, cited. Do not infer a move from silence. If nothing of severity moved, say so plainly.
-
-[name the window]
 ```
 
-### Step 6: deep read on one competitor
+### Get the full read on one competitor
 
 ```
-Using Calven MCP, give me the full read on [competitor] after this week's move.
+Using Calven MCP, give me the full read on the competitor below after this week's move.
+
+FILL IN
+- Competitor: [competitor]
+- Move: [what they did]
+- Window: [time window for signals, e.g. last 90 days]
 
 CONTEXT
-[competitor] did [move]. I want the context: who they are, how they position, where we win and lose, our win rate against them, and what the move changes.
+The competitor made the move above. I want the context: who they are, how they position, where we win and lose, our win rate against them, and what the move changes.
 
 PULL FROM THE UNIVERSE
-- [competitor]'s dossier: at-a-glance, positioning, strengths, weaknesses, pricing.
+- The competitor's dossier: at-a-glance, positioning, strengths, weaknesses, pricing.
 - The battlecard: how we win, where we lose.
-- Signals from them in the last [window].
+- Signals from them in the window.
 - Win rate against them and the top loss reasons, with samples.
 
 BUILD
@@ -75,17 +64,18 @@ A one-page read.
 
 GROUNDING
 Use only the dossier, battlecard, signals and dashboard, cited. Do not predict their next move.
-
-[name the competitor and the move]
 ```
 
-### Step 6: deep read on one trend
+### Explain one trend and what it means
 
 ```
-Using Calven MCP, explain [trend] and what it means for us.
+Using Calven MCP, explain the trend below and what it means for us.
+
+FILL IN
+- Trend: [trend]
 
 CONTEXT
-[trend] appeared in the briefing with high severity. I want the evidence behind it and the implication.
+The trend appeared in the briefing with high severity. I want the evidence behind it and the implication.
 
 PULL FROM THE UNIVERSE
 - The trend record: description, so-what, category, severity, horizon, first and last seen.
@@ -100,8 +90,6 @@ A half-page note.
 
 GROUNDING
 Use only the record and its cited signals. Do not extend the trend with your own knowledge.
-
-[name the trend]
 ```
 
 ## Ad hoc questions
@@ -120,17 +108,3 @@ Use only the record and its cited signals. Do not extend the trend with your own
 - Which trend shows up as a buying trigger in our deals?
 - What is the sizing on [opportunity]?
 - Which trends went stale or were archived this quarter?
-
-## Good practice
-
-- Fix the window and the shape. A briefing readers can compare week to week is one they read.
-- Rank by severity, not recency. The agent rates severity; use it.
-- Ask for deals exposed. A move that touches open pipeline is a decision; one that does not is news.
-- Use the deep-read prompts on request; keep the briefing to a page.
-- Pass battlecard suggestions to the PMM; the briefing does not edit the battlecard.
-
-## Not covered today
-
-- Browsing competitor sites or news from the AI tool. The agents gather in Calven; MCP reads the record.
-- Sending the briefing. Paste it into Slack or the meeting doc.
-- Updating dossiers and battlecards.

@@ -1,36 +1,23 @@
 # Case studies
 
-**Team:** Content marketing · also customer marketing, product marketing, sales
-**Impact:** High. A case study is the proof sales sends when a buyer asks "who else like us". One written around the outcome the buyer cares about and the words the customer used closes deals; one written as a feature tour gets skimmed.
-**Prerequisites:** strategy documents approved (positioning, messaging, product brief). Better with call transcripts ingested (the customer's own quotes and the pains they named), CRM connected (the deal, the competitors in it, the persona who bought) and win/loss surveys running (why they chose us).
 **Related:** [Customer quotes](../customer-marketing/customer-quotes.md) covers sourcing and approving the quotes a case study draws on.
 
-## What the team is trying to do
+You're turning one customer's result into a story a prospect in the same segment recognises: the problem in their words, what they tried, why they chose us, what changed and the number that proves it. You walk away with a case study the customer approves, sales uses, and whose quote gets reused across pages and decks. Calven pulls the story back together from the calls, the deal that shows who else they looked at, and the persona who bought, which otherwise live in different places.
 
-Turn one customer's result into a story a prospect in the same segment recognises: the problem in the customer's words, what they tried, why they chose us, what changed and the number that proves it. Done means the customer has approved it, sales uses it, and the quote is reused across pages and decks. The hard part is reconstructing the story: the calls that hold the customer's words, the deal that says who else they looked at, and the persona who bought all live in different places.
+## Prompts
 
-## The work, end to end
-
-| # | Step | What the team does | Where Calven helps | Pulls from |
-|---|---|---|---|---|
-| 1 | Pick the customer | Choose an account that matches the segment and persona the team sells to next | ICP fit tier, industry and size of candidate accounts; which won deals had a competitor in play; themes those customers raised | CRM accounts and deals, quotes, ICP |
-| 2 | Reconstruct the story | What the customer said before, during and after the sale | Quotes from their calls (pains, buying triggers, competitor mentions, outcomes), the deal context, the win drivers from their survey | Quotes, conversations, deal drivers, surveyed deals |
-| 3 | Prepare the interview | Questions for the customer and for the internal team | Questions built from what they already said, so the interview confirms and quantifies instead of starting over | Quotes, persona canvas |
-| 4 | Interview | Run the call | Calven does not help here. The recording can be ingested afterwards | |
-| 5 | Draft | Challenge, approach, result, quote | Draft in the customer's words, on our positioning, with the capability facts right | Messaging, positioning, product brief, quotes |
-| 6 | Fact and claim check | Numbers, capabilities, competitor mentions | Product brief, claims register, battlecard for any competitor named | Product brief, claims, battlecard |
-| 7 | Customer approval | Send for sign-off | Calven does not help here | |
-| 8 | Publish and reuse | Web page, PDF, slide, quotes for other pages | Which other pages and personas the quotes serve; the quote's category and highlight tags | Quotes, messaging matrix |
-
-## Recommended prompts
-
-### Step 1: choose the customer
+### Choose the next case study customer
 
 ```
 Using Calven MCP, help me choose the next case study customer.
 
+FILL IN
+- Segment: [segment]
+- Persona: [persona]
+- Shortlist: [paste the shortlist]
+
 CONTEXT
-We sell to [segment] next quarter and want a story a [persona] there will recognise. Sales has given me a shortlist of willing customers at the bottom.
+We sell to the segment next quarter and want a story the persona there will recognise. Sales has given me the shortlist of willing customers.
 
 PULL FROM THE UNIVERSE
 - For each account: industry, size, region, ICP fit tier, the deal and whether a competitor was in it.
@@ -38,7 +25,7 @@ PULL FROM THE UNIVERSE
 - Where available, the win drivers from their win/loss survey.
 
 RANK
-- Rank the shortlist by fit with [segment] and [persona], the strength of the recorded outcome, and whether a competitor was displaced.
+- Rank the shortlist by fit with the segment and the persona, the strength of the recorded outcome, and whether a competitor was displaced.
 - For each, the one-line story the evidence already supports.
 
 OUTPUT
@@ -46,20 +33,21 @@ A ranked table with the reason and the sources, and the one to approach first.
 
 GROUNDING
 Use only account, deal and quote data in the Universe and cite it. Do not invent outcomes. If an account has no recorded quotes, say so.
-
-[paste the shortlist]
 ```
 
-### Step 2: reconstruct the story
+### Reconstruct the customer's story
 
 ```
-Using Calven MCP, reconstruct what [account] told us before, during and after the sale.
+Using Calven MCP, reconstruct what the account below told us before, during and after the sale.
+
+FILL IN
+- Account: [account]
 
 CONTEXT
-I am preparing a case study with [account]. Before the interview I want everything they already said on record.
+I am preparing a case study with the account. Before the interview I want everything they already said on record.
 
 PULL FROM THE UNIVERSE
-- Every customer quote from [account], with date, speaker role, category and sentiment.
+- Every customer quote from the account, with date, speaker role, category and sentiment.
 - The deal: stage history, competitors in play, who the champion and decision maker were.
 - Their win/loss survey drivers and the deal summary, if a survey went out.
 - The persona canvas for the buyer's role.
@@ -74,20 +62,24 @@ The story so far as a timeline with sources, then the gap list for the interview
 
 GROUNDING
 Use only quotes and records in the Universe and cite each. Do not fill gaps with likely answers; list them.
-
-[name the account]
 ```
 
-### Step 3: interview guide
+### Write the interview guide
 
 ```
-Using Calven MCP, write the interview guide for the [account] case study.
+Using Calven MCP, write the interview guide for the case study with the account below.
+
+FILL IN
+- Account: [account]
+- Contact: [contact]
+- Title: [contact's title]
+- Story so far: [paste the story so far and the gap list]
 
 CONTEXT
-Thirty minutes with [contact], [title]. Below is the story so far and the gap list. I want questions that confirm and quantify what they already said, then fill the gaps.
+Thirty minutes with the contact. I want questions that confirm and quantify what they already said, then fill the gaps.
 
 PULL FROM THE UNIVERSE
-- The quotes from [account], so questions can quote them back.
+- The quotes from the account, so questions can quote them back.
 - The persona canvas for their role: goals and KPIs, so the result question asks about the metric they are measured on.
 - Our positioning proof points, so I know which outcome types we want evidence for.
 
@@ -101,23 +93,27 @@ The guide, ready to use.
 
 GROUNDING
 Base questions on recorded quotes and the canvas in the Universe and cite them. Do not put words in the customer's mouth; ask.
-
-[name the account, contact and title, paste the story so far]
 ```
 
-### Step 5: draft
+### Draft the case study
 
 ```
-Using Calven MCP, draft the [account] case study.
+Using Calven MCP, draft the case study for the account below.
+
+FILL IN
+- Account: [account]
+- Persona: [persona]
+- Segment: [segment]
+- Interview: [paste the interview transcript or notes and the story so far]
 
 CONTEXT
-Below is the interview transcript or notes and the story so far. Structure: challenge, approach, result, quote. Under 800 words. The reader is [persona] in [segment].
+Structure: challenge, approach, result, quote. Under 800 words. The reader is the persona in the segment.
 
 PULL FROM THE UNIVERSE
 - Our positioning and the value pillar this story proves.
 - The product brief sections for the capabilities the customer used.
-- The [persona] canvas, so the result speaks to what the reader is measured on.
-- The quotes from [account] on record.
+- The persona's canvas, so the result speaks to what the reader is measured on.
+- The quotes from the account on record.
 
 WRITE
 - Challenge in the customer's words, two to four sentences.
@@ -131,22 +127,24 @@ The draft in markdown, plus a list of every number and capability claim with its
 
 GROUNDING
 Use only quotes from the Universe and the pasted interview, and only capabilities in the product brief. Cite each. Do not round a number up or invent a metric the customer did not give.
-
-[paste the interview notes and the story so far; name the persona and segment]
 ```
 
-### Step 6: fact and claim check
+### Check the claims before customer review
 
 ```
-Using Calven MCP, check the [account] case study before it goes to the customer.
+Using Calven MCP, check the case study for the account below before it goes to the customer.
+
+FILL IN
+- Account: [account]
+- Draft: [paste the draft]
 
 CONTEXT
-Below is the draft. I need every capability, number and competitor mention checked.
+I need every capability, number and competitor mention checked.
 
 PULL FROM THE UNIVERSE
 - The product brief and the claims register.
 - The battlecard for any competitor named.
-- The quotes from [account] on record.
+- The quotes from the account on record.
 
 CHECK
 - Capability claims: in the brief, overstated, or not in the brief.
@@ -159,20 +157,21 @@ The draft annotated, then the list for the customer to confirm.
 
 GROUNDING
 Judge only against the Universe and the pasted interview, and cite. Mark anything else "to confirm with the customer".
-
-[paste the draft]
 ```
 
-### Step 8: reuse the evidence
+### Find more places to reuse it
 
 ```
-Using Calven MCP, tell me where else the [account] case study can work.
+Using Calven MCP, tell me where else the case study for the account below can work.
+
+FILL IN
+- Account: [account]
 
 CONTEXT
 The case study is approved. I want its quotes and outcome placed across our content.
 
 PULL FROM THE UNIVERSE
-- The quotes from [account] with their category and highlight tags.
+- The quotes from the account with their category and highlight tags.
 - Our messaging matrix: which persona and stage each pillar serves.
 - The competitors in the deal and their battlecards.
 
@@ -186,8 +185,6 @@ A placement table and the three short versions.
 
 GROUNDING
 Keep every quote verbatim. Map only to pillars and personas in the Universe and cite them.
-
-[name the account]
 ```
 
 ## Ad hoc questions
@@ -207,21 +204,3 @@ Keep every quote verbatim. Map only to pillars and personas in the Universe and 
 - Which segments have won deals but no case study candidate with quotes?
 - What were the top three drivers in deals we won against [competitor]?
 - How would [persona] react to this case study: [paste]
-
-## Good practice
-
-- Reconstruct before you interview. Thirty minutes spent confirming beats thirty minutes starting from zero.
-- Ask about the metric the persona is measured on. The canvas names it.
-- Keep quotes verbatim through every step and show the customer the exact lines.
-- Ask Calven which pillar has the fewest stories. Pick the next customer to fill it.
-- Ingest the interview recording into Calven afterwards so the new quotes join the record.
-- Put the deal's competitor on the page only when the battlecard and the customer both support it.
-- Run the persona review on the draft before it goes to the customer for approval. A story that reads as vendor marketing to the persona the prospect maps to will not be forwarded.
-
-## Not covered today
-
-- Finding willing customers and asking them. That is a sales and customer success conversation.
-- The interview itself and the customer's approval.
-- Design, layout and publishing.
-- Customer reference management and approvals tracking.
-- Adding the new quotes to Calven from the AI tool. Ingest the recording in Calven and the voice-of-customer agent extracts them.

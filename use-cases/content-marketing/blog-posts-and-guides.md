@@ -1,39 +1,25 @@
 # Blog posts and guides
 
-**Team:** Content marketing · also product marketing, brand and communications, founders who write
-**Impact:** High. Long-form is most of the content budget. A post with a real point of view, grounded in a tracked market shift and the buyer's own words, earns links, citations and replies; one written from the category's common knowledge earns nothing.
-**Prerequisites:** strategy documents approved (positioning, messaging), personas approved. Better with market research run (trends, opportunities, analyst findings) and call transcripts ingested (quotes, themes).
 
-## What the team is trying to do
+You want a piece the target persona reads to the end and remembers who wrote: a point of view that follows from how the company sees the market, examples in the buyer's words, the product only where it belongs. You walk away with a piece that's on-positioning, accurate, worth sharing for the persona, and structured so AI assistants can cite it. Calven covers the hard first hour: the angle, the evidence and the reader's actual questions before you write.
 
-Publish pieces a buyer in the target persona reads to the end and remembers who wrote it: a point of view that follows from how the company sees the market, examples in the buyer's words, product mentioned only where it belongs. Done means the piece is on-positioning, the claims are right, the persona would share it, and it is structured so AI assistants can cite it. The hard part is the first hour: finding the angle, the evidence and the reader's actual questions before writing.
+## Prompts
 
-## The work, end to end
-
-| # | Step | What the team does | Where Calven helps | Pulls from |
-|---|---|---|---|---|
-| 1 | Topic and keyword | Research demand, intent, ranking pages | Calven does not help here. The SEO tool owns it | |
-| 2 | Find the angle | The point of view and why now | Trends, opportunities and analyst findings behind the topic; our positioning's category frame and "why now" | Trends, market opportunities, analyst findings, positioning |
-| 3 | Know the reader | What they ask, fear and distrust | The persona canvas, their objections, the questions buyers asked on calls | Persona, quotes, themes |
-| 4 | Gather evidence | Quotes, examples, numbers | Verbatim quotes and themes, proof points, dashboard numbers the company can publish | Quotes, themes, positioning, Insights |
-| 5 | Outline | Headings as the reader's questions, the answer first | Outline from the reader's questions and the messaging hook | Persona canvas, messaging |
-| 6 | Draft | Write it | Draft on-positioning in the reader's words, product only where the brief allows | Positioning, messaging, product brief, quotes |
-| 7 | Review | Positioning drift, claims, persona reaction | Drift check against positioning, claim check against the product brief, persona review | Positioning, product brief, `review_against_personas` |
-| 8 | Structure for citation | Direct answers under question headings, a summary, FAQ | Calven does not help with search structure; it supplies the questions and the one-line answers | Persona canvas, messaging |
-| 9 | Publish and distribute | CMS, social, newsletter | Calven does not help here | |
-
-## Recommended prompts
-
-### Step 2: the angle
+### Find the angle for the piece
 
 ```
-Using Calven MCP, find the angle for a piece on [topic] for [persona].
+Using Calven MCP, find the angle for a piece on the topic below for the persona below.
+
+FILL IN
+- Topic: [topic]
+- Persona: [persona]
+- Format: [blog post / guide / point-of-view piece]
 
 CONTEXT
-I am writing a [blog post / guide / point-of-view piece] on [topic]. I want it anchored in a market shift we track and in our positioning, not in opinion alone.
+I am writing a piece in the format above on the topic. I want it anchored in a market shift we track and in our positioning, not in opinion alone.
 
 PULL FROM THE UNIVERSE
-- The trends and market opportunities relevant to [topic], with their "so what" and horizon.
+- The trends and market opportunities relevant to the topic, with their "so what" and horizon.
 - Analyst findings on the subject, if any.
 - Our positioning: category frame, unique attributes, "why now" trends.
 
@@ -47,25 +33,27 @@ The three candidates in a table, then the arc for the one you recommend.
 
 GROUNDING
 Ground every point of view in trends and positioning in the Universe and cite them with dates. Do not present a trend we do not track as fact. Flag speculation as speculation.
-
-[name the topic, the persona and the format]
 ```
 
-### Step 3 and 4: reader questions and evidence
+### Gather reader questions and evidence
 
 ```
-Using Calven MCP, gather what [persona] asks and says about [topic].
+Using Calven MCP, gather what the persona below asks and says about the topic below.
+
+FILL IN
+- Persona: [persona]
+- Topic: [topic]
 
 CONTEXT
-I am outlining a piece on [topic]. I want the reader's real questions and words before I write a heading.
+I am outlining a piece on the topic. I want the reader's real questions and words before I write a heading.
 
 PULL FROM THE UNIVERSE
-- The [persona] canvas: pains, jobs to be done, objections, messaging hooks.
-- Customer quotes on [topic], grouped by theme, with speaker role and sentiment.
-- The themes with the most mentions that touch [topic].
+- The persona's canvas: pains, jobs to be done, objections, messaging hooks.
+- Customer quotes on the topic, grouped by theme, with speaker role and sentiment.
+- The themes with the most mentions that touch the topic.
 
 BUILD
-- The eight questions this reader asks about [topic], in their words.
+- The eight questions this reader asks about the topic, in their words.
 - The language bank: phrases for the problem, the outcome and the alternatives.
 - Five quotes the piece can use verbatim, attributed.
 - The objection the piece must answer before the reader will believe the point of view.
@@ -75,20 +63,25 @@ The questions, the language bank and the quotes, each with its source.
 
 GROUNDING
 Use only the canvas and recorded quotes in the Universe and cite them. Do not invent questions the evidence does not support; if the record is thin, say so.
-
-[name the persona and the topic]
 ```
 
-### Step 5 and 6: outline and draft
+### Draft the post or guide
 
 ```
-Using Calven MCP, draft a [format] on [topic] for [persona].
+Using Calven MCP, draft the piece described below.
+
+FILL IN
+- Format: [format]
+- Topic: [topic]
+- Persona: [persona]
+- Author: [author]
+- Inputs: [paste the angle, questions, language bank, quotes and SEO inputs]
 
 CONTEXT
-Below are the angle, the reader's questions, the language bank and the quotes from the previous steps, plus the SEO inputs (keyword, length, internal links). Byline: [author]. The product appears once, where the reader would ask about it, and not before.
+The inputs are the angle, the reader's questions, the language bank and the quotes from the previous steps, plus the SEO inputs (keyword, length, internal links). The byline is the author. The product appears once, where the reader would ask about it, and not before.
 
 PULL FROM THE UNIVERSE
-- Our positioning and the messaging hook for [persona].
+- Our positioning and the messaging hook for the persona.
 - The product brief section for the one capability the piece may mention.
 
 WRITE
@@ -102,22 +95,25 @@ The draft in markdown with a one-paragraph summary at the top and a short FAQ at
 
 GROUNDING
 Ground every claim in the Universe and the pasted inputs and cite it. Mention only capabilities in the product brief. Do not invent statistics; where the piece needs a number we do not have, leave a marked placeholder.
-
-[paste the angle, questions, language bank, quotes and SEO inputs]
 ```
 
-### Step 7: review
+### Review the draft before publishing
 
 ```
 Using Calven MCP, review this draft before it is published.
 
+FILL IN
+- Topic: [topic]
+- Persona: [persona]
+- Draft: [paste the draft]
+
 CONTEXT
-Below is the draft of a piece on [topic] for [persona].
+The draft is a piece on the topic for the persona.
 
 PULL FROM THE UNIVERSE
 - Our positioning, to check for drift and for a competitor's frame creeping in.
 - The product brief and claims register, for any product claim.
-- The [persona] canvas, and run the persona review on the draft.
+- The persona's canvas, and run the persona review on the draft.
 
 CHECK
 - Lines that drift from our positioning or adopt a frame a competitor uses.
@@ -129,21 +125,23 @@ The draft annotated inline, then the five edits that matter most.
 
 GROUNDING
 Judge only against the Universe and cite what each flag conflicts with. If the draft is clean, say so rather than inventing problems.
-
-[paste the draft]
 ```
 
-### Refresh an existing post
+### Plan the refresh of an old post
 
 ```
 Using Calven MCP, tell me how to refresh this post.
 
+FILL IN
+- Publish date: [publish date]
+- Post: [paste the post]
+
 CONTEXT
-Below is a post published on [date]. It still ranks but the product and the market have moved.
+The post was published on the publish date. It still ranks but the product and the market have moved.
 
 PULL FROM THE UNIVERSE
-- Product changes since [date] and any drift findings on this post.
-- Trends that have changed status since [date].
+- Product changes since the publish date and any drift findings on this post.
+- Trends that have changed status since the publish date.
 - Our current positioning and messaging.
 - Newer customer quotes on the topic.
 
@@ -157,8 +155,6 @@ A refresh list: section, what changed, the rewrite, the source.
 
 GROUNDING
 Use only changes, trends and quotes recorded in the Universe and cite them with dates. If nothing has changed, say so.
-
-[paste the post and its publish date]
 ```
 
 ## Ad hoc questions
@@ -175,19 +171,3 @@ Use only changes, trends and quotes recorded in the Universe and cite them with 
 - Which messaging pillar has the weakest customer-language fit? I want to write toward it.
 - Would [persona] share a piece arguing [point of view]?
 - What is our one-liner and boilerplate for the author bio?
-
-## Good practice
-
-- Get the angle from a tracked trend, not from the keyword. The keyword tells you demand; the trend tells you what to say.
-- Write headings as the reader's questions and put the answer first. The persona canvas and the call quotes give you the questions.
-- Use quotes verbatim and attributed. A paraphrased customer stops being evidence.
-- Mention the product once, where the reader would ask. The product brief tells you what you may say.
-- Run the review prompt before every publish and the refresh prompt on every post older than a year.
-- Keep competitor mentions in plain text and inside the battlecard.
-
-## Not covered today
-
-- Keyword research, search intent, SERP analysis and the content's performance.
-- Web research for third-party statistics. The AI tool may search the web if it has that tool; Calven does not.
-- Publishing, distribution and promotion.
-- Adding a new trend or quote to Calven from the AI tool. The market research and voice-of-customer agents do that in the app.

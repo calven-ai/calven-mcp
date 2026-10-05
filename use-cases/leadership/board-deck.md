@@ -1,39 +1,23 @@
 # Board deck
 
-**Team:** Leadership · also finance, sales leadership, product marketing, chief of staff
-**Impact:** High. The competitive and win/loss slides are the ones the board asks about and the ones built last, from whatever sales could pull together. Calven produces them with sample sizes, sources and the change against last quarter, in the same shape every time.
-**Prerequisites:** win/loss surveys running (win rates, loss reasons, drivers), CRM connected (pipeline won and lost, ICP focus), competitors tracked (signals, battlecard coverage). Market research run adds the market slide.
 
-## What the team is trying to do
+The board wants a current read on the competition, why deals are won and lost, pipeline quality and the market, and it'll have follow-up questions. You get the four market-facing slides of the board pack drafted from the Universe with every number sourced, plus an appendix answering the questions the board usually asks before anyone asks them. Financials, hiring and cash come from finance; Calven doesn't hold them.
 
-Give the board a current, consistent read on competition, why deals are won and lost, pipeline quality and the market, and answer the questions that follow. Done means the four market-facing slides of the board pack drafted from the Universe with every number sourced, plus an appendix of the questions the board usually asks, answered in advance. Financials, hiring and cash come from finance and stay out of Calven.
+## Prompts
 
-## The work, end to end
-
-| # | Step | What the team does | Where Calven helps | Pulls from |
-|---|---|---|---|---|
-| 1 | Fix the slide set | Decide which market-facing slides recur every quarter | The dashboards that map to each slide, with the same window each quarter | Insights overview |
-| 2 | Competitive slide | Win rate by competitor, moves this quarter, where we fight and avoid | Competitive intelligence dashboard: performance, showdown, market movement; signals | Competitive intelligence dashboard, competitive signals |
-| 3 | Win/loss slide | Win rate, pipeline won and lost, top win and loss drivers, what decides deals | Win/loss dashboard: scoreboard, why won and lost, deciding forces | Win/loss dashboard |
-| 4 | ICP and pipeline quality slide | Share of pipeline in profile, ICP share of wins, deal size and cycle | ICP dashboard: KPIs, reality check | ICP dashboard |
-| 5 | Market slide | Trends and opportunities with the so-what | Market research dashboard; trends, opportunities | Market research dashboard, trends, market opportunities |
-| 6 | Customer voice slide | What customers say, in their words | Voice-of-customer dashboard; marketing-ready quotes | Voice-of-customer dashboard, quotes |
-| 7 | Anticipate questions | Answer the board's usual questions in an appendix | Drill-downs behind each number | `get_insight_detail`, deal drivers |
-| 8 | Financials, hiring, cash | The rest of the pack | Calven does not help here | |
-| 9 | Assemble and send | The deck and the pre-read | Calven does not help here | |
-
-## Recommended prompts
-
-### Step 2: the competitive slide
+### Draft the competitive slide
 
 ```
-Using Calven MCP, build the competitive slide for the [quarter] board meeting.
+Using Calven MCP, build the competitive slide for the quarter's board meeting.
+
+FILL IN
+- Quarter: [quarter]
 
 CONTEXT
 One slide: our competitive position and win rate by competitor, with what changed this quarter. The board compares it with last quarter's.
 
 PULL FROM THE UNIVERSE
-- The competitive intelligence read for [quarter] compared with the prior quarter: competitive win rate, win rate per competitor with sample, fight-or-avoid read, top loss reasons per competitor.
+- The competitive intelligence read for the quarter compared with the prior quarter: competitive win rate, win rate per competitor with sample, fight-or-avoid read, top loss reasons per competitor.
 - The competitor moves this quarter with the highest severity, with dates.
 - Battlecard coverage and competitors under watch.
 
@@ -47,20 +31,21 @@ The slide content as a table plus bullets, with the window and samples in a foot
 
 GROUNDING
 Use only dashboard figures and signals from the Universe, cited with n. Rates come from the dashboard, never from counting rows. Where a competitor has too few deals for a rate, say so rather than showing a number.
-
-[name the quarter]
 ```
 
-### Step 3: the win/loss slide
+### Draft the win/loss slide
 
 ```
-Using Calven MCP, build the win/loss slide for the [quarter] board meeting.
+Using Calven MCP, build the win/loss slide for the quarter's board meeting.
+
+FILL IN
+- Quarter: [quarter]
 
 CONTEXT
 One slide: how we are winning and losing, and why, compared with last quarter.
 
 PULL FROM THE UNIVERSE
-- The win/loss scoreboard for [quarter] with the change against the prior quarter: win rate, pipeline won and lost, deals with completed win/loss, sentiment.
+- The win/loss scoreboard for the quarter with the change against the prior quarter: win rate, pipeline won and lost, deals with completed win/loss, sentiment.
 - Why deals are won and lost: top win drivers, top loss drivers, costly objections.
 - What kind of force decides deals: the driver categories.
 
@@ -74,20 +59,21 @@ The slide content, with samples and window in a footnote.
 
 GROUNDING
 Use only the dashboard and drivers in the Universe, cited. Mark any KPI that cannot be compared as such; never read it as no change. Keep quotes verbatim.
-
-[name the quarter]
 ```
 
-### Step 4: ICP and pipeline quality
+### Draft the ICP and pipeline quality slide
 
 ```
 Using Calven MCP, build the pipeline quality slide for the board.
+
+FILL IN
+- Quarter: [quarter]
 
 CONTEXT
 The board asks whether we are selling to the customers we said we would. One slide on ICP focus.
 
 PULL FROM THE UNIVERSE
-- The ICP read for [quarter] vs prior: ICP share of wins, ICP-fit pipeline, average deal size, sales cycle.
+- The ICP read for the quarter vs prior: ICP share of wins, ICP-fit pipeline, average deal size, sales cycle.
 - The reality check: fit score distribution and pipeline gap.
 - What predicts a win: the attributes with the largest lift.
 
@@ -101,17 +87,18 @@ The slide content with footnoted samples.
 
 GROUNDING
 Use only ICP dashboard figures, cited with n. If the pipeline category is restricted, say so.
-
-[name the quarter]
 ```
 
-### Step 7: the questions appendix
+### Answer the board's likely questions in advance
 
 ```
 Using Calven MCP, prepare the appendix answering the board's likely questions on competition and win/loss.
 
+FILL IN
+- Slides: [paste the four slides]
+
 CONTEXT
-Below are the four slides. The board will ask for the deals behind the numbers. I want the answers ready.
+The slides are the four market-facing slides. The board will ask for the deals behind the numbers. I want the answers ready.
 
 PULL FROM THE UNIVERSE
 - The deals behind each competitor's win rate.
@@ -127,17 +114,19 @@ The appendix.
 
 GROUNDING
 Use only drill-downs and drivers in the Universe, cited. Respect withheld fields; do not reconstruct a deal name or amount.
-
-[paste the four slides]
 ```
 
-### Review mode: check last quarter's deck against the Universe
+### Check last quarter's deck against the Universe
 
 ```
 Using Calven MCP, check the competitive and win/loss slides from last quarter's deck.
 
+FILL IN
+- Slides: [paste the slides]
+- Window: [the window the slides covered]
+
 CONTEXT
-Below are the slides as sent. I want to know whether the numbers match what the Universe shows for that window and whether anything has moved since.
+The slides are last quarter's, as sent. I want to know whether the numbers match what the Universe shows for that window and whether anything has moved since.
 
 PULL FROM THE UNIVERSE
 - The same dashboards for the same window, and for the current period.
@@ -151,8 +140,6 @@ The slides annotated.
 
 GROUNDING
 Compare only with dashboard figures, cited. Do not explain differences you cannot see in the data.
-
-[paste the slides and the window]
 ```
 
 ## Ad hoc questions
@@ -169,17 +156,3 @@ Compare only with dashboard figures, cited. Do not explain differences you canno
 - What is net customer sentiment this quarter?
 - Which trend has the highest severity, and what is the so-what?
 - Did average deal size move this quarter?
-
-## Good practice
-
-- Use the same window and the same slides every quarter. The board reads trends, not one-off numbers.
-- Footnote the sample on every rate. Small per-competitor samples are normal and the board will ask.
-- Pull the questions appendix every time. The deals behind a number are the first follow-up.
-- Keep financials out of the prompt. Calven does not hold them, and the AI tool must not guess them.
-- Check last quarter's slides against the Universe before building this quarter's; the comparison column depends on it.
-
-## Not covered today
-
-- Financials, hiring, cash, runway and the CEO update. Finance and the board tool own those.
-- Building and sending the deck. Calven supplies slide content.
-- Deal names and amounts where the workspace withholds them.

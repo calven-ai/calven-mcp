@@ -1,27 +1,11 @@
 # Training sessions
 
-**Team:** Sales enablement · also product marketing, sales managers
-**Impact:** Medium. Every session built from the current documents rather than last quarter's deck is a session reps do not have to unlearn. The value compounds with cadence: weekly sessions, monthly product updates, the quarterly kickoff.
-**Prerequisites:** strategy documents approved. Better with call transcripts ingested (real objections and quotes to teach from), competitors tracked and win/loss surveys running.
 
-## What the team is trying to do
+You've got a session to run (30 to 60 minutes weekly, a product update monthly, a kickoff module quarterly), and it should teach one thing and leave reps with a line to practise. You get the outline, the teaching content with sources, the exercise and the check. Calven builds it from the current documents and real deals, so reps don't learn a slide that was only true when it was made.
 
-Run a session (30 to 60 minutes weekly, a product update monthly, a kickoff module quarterly) that teaches one thing from the approved story with evidence from real deals, and leaves reps with a line to practise. Done means an outline, the teaching content with sources, the exercise and the check. Without the company's own knowledge the session reuses the slide that was true when it was made.
+## Prompts
 
-## The work, end to end
-
-| # | Step | What the team does | Where Calven helps | Pulls from |
-|---|---|---|---|---|
-| 1 | Pick the topic | Decide what the team needs most | Objections most heard, pillars least said, competitor with the worst win rate | Messaging dashboard, competitive dashboard, themes |
-| 2 | Build the content | Write what to teach | The approved section (pillar, persona, competitor, capability) with its proof | Strategy documents, battlecards, persona canvases |
-| 3 | Add the evidence | Bring real calls into the room | Buyer and rep quotes on the topic; deal drivers that show the stakes | Quotes, vendor quotes, deal drivers |
-| 4 | Design the exercise | Role-play, rewrite, quiz | Role-play brief as the persona; objection drill; three check questions | Persona canvas, messaging |
-| 5 | Run and measure | Deliver, record attendance, follow up | Calven does not help here | |
-| 6 | Kickoff module | Quarterly refresher on positioning and competition | What changed in the quarter: document versions, signals, win rates | List documents, competitive signals, dashboards |
-
-## Recommended prompts
-
-### Step 1: choose the topic
+### Pick the next three session topics
 
 ```
 Using Calven MCP, tell me what the next three enablement sessions should cover.
@@ -44,18 +28,22 @@ GROUNDING
 Numbers from the dashboards only, cited with n and window. If a section has too few rows, say so and pick a topic the data does support.
 ```
 
-### Step 2 to 4: build the session
+### Build a 45-minute session
 
 ```
-Using Calven MCP, build a 45-minute session on [topic].
+Using Calven MCP, build a 45-minute session on the topic below.
+
+FILL IN
+- Topic: [topic]
+- Behaviour: [the behaviour every rep should show by the end]
 
 CONTEXT
-Audience: all AEs. Goal: by the end, every rep can [the behaviour]. Structure: ten minutes of why, fifteen of what, fifteen of practice, five of check.
+Audience: all AEs. Goal: by the end, every rep can show the behaviour. Structure: ten minutes of why, fifteen of what, fifteen of practice, five of check.
 
 PULL FROM THE UNIVERSE
-- The approved content for [topic]: the messaging section, persona canvas, battlecard or product brief entry it lives in.
-- Buyer quotes and rep quotes on [topic] from the last two quarters.
-- Deal drivers on [topic] with direction and the deals they touched.
+- The approved content for the topic: the messaging section, persona canvas, battlecard or product brief entry it lives in.
+- Buyer quotes and rep quotes on the topic from the last two quarters.
+- Deal drivers on the topic with direction and the deals they touched.
 
 BUILD
 - Why: the stakes, with two buyer quotes and the deal numbers.
@@ -68,11 +56,9 @@ The session outline with speaker notes.
 
 GROUNDING
 Everything cites the Universe. Do not invent quotes, lines or numbers; if the evidence is thin, say so in the notes.
-
-[name the topic and the behaviour you want]
 ```
 
-### Step 6: the quarterly kickoff module
+### Build the kickoff's what-changed module
 
 ```
 Using Calven MCP, build the "what changed this quarter" module for the kickoff.
@@ -108,17 +94,3 @@ Use recorded changes and dashboard numbers with n and window. Do not present an 
 - How did reps handle [objection] on calls last month?
 - What did we release this month that needs a product update session?
 - Which pillar has the lowest pull-through?
-
-## Good practice
-
-- Let the dashboards pick the topic. A session on the objection that cost six deals beats a session on the one the loudest rep mentioned.
-- Open with the buyer's words. Two verbatim quotes do more than a slide of bullets.
-- Teach the approved line and its source so reps can find it again.
-- End with practice against the persona, not with questions to the room.
-- Reuse the session prompt with a new topic each week; the structure stays.
-
-## Not covered today
-
-- Scheduling, attendance, recording and the LMS.
-- Methodology and tool training.
-- Updating the documents a session reveals as stale; that is done in Calven by the owner.

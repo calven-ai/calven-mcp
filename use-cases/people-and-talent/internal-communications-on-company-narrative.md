@@ -1,37 +1,23 @@
 # Internal communications on the company narrative
 
-**Team:** People and talent · also leadership, product marketing, sales enablement
-**Impact:** Medium. The all-hands and the company update are where everyone hears the story. When the market, buyer and competitor sections come from the approved Universe with current numbers, every team repeats the same story, and the people team does not chase five leaders for slides.
-**Prerequisites:** strategy documents approved, competitors tracked. Better with win/loss surveys running (win rates, drivers), call transcripts ingested (customer voice), market research run (what changed in the market).
 
-## What the team is trying to do
+The all-hands and the company update are where everyone hears the story, and you don't want to chase five leaders for slides. Each month you get a short market, customer and competition section that answers "what changed, what customers said, where we stand" with sources, plus a one-page "how we describe ourselves" everyone can repeat. Calven pulls the numbers and quotes from the approved Universe, so every team tells the same story sales and marketing tell outside.
 
-Produce the market, customer and competition sections of the monthly all-hands and the written company update, in plain language, with the numbers and the quotes, consistent with what sales and marketing say outside. Done means a short section per month that answers "what changed, what customers said, where we stand", with sources, and a one-page "how we describe ourselves" everyone can repeat. Without the company's own knowledge the all-hands is a product demo and a revenue number, and the story drifts team by team.
+## Prompts
 
-## The work, end to end
-
-| # | Step | What the team does | Where Calven helps | Pulls from |
-|---|---|---|---|---|
-| 1 | Agenda | Leadership sets the sections | Calven does not help here | |
-| 2 | Business numbers | Revenue, hiring, cash | Calven does not help here | |
-| 3 | Market and competition | What changed, where we stand | High-severity competitive signals and trends this month; win rate per competitor | Competitive signals, trends, competitive intelligence dashboard |
-| 4 | Customers | What customers said, who we won and why | Top themes and sentiment this month; new marketing-ready quotes; top win drivers with verbatims | Themes, quotes, deal drivers |
-| 5 | The story everyone repeats | One page: what we do, for whom, category, three pillars | Positioning statement, messaging pillars, boilerplate | Positioning, messaging |
-| 6 | Draft | Write the sections in plain language | Drafts grounded in steps 3 to 5 | All of the above |
-| 7 | Review and deliver | Leadership approves, presented or sent | Calven does not help here | |
-
-## Recommended prompts
-
-### Steps 3 and 4: this month's market and customer sections
+### Write this month's market and customer sections
 
 ```
 Using Calven MCP, write the market and customer sections of this month's all-hands.
+
+FILL IN
+- Month: [month]
 
 CONTEXT
 Two sections, three minutes each, for the whole company. Plain language, no sales jargon. The audience includes engineers and support.
 
 PULL FROM THE UNIVERSE
-- Competitive signals of High severity in the last month, with the "so what".
+- Competitive signals of High severity in the month, with the "so what".
 - Trends that changed status or were newly seen.
 - Our competitive win rate this month against the prior period, with n.
 - The top customer themes by mentions this month and their sentiment.
@@ -46,11 +32,9 @@ Two sections of under 150 words each, with speaker notes and sources.
 
 GROUNDING
 Use only recorded signals, trends, dashboards and quotes in the Universe, cited. Keep quotes verbatim. If the month has no High signals, say so.
-
-[name the month]
 ```
 
-### Step 5: the one-page story
+### Write the one-page company story
 
 ```
 Using Calven MCP, write the one-page "how we describe ourselves" for every employee.
@@ -71,17 +55,18 @@ One page with sources.
 
 GROUNDING
 Use only positioning and messaging in the Universe, cited. Do not add claims the documents do not make.
-
-[nothing to paste]
 ```
 
-### Step 6: review the draft
+### Check a company update against the approved story
 
 ```
 Using Calven MCP, check this company update against our approved story and current numbers.
 
+FILL IN
+- Draft: [paste the draft update]
+
 CONTEXT
-Below is the draft update. I want contradictions with positioning, stale competitor facts and unsourced numbers flagged.
+I want contradictions with positioning, stale competitor facts and unsourced numbers flagged.
 
 PULL FROM THE UNIVERSE
 - Positioning and messaging; the competitive intelligence dashboard and signals for the month.
@@ -95,8 +80,6 @@ The draft annotated, then a clean version.
 
 GROUNDING
 Judge only against the Universe and cite each flag.
-
-[paste the draft]
 ```
 
 ## Ad hoc questions
@@ -110,16 +93,3 @@ Judge only against the Universe and cite each flag.
 - Which words do we avoid when describing ourselves?
 - Which market trend changed this month?
 - What product gap are customers naming most right now?
-
-## Good practice
-
-- Keep the sections short and monthly. The dashboards carry the prior period, so ask for what changed.
-- Use the same one-page story every time. It is the reference, not the content.
-- Quote customers verbatim and attribute as the settings allow. Polished quotes stop being news.
-- Keep financials and headcount in leadership's section; Calven holds neither.
-
-## Not covered today
-
-- Financial and hiring updates.
-- The all-hands deck, recording and distribution.
-- Team-level updates and product demos.

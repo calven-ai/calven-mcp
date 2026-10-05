@@ -1,31 +1,18 @@
 # Hiring scorecards
 
-**Team:** Sales leadership · also people and talent, sales enablement
-**Impact:** High. A sales hire is the most expensive decision a manager makes each quarter; a scorecard and interview loop built on the real ICP, personas and competitors tests whether the candidate can sell this product to these buyers, not sales in general.
-**Prerequisites:** ICP approved, personas approved, competitors tracked. Better with win/loss surveys running (what buyers value in a rep) and messaging approved.
 
-## What the team is trying to do
+You're hiring AEs or BDRs and need to know whether a candidate can sell this product to these buyers. You get a scorecard with the competencies that win here, interview questions and role-plays built on the actual personas and competitors, and a shared brief so every loop tests the same things. Calven builds the loop on the real ICP, personas and competitors, so it isn't generic questions and a role-play about a product the candidate has never seen.
 
-Hire AEs and BDRs who can work this market. Done means a scorecard with the competencies that win here, interview questions and role-plays built on the actual personas and competitors, and a brief the interviewers share so every loop tests the same things. Without the company's knowledge the loop is generic questions and a role-play about a product the candidate has never seen.
+## Prompts
 
-## The work, end to end
-
-| # | Step | What the team does | Where Calven helps | Pulls from |
-|---|---|---|---|---|
-| 1 | Define the role | Segment, deal size, cycle, buyers | The ICP tiers and segments, average deal size and cycle, the personas on won deals | ICP document and dashboard, persona dashboard |
-| 2 | Build the scorecard | Competencies and the evidence for each | What buyers said decides deals (sales-process drivers, sales team survey) turned into competencies | Win/loss (surveys: sales team), deal drivers |
-| 3 | Write interview questions | Territory, discovery, competitive, objection | Questions grounded in the ICP, the top objections and the main competitor | ICP, messaging (objection handling), competitor battlecard |
-| 4 | Design the role-play | A realistic buyer | A persona brief and a scenario with the competitor in play | Persona canvas, competitor battlecard |
-| 5 | Brief the interviewers | A one-pager on the market | ICP summary, top personas, competitors, how we win | ICP, positioning, battlecards |
-| 6 | Interview and score | Run the loop | Calven does not help here | |
-| 7 | Decide and offer | Comp, territory | Calven does not help here | |
-
-## Recommended prompts
-
-### Steps 1 and 2: the scorecard
+### Build the hiring scorecard for a role
 
 ```
-Using Calven MCP, build the hiring scorecard for a [role: AE / BDR] in [segment].
+Using Calven MCP, build the hiring scorecard for the role and segment below.
+
+FILL IN
+- Role: [AE or BDR]
+- Segment: [segment]
 
 CONTEXT
 I am opening a req. I want competencies that reflect what wins deals here, with the evidence, so the loop tests the right things.
@@ -46,14 +33,17 @@ A one-page scorecard with sources.
 
 GROUNDING
 Use only the ICP, dashboards and survey evidence in the Universe, cited with n. Do not add generic sales competencies the evidence does not support.
-
-[name the role and segment]
 ```
 
-### Step 3: interview questions
+### Write the interview questions
 
 ```
-Using Calven MCP, write the interview questions for a [role] candidate.
+Using Calven MCP, write the interview questions for a candidate for the role below.
+
+FILL IN
+- Role: [role]
+- Competitor: [competitor]
+- Persona: [persona]
 
 CONTEXT
 Four sections: territory and targeting, discovery, competitive, objection handling. The questions must be about our market, so a generic answer stands out.
@@ -61,8 +51,8 @@ Four sections: territory and targeting, discovery, competitive, objection handli
 PULL FROM THE UNIVERSE
 - The ICP: attributes, tiers, disqualifiers, triggers.
 - The top objections our buyers raise and the approved handling.
-- The battlecard for [competitor]: where we win and lose, landmines.
-- The [persona] canvas: pains and jobs to be done.
+- The competitor's battlecard: where we win and lose, landmines.
+- The persona's canvas: pains and jobs to be done.
 
 BUILD
 - Three questions per section, each with what a strong answer contains, drawn from the Universe.
@@ -73,21 +63,24 @@ The question set with the strong-answer notes.
 
 GROUNDING
 Use only ICP, messaging, battlecard and persona content in the Universe. Do not include facts about us that the Universe does not hold.
-
-[name the role, the competitor and the persona]
 ```
 
-### Step 4: the role-play
+### Design the interview role-play
 
 ```
-Using Calven MCP, design the role-play for the [role] loop.
+Using Calven MCP, design the role-play for the interview loop for the role below.
+
+FILL IN
+- Role: [role]
+- Persona: [persona]
+- Competitor: [competitor]
 
 CONTEXT
-Thirty minutes. The interviewer plays the buyer. I want a persona brief for the interviewer and a scenario where [competitor] is the incumbent.
+Thirty minutes. The interviewer plays the buyer. I want a persona brief for the interviewer and a scenario where the competitor is the incumbent.
 
 PULL FROM THE UNIVERSE
-- The [persona] canvas: goals, pains, objections, how they talk, what they find credible.
-- The battlecard for [competitor]: what the buyer will say they like about the incumbent, the landmines a strong candidate would set.
+- The persona's canvas: goals, pains, objections, how they talk, what they find credible.
+- The competitor's battlecard: what the buyer will say they like about the incumbent, the landmines a strong candidate would set.
 
 BUILD
 - The scenario in one paragraph.
@@ -99,14 +92,15 @@ The scenario, the brief and the scoring guide.
 
 GROUNDING
 Use only the persona and battlecard in the Universe. Keep the buyer as hard as the canvas says, no harder.
-
-[name the role, the persona and the competitor]
 ```
 
-### Step 5: the interviewer brief
+### Brief interviewers on the market
 
 ```
-Using Calven MCP, brief our interviewers on our market before they screen [role] candidates.
+Using Calven MCP, brief our interviewers on our market before they screen candidates for the role below.
+
+FILL IN
+- Role: [role]
 
 PULL FROM THE UNIVERSE
 - The ICP summary and segment tiers.
@@ -119,8 +113,6 @@ A one-page brief a non-sales interviewer can read in five minutes.
 
 GROUNDING
 Use only the Universe, cited.
-
-[name the role]
 ```
 
 ## Ad hoc questions
@@ -135,17 +127,3 @@ Use only the Universe, cited.
 - Give me a territory exercise using our segment tiers.
 - What does [persona] find credible from a seller?
 - Which discovery questions do our best reps ask on won calls?
-
-## Good practice
-
-- Build the scorecard before the questions. The questions test competencies; the competencies come from the evidence.
-- Ask for "what a strong answer contains" on every question, so interviewers score against the same bar.
-- Keep the role-play persona exactly as approved. Interviewers improvising a buyer is how loops drift.
-- Share the interviewer brief with everyone on the loop, including non-sales interviewers.
-- Refresh the question set when the battlecard or the ICP changes.
-
-## Not covered today
-
-- Candidate sourcing, applicant tracking, scheduling and offers.
-- Comp design and quota for the hire.
-- Scoring candidates; the interviewers do that.

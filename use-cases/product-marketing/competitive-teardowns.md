@@ -1,41 +1,24 @@
 # Competitive teardowns
 
-**Team:** Product marketing · also product management, sales leadership, leadership
-**Impact:** High. A teardown sets the battlecard, the roadmap conversation and the board's competitive slide for a quarter; one built from the dossier, the signals and every deal against that rival replaces weeks of reading.
-**Prerequisites:** competitors tracked (rows, signals, deep dives, battlecards). Better with win/loss surveys running and CRM connected (deals against the rival), transcripts ingested (competitor mentions).
 
-## What the team is trying to do
+You want to understand one competitor completely: what they sell and charge, how they position, what moved recently, and where each side wins. You walk away with a teardown document, an updated competitive position for the board, and a list of battlecard and roadmap changes. Calven brings the current dossier and the deal record, so the teardown is more than a tour of the rival's website.
 
-Understand one competitor completely: who they are, what they sell and charge, how they position, what moved recently, where they beat us and where we beat them, and what that means for the story, the product and the field. Done means a teardown document, an updated competitive position for the board, and a list of battlecard and roadmap changes. Without a current dossier and the deal record the teardown is a tour of the rival's website.
+## Prompts
 
-## The work, end to end
-
-| # | Step | What the team does | Where Calven helps | Pulls from |
-|---|---|---|---|---|
-| 1 | Pick the competitor and the question | Which rival, and what decision the teardown feeds | Which competitors cost the most deals, tier and state | Competitive intelligence dashboard, competitors |
-| 2 | Read the dossier | Company, product, pricing, positioning, strengths, weaknesses | The deep dive, section by section | Competitor deep dive |
-| 3 | Read what moved | Launches, pricing changes, hires, messaging shifts | Signals with dates, severity and so-what | Competitive signals |
-| 4 | Read the deal record | Win rate against them, why we lose, why we win | Competitor win rate, loss reasons, deals against them, deal drivers | Competitive intelligence, `get_insight_detail` competitor deals, deal_drivers |
-| 5 | Read what buyers say | How customers describe them | Competitor mentions in quotes, head-to-head survey answers | Quotes (Competitor mention), win/loss head-to-head |
-| 6 | Compare the products | Feature by feature, honest | Feature comparison in the dossier, our product brief | Deep dive, product brief |
-| 7 | Compare pricing | Their packaging vs ours, buyer price verdicts | Pricing and packaging sections, pricing deals, price feedback | Deep dive, product brief, `get_insight_detail` pricing deals |
-| 8 | Judge the battlecard | Does it still hold | Battlecard vs the above | Battlecard |
-| 9 | Write the teardown | Narrative, implications, changes | Drafted from the above | |
-| 10 | Update the battlecard, brief product and the board | Changes land in Calven and the roadmap | Calven does not help here from the AI tool | |
-
-## Recommended prompts
-
-### Step 1: which competitor
+### Pick the competitor for the next teardown
 
 ```
 Using Calven MCP, tell me which competitor deserves the next teardown.
+
+FILL IN
+- Window: [time window, e.g. last quarter]
 
 CONTEXT
 I can do one deep teardown this quarter. I want the rival that is costing us most or moving fastest.
 
 PULL FROM THE UNIVERSE
-- Competitive performance: deals, win rate and change per competitor for [window].
-- Competitive signals in [window], by competitor, with severity.
+- Competitive performance: deals, win rate and change per competitor for the window.
+- Competitive signals in the window, by competitor, with severity.
 - Which competitors have a battlecard and a deep dive, and how fresh each is.
 
 BUILD
@@ -46,27 +29,29 @@ The table and a three-line recommendation.
 
 GROUNDING
 Rates from the dashboard with n. Mark competitors below the floor. Freshness from the document dates.
-
-[name the window]
 ```
 
-### Step 2 to 5: the full read
+### Build the full teardown
 
 ```
-Using Calven MCP, build a teardown of [competitor].
+Using Calven MCP, build a teardown of the competitor below.
+
+FILL IN
+- Competitor: [competitor]
+- Window: [time window, e.g. last quarter]
 
 CONTEXT
 The audience is the PMM, product and sales leadership. The output feeds the battlecard, the roadmap conversation and the board's competitive slide.
 
 PULL FROM THE UNIVERSE
-- The deep dive for [competitor]: company, product, pricing, positioning, strengths, weaknesses, feature comparison.
-- Their signals in [window], newest first.
+- The competitor's deep dive: company, product, pricing, positioning, strengths, weaknesses, feature comparison.
+- Their signals in the window, newest first.
 - Our win rate against them, the loss reasons, and the deals we lost and won against them with the buyer's reason.
 - Customer quotes that mention them.
 
 BUILD
 - Who they are and what they sell, in one paragraph.
-- What moved in [window] and what it means for us.
+- What moved in the window and what it means for us.
 - Where they beat us: the evidence from deals and quotes.
 - Where we beat them: the evidence from deals and quotes.
 - The three implications: for the story, for the product, for the field.
@@ -76,20 +61,21 @@ A teardown document with sources per section; slides if I say deck.
 
 GROUNDING
 Ground every point in the Universe and cite the source and date. Do not invent moves, features or prices. Where the dossier is thin, say so.
-
-[name the competitor and the window]
 ```
 
-### Step 6 and 7: product and pricing comparison
+### Compare product and pricing side by side
 
 ```
-Using Calven MCP, compare us to [competitor] on product and pricing.
+Using Calven MCP, compare us to the competitor below on product and pricing.
+
+FILL IN
+- Competitor: [competitor]
 
 CONTEXT
 Product and finance want an honest side by side.
 
 PULL FROM THE UNIVERSE
-- The feature comparison and the product section of the [competitor] deep dive.
+- The feature comparison and the product section of the competitor's deep dive.
 - Our product brief: capabilities, integrations, pricing and packaging.
 - Their pricing and packaging section, and the deals where buyers compared price, with the verdict.
 
@@ -103,20 +89,22 @@ Two tables and five lines on what matters.
 
 GROUNDING
 Mark a cell "Unknown" when the dossier does not say. Price verdicts from the dashboard only, with n.
-
-[name the competitor]
 ```
 
-### Step 8: judge the battlecard
+### Check the battlecard against the teardown
 
 ```
-Using Calven MCP, check the [competitor] battlecard against the teardown.
+Using Calven MCP, check the competitor's battlecard against the teardown.
+
+FILL IN
+- Competitor: [competitor]
+- Teardown: [paste the teardown]
 
 CONTEXT
-The teardown is below. I want to know what in the battlecard is now wrong, missing or stale.
+I want to know what in the battlecard is now wrong, missing or stale.
 
 PULL FROM THE UNIVERSE
-- The battlecard for [competitor].
+- The competitor's battlecard.
 
 CHECK
 - Each "how we win", "where we lose", landmine and objection entry: still true, now wrong, or missing evidence.
@@ -128,17 +116,19 @@ A change list for the battlecard: keep, change (with the new wording), add, remo
 
 GROUNDING
 Judge only against the teardown and the Universe. Cite the evidence for each change.
-
-[paste the teardown]
 ```
 
-### Step 9: board slide
+### Draft the board's competitive slide
 
 ```
-Using Calven MCP, write the competitive slide on [competitor] for the board.
+Using Calven MCP, write the board's competitive slide on the competitor below.
+
+FILL IN
+- Competitor: [competitor]
+- Teardown: [paste the teardown]
 
 CONTEXT
-One slide, read in 90 seconds. The teardown is below.
+One slide, read in 90 seconds, built from the teardown.
 
 BUILD
 - Where we stand: win rate against them and change, with n.
@@ -151,8 +141,6 @@ The slide text and a speaker note.
 
 GROUNDING
 Numbers from the dashboard only. Nothing that is not in the teardown.
-
-[paste the teardown]
 ```
 
 ## Ad hoc questions
@@ -171,18 +159,3 @@ Numbers from the dashboard only. Nothing that is not in the teardown.
 - Which competitors have no battlecard yet?
 - Which of their claims does the dossier flag as unsupported?
 - Which analyst reports mention [competitor]?
-
-## Good practice
-
-- One competitor per teardown. A landscape read is the market briefing, not a teardown.
-- Read the deal record before the dossier. The deals tell you which sections to care about.
-- Ask for "unknown" cells rather than guesses. A thin dossier is a research task for the competitive intelligence agent.
-- Keep "where they beat us" honest. It is the part product and sales actually need.
-- Finish with the battlecard change list. The teardown is only useful once the field has the result.
-
-## Not covered today
-
-- Researching the competitor on the web. That is the competitive intelligence agent in Calven; the teardown reads what it stored.
-- Editing the battlecard or the dossier. Changes go through the agent and the PMM's approval in Calven.
-- Roadmap decisions and the board meeting.
-- Hands-on evaluation: trialling the competitor's product and reading their documentation. The dossier records what the agent found; the walkthrough is the team's.

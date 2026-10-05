@@ -1,37 +1,21 @@
 # New-hire onboarding packs
 
-**Team:** People and talent · also sales enablement, hiring managers in every team
-**Impact:** High. Every hire in every role needs the company story, the market, the buyers and the competition in week one. Today it is a deck from the last fundraise and whoever has time to explain it. With Calven the pack is current the day the person starts, and the same for everyone.
-**Prerequisites:** strategy documents approved (positioning, messaging, product brief, ICP), personas approved, competitors tracked. Better with call transcripts ingested (customer voice) and win/loss surveys running (why we win).
 
-## What the team is trying to do
+Your new hire should be able to read their week-one brief in an hour and tell the story in their own words by Friday: what we do and for whom, the category we claim, the buyers and what they care about, the competitors and how we differ, how we win, and how customers describe us. You get a role-specific pack with sources and a short knowledge check, and the hiring manager doesn't write a word of it. The alternative is learning the story from the oldest slide deck and three colleagues' versions of it.
 
-Give a new hire, in any role, a week-one brief they can read in an hour and repeat in their own words by Friday: what we do and for whom, the category we claim, the buyers and what they care about, the competitors and how we differ, how we win deals, and how customers describe us. Done means a role-specific pack with sources, a short knowledge check, and a manager who does not have to write any of it. Without the company's own knowledge the new hire learns the story from the oldest slide deck and three different colleagues' versions of it.
+## Prompts
 
-## The work, end to end
-
-| # | Step | What the team does | Where Calven helps | Pulls from |
-|---|---|---|---|---|
-| 1 | Role intake | Agree what this role must know by day 5, day 30, day 90 | Calven does not help here | |
-| 2 | Company story | What we do, for whom, why it matters | Positioning statement, category, core narrative and one-liner, boilerplate | Positioning, messaging |
-| 3 | Product | What it does, integrations, pricing at the level the role needs | Product brief sections, scoped to the role's depth | Product brief |
-| 4 | Market and buyers | The ICP, the personas, the pains in their words | ICP summary and segments; persona canvases; top customer themes and quotes | ICP, personas, themes, quotes |
-| 5 | Competition | Who we meet, how we differ, where we lose | Competitor rows by tier; battlecard how-we-win and where-we-lose; win rate per competitor | Competitors, battlecards, competitive intelligence dashboard |
-| 6 | How we win | The drivers behind won deals, in buyer words | Top win drivers with verbatims; marketing-ready quotes | Win/loss dashboard, deal drivers, quotes |
-| 7 | Role overlay | What this role touches: the persona an SDR calls, the objections a CSM hears, the claims a writer must get right | The persona, objection handling, claims register relevant to the role | Personas, messaging (objection handling), claims |
-| 8 | Knowledge check | Ten questions with answers from the pack | A quiz generated from the pack with sources | All of the above |
-| 9 | Logistics, tools, policies | Accounts, HRIS, benefits, compliance | Calven does not help here | |
-| 10 | Review and refresh | Manager signs off; pack is regenerated per cohort | The same prompt rerun pulls the current approved versions | All of the above |
-
-## Recommended prompts
-
-### Steps 2 to 6: the week-one pack
+### Build the week-one pack
 
 ```
-Using Calven MCP, build a week-one onboarding pack for a new [role].
+Using Calven MCP, build a week-one onboarding pack for the new hire's role below.
+
+FILL IN
+- Role: [role]
+- Product: [product, or leave blank for all]
 
 CONTEXT
-A new [role] starts on Monday. They need to understand what we do, for whom, against whom, and how we win, well enough to explain it to a customer by Friday. Reading time under one hour.
+A new hire in the role starts on Monday. They need to understand what we do, for whom, against whom, and how we win, well enough to explain it to a customer by Friday. Reading time under one hour. If a product is given, scope the pack to it.
 
 PULL FROM THE UNIVERSE
 - Our positioning statement, market category, core narrative and one-liner, boilerplate.
@@ -43,7 +27,7 @@ PULL FROM THE UNIVERSE
 
 BUILD
 1. The story in one page: what we do, for whom, why now, in the words of our positioning.
-2. The product in one page at [role]'s depth.
+2. The product in one page at the depth the role needs.
 3. The buyers: one half-page per persona, pains and objections in their words.
 4. The competition: a table, then one paragraph per Tier 1 rival.
 5. How we win: the drivers and the quotes.
@@ -54,17 +38,18 @@ A document in those six sections with the source beside every claim, then a ten-
 
 GROUNDING
 Use only the approved documents, records and dashboards in the Universe and cite them. Do not invent customers, numbers or competitor facts. If a section has no approved content, say "not yet published" rather than filling it.
-
-[name the role and the product if we scope by product]
 ```
 
-### Step 7: the role overlay
+### Add the overlay for one role
 
 ```
-Using Calven MCP, add the role-specific section to the onboarding pack for a new [role].
+Using Calven MCP, add the role-specific section to the onboarding pack for the new hire's role below.
+
+FILL IN
+- Role: [role]
 
 CONTEXT
-The general pack exists. This section covers what [role] touches every day: the people they talk to, the questions they get, the claims they must get right.
+The general pack exists. This section covers what the role touches every day: the people they talk to, the questions they get, the claims they must get right.
 
 PULL FROM THE UNIVERSE
 - For an SDR or AE: the personas they prospect, with messaging hooks and objections; the discovery questions from each Tier 1 battlecard.
@@ -82,14 +67,15 @@ A two-page role section with sources.
 
 GROUNDING
 Use only the Universe and cite each item. Where the Universe has nothing for this role, say so.
-
-[name the role]
 ```
 
-### Step 8: the knowledge check
+### Write the knowledge check
 
 ```
-Using Calven MCP, write a week-one knowledge check for a new [role].
+Using Calven MCP, write a week-one knowledge check for the new hire's role below.
+
+FILL IN
+- Role: [role]
 
 CONTEXT
 Ten questions a new hire answers on Friday to show they can tell the company story. Answers must come from the approved documents so a manager can grade them.
@@ -106,22 +92,23 @@ The quiz, then the answer key.
 
 GROUNDING
 Every answer is a direct reading of the Universe, cited. No trick questions on facts the Universe does not hold.
-
-[name the role]
 ```
 
-### Step 10: refresh check
+### Check the pack is still current
 
 ```
-Using Calven MCP, tell me what changed in our story since [date] so I can refresh the onboarding pack.
+Using Calven MCP, tell me what changed in our story since the pack was built so I can refresh the onboarding pack.
+
+FILL IN
+- Date: [date the pack was built]
 
 CONTEXT
-The pack was built on [date]. Before the next cohort I want to know what is stale.
+Before the next cohort I want to know what is stale.
 
 PULL FROM THE UNIVERSE
-- Strategy documents with a version or update after [date].
-- Product changes since [date] and the drift findings on published documents.
-- Competitive signals of High severity since [date].
+- Strategy documents with a version or update after the date.
+- Product changes since the date and the drift findings on published documents.
+- Competitive signals of High severity since the date.
 - New or changed personas and competitors.
 
 BUILD
@@ -132,8 +119,6 @@ The change list with sources.
 
 GROUNDING
 Use only recorded versions, changes, signals and findings in the Universe and cite them.
-
-[name the date]
 ```
 
 ## Ad hoc questions
@@ -151,19 +136,3 @@ Use only recorded versions, changes, signals and findings in the Universe and ci
 - Which persona does an SDR call first, and what is their top objection?
 - What changed in the product in the last 60 days?
 - Which market trends does our story rely on?
-
-## Good practice
-
-- Build one general pack and one overlay per role. The story is shared; what the role touches is not.
-- Set the reading time in the prompt. Without it the AI tool pastes the whole product brief.
-- Keep sources beside every claim so the manager can send the new hire to the original.
-- Regenerate per cohort instead of editing the old pack. The prompt pulls the current approved versions.
-- Add the knowledge check. A pack nobody is tested on is a pack nobody reads.
-- Keep logistics, benefits and policies in the HRIS and the handbook.
-
-## Not covered today
-
-- Accounts, tools, benefits, policies and compliance training.
-- Org charts, team introductions and the buddy system.
-- Learning management systems; the pack is a document the team hosts where it likes.
-- Anything about the company that is not in the Universe: history, culture, values, unless the messaging boilerplate carries it.

@@ -1,41 +1,26 @@
 # Claim checks
 
-**Team:** Product marketing · also content marketing, demand generation, legal, sales enablement
-**Impact:** High. A wrong price, a stale integration or a competitive claim that does not hold costs trust with buyers and time with legal; checking every claim against the product brief and the claims register takes minutes.
-**Prerequisites:** product brief approved. Better with own website and docs monitored (product changes, drift findings, claims register), competitors tracked (for competitive claims), win/loss (for outcome claims).
 **Related:** [Claim substantiation](../legal-and-procurement/claim-substantiation.md) is the legal team's audit of the same register.
 
-## What the team is trying to do
+Something's about to ship and you need to know it says nothing the product doesn't do, the price list doesn't say, a competitor doesn't match or a customer didn't say. You walk away with every claim marked correct, wrong, stale, unverified or unsupported, with the accurate wording next to it. Calven holds the approved product brief and a record of what the site already claims, so you skip the email thread with product.
 
-Make sure nothing the company publishes says something the product does not do, the price list does not say, a competitor does not match, or a customer did not say. Done means every claim in an asset marked correct, wrong, stale, unverified or unsupported, with the accurate wording, before it ships. Without one approved product brief and a record of what the site already claims, the check is an email thread with product.
+## Prompts
 
-## The work, end to end
-
-| # | Step | What the team does | Where Calven helps | Pulls from |
-|---|---|---|---|---|
-| 1 | List the claims | Pull every assertion out of the asset | The AI tool extracts them from the pasted text | |
-| 2 | Check product claims | Capabilities, integrations, architecture | The product brief | Product brief |
-| 3 | Check pricing and packaging | Prices, tiers, what is included | Pricing and packaging section | Product brief |
-| 4 | Check for staleness | Did a recent release change it | Product changes and drift findings | Product changes, drift findings |
-| 5 | Check competitive claims | "Only we", "unlike X", feature comparisons | Dossier, feature comparison, battlecard | Competitor deep dive, battlecard |
-| 6 | Check proof and outcome claims | Numbers, customer results, quotes | Quotes, win/loss evidence, positioning proof points | Quotes, deal drivers, positioning |
-| 7 | Check against the claims register | Is this claim already flagged | Claims register | Claims |
-| 8 | Write the verdicts and fixes | Per claim, with wording | Drafted from the above | |
-| 9 | Route the unverifiable ones | To product, legal or the customer | Calven does not help here | |
-
-## Recommended prompts
-
-### Step 1 to 4: product and pricing claims
+### Fact-check product and pricing claims
 
 ```
-Using Calven MCP, fact-check this [asset] before it ships.
+Using Calven MCP, fact-check the asset below before it ships.
+
+FILL IN
+- Asset: [paste the asset]
+- Window: [time window for product changes, e.g. last quarter]
 
 CONTEXT
-Below is the asset. Every product, integration, architecture and pricing claim must be right.
+Every product, integration, architecture and pricing claim in the asset must be right.
 
 PULL FROM THE UNIVERSE
 - The product brief: capabilities, integrations, technical architecture, pricing and packaging.
-- Product changes in the last [window] and the documents they left stale.
+- Product changes in the window and the documents they left stale.
 - The claims register, for anything already flagged.
 
 CHECK
@@ -48,17 +33,19 @@ The asset annotated inline, a claims table with verdicts, and the claims a human
 
 GROUNDING
 Confirm only against the Universe and cite the section. Where the brief is silent, say "not in the brief" rather than guessing.
-
-[paste the asset]
 ```
 
-### Step 5: competitive claims
+### Check the competitive claims
 
 ```
 Using Calven MCP, check the competitive claims in this asset.
 
+FILL IN
+- Asset: [paste the asset]
+- Competitors: [the competitors it names or implies]
+
 CONTEXT
-Below is the asset. It names or implies [competitors]. Legal will ask for evidence on every comparison.
+The asset names or implies the competitors. Legal will ask for evidence on every comparison.
 
 PULL FROM THE UNIVERSE
 - The deep dive and feature comparison for each competitor named.
@@ -74,17 +61,18 @@ A table: claim, verdict, evidence, safe wording.
 
 GROUNDING
 Use only the dossiers in the Universe and cite the section and date. Mark "unknown" where they are silent. Never infer a rival's gap from our strength.
-
-[paste the asset and name the competitors]
 ```
 
-### Step 6: proof and outcome claims
+### Check the proof and outcome claims
 
 ```
 Using Calven MCP, check the proof points in this asset.
 
+FILL IN
+- Asset: [paste the asset]
+
 CONTEXT
-Below is the asset. It cites customer outcomes, numbers and quotes.
+The asset cites customer outcomes, numbers and quotes.
 
 PULL FROM THE UNIVERSE
 - Customer quotes, by highlight type (quantified outcome, time to value, competitive win).
@@ -101,20 +89,21 @@ A table: claim, source, verbatim, verdict (supported, overstated, unsupported).
 
 GROUNDING
 Quotes verbatim and cited. A paraphrase that adds a number is overstated. Do not invent sources.
-
-[paste the asset]
 ```
 
-### Step 7: register check for a site section
+### List the unsupported claims on a site section
 
 ```
-Using Calven MCP, list the unsupported claims on our [site section or document].
+Using Calven MCP, list the unsupported claims on the site section or document below.
+
+FILL IN
+- Section: [site section or document]
 
 CONTEXT
 Before the quarterly content review I want the claims the product intelligence agent has flagged.
 
 PULL FROM THE UNIVERSE
-- The claims register, filtered to [origin or document] and status new or reviewed.
+- The claims register, filtered to that section or document and status new or reviewed.
 - The drift findings for the same documents.
 
 BUILD
@@ -126,8 +115,6 @@ The table and the five claims to fix first.
 
 GROUNDING
 List only what the register holds. An empty list means nothing is flagged; say so.
-
-[name the site section or document]
 ```
 
 ## Ad hoc questions
@@ -146,18 +133,3 @@ List only what the register holds. An empty list means nothing is flagged; say s
 - What is the safe wording for a claim about [capability] vs [competitor]?
 - Is there an analyst finding behind "[statistic]"?
 - Did [customer] say "[quote]"? Is it approved for marketing use?
-
-## Good practice
-
-- Paste the whole asset. Claims hide in subheads, captions and CTAs.
-- Separate the three checks: product and price, competitive, proof. Each has a different owner for what fails.
-- Ask for "not in the brief" explicitly. The AI tool will otherwise answer from its own knowledge.
-- Treat "stale" as a product-brief task first. If the brief is behind the product, every check inherits the error; the product intelligence agent in Calven fixes the brief.
-- Keep safe wording in the asset, not a disclaimer.
-
-## Not covered today
-
-- Reading the live page. Paste the copy.
-- Legal review and the customer's approval of a quote.
-- Updating the product brief or resolving a claim in the register. That happens in Calven.
-- Claims the brief does not cover. "Not in the brief" goes to product, and ideally into the brief.

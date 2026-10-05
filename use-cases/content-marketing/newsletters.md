@@ -1,36 +1,24 @@
 # Newsletters
 
-**Team:** Content marketing · also demand generation, brand and communications
-**Impact:** Medium. A newsletter is the one email the database gets every month. An issue with a point of view on a tracked trend, one customer line and the current product story earns opens next month; a round-up of links does not.
-**Prerequisites:** strategy documents approved (positioning, messaging, product brief), personas approved. Better with market research run (trends), call transcripts ingested (quotes) and own website monitored (product changes for the "what's new" section).
 
-## What the team is trying to do
+An issue is due and the target persona needs a reason to read it: one idea on something moving in the market, one piece of customer evidence, what changed in the product and what to read next. You walk away with an issue that's on-message, current, in the persona's words and sent on time. Calven helps most with the first section: a point of view instead of a summary.
 
-Ship a monthly or biweekly issue the target persona reads: one idea on something moving in the market, one piece of customer evidence, what changed in the product, what to read next. Done means on-message, factually current, in the persona's words, sent on time. The hard part is the first section: a point of view, not a summary.
+## Prompts
 
-## The work, end to end
-
-| # | Step | What the team does | Where Calven helps | Pulls from |
-|---|---|---|---|---|
-| 1 | Pick the lead idea | One thing worth saying this issue | Trends and opportunities with a recent change, themes that moved, our positioning's take | Trends, market opportunities, themes, positioning |
-| 2 | Gather the sections | Customer line, product news, reading list | A verbatim quote on the lead theme; product changes this month in buyer terms; which published pieces fit the persona | Quotes, product changes, product brief |
-| 3 | Write | Subject, lead, sections, CTA | Draft on-message in the persona's words | Messaging, persona canvas |
-| 4 | Check | Claims, drift, persona reaction | Claim check and persona review | Product brief, `review_against_personas` |
-| 5 | Build and send | Email tool | Calven does not help here | |
-| 6 | Read the results | Opens, clicks, replies | Calven does not help here | |
-
-## Recommended prompts
-
-### Step 1 and 2: the issue plan
+### Plan the issue
 
 ```
-Using Calven MCP, plan this month's newsletter for [persona].
+Using Calven MCP, plan this month's newsletter for the persona below.
+
+FILL IN
+- Persona: [persona]
+- Window: [time window, e.g. last month]
 
 CONTEXT
-Sections: one lead idea, one customer line, what's new in the product, three things to read. Under 400 words. Reader: [persona].
+Sections: one lead idea, one customer line, what's new in the product, three things to read. Under 400 words. Reader: the persona.
 
 PULL FROM THE UNIVERSE
-- Trends and opportunities that changed status or severity in the last [window], with their "so what".
+- Trends and opportunities that changed status or severity in the window, with their "so what".
 - Themes that moved most in customer calls, with a verbatim quote.
 - Product changes this month, with what each means for the buyer.
 - Our positioning, for the take on the lead idea.
@@ -45,20 +33,23 @@ The issue plan with sources.
 
 GROUNDING
 Use only trends, quotes, product changes and positioning in the Universe and cite them with dates. Do not invent a product change or a trend.
-
-[name the persona and the window]
 ```
 
-### Step 3: write the issue
+### Write the issue from the plan
 
 ```
 Using Calven MCP, write the newsletter issue from this plan.
 
+FILL IN
+- Persona: [persona]
+- Plan: [paste the issue plan]
+- Reading list: [paste the reading list]
+
 CONTEXT
-Below is the issue plan. Voice: a peer writing to [persona], plain, no hype. Subject line under 50 characters.
+Voice: a peer writing to the persona, plain, no hype. Subject line under 50 characters.
 
 PULL FROM THE UNIVERSE
-- The [persona] canvas: messaging hooks and how they talk.
+- The persona's canvas: messaging hooks and how they talk.
 - Our messaging for the one product mention.
 
 WRITE
@@ -66,7 +57,7 @@ WRITE
 - The lead: our take on the idea in 120 words, in the persona's words.
 - The customer line, verbatim.
 - What's new, two sentences per change.
-- Three things to read with one line each (from the list I paste).
+- Three things to read with one line each (from the reading list).
 - One CTA.
 
 OUTPUT
@@ -74,22 +65,25 @@ The issue in plain text, with sources.
 
 GROUNDING
 Use only the plan, the canvas and the messaging in the Universe and cite them. Do not add claims the product brief does not support.
-
-[paste the plan and the reading list]
 ```
 
-### Step 4: check the issue
+### Check the issue before it goes out
 
 ```
 Using Calven MCP, check this newsletter before it goes out.
 
+FILL IN
+- Persona: [persona]
+- Contacts: [number of contacts it goes to]
+- Issue: [paste the issue]
+
 CONTEXT
-Below is the issue. It goes to [number] contacts tomorrow.
+The issue goes to the contacts above tomorrow.
 
 PULL FROM THE UNIVERSE
 - The product brief and product changes, for the what's new section.
 - Our positioning, for the lead.
-- The [persona] canvas, and run the persona review.
+- The persona's canvas, and run the persona review.
 
 CHECK
 - Every product claim: correct, wrong or stale.
@@ -101,8 +95,6 @@ The issue annotated, then the three changes to make.
 
 GROUNDING
 Judge only against the Universe and cite. If it is clean, say so.
-
-[paste the issue]
 ```
 
 ## Ad hoc questions
@@ -115,16 +107,3 @@ Judge only against the Universe and cite. If it is clean, say so.
 - Is this subject line something [persona] would open: "[subject]"?
 - Which published pieces fit [persona] at the awareness stage?
 - Rewrite this lead in the persona's words: [paste]
-
-## Good practice
-
-- Lead with a take, not a summary. The positioning gives you the take; the trend gives you the timing.
-- One quote per issue, verbatim.
-- Write the product news from product changes, not from the release notes. Product changes say what the buyer sees.
-- Run the check prompt every issue; stale pricing in a newsletter reaches everyone at once.
-
-## Not covered today
-
-- The email tool, the list, the send and the results.
-- Web links to third-party reading. Paste the list in.
-- Adding a trend or quote to Calven from the AI tool.

@@ -1,40 +1,30 @@
 # Competitive drills
 
-**Team:** Sales enablement · also account executives, sales managers
-**Impact:** Medium. Reps lose competitive deals on the questions they did not rehearse. A drill where the AI tool plays the buyer with the competitor's pitch in hand, then debriefs against the battlecard, is practice with the real objections.
-**Prerequisites:** competitors tracked (battlecards, deep dives), personas approved. Better with win/loss surveys running (what buyers said when they chose the competitor) and call transcripts ingested.
 
-## What the team is trying to do
+Your rep's next competitive call will hit the competitor's strengths, and you'd rather they hear them in rehearsal first. You get a drill script per Tier 1 competitor and persona, plus a debrief rubric against the approved battlecard. With Calven the role-play buyer argues from the real objections, so the drill isn't easy and the rep learns something.
 
-Rehearse a competitive conversation before it happens: the buyer raises the competitor's strengths, the rep answers, the drill ends with a debrief against the approved battlecard. Done means a drill script per Tier 1 competitor and persona, and a debrief rubric. Without the company's own knowledge the role-play buyer is easy, and the rep learns nothing.
+## Prompts
 
-## The work, end to end
-
-| # | Step | What the team does | Where Calven helps | Pulls from |
-|---|---|---|---|---|
-| 1 | Pick the matchup | Competitor and persona | Competitors with the lowest win rate; personas most present in those deals | Competitive dashboard, persona dashboard |
-| 2 | Build the buyer brief | What the buyer believes and will say | The persona's pains and objections; the competitor's strengths and positioning; what buyers who chose the competitor said | Persona canvas, battlecard (Strengths, Their Positioning), deal drivers, survey responses |
-| 3 | Run the drill | Role-play live | The AI tool plays the buyer from the brief | Persona canvas, battlecard |
-| 4 | Debrief | Score against the approved plays | Where we win, landmines, objection handling and proof points the rep used or missed | Battlecard |
-| 5 | Repeat and track | Schedule, record scores | Calven does not help here | |
-
-## Recommended prompts
-
-### Step 2 and 3: the drill
+### Run a competitive role-play as the buyer
 
 ```
-Using Calven MCP, run a competitive drill: you are [persona] at a [segment] company, evaluating us against [competitor].
+Using Calven MCP, run a competitive drill: you are the persona below at a company in the segment below, evaluating us against the competitor.
+
+FILL IN
+- Persona: [persona]
+- Segment: [segment]
+- Competitor: [competitor]
 
 CONTEXT
-I am the rep. Play the buyer realistically: you like [competitor] for their real strengths, you raise the objections this persona raises, and you push back when I over-claim. Keep going until I say "debrief".
+I am the rep. Play the buyer realistically: you like the competitor for their real strengths, you raise the objections this persona raises, and you push back when I over-claim. Keep going until I say "debrief".
 
 PULL FROM THE UNIVERSE
-- The [persona] canvas: KPIs, pains, objections, how they talk.
-- The [competitor] battlecard: their positioning and messaging, strengths, the bullshit detector, where we lose.
-- What buyers said when they chose [competitor] over us, from win/loss responses and deal drivers.
+- The persona's canvas: KPIs, pains, objections, how they talk.
+- The competitor's battlecard: their positioning and messaging, strengths, the bullshit detector, where we lose.
+- What buyers said when they chose the competitor over us, from win/loss responses and deal drivers.
 
 ROLE-PLAY
-Open as the buyer would. Raise [competitor]'s strengths in the buyer's words. Do not make it easier than the evidence says it is.
+Open as the buyer would. Raise the competitor's strengths in the buyer's words. Do not make it easier than the evidence says it is.
 
 DEBRIEF (when I say so)
 - Where I was strong, where I lost you, with the battlecard section I should have used.
@@ -44,20 +34,22 @@ DEBRIEF (when I say so)
 
 GROUNDING
 Stay inside the persona and battlecard as recorded. Do not invent competitor features or buyer reactions the Universe does not support.
-
-[name the persona, segment and competitor]
 ```
 
-### Step 4: debrief a recorded drill or a real call
+### Debrief a drill or a real call
 
 ```
-Using Calven MCP, debrief this competitive conversation against the [competitor] battlecard.
+Using Calven MCP, debrief this competitive conversation against the competitor's battlecard.
+
+FILL IN
+- Competitor: [competitor]
+- Transcript: [paste the transcript]
 
 CONTEXT
-Below is a transcript (a drill or a real call) where [competitor] was in play. Score it against our approved plays.
+The transcript is a drill or a real call where the competitor was in play. Score it against our approved plays.
 
 PULL FROM THE UNIVERSE
-- The [competitor] battlecard: How We Win, Where We Lose, Landmines, Objection Handling, Proof Points.
+- The competitor's battlecard: How We Win, Where We Lose, Landmines, Objection Handling, Proof Points.
 - The product brief for any capability claimed.
 
 CHECK
@@ -70,11 +62,9 @@ A scorecard (used / missed / wrong), then the three lines to practise.
 
 GROUNDING
 Judge only against the battlecard and the brief. Do not credit a play the card does not contain.
-
-[paste the transcript]
 ```
 
-### Gap mode: which drills to build
+### Pick which drills to build this quarter
 
 ```
 Using Calven MCP, tell me which competitive drills to build this quarter.
@@ -107,16 +97,3 @@ Numbers with n and window. Pairs below the floor are listed as such.
 - What is our proof point against [competitor]'s time-to-value claim?
 - Score this answer to "[competitor objection]" against the battlecard: [paste].
 - Which competitor should I rehearse against before a [segment] call?
-
-## Good practice
-
-- Give the buyer the competitor's real strengths. A drill where we always win teaches overconfidence.
-- Name the persona. The economic buyer and the technical buyer raise different objections about the same competitor.
-- Ask for the debrief with sections cited, so the rep opens the card afterwards.
-- Run the drill after every battlecard update; the new landmine needs practice.
-- Debrief real calls the same way. The rubric is the same card.
-
-## Not covered today
-
-- Recording, scoring over time and manager dashboards.
-- Competitor demos or trial environments. The battlecard and dossier record what the agent found; the AI tool does not browse the competitor's product.

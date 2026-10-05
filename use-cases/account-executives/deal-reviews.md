@@ -1,38 +1,28 @@
 # Deal reviews
 
-**Team:** Account executives · also sales leadership, RevOps
-**Impact:** Medium. The weekly review runs on the rep's story about the deal, and the story is rarely checked against what sinks deals like it.
-**Prerequisites:** CRM connected (pipeline category on for MCP), win/loss surveys running. Better with personas approved, competitors tracked.
 
-## What the team is trying to do
+Pipeline review's tomorrow and your manager wants evidence from the buyer, not hope. You walk in with a half-page deal card per deal: red, yellow or green on pain, metrics, economic buyer, decision criteria, decision process, champion and competition, a next buyer action, and the risk they'll ask about before they ask. Calven adds the company's own evidence, so the review stops being opinion versus opinion.
 
-Present the deal against the qualification framework (pain, metrics, economic buyer, decision criteria, decision process, champion, competition) with evidence from the buyer, not hope, and know the risk the manager will ask about before they ask. Done means a half-page deal card per reviewed deal with a red, yellow or green per element and a next buyer action. Without the company's own evidence, the review is opinion versus opinion.
+## Prompts
 
-## The work, end to end
-
-| # | Step | What the team does | Where Calven helps | Pulls from |
-|---|---|---|---|---|
-| 1 | Pull the facts | Stage, amount, close date, days in stage, competitors | The deal record | CRM deals |
-| 2 | Score the elements | Red, yellow, green per qualification element | The record against the elements: contacts by role (economic buyer, champion), competitor named, stage history | CRM deals, CRM contacts |
-| 3 | Find the pattern risk | What sank similar deals at this stage | Deal drivers and loss reasons for this segment, competitor and stage | Win/loss dashboard, deal drivers, CRM deals (furthest stage) |
-| 4 | Write the next buyer action | What the buyer must do this week to prove the stage | Calven does not help here beyond what decided similar deals | |
-| 5 | Prepare the answer | The question the manager will ask | The risk the pattern shows that the deal card does not address | Deal drivers |
-| 6 | Present and update | The review, the CRM update | Calven does not help here | |
-
-## Recommended prompts
-
-### Step 1 to 5: the deal card
+### Build the deal card for pipeline review
 
 ```
-Using Calven MCP, build my deal card for [deal] for the pipeline review.
+Using Calven MCP, build my deal card for the deal below for the pipeline review.
+
+FILL IN
+- Deal: [deal]
+- Segment: [segment]
+- Competitor: [competitor]
+- Notes: [paste what you know that is not in the CRM: what the buyer did this week, the next mutual step, what the champion said]
 
 CONTEXT
-Below is what I know that is not in the CRM: what the buyer did this week, the next mutual step, what the champion said. I want a red, yellow or green per qualification element and the risk my manager will raise.
+The notes hold what I know that is not in the CRM. I want a red, yellow or green per qualification element and the risk my manager will raise.
 
 PULL FROM THE UNIVERSE
 - The deal record: stage, amount, close date, competitors, stage history.
 - The contacts on the account by buying role: do we have an economic buyer, a champion, a technical buyer.
-- What decided deals in [segment] against [competitor] that reached this stage: the drivers and loss reasons, with n.
+- What decided deals in the segment against the competitor that reached this stage: the drivers and loss reasons, with n.
 
 BUILD
 - The deal in two lines.
@@ -45,21 +35,24 @@ A half-page card with sources.
 
 GROUNDING
 Record and dashboard data only, cited with n. Do not invent buyer actions I did not report. Where the CRM lacks the contact or field, mark the element "no evidence", not green.
-
-[paste what you know; name the deal, segment and competitor]
 ```
 
-### Gap mode: which deals will the manager pick on
+### Find the open deals that look weakest
 
 ```
 Using Calven MCP, which of my open deals look weakest against our record?
 
+FILL IN
+- Deals: [paste your open deal list, or leave blank to use the CRM mirror]
+- Owner: [owner name, used when no list is pasted]
+- Segment: [segment]
+
 CONTEXT
-Pipeline review is tomorrow. Below is my open deal list, or use the CRM mirror for deals owned by [owner name].
+Pipeline review is tomorrow. Use the pasted deal list, or the CRM mirror for deals owned by the owner.
 
 PULL FROM THE UNIVERSE
 - Each open deal: stage, amount, close date, contact roles, competitor.
-- The win rate by furthest stage reached, by competitor and by ICP tier in [segment], with n.
+- The win rate by furthest stage reached, by competitor and by ICP tier in the segment, with n.
 - Loss reasons on deals that stalled at each stage.
 
 BUILD
@@ -71,17 +64,20 @@ A ranked table.
 
 GROUNDING
 Only CRM mirror and dashboards, cited with n. No invented activity.
-
-[paste the list or name the owner and segment]
 ```
 
-### Review mode: challenge my forecast call
+### Challenge your commit as your manager
 
 ```
-Using Calven MCP, challenge my commit on [deal].
+Using Calven MCP, challenge my commit on the deal below.
+
+FILL IN
+- Deal: [deal]
+- Commit date: [date]
+- Reasons: [paste your reasons]
 
 CONTEXT
-I have [deal] in commit for [date]. Below is why. Play my manager.
+I have the deal in commit for the date above, for the reasons given. Play my manager.
 
 PULL FROM THE UNIVERSE
 - The deal record and contacts.
@@ -96,8 +92,6 @@ The verdict: commit, best case or pipeline, with the evidence.
 
 GROUNDING
 Only from the Universe. Say so if the commit holds.
-
-[paste your reasons]
 ```
 
 ## Ad hoc questions
@@ -110,15 +104,3 @@ Only from the Universe. Say so if the commit holds.
 - What loss reason is most common for deals against [competitor] at this stage?
 - Which of my deals has no competitor recorded?
 - What would prove the decision process on [deal]?
-
-## Good practice
-
-- Paste what the buyer did this week. The card is evidence plus record; the record alone is the CRM screen.
-- Mark elements "no evidence" rather than green. The review is for finding gaps.
-- Ask for the risk the card does not address. That is the manager's question.
-- Use the gap prompt the night before. Choose which deals to defend.
-
-## Not covered today
-
-- Forecast categories, quota math and the CRM forecast itself. Calven reads the mirror.
-- Activity data: emails, calls, meetings. The rep reports them.

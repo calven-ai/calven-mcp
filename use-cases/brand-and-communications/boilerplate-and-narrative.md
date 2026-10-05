@@ -1,33 +1,20 @@
 # Boilerplate and company narrative
 
-**Team:** Brand and communications · also product marketing, leadership, people and talent, finance and investor relations
-**Impact:** Medium. The boilerplate, the one-liner and the about page are copied into every release, deck, job ad, listing and investor update. When they match the positioning, every channel agrees; when they lag a repositioning by a quarter, the company introduces itself three ways.
-**Prerequisites:** strategy documents approved (positioning, messaging with boilerplate, product brief, ICP). Better with market research run (the "why now") and call transcripts ingested (a customer line for the narrative).
 
-## What the team is trying to do
+Someone needs the company description again: the one-liner, the 50-word boilerplate, the 150-word about, the one-page narrative, or the version for press, investors, candidates or partners. You get the whole set, each with a version date, all saying the same category and the same three pillars. Calven derives every variant from the positioning, so each audience gets a different emphasis without a different story.
 
-Keep one approved set of company descriptions at every length: the one-liner, the 50-word boilerplate, the 150-word about, the one-page narrative, and the variants for press, investors, candidates and partners. Done means every variant derives from the positioning, says the same category and the same three pillars, and carries a version date. The hard part is the variants: each audience needs a different emphasis without a different story.
+## Prompts
 
-## The work, end to end
-
-| # | Step | What the team does | Where Calven helps | Pulls from |
-|---|---|---|---|---|
-| 1 | Pull the reference | Current positioning and messaging | The positioning statement, category, pillars, the boilerplate on record | Positioning, messaging |
-| 2 | Write the lengths | One-liner, 50, 150, one page | Drafts at each length from the reference | Positioning, messaging |
-| 3 | Write the variants | Press, investors, candidates, partners | Emphasis per audience: proof points for press, market and "why now" for investors, pillars and customer voice for candidates, ICP and fit for partners | Positioning, trends, quotes, ICP |
-| 4 | Check | Claims, consistency | Claim check against the brief; drift check against positioning | Product brief, positioning |
-| 5 | Approve and version | Leadership sign-off, date | Calven does not help here | |
-| 6 | Distribute | Every owner replaces the old copy | See [messaging consistency audit](messaging-consistency-audit.md) | |
-
-## Recommended prompts
-
-### Step 1 and 2: the lengths
+### Write the company description at four lengths
 
 ```
 Using Calven MCP, write our company description at four lengths.
 
+FILL IN
+- Repositioning date: [date]
+
 CONTEXT
-We repositioned on [date]. I need the one-liner, a 50-word boilerplate, a 150-word about and a one-page narrative, all from the same story.
+We repositioned on the date given. I need the one-liner, a 50-word boilerplate, a 150-word about and a one-page narrative, all from the same story.
 
 PULL FROM THE UNIVERSE
 - Our positioning: positioning statement, category and frame of reference, unique attributes, value themes, best-fit customers, "why now".
@@ -45,14 +32,15 @@ The four texts with the document versions they derive from.
 
 GROUNDING
 Use only the positioning, messaging and brief in the Universe and cite them. Do not add founding dates, customer counts, funding or awards unless they are in the documents.
-
-[name the repositioning date]
 ```
 
-### Step 3: audience variants
+### Write the boilerplate for one audience
 
 ```
-Using Calven MCP, write the [press / investor / candidate / partner] variant of our boilerplate.
+Using Calven MCP, write the variant of our boilerplate for the audience below.
+
+FILL IN
+- Audience: [press / investor / candidate / partner]
 
 CONTEXT
 Same story, different emphasis. Press: the category and the proof. Investors: the market shift and the "why now". Candidates: the mission, the pillars and what customers say. Partners: who we fit and how we complement. 80 words each.
@@ -72,17 +60,18 @@ The variant and the note, with sources.
 
 GROUNDING
 Use only the Universe and cite. The category, one-liner and pillars do not change between variants.
-
-[name the audience]
 ```
 
-### Step 4: check the set
+### Check the set of descriptions
 
 ```
 Using Calven MCP, check this set of company descriptions.
 
+FILL IN
+- Set: [paste the one-liner, boilerplate, about, narrative and the audience variants]
+
 CONTEXT
-Below are the one-liner, boilerplate, about, narrative and the audience variants.
+The set holds the one-liner, boilerplate, about, narrative and the audience variants.
 
 PULL FROM THE UNIVERSE
 - Our positioning and messaging.
@@ -98,8 +87,6 @@ A table per text with verdicts and fixes, with sources.
 
 GROUNDING
 Judge only against the Universe and cite. If a text is clean, say so.
-
-[paste the set]
 ```
 
 ## Ad hoc questions
@@ -113,16 +100,3 @@ Judge only against the Universe and cite. If a text is clean, say so.
 - Who do we fit best, for a partner description?
 - Does the product brief state a founding date, customer count or anything else a boilerplate often includes?
 - Is this about text on-positioning: [paste]
-
-## Good practice
-
-- Derive every length from the positioning, never from the previous boilerplate.
-- Keep the category, one-liner and pillars identical across variants; change only the emphasis.
-- Date every version and hand the set to the owners with the fix list from the consistency audit.
-- Rewrite the set the day the positioning changes, not when someone notices.
-
-## Not covered today
-
-- Company facts outside the documents: founding date, headcount, funding, office locations. Add them from the source of truth.
-- Leadership approval and the places the copy lives.
-- Updating the messaging document's boilerplate section from the AI tool. The messaging agent and the PMM do that in Calven.

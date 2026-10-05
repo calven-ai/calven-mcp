@@ -1,34 +1,21 @@
 # QBR metrics pack
 
-**Team:** Revenue operations · also sales leadership, leadership, finance
-**Impact:** Medium. The QBR pack takes RevOps a week of exports and reconciliation. The GTM half of it (win rates, competitive performance, ICP focus, persona coverage, voice of customer, win/loss program coverage) comes from the Insights dashboards in one pass, with n and the prior period, so the numbers agree with last quarter's.
-**Prerequisites:** CRM connected, win/loss surveys running. Better with competitors tracked, personas approved and call transcripts ingested.
 
-## What the team is trying to do
+Every quarter you rebuild the GTM numbers from exports for the QBR and the board, and they never quite reconcile. You get the metric pages with the prior period, the movers, the reasons in the buyer's words, and the same window quarter after quarter. Bookings, quota attainment and pipeline coverage come from the CRM and finance; Calven supplies the rest.
 
-Assemble the quarter's GTM numbers, what moved, and why, for the QBR and the board. Done means the metric pages with the prior period, the movers, the explanations in the buyer's words, and a consistent window quarter after quarter. Bookings, quota attainment and pipeline coverage come from the CRM and finance; Calven supplies the rest. Without the company's own knowledge the pack is rebuilt from exports each quarter and never quite reconciles.
+## Prompts
 
-## The work, end to end
-
-| # | Step | What the team does | Where Calven helps | Pulls from |
-|---|---|---|---|---|
-| 1 | Set the window and scope | Quarter, product, comparison | Windows and product scoping are built into every dashboard | All dashboards |
-| 2 | Pull the headlines | Every KPI with the prior period | The Insights overview: KPIs, movers, top loss reasons, product gaps, availability | Insights overview |
-| 3 | Pull the sections | Win/loss, competitive, ICP, persona, voice of customer, messaging, program health | Each dashboard as data | Dashboards |
-| 4 | Explain the movers | Why a number moved | Deal drivers, quotes, signals behind the mover | Deal drivers, quotes, competitive signals, insight details |
-| 5 | Add the CRM and finance numbers | Bookings, quota, coverage | Calven does not hold these; paste them | |
-| 6 | Write the narrative | One page of what happened and what we change | The narrative with sources | All of the above |
-| 7 | Build the deck | Slides, charts | Calven supplies the tables; the deck tool draws them | |
-
-## Recommended prompts
-
-### Step 2 and 3: the pack in one pass
+### Build the quarter's GTM metrics pack
 
 ```
-Using Calven MCP, build the GTM metrics pack for [quarter].
+Using Calven MCP, build the GTM metrics pack for the quarter below.
+
+FILL IN
+- Quarter: [quarter]
+- Scope: [product, or leave blank for the whole company]
 
 CONTEXT
-For the QBR. Window: [quarter], compared with the prior quarter. Scope: [product or whole company]. Every number with n; placeholders reported as "no data", never estimated.
+For the QBR. Window: the quarter, compared with the prior quarter, within the scope. Every number with n; placeholders reported as "no data", never estimated.
 
 PULL FROM THE UNIVERSE
 - The Insights overview for the window: every dashboard's headline KPIs with the comparison, the biggest movers, top loss reasons, product gaps and which dashboards have no data.
@@ -49,17 +36,18 @@ The tables and the two pages.
 
 GROUNDING
 Every number from a dashboard with n and window. Report "cannot compare" with its reason rather than "no change". Do not sum rows.
-
-[name the quarter and the scope]
 ```
 
-### Step 4: explain the movers
+### Explain the five biggest movers
 
 ```
 Using Calven MCP, explain the five movers in this pack.
 
+FILL IN
+- Movers: [paste the five movers]
+
 CONTEXT
-Below are the five biggest changes. For each I need the reason with evidence, in three lines.
+The movers are the five biggest changes. For each I need the reason with evidence, in three lines.
 
 PULL FROM THE UNIVERSE
 - For win-rate movers: the deals and deal drivers behind the cell.
@@ -75,17 +63,19 @@ Five short entries.
 
 GROUNDING
 Cite the evidence behind every reason. Where the evidence does not explain the move, say so.
-
-[paste the five movers]
 ```
 
-### Step 6: the narrative
+### Write the one-page QBR narrative
 
 ```
 Using Calven MCP, write the one-page narrative for the QBR.
 
+FILL IN
+- Pack: [paste the pack's tables and the mover explanations]
+- CRM and finance numbers: [paste bookings, quota attainment, coverage]
+
 CONTEXT
-Audience: the executive team. Below are the pack's tables, the mover explanations and the CRM and finance numbers (bookings, quota attainment, coverage). One page: what happened, why, what we change.
+Audience: the executive team. One page: what happened, why, what we change.
 
 PULL FROM THE UNIVERSE
 - Nothing new; use the pasted pack. Verify any number I quote against the dashboards.
@@ -100,8 +90,6 @@ The page.
 
 GROUNDING
 Numbers as in the pack with n. Do not add numbers Calven does not hold beyond the ones I pasted.
-
-[paste the pack and the CRM and finance numbers]
 ```
 
 ## Ad hoc questions
@@ -115,17 +103,3 @@ Numbers as in the pack with n. Do not add numbers Calven does not hold beyond th
 - What was the ICP share of wins this quarter versus last?
 - What are the top three customer themes this quarter?
 - How did our win rate against [competitor] change?
-
-## Good practice
-
-- Fix the window and scope once and reuse the prompt every quarter. Comparable beats clever.
-- Report the availability note. A section with no data is a program finding, not a gap to paper over.
-- Explain movers with evidence before the meeting. The QBR is for decisions, not for finding reasons.
-- Keep CRM and finance numbers separate from Calven's and label the source of each.
-- Remember amount at risk on product gaps covers won and lost deals; say so on the slide.
-
-## Not covered today
-
-- Bookings, revenue, quota attainment, pipeline coverage ratio, CAC and retention. Those come from the CRM, finance and the subscription system.
-- Charts and slides. Calven supplies tables; the deck tool draws them.
-- Marketing attribution and funnel conversion by channel. Not in Calven.

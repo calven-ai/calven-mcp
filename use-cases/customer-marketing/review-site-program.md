@@ -1,37 +1,25 @@
 # Review-site program
 
-**Team:** Customer marketing · also customer success, product marketing
-**Impact:** Medium. Reviews on G2, Gartner Peer Insights, Capterra and TrustRadius shape shortlists and what AI assistants say about the category. Knowing who to ask and what they already said gets more reviews and better ones.
-**Prerequisites:** call transcripts ingested (quotes), CRM connected (contacts, accounts). Competitors tracked adds the comparison angle reviewers are asked about.
 
-## What the team is trying to do
+You want more and better reviews on the sites buyers and AI assistants read. You walk away with a monthly ask list, a personalised prompt per contact, and a read on which strengths reviews should reinforce. Calven picks the right customers at the right moment from the company's own call evidence, so requests don't go to everyone and the reviews say more than "good support".
 
-Grow the volume and quality of reviews on the sites buyers and AI assistants read, by asking the right customers at the right moment with a prompt that helps them write. Done means a monthly ask list with a personalised prompt per contact, and a read on which strengths reviews should reinforce. Without the company's own call evidence, review requests go to everyone, say nothing, and the reviews repeat "good support".
+## Prompts
 
-## The work, end to end
-
-| # | Step | What the team does | Where Calven helps | Pulls from |
-|---|---|---|---|---|
-| 1 | Decide what reviews should say | The strengths and comparisons to reinforce | Positioning differentiation and proof points; where competitors are weak | Positioning, competitor battlecards |
-| 2 | Pick who to ask | Enthusiastic users and recent wins | Contacts with positive quotes, end users and champions, recent won deals | Quotes, CRM contacts, CRM deals |
-| 3 | Personalise the ask | A prompt per contact | Their own words as the prompt; the review-site questions mapped to what they said | Quotes |
-| 4 | Send and follow up | Outreach, incentives where allowed | Calven does not help here | |
-| 5 | Respond to reviews | Reply to each review | Responses grounded in the product brief and the approved messaging | Product brief, messaging |
-| 6 | Read the results | What reviews reinforce or contradict | Calven does not hold review content. The AI assistant answers in Insights show what the category's assistants say about us | Positioning dashboard (how AI sees you) |
-
-## Recommended prompts
-
-### Step 2 and 3: the ask list
+### Build this month's review ask list
 
 ```
 Using Calven MCP, build this month's review request list.
 
+FILL IN
+- Site: [review site]
+- Window: [time window, e.g. last six months]
+
 CONTEXT
-We are collecting reviews on [site]. I want twenty contacts likely to write a good one, each with a personalised ask.
+We are collecting reviews on the site. I want twenty contacts likely to write a good one, each with a personalised ask.
 
 PULL FROM THE UNIVERSE
-- Customer contacts who are end users or champions with positive quotes over [window], with the quote, role and account.
-- Won deals closed in the last [window] with the champion contact.
+- Customer contacts who are end users or champions with positive quotes over the window, with the quote, role and account.
+- Won deals closed in the window with the champion contact.
 - The positioning differentiators we want reviews to reinforce.
 
 BUILD
@@ -42,17 +30,19 @@ The table.
 
 GROUNDING
 Use only quotes and CRM data in the Universe, verbatim and cited. Do not include contacts with no positive quote.
-
-[name the site and the window]
 ```
 
-### Step 5: respond to a review
+### Draft a reply to a review
 
 ```
 Using Calven MCP, draft a reply to this review.
 
+FILL IN
+- Site: [review site]
+- Review: [paste the review]
+
 CONTEXT
-Below is a review from [site]. I want a reply that thanks them, addresses any criticism honestly, and stays on the approved messaging.
+I want a reply that thanks the reviewer, addresses any criticism honestly, and stays on the approved messaging.
 
 PULL FROM THE UNIVERSE
 - The product brief for anything the review says about capabilities.
@@ -67,11 +57,9 @@ The reply.
 
 GROUNDING
 Use only the Universe and cite it. If the criticism is right and nothing has changed, say so in the reply rather than deflecting.
-
-[paste the review]
 ```
 
-### Step 1 and 6: what reviews should reinforce
+### Pick the strengths reviews should reinforce
 
 ```
 Using Calven MCP, tell me which strengths our review program should reinforce.
@@ -105,16 +93,3 @@ Use only the Universe and cite it.
 - Has [criticism] been addressed by a product change?
 - Which quotes are tagged ease of use or time to value with positive sentiment this quarter?
 - Is "[claim in a reply]" supported by the product brief?
-
-## Good practice
-
-- Ask after a positive moment the quote shows, not on a schedule.
-- Give the reviewer their own words. Reviews written from a prompt are longer and more specific.
-- Reply to critical reviews with the product brief in hand. A promise the brief does not back is a future bad review.
-- Keep review content and ratings in the review platform or a sheet. Calven does not read review sites.
-
-## Not covered today
-
-- Review site content, ratings, badges and campaigns live on the platforms.
-- Incentives, consent and compliance rules for reviews are handled outside.
-- Calven does not see what a specific competitor's reviews say.

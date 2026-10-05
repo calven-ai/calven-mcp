@@ -1,37 +1,22 @@
 # Launches positioned from day one
 
-**Team:** Product management · also product marketing, demand generation, sales enablement
-**Impact:** High. A launch written from the engineering spec describes the feature. One written from the positioning, the persona's pains and what customers asked for sells it. The claims check keeps it true.
-**Prerequisites:** strategy documents approved (positioning, messaging, product brief), personas approved. Better with call transcripts ingested (quotes on the problem), win/loss surveys (the deals that asked), own website and docs monitored (claims, product changes, drift).
 
-## What the team is trying to do
+The feature is done, and now it has to land with the buyer and stay consistent with the company story. You walk away with its value statement under the right pillar, the persona and the pain it removes in their words, the proof, claims checked against the product brief, a sales FAQ and a list of documents the launch leaves stale. Without a PMM this is your job; with one, Calven means you both start from the same evidence.
 
-Take a feature from "done" to a launch that lands with the buyer and stays consistent with the company story. Done means: the feature's value statement under the right pillar, the persona it serves and the pain it removes in their words, the proof, the claims checked against the product brief, the sales FAQ, and a readiness list of documents the launch leaves stale. In a company without a PMM, this is the PM's job; with one, this is how the PM and PMM start from the same evidence.
+## Prompts
 
-## The work, end to end
-
-| # | Step | What the team does | Where Calven helps | Pulls from |
-|---|---|---|---|---|
-| 1 | Frame the launch | Decide the tier, the audience and the problem the feature solves | The persona canvas (pains, jobs), the themes and quotes on the problem, the deals that asked for it | Persona, themes, quotes, deal drivers |
-| 2 | Position the feature | Place it under a value pillar, write the value statement | Positioning (value themes, unique attributes), messaging (pillars, value propositions by persona) | Positioning, messaging |
-| 3 | Write the messaging | Headline, one-liner, three benefits, proof | Messaging matrix per persona and stage, customer quotes as proof, the product brief for what it does | Messaging, quotes, product brief |
-| 4 | Fact-check | Confirm every claim | The product brief, the claims register, recent product changes | Product brief, claims, product changes |
-| 5 | Review as the buyer | Read the launch copy as the persona | Persona review | `review_against_personas` |
-| 6 | Competitive angle | Decide what to say about rivals, if anything | Battlecards and the signals around the same capability | Battlecard, competitive signals |
-| 7 | Readiness check | Find the documents the launch makes stale | Drift findings tied to the product change; claims that now need updating | Product drift findings, claims |
-| 8 | Enable sales | FAQ, talk track, objections | Objection handling in messaging, battlecard objections, product brief known weaknesses | Messaging, battlecard, product brief |
-| 9 | Ship the launch | Blog, email, in-app, release notes, webinar | Calven does not help here beyond the copy checks above | |
-| 10 | Post-launch | Read what customers say about it | Themes and quotes after the launch date | Themes, quotes |
-
-## Recommended prompts
-
-### Step 1: the launch frame
+### Frame the launch on one page
 
 ```
-Using Calven MCP, frame the launch of [feature] for [product].
+Using Calven MCP, frame the launch of the feature below.
+
+FILL IN
+- Feature: [feature]
+- Product: [product]
+- Timeframe: [when it ships, e.g. next month]
 
 CONTEXT
-[feature] ships in [timeframe]. Before writing anything I want to know who it is for, which pain it removes in the buyer's words, and who asked for it.
+The feature ships in the timeframe above. Before writing anything I want to know who it is for, which pain it removes in the buyer's words, and who asked for it.
 
 PULL FROM THE UNIVERSE
 - The personas whose pains and jobs this feature addresses, from their canvases.
@@ -48,21 +33,24 @@ A launch frame on one page: persona, pain, evidence, deals.
 
 GROUNDING
 Use only canvases, quotes and drivers in the Universe and cite them. If no deal named this capability, say so.
-
-[name the feature and the product]
 ```
 
-### Step 2 and 3: positioning and messaging for the feature
+### Write the launch messaging
 
 ```
-Using Calven MCP, write the launch messaging for [feature].
+Using Calven MCP, write the launch messaging for the feature below.
+
+FILL IN
+- Feature: [feature]
+- Persona: [persona]
+- Launch frame: [paste the launch frame]
 
 CONTEXT
-The launch frame is below. I need messaging that fits our positioning and sounds like our customers.
+I need messaging that fits our positioning and sounds like our customers.
 
 PULL FROM THE UNIVERSE
 - Our positioning: value themes and unique attributes, so the feature lands under the right one.
-- The messaging: the pillar it belongs to and the value proposition for [persona].
+- The messaging: the pillar it belongs to and the value proposition for the persona.
 - The product brief entry for what the feature does.
 - Customer quotes on the problem, for proof and language.
 
@@ -76,17 +64,19 @@ The messaging block, with the pillar and sources noted.
 
 GROUNDING
 Use only claims the product brief supports and quotes from the Universe. Do not invent outcomes or numbers. Do not introduce a value theme the positioning does not have.
-
-[paste the launch frame]
 ```
 
-### Step 4: claims check
+### Fact-check the launch copy
 
 ```
-Using Calven MCP, fact-check the launch copy for [feature].
+Using Calven MCP, fact-check the launch copy for the feature below.
+
+FILL IN
+- Feature: [feature]
+- Launch copy: [paste the launch copy]
 
 CONTEXT
-Below is the launch copy: blog, email and in-app text. Every product, pricing and integration claim must be right.
+The launch copy covers blog, email and in-app text. Every product, pricing and integration claim must be right.
 
 PULL FROM THE UNIVERSE
 - The product brief: capabilities, integrations, pricing and packaging.
@@ -102,20 +92,22 @@ The copy annotated inline, then a list of claims a human must confirm with engin
 
 GROUNDING
 Confirm only against the product brief and claims in the Universe and cite the section. Where the brief is silent, write "not in the brief".
-
-[paste the launch copy]
 ```
 
-### Step 5: the persona read
+### Review the announcement as the persona
 
 ```
-Using Calven MCP, review the launch announcement as [persona].
+Using Calven MCP, review the launch announcement as the persona below.
+
+FILL IN
+- Persona: [persona]
+- Announcement: [paste the announcement]
 
 CONTEXT
-Below is the announcement. I want the persona's honest reaction before it goes out.
+I want the persona's honest reaction to the announcement before it goes out.
 
 PULL FROM THE UNIVERSE
-- The [persona] canvas, and run the persona review on the text.
+- The persona's canvas, and run the persona review on the text.
 
 REACT
 - What lands, what reads as vendor marketing, the line they would not believe, the question they still have.
@@ -126,22 +118,24 @@ The findings with severity, then the three edits.
 
 GROUNDING
 React only from what the Universe says about this persona.
-
-[paste the announcement]
 ```
 
-### Step 7: launch readiness, what went stale
+### List what the launch makes stale
 
 ```
-Using Calven MCP, list what the [feature] launch makes stale.
+Using Calven MCP, list what the feature launch below makes stale.
+
+FILL IN
+- Feature: [feature]
+- Area: [the product area it changes]
 
 CONTEXT
-[feature] changes what the product does in [area]. I need every published document and claim that now tells an old story.
+The feature changes what the product does in the area above. I need every published document and claim that now tells an old story.
 
 PULL FROM THE UNIVERSE
-- Product changes recorded for [area] and the drift findings tied to them, with the document each one affects and the verdict.
-- Claims about [area] on our site and in our documents.
-- Battlecards and the product brief sections that mention [area].
+- Product changes recorded for the area and the drift findings tied to them, with the document each one affects and the verdict.
+- Claims about the area on our site and in our documents.
+- Battlecards and the product brief sections that mention the area.
 
 BUILD
 - A table: document or claim, what it says now, what changed, the suggested fix, owner.
@@ -150,15 +144,16 @@ OUTPUT
 The readiness table.
 
 GROUNDING
-Use only drift findings, claims and documents in the Universe and cite them. If the product change has not been recorded yet, say so, and list the documents that mention [area] as candidates instead.
-
-[name the feature and the area]
+Use only drift findings, claims and documents in the Universe and cite them. If the product change has not been recorded yet, say so, and list the documents that mention the area as candidates instead.
 ```
 
-### Step 8: the sales FAQ for the launch
+### Write the sales FAQ for the launch
 
 ```
-Using Calven MCP, write the sales FAQ for the [feature] launch.
+Using Calven MCP, write the sales FAQ for the feature launch below.
+
+FILL IN
+- Feature: [feature]
 
 CONTEXT
 Sales will get questions from prospects and customers on day one. I need the ten most likely questions with answers that are true.
@@ -177,8 +172,6 @@ The FAQ and the do-not-say list.
 
 GROUNDING
 Use only claims in the product brief and messaging, cited. Do not invent pricing, dates or integrations.
-
-[name the feature]
 ```
 
 ## Ad hoc questions
@@ -195,18 +188,3 @@ Use only claims in the product brief and messaging, cited. Do not invent pricing
 - What does the product brief say we do not do in [area]?
 - Which claims on our site about [area] have no proof point?
 - How would [persona] react to this headline: "[headline]"?
-
-## Good practice
-
-- Frame before you write. The persona, the pain and the deals that asked are the brief; the copy follows.
-- Pick one pillar. A feature that supports three pillars supports none on the slide.
-- Fact-check the final copy, not the draft. Claims drift during editing.
-- Run the readiness check as soon as the product change is recorded. Drift findings show up per document; fixing them before launch day is cheaper.
-- Keep "what it is not" in the FAQ. The product brief's known weaknesses are there to stop overclaiming.
-- Ask the AI tool for sources on every proof point and keep quotes verbatim.
-
-## Not covered today
-
-- Publishing the blog post, sending the email, shipping the in-app message. Those live in your content and marketing tools.
-- Editing the product brief, messaging or battlecards. That is the product intelligence, messaging and competitive intelligence agents' work in Calven, approved by the PMM.
-- Adoption numbers after launch. Product analytics stay in your analytics tool; Calven holds what customers said.

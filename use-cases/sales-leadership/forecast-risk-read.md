@@ -1,33 +1,23 @@
 # Forecast risk read
 
-**Team:** Sales leadership · also revenue operations, finance
-**Impact:** High. The forecast call commits a number; a risk read that scores each late-stage deal against what has sunk deals like it (competitor, segment, threading, loss reason) gives the leader a reason to move a deal out of commit before the quarter does.
-**Prerequisites:** CRM connected (deals, contacts), win/loss surveys running (deal drivers, loss patterns). Better with competitors tracked (win rates per competitor) and personas approved (buying-group roles).
 
-## What the team is trying to do
+The forecast call is this week, and you need to decide which late-stage deals belong in commit, best case or neither. You walk in able to say why each commit deal stays, because each one was checked against the patterns that decided similar deals. Calven brings the company's own loss patterns, so the call isn't each rep's confidence, averaged.
 
-Decide which late-stage deals belong in commit, best case or neither, with a reason. Done means every deal in commit has been checked against the patterns that decided similar deals and the leader can say why it stays. Without the company's own loss patterns the call is each rep's confidence, averaged.
+## Prompts
 
-## The work, end to end
-
-| # | Step | What the team does | Where Calven helps | Pulls from |
-|---|---|---|---|---|
-| 1 | Pull the late-stage deals | Commit and best case by rep | Deals at the late stages with amount band, close date, competitor, fit, contact roles | CRM deals |
-| 2 | Score the risk | Pattern each deal against what sinks deals like it | Win rate by competitor, segment and persona threading; loss drivers for similar deals | Competitive intelligence, ICP, persona and win/loss dashboards, deal drivers |
-| 3 | Read the buyer evidence | What did buyers say in the losses this resembles | The deciding drivers and quotes from similar lost deals | Deal drivers, surveyed deals |
-| 4 | Decide | Keep, move, flag | Calven does not help here | |
-| 5 | Prepare the finance line | The number and the caveat | The in-profile versus out-of-profile win rate applied as a sanity check | ICP dashboard |
-| 6 | Submit | Forecast tool | Calven does not help here | |
-
-## Recommended prompts
-
-### Steps 1 to 3: the risk read
+### Score every commit deal for risk
 
 ```
-Using Calven MCP, give me a risk read on every deal in commit for [period].
+Using Calven MCP, give me a risk read on every deal in commit for the period below.
+
+FILL IN
+- Period: [period, e.g. this quarter]
+- Forecast call: [day of the forecast call]
+- Commit list: [paste the commit list, or leave blank to use the stage]
+- Stage: [stage, used only when the commit list is blank]
 
 CONTEXT
-Forecast call is [day]. The commit list is at the bottom (or pull every open deal past [stage] closing in [period]). I want each deal scored against the patterns that decided deals like it.
+Forecast call on the day above. Use the commit list, or if it is blank, pull every open deal past the stage closing in the period. I want each deal scored against the patterns that decided deals like it.
 
 PULL FROM THE UNIVERSE
 - Each deal: stage, amount band, close date, segment, ICP fit tier, competitors, contact roles.
@@ -44,14 +34,15 @@ A table sorted by risk, then the three-line summary for the call.
 
 GROUNDING
 Use only CRM records, dashboards and deal drivers in the Universe. Cite every rate with n and window. Do not estimate close probability as a number; give the level and the patterns.
-
-[paste the commit list, or name the stage and period]
 ```
 
-### Step 2: one deal
+### Decide whether one deal stays in commit
 
 ```
-Using Calven MCP, should [deal] be in commit?
+Using Calven MCP, should the deal below be in commit?
+
+FILL IN
+- Deal: [deal]
 
 PULL FROM THE UNIVERSE
 - The deal record: stage, amount band, competitor, fit tier, contact roles, price and product feedback.
@@ -63,14 +54,16 @@ Keep or move, the two facts that decide it, and the one question for the rep.
 
 GROUNDING
 Use only the Universe, cited with samples. Say when the sample is too thin to judge.
-
-[name the deal]
 ```
 
-### Step 5: the sanity check for finance
+### Sanity-check the commit for finance
 
 ```
-Using Calven MCP, sanity-check our [period] commit of [amount].
+Using Calven MCP, sanity-check our commit for the period below.
+
+FILL IN
+- Period: [period, e.g. this quarter]
+- Commit: [commit amount]
 
 PULL FROM THE UNIVERSE
 - Open pipeline in the period by ICP tier and segment.
@@ -86,8 +79,6 @@ Five lines with figures and samples, and the caveat to give finance.
 
 GROUNDING
 Use only dashboard figures in the Universe, cited. This is a sanity check on patterns, not a forecast model; say so.
-
-[name the period and the commit]
 ```
 
 ## Ad hoc questions
@@ -102,17 +93,3 @@ Use only dashboard figures in the Universe, cited. This is a sanity check on pat
 - Which product gap appears on commit deals and how many deals has it cost?
 - Do deals with an exec sponsor on record close more often? Sample?
 - Which lost deal most resembles [deal]?
-
-## Good practice
-
-- Ask for levels and patterns, not probabilities. The dashboards hold rates, not per-deal odds.
-- Paste the commit list if the forecast tool holds categories the CRM mirror does not.
-- Ask for the question for the rep on every high-risk deal. The read is for the call, not instead of it.
-- Rerun on the same list the day before the call; contact roles and stages move.
-- Keep the finance sanity check to the dashboard rates. The forecast model stays in the forecast tool.
-
-## Not covered today
-
-- Forecast categories, commit history, quota and attainment.
-- A per-deal close probability. Calven holds patterns and rates, not a scoring model.
-- Writing the forecast anywhere.
