@@ -135,6 +135,100 @@ GROUNDING
 Judge only against the Universe and cite it. If my plan is sound, say so.
 ```
 
+## Advanced prompts
+
+### Update the odds as the deal facts come in
+
+```
+Give me an honest win probability for my deal, starting from our real base rate and updating it fact by fact like a Bayesian would. Use Calven MCP for the base rate and for how much each fact has mattered in deals we've closed.
+
+FILL IN
+- Deal: [deal]
+- What I know: [paste the facts: champion yes or no, economic buyer met, competitor, pricing discussed, timeline, pilot]
+- My gut number: [your current forecast probability]
+
+CONTEXT
+My forecast number is a feeling. I want one I can defend in the forecast call, built from what has happened in deals like this one, and I want to see which single fact moves it most.
+
+FROM CALVEN
+- Win rate for the deal's segment and size band from the win/loss and ICP dashboards, with n. That's the prior.
+- Win rate with and without multi-threading from the persona dashboard, and against the named competitor from the competitive dashboard, with n.
+- Closed deals in the segment paged from the CRM mirror with the fields that match my facts: contact roles, competitors, furthest stage, loss reason.
+
+METHOD
+- Start at the prior. For each fact, estimate a likelihood ratio from how often it appears on won versus lost deals, and update. Show the running probability after each fact.
+- Where the data is thin (under 10 deals), shrink the ratio toward 1 and say so.
+- Compare the result with my gut number and explain the gap.
+- If you can run code, do the arithmetic in code and show it.
+
+OUTPUT
+An update table (fact, ratio, source, probability after), the final number with a range, and the one fact I could change this week that moves it most.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Don't invent a likelihood ratio for a fact the records don't hold; leave it out and say so.
+```
+
+### Replay the deals we lost that looked like this one
+
+```
+Find three to five lost deals that looked like mine and replay each one: what would have happened if we'd done one thing differently. Use Calven MCP for the lookalike deals, why they were lost and what the buyers said.
+
+FILL IN
+- Deal: [deal]
+- My plan for the next two weeks: [paste it]
+
+CONTEXT
+Lost deals rarely get a second look, and the next one that looks the same gets lost the same way. I want the lesson before my deal hits the stage where theirs died.
+
+FROM CALVEN
+- My deal's segment, size band, competitors, contact roles and stage.
+- Lost deals in the same segment with the same competitor or a similar size, paged from the CRM mirror: stage reached, contact roles, loss reason, price and product feedback.
+- The survey responses and deal drivers for those deals, with evidence quotes.
+
+METHOD
+- Pick the closest three to five and show why each is a match.
+- For each, name the turning point: the stage, the moment, the driver ranked as deciding.
+- Run the counterfactual: one change we controlled (an earlier exec meeting, a pilot, a different proof point, a second thread). Judge whether the buyer's own words suggest it would have changed the result. Mark it plausible, possible or no.
+- Check my plan against every plausible counterfactual.
+
+OUTPUT
+A replay table (deal, turning point, counterfactual, verdict, buyer quote), then my plan with the changes it needs, marked.
+
+GROUNDING
+Turning points and quotes come from the records, cited. The counterfactual verdict is your judgement and labelled as such. If no lost deal is close, say so.
+```
+
+### Build the call as an if-they-say tree
+
+```
+Build my next call as a decision tree: if the buyer says this, I ask that, with the branch that leads to a next step. Use Calven MCP for what this persona says, how the competitor gets mentioned and the questions that work.
+
+FILL IN
+- Deal: [deal]
+- Call goal: [the next step I need: technical evaluation, exec meeting, pilot, pricing]
+- Who's on the call: [names and roles]
+
+CONTEXT
+I've prepared the first five minutes. Calls turn on the buyer's third answer, and I want to have thought through every likely answer before I'm in it.
+
+FROM CALVEN
+- The persona canvases for the people on the call: objections, pains, what they're measured on.
+- Quotes from buyers in this segment tagged Objection or Competitor mention, and our reps' discovery questions from won deals.
+- The competitor's discovery questions and landmines from their battlecard, if one is in the deal.
+
+BUILD
+- The opening question, then the four or five most likely answers, each with my follow-up. Go three levels deep.
+- Every leaf ends in an ask for the call goal, a graceful exit, or a flag that the deal is weaker than I think.
+- Mark the branch where most similar calls go wrong.
+- If you can make files, build it as a single interactive HTML page: click an answer, see the next question.
+
+OUTPUT
+The tree as a nested list (or the HTML file), plus a one-screen cheat sheet of the five lines I most need.
+
+GROUNDING
+Every buyer answer traces to a canvas or a quote, cited, or is marked as your assumption. Don't invent rep questions; use the recorded ones or label yours.
+```
+
 ## Ad hoc questions
 
 - Where does [deal] stand and who is on it?
@@ -149,3 +243,9 @@ Judge only against the Universe and cite it. If my plan is sound, say so.
 - What is the loss reason on the deals we lost at [account] before?
 - Which of our proof points is strongest for a technical buyer?
 - What question does the [competitor] battlecard say to ask first?
+- What is the sales cycle for won deals in [segment], and is [deal] running long against it?
+- Which lead source wins most often in [segment], and over how many deals?
+- What did the last buyer who chose us over [competitor] say tipped it?
+- Which buying trigger is on record for [account], and what do customers with that trigger say they needed?
+- Is the [persona] on [deal] a role that shows up on our won deals or our lost ones?
+- What does the product brief say about the one capability [deal] is evaluating hardest?

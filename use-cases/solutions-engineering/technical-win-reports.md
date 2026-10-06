@@ -122,6 +122,70 @@ GROUNDING
 Only the Universe, cited.
 ```
 
+## Advanced prompts
+
+### Rank the gaps by cost of delay
+
+```
+Rank the product gaps for product management by cost of delay divided by duration, so the fix order follows the money. Use Calven MCP for the deals each gap touched and what buyers said about it.
+
+FILL IN
+- Gaps: [paste the gaps you want ranked]
+- Build estimates: [engineering's rough duration for each, or "use an assumption"]
+- Window: [window]
+
+CONTEXT
+Our gap list is ranked by who complained last. Product asks "how much is it worth" and I answer with anecdotes.
+
+FROM CALVEN
+- The product gaps section of the win/loss dashboard and the deals behind each gap, with amounts.
+- Deal drivers in the Capability category tied to each gap, with outcome and whether they decided the deal.
+- Buyer quotes on each gap, and open deals where the same product feedback tag appears.
+
+MODEL
+- For each gap, estimate cost of delay per month: lost pipeline from closed deals spread over the window, plus open pipeline at risk weighted by a stated probability.
+- Divide by build duration (CD3). Rank.
+- Show the ranking's sensitivity: which gaps swap places if the at-risk probability halves or doubles.
+- Flag gaps where the money comes from one big deal, so product sees the concentration.
+
+OUTPUT
+The ranked table (gap, deals, n, cost of delay, duration, CD3, concentration), the top three in two lines each with a buyer quote, and the sensitivity note.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Amounts come from deal rows; say which were withheld. Don't invent a deal or a buyer quote.
+```
+
+### Test whether the gap really loses deals
+
+```
+Test whether a product gap really lowers our win rate or just shows up in deals we'd lose anyway. Use Calven MCP for the closed deals and the drivers that mention the gap.
+
+FILL IN
+- Gap: [the gap]
+- Product feedback tag: [the closest tag]
+- Window: [window]
+
+CONTEXT
+Product will fund one gap this quarter. I'm about to argue for this one. If the losses would have happened without it, I lose credibility for the next one.
+
+FROM CALVEN
+- Closed deals in the window, paged, with product feedback, competitors, account size, industry, ICP fit tier, loss reason and amount.
+- Deal drivers that mention the gap: direction, whether they decided the deal, evidence quote.
+- The overall win rate from the win/loss dashboard, with n.
+
+METHOD
+- Compare win rates for deals with and without the gap tag. If you can run code, use Fisher's exact test and report the p-value.
+- Check confounders: is the gap concentrated in a low-fit tier, one competitor or one segment? Compare within each.
+- Read the drivers: in how many lost deals did the gap decide the outcome, versus appear alongside a bigger reason?
+- Give a verdict: causal enough to fund, plausible but unproven, or a symptom of targeting.
+
+OUTPUT
+A half-page verdict with the raw and adjusted gaps, n per cell, the decided-the-deal count, and the sentence I say to product.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Say plainly when a cell has fewer than ten deals. Don't present correlation as cause.
+```
+
 ## Ad hoc questions
 
 - Which product gaps cost us deals this quarter, and how many?
@@ -133,3 +197,9 @@ Only the Universe, cited.
 - Which battlecards went stale after the last release?
 - What caveats did our SEs make on won deals this quarter?
 - What did the win/loss survey say about product on [deal]?
+- Which gap shows up on both won and lost deals, so it's annoying but not deciding?
+- Which gap appears most on deals that are still open?
+- Did any gap we reported last quarter stop appearing after a release?
+- Which competitor wins most often on deals with the [tag] product feedback tag?
+- What's the single most expensive lost deal where a capability gap decided it?
+- Which gap do our reps caveat on calls before the buyer raises it?

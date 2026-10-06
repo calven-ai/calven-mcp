@@ -88,6 +88,68 @@ GROUNDING
 Re-check every number against the Universe and flag any that do not match. Do not rank on cost; I add that.
 ```
 
+## Advanced prompts
+
+### Fund the best portfolio of requests
+
+```
+Treat this year's GTM budget requests as a portfolio and pick the combination that buys the most expected pipeline under the budget cap. Use Calven MCP for the evidence behind each request's upside.
+
+FILL IN
+- Requests: [paste each request: what, cost, the owner's claimed impact]
+- Budget cap: [total available]
+- Must-funds: [anything already committed]
+
+CONTEXT
+Requests get funded one by one, in order of who asks loudest. A portfolio view shows which combination returns the most, and which requests only look good alone.
+
+FROM CALVEN
+- For each request, the evidence it rests on: segment win rate and deal size, the loss driver it fixes with the pipeline it decided, or the market opportunity it targets with sizing and timeline.
+- Win rates and average deal size by segment from the ICP dashboard, with n.
+- Product gaps and costly objections from the win/loss and voice-of-customer dashboards, with amounts at risk.
+
+MODEL
+- For each request, estimate pipeline added as a low, likely and high range, built from the Calven evidence plus a labelled assumption for effectiveness.
+- Flag overlaps: two requests chasing the same lost pipeline can't both claim it.
+- Solve the selection: maximise expected pipeline under the cap, then repeat at the low end to find the robust choice. If you can run code, solve it as a knapsack problem.
+- Show the efficient frontier: best pipeline at 70%, 85% and 100% of the cap.
+
+OUTPUT
+The funded set with expected pipeline and range, the frontier, the requests that didn't make it and why, and a one-page memo for the exec team.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Never accept an owner's claimed impact as evidence; mark it as theirs.
+```
+
+### Set kill criteria before you fund
+
+```
+For each budget case we fund, define the leading indicators, the check-in date and the result that would stop the spend, before a dollar goes out. Use Calven MCP for the baselines each indicator is measured against.
+
+FILL IN
+- Funded cases: [paste each case with its cost and promised outcome]
+- Review cadence: [e.g. monthly, quarterly]
+
+CONTEXT
+Once money is spent, nobody wants to call it a failure, so programs run a year past their sell-by date. Kill criteria agreed up front make stopping a rule, not a fight.
+
+FROM CALVEN
+- The baseline for each indicator: segment win rate, in-profile pipeline, multi-threading rate, competitive win rate, loss share for a driver, each with n and the prior period.
+- How much each baseline moved quarter to quarter in the last year, as the normal noise.
+
+METHOD
+- For each case, pick one leading indicator (moves in 30 to 60 days) and one lagging indicator (pipeline or win rate).
+- Set the threshold: the change that's bigger than normal noise. Use the past variation; if you can run code, compute the minimum detectable change at the deal volume the case will touch.
+- Write the rule: by this date, if the leading indicator hasn't moved past this threshold, cut or rescope.
+- Flag cases whose effect can't be distinguished from noise at our volume; they need a longer horizon or a different metric.
+
+OUTPUT
+A table per case: indicators, baseline (n), threshold, check-in date, kill rule. Then the cases that can't be measured as planned and what to change.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Baselines come from dashboards only; never compute a rate from rows.
+```
+
 ## Ad hoc questions
 
 - What is the win rate and average deal size in [segment]?
@@ -99,3 +161,9 @@ Re-check every number against the Universe and flag any that do not match. Do no
 - Which costly objection comes up most?
 - Do we win more with multi-threaded deals? By how much?
 - Which lead source has the best win rate?
+- Which segment has the highest win rate but the least pipeline?
+- How much lost pipeline traces to the single biggest product gap?
+- Which market opportunity has a high impact rating and no deals against it?
+- What's the win-rate difference between inbound and outbound lead sources, with n?
+- Which competitor costs us the most pipeline, and is that rising?
+- Which customer theme grew most this year, and is it tied to revenue?

@@ -97,6 +97,69 @@ GROUNDING
 Carry only the changes the retro supports and the evidence the Universe holds. Do not invent a new angle the quotes do not back.
 ```
 
+## Advanced prompts
+
+### Replay the campaign as a counterfactual
+
+```
+Replay my finished campaign as if we'd made two different calls, and estimate what we'd have got. Use Calven MCP for what the leads became and how each tier really converts.
+
+FILL IN
+- Campaign: [campaign]
+- Results: [paste spend, leads, MQLs and opportunities, by segment and channel]
+- Lead list: [attach the campaign's leads: company and title]
+- Alternatives: [the two calls to replay, e.g. "Tier 1 only" or "the angle we rejected"]
+
+CONTEXT
+The retro will say what happened. The next budget decision needs what would have happened if we'd chosen differently, with the arithmetic shown so nobody argues from gut feel.
+
+FROM CALVEN
+- The ICP tier of each company on the lead list, and any deal it opened, with stage and outcome, from the CRM.
+- Win rate, deal size and sales cycle by tier and segment from the ICP dashboard, with n.
+- A persona review of the rejected angle, if one of the alternatives is a different message.
+
+METHOD
+- Rebuild the actual funnel from my results and the CRM: what the leads became, by tier.
+- For each alternative, rebuild the funnel under its rules: drop or reweight leads, swap in the tier's real conversion and win rates, and adjust for the persona review where the message changes. Show every step.
+- Give each counterfactual as a low, expected and high range, and name the assumption that carries most of the difference.
+
+OUTPUT
+A side-by-side of the actual campaign and the two counterfactuals (leads, opportunities, pipeline, cost per opportunity), then a three-line recommendation for the next campaign.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. A counterfactual is an estimate; never present it as what would certainly have happened.
+```
+
+### Find what really drove the pipeline
+
+```
+Find which lead attributes actually drove pipeline in my campaign, with a driver analysis on my export. Use Calven MCP to add fit, persona and outcome to every lead.
+
+FILL IN
+- Lead export: [attach a CSV: lead, company, title, source, channel, asset, date, became opportunity yes or no]
+- Campaign: [campaign]
+
+CONTEXT
+The campaign report splits results by channel. The real driver might be company size, persona or the asset someone downloaded, and a channel can look good only because of who it happened to reach.
+
+FROM CALVEN
+- For each company: ICP tier, size, industry and any deal with stage and outcome, from the CRM.
+- For each contact the CRM holds: role and lifecycle stage. Map the remaining titles to our approved personas.
+- The ICP dashboard's predictive attributes, with n, to compare against.
+
+METHOD
+- Join my export to the Calven fields. Report the match rate and what didn't match.
+- Fit a logistic regression of became-opportunity on tier, persona, size, channel and asset. If the sample is too small, use cross-tabs with confidence intervals and say why.
+- Show which attributes predict pipeline, which only looked good in the channel report, and whether this campaign's drivers agree with the ICP dashboard.
+- If you can run code, do it in a notebook and show the odds ratios.
+
+OUTPUT
+A ranked driver table with effect size and confidence, the two findings that change the next brief, and the matched dataset as a CSV.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Call out correlation versus cause. Don't force a title onto a persona it doesn't fit; leave it unmapped.
+```
+
 ## Ad hoc questions
 
 - Which of these accounts are Tier 1: [paste]?
@@ -108,3 +171,10 @@ Carry only the changes the retro supports and the evidence the Universe holds. D
 - What should the next [segment] campaign open on?
 - Did the leads from [campaign] close at the in-profile win rate or below it?
 - Which of the campaign's claims are not in the product brief?
+- Which titles on the [campaign] lead list map to none of our personas?
+- What share of [campaign] accounts already had an open deal before the campaign started?
+- Which competitors showed up on deals opened from [campaign] accounts?
+- Which objections did [persona] raise on calls during the [campaign] window?
+- Which pillar has the weakest field adoption, and did [campaign] lean on it?
+- Did [campaign] reach the contact roles that sit on our won deals?
+- Which trend did the winning asset ride, and is it still rising?

@@ -87,6 +87,69 @@ GROUNDING
 Language from quotes, claims from the brief, cited.
 ```
 
+## Advanced prompts
+
+### Pick the topic with a Delphi panel
+
+```
+Pick the webinar topic with a Delphi panel of our personas: independent ratings, shared feedback, a second round, convergence. Use Calven MCP for the panelists and the evidence they argue from.
+
+FILL IN
+- Candidate topics: [paste four to six topics]
+- Personas: [three or four personas the webinar targets]
+- Segment: [segment]
+
+CONTEXT
+The topic usually comes from whoever spoke loudest in the planning call. A Delphi round takes the loudest voice out and shows where the audience genuinely agrees.
+
+FROM CALVEN
+- Each persona's canvas: goals, pains, jobs to be done, watering holes.
+- The themes with the most mentions for each persona last quarter, with counts.
+- High-severity trends for the segment.
+
+METHOD
+- Round 1: each persona rates every topic 1 to 10 on "I'd give up an hour for this", alone, with a one-line reason grounded in their canvas or themes.
+- Share the anonymised median and range. Round 2: each persona revises or defends their score.
+- Stop when the spread on the top topic narrows, or after round 3. Report where the panel converged, and where one persona stayed an outlier and why.
+- For the winner, write the title and a three-line abstract in the persona's words.
+
+OUTPUT
+A table of scores by round, the winning topic with its title and abstract, and the outlier view worth keeping for the Q&A.
+
+GROUNDING
+Every rating reason cites the canvas, a theme or a trend; mark extrapolation as yours. Don't invent theme counts.
+```
+
+### Find which webinars actually made pipeline
+
+```
+Find which past webinars actually made pipeline, with a cohort analysis of the attendees. Use Calven MCP to see which attendees' accounts went on to open deals.
+
+FILL IN
+- Attendee export: [attach a CSV: webinar, date, attendee, company, title, registered or attended]
+- Window: [window]
+
+CONTEXT
+We judge webinars on registrations. Before I plan next quarter's calendar, I want to know which topics brought in the accounts that later bought, and how long it took.
+
+FROM CALVEN
+- For each company: ICP tier and any deal opened after the webinar date, with stage, outcome and amount, from the CRM.
+- The CRM contacts at those accounts, with role.
+
+METHOD
+- Treat each webinar as a cohort. Match attendees to accounts and report the match rate.
+- For each cohort: share of Tier 1 and Tier 2 attendees, share whose account opened a deal within 30, 90 and 180 days, and the pipeline and won revenue that followed.
+- Compare attended against registered-only as a rough control.
+- Plot time to first deal by cohort; if you can run code, as a survival curve.
+- Group the webinars by topic and format, and say which pattern made pipeline.
+
+OUTPUT
+A cohort table, the chart, the two topics to repeat and the one to drop.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Pipeline after a webinar is influenced, not caused; say so. Don't count an account the match can't confirm.
+```
+
 ## Ad hoc questions
 
 - What topic does [persona] ask about most on calls this quarter?
@@ -100,3 +163,8 @@ Language from quotes, claims from the brief, cited.
 - Which customers have quotes on [topic] we could ask to speak?
 - Rewrite this abstract in the buyer's words: [paste]
 - What may the speakers claim about [capability]?
+- Which high-severity trends for [segment] are still marked new, not acted on?
+- What question do buyers ask on calls that our messaging never answers?
+- Which customers have Quantified outcome quotes about [topic]?
+- Which [persona] contacts sit on open deals a webinar invite could move forward?
+- Which analyst findings back a webinar on [topic]?

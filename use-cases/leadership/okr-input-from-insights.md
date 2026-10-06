@@ -82,6 +82,68 @@ GROUNDING
 Use only the Universe, cited. Do not speculate beyond the rows.
 ```
 
+## Advanced prompts
+
+### Check if a key result can move detectably
+
+```
+Check whether each proposed key result can move by enough, on our volume, to tell a real change from noise. Use Calven MCP for the baselines and the sample sizes behind them.
+
+FILL IN
+- Proposed key results: [paste them, with targets]
+- Expected volume: [deals or calls you expect next quarter, or write "use last quarter"]
+
+CONTEXT
+"Raise competitive win rate from 42% to 48%" sounds precise. On 30 deals a quarter, that move sits inside the noise. A key result we can't measure ends in an argument, not a decision.
+
+FROM CALVEN
+- The baseline for each key result from its dashboard (win rate, in-profile share, multi-threading, messaging alignment, sentiment), with n and the last four quarters.
+- Data availability from the Insights overview: which dashboards have enough data.
+
+MODEL
+- For each key result, compute the smallest change detectable at 80% power and a 10% significance level, given the baseline and the expected n.
+- Compare it with the target and grade each: measurable, measurable over two quarters, or noise.
+- For the noise ones, propose a measurable alternative: a longer window, a pooled metric or a leading indicator with more volume.
+- If you can run code, run the calculation and show a table of the n needed against effect size.
+
+OUTPUT
+A table (key result, baseline, n, target change, detectable change, grade, alternative), then the rewritten set of key results.
+
+GROUNDING
+Label every number as Calven (cited, with n), computed by you (with the method), or your assumption. Don't recompute a baseline from rows; use the dashboard number.
+```
+
+### Build the driver tree under the revenue goal
+
+```
+Build the driver tree from the revenue objective down to the key results the GTM team controls, and show which branch carries the most weight. Use Calven MCP for the rate at each branch.
+
+FILL IN
+- Objective: [the revenue or growth objective]
+- Quarterly history: [paste bookings, pipeline created and deal counts by quarter, or write "none"]
+
+CONTEXT
+Key results get picked because they're easy to report. A driver tree shows which ones actually move the objective, and by how much per point.
+
+FROM CALVEN
+- Win rate, deal size and cycle by segment from the ICP dashboard, with n.
+- Multi-threading win rate against single-threaded, and contact coverage, from the persona dashboard.
+- Competitive win rate and the top loss reasons.
+- Messaging alignment and evidence-backed pillars from the messaging dashboard.
+
+MODEL
+- Build the tree: revenue is deals times deal size; deals are pipeline times win rate; win rate breaks into its drivers (in-profile share, threading, competitive win rate).
+- Attach the Calven baseline to each node.
+- Compute what one point of improvement at each leaf is worth in revenue.
+- If I pasted history and you can run code, check the tree against it: which drivers moved with revenue over the quarters.
+
+OUTPUT
+The tree as an outline or a diagram, the value-per-point table ranked, and the three key results to pick because they carry the most revenue per point.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Value per point is arithmetic on stated baselines; say so, and don't present a correlation as a cause.
+```
+
 ## Ad hoc questions
 
 - Which dashboards have data this quarter, and which do not?
@@ -93,3 +155,9 @@ Use only the Universe, cited. Do not speculate beyond the rows.
 - How many documents were flagged for drift and how many resolved?
 - What is contact coverage on open pipeline?
 - Which KPI moved most this quarter?
+- Which KPI has the smallest sample behind it?
+- Which KPI got worse two quarters running?
+- What's the win-rate gap between in-profile and out-of-profile deals, with n?
+- How many deals did win/loss cover last quarter, and is that enough to report a win rate per competitor?
+- How many pillars are evidence-backed, and did that change last quarter?
+- Which dashboard has no data, and which agent would fill it?

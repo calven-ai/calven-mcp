@@ -85,6 +85,70 @@ GROUNDING
 Use only quotes and dossiers in the Universe, cited.
 ```
 
+## Advanced prompts
+
+### Run a naming tournament with your personas
+
+```
+Run a pairwise tournament between my candidate names, judged by our personas, and rank them with a proper model. Use Calven MCP for the judges and the words customers use.
+
+FILL IN
+- Candidates: [paste five to ten candidate names]
+- Feature: [one line on what it does]
+- Personas: [buyer and user personas who'll see the name]
+
+CONTEXT
+Asking "which name do you like" gets you the clever one. Forced choices between pairs, judged on whether the name says what the feature does, get you the one people understand on first read.
+
+FROM CALVEN
+- The personas' canvases: jobs, pains and messaging hooks, for their language.
+- Quotes where customers describe this job or capability, for their vocabulary.
+- A persona review of the feature description written with each of the top two names.
+
+METHOD
+- For every pair of names, have each persona pick the one that better tells them what the feature does without explanation, with a one-line reason in their voice.
+- Score with a Bradley-Terry model. If you can run code, fit it and give each name a strength with an interval. Otherwise rank by win share.
+- Break near-ties on how close each name sits to words customers use, citing the quotes.
+- Run the persona review on the top two and report the findings.
+
+OUTPUT
+A ranked table: name, strength, win share by persona, the closest customer phrase, review findings. Then the pick in two lines.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Persona choices trace to the canvas, quotes or review. Don't credit a customer phrase nobody said.
+```
+
+### Red-team the name as a rival rep
+
+```
+Attack my shortlisted names the way a competitor's sales rep would, and tell me which survive. Use Calven MCP for the competitors' product names, their talk tracks and how buyers already use the words.
+
+FILL IN
+- Names: [paste two to four shortlisted names]
+- Feature: [one line on what it does]
+- Competitors: [the competitors we meet most]
+
+CONTEXT
+A name lives in deals, not in the naming doc. If a rival rep can twist it into a weakness in one sentence, or a buyer mixes it up with theirs, it costs us.
+
+FROM CALVEN
+- Each competitor's dossier: product, module and feature names, and their positioning.
+- Their battlecards: talk track, landmines, objection handling.
+- Quotes where customers use each name's words, and in what sense.
+
+RED-TEAM
+- For each name, write the competitor rep's best one-liner against it, in the style of their talk track.
+- Check collisions: names that match or sound like a competitor's product or feature, and the confusion a buyer would have.
+- Check meaning drift: places where customers already use the word for something else.
+- Score each name for attack surface and collision risk, 1 to 5 each, with the reason.
+
+OUTPUT
+A table per name with the attack, collisions, meaning drift and scores, then the survivor and the one change that would make it stronger.
+
+GROUNDING
+Label every score as your judgement and every collision or quote as Calven (cited). Don't invent a competitor feature name; if the dossier doesn't list one, say "not in the dossier".
+```
+
 ## Ad hoc questions
 
 - What do customers call [capability] on calls?
@@ -96,3 +160,9 @@ Use only quotes and dossiers in the Universe, cited.
 - Which existing feature names in the product brief would [name] sit next to?
 - Does any theme or quote already use "[name]" to mean something else?
 - Run the persona review on this feature description with the name "[name]": [paste]
+- What words do buyers in lost deals use for [capability] that buyers in won deals don't?
+- Which of our feature names never appear in customer quotes?
+- What do our reps call [capability] on calls, and does it match the product brief?
+- Which feature names in [competitor]'s dossier start with the same verb as "[name]"?
+- Does "[name]" already appear in any of our claims or positioning?
+- Which customer phrases for [job] show up in more than one segment?

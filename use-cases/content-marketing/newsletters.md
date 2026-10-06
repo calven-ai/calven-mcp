@@ -97,6 +97,73 @@ GROUNDING
 Judge only against the Universe and cite. If it is clean, say so.
 ```
 
+## Advanced prompts
+
+### Design a subject line test with real power
+
+```
+Design a subject line test that can actually detect a winner: shortlist the candidates with our personas first, then size the test properly. Use Calven MCP for the personas, their words and a persona review of the candidates.
+
+FILL IN
+- Issue: [paste the issue's lead or plan]
+- Candidates: [paste five to eight subject lines, or write "draft them"]
+- List size: [subscribers per send]
+- Baseline: [your usual open or click rate]
+
+CONTEXT
+We A/B test every issue and the winner changes every time, which means we're mostly measuring noise. I want fewer, better tests.
+
+FROM CALVEN
+- The personas on the list, with their canvases: goals, pains, hooks.
+- How those personas phrase the issue's topic, from customer quotes.
+- A persona review of each candidate subject line.
+
+METHOD
+- If I asked you to draft, write eight candidates across distinct strategies: the buyer's own phrase, a number, a question, a contrarian claim.
+- Use the persona review to cut to the two most different strong candidates. Explain why.
+- Run a power calculation: for my list size and baseline, what's the smallest lift a 50/50 test can detect at 80 percent power and 5 percent significance? If you can run code, show the calculation.
+- If the detectable lift is bigger than any lift we'd realistically see, say so and propose the alternative: test on clicks, pool the same test across three issues, or stop testing subject lines.
+- Write the test plan: metric, split, duration, the decision rule, and what we learn whichever wins.
+
+OUTPUT
+The two finalists with the review findings, the power calculation, the test plan, and a one-line verdict on whether this test is worth running.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Persona preferences come from the review and canvases, cited; they shortlist, the test decides.
+```
+
+### Trace issues to pipeline with a lag model
+
+```
+Find out which newsletter issues and topics moved pipeline, by lining up each send against the opportunities that opened in the weeks after. Use Calven MCP for the deals that opened, their source and the accounts behind them.
+
+FILL IN
+- Issue data: [attach a CSV: issue date, topic, sends, opens, clicks, and clicking contacts' company domains if you have them]
+- Window: [window, e.g. last 12 issues]
+- Lag: [how long after a send you'd credit an opportunity, e.g. 30 days, or write "test 14, 30 and 60"]
+
+CONTEXT
+The newsletter is judged on opens because nobody can connect it to revenue. I want a defensible read on which issues mattered, even if it's directional.
+
+FROM CALVEN
+- CRM deals opened in the window with lead source, opened date, account, segment and amount.
+- CRM accounts for the clicking domains, with ICP tier, if I gave domains.
+- Themes from customer calls for each issue's topic, to see if the topic was live with buyers at the time.
+
+MODEL
+- For each issue, count opportunities opened within the lag window, overall and from accounts that clicked, with pipeline amount.
+- Compare against the baseline rate of new opportunities in weeks with no send.
+- If you can run code, fit a simple distributed lag regression of weekly new opportunities on clicks, and test the three lags to see which fits best.
+- Group by topic: which topics go with more pipeline per send? Check whether those topics were also rising themes on calls.
+- Name the limits: other campaigns in the same weeks, small numbers, clicks that aren't buyers.
+
+OUTPUT
+A table per issue (clicks, opportunities in window, pipeline, lift over baseline), the topic ranking, the best-fitting lag, and three topics for next quarter's issues.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Call it attribution evidence, not proof, and never count a deal unless its dates fall inside the window.
+```
+
 ## Ad hoc questions
 
 - Which trend changed most in the last month, and what is our take?
@@ -107,3 +174,10 @@ Judge only against the Universe and cite. If it is clean, say so.
 - Is this subject line something [persona] would open: "[subject]"?
 - Which published pieces fit [persona] at the awareness stage?
 - Rewrite this lead in the persona's words: [paste]
+- Which customer quote from this month would make a reader stop scrolling?
+- What changed in the market this month that our positioning has a view on?
+- Which persona on our list has the least content written for their stage?
+- What's a counter-intuitive finding from our win/loss data I could lead an issue with?
+- Which competitor move this month is worth a paragraph, and what's our take?
+- Which theme from calls has risen for three months straight?
+- What does [persona] say they read every week, from their canvas?

@@ -174,6 +174,102 @@ GROUNDING
 Use only claims in the product brief and messaging, cited. Do not invent pricing, dates or integrations.
 ```
 
+## Advanced prompts
+
+### Test launch messages with a conjoint trade-off
+
+```
+Run a conjoint-style test of my launch message: mix headlines, benefits and proof, and find which parts actually earn the buyer's attention. Use Calven MCP for the personas' reactions and the approved claims.
+
+FILL IN
+- Feature: [feature]
+- Personas: [two or three personas]
+- Headlines: [paste three candidate headlines]
+- Benefits: [paste three candidate benefit lines]
+- Proof options: [paste two or three proof points or quotes]
+
+CONTEXT
+Everyone has a favourite headline. I want to know which element does the work, so the launch leads with it and sales repeats it.
+
+FROM CALVEN
+- The persona canvases: pains, goals, messaging hooks.
+- The messaging pillar the feature sits under and its approved value propositions.
+- A persona review of the full set of candidate lines.
+
+SIMULATE
+- Build eight to twelve message cards, each one headline, one benefit and one proof, using a balanced design so every element appears equally.
+- For each persona, show the cards in pairs and have them pick one, in the first person, with a one-line reason drawn from their canvas.
+- Estimate a part-worth for each element per persona. If you can run code, fit a simple logit on the choices.
+- Flag any element that wins with one persona and loses with another.
+
+OUTPUT
+A part-worth table by persona, the winning combination, and the launch headline and subhead written from it.
+
+GROUNDING
+Label every number as from the simulation, not real buyers. Reactions trace to the canvas or the review, cited. Drop any line that makes a claim the product brief doesn't support.
+```
+
+### Red-team the launch as the rival's PMM
+
+```
+Red-team my launch: play the competitor's product marketer and write the counter-attack they'd run the week we ship. Use Calven MCP for their positioning, their talk track and the gaps in our claims.
+
+FILL IN
+- Launch copy: [paste the announcement and the key messages]
+- Competitor: [competitor]
+
+CONTEXT
+We'll spend weeks on the launch. They'll spend a day on the response, and their reps will use it on our deals. I'd rather read it now.
+
+FROM CALVEN
+- The competitor's battlecard and dossier: positioning, strengths, talk track, and their feature comparison.
+- Their competitive signals from the last 12 months, to see how they've responded before.
+- Our claims register and the product brief's known weaknesses for the area.
+
+RED-TEAM
+- As their PMM, write the internal email to their sales team: what we launched, why it doesn't matter, and the three lines to use.
+- Write the landmine questions their reps will plant with our prospects.
+- Write the comparison table they'd publish, hitting the gap between our launch copy and what our brief says we do.
+- Then switch sides: for each attack, rate how much it would hurt (high, medium, low) and give our counter.
+
+OUTPUT
+The counter-campaign as they'd write it, the damage ratings, and the launch copy revised to close the openings.
+
+GROUNDING
+Their moves must be consistent with their recorded positioning and past signals, cited. Don't invent a capability for them. Label anything beyond the evidence as your extrapolation.
+```
+
+### Forecast adoption from past launches
+
+```
+Forecast this launch's first-90-day adoption using our past launches as the reference class, then adjust for what's different. Use Calven MCP for how much buyers have asked for this and what's pulling deals toward it.
+
+FILL IN
+- Feature: [feature]
+- Past launches: [paste adoption at 30, 60 and 90 days for four or more past launches, with notes]
+- Target accounts: [the customers or segment it's built for]
+
+CONTEXT
+Every launch plan has a target that came from hope. I want an outside-view forecast first, then an honest adjustment, so the number I commit to has a reason behind it.
+
+FROM CALVEN
+- Theme mentions and quotes asking for the capability, with n and window, against the same for the past launches' areas where they exist.
+- Open and lost deals naming it as a requirement, with amount.
+- Accounts in the target segment, by ICP tier, from the CRM.
+
+MODEL
+- Build the base rate from the past launches: the median and the spread at each checkpoint.
+- Decide which past launches are the closest match and why.
+- Adjust up or down for the inside view: demand evidence from Calven, size of the target base, and anything in my notes. Cap the adjustment and show it.
+- Give the forecast as a range at 30, 60 and 90 days.
+
+OUTPUT
+The reference class table, the adjustment with reasons, the forecast range, and the leading indicator to watch in week two.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Demand mentions aren't adoption; say how much weight you gave them.
+```
+
 ## Ad hoc questions
 
 - Which pillar does [feature] belong under in our messaging?
@@ -188,3 +284,8 @@ Use only claims in the product brief and messaging, cited. Do not invent pricing
 - What does the product brief say we do not do in [area]?
 - Which claims on our site about [area] have no proof point?
 - How would [persona] react to this headline: "[headline]"?
+- Which objection to [feature] does the persona canvas predict, and does our messaging already answer it?
+- Which customers asked for [feature] by name, and do any have an open renewal?
+- What words do customers use for [feature]'s benefit that our messaging never uses?
+- Which competitor launched something similar in the last 12 months, and how did they position it?
+- Which pillar has the least proof, and could [feature] supply it?

@@ -109,6 +109,101 @@ GROUNDING
 Stay true to the persona in the Universe. Do not make the buyer easier or harder than the canvas supports.
 ```
 
+## Advanced prompts
+
+### Build a clickable call flow for live calls
+
+```
+Build a working call-flow tool I can click through during a live call. Use Calven MCP for the approved messages, the persona's objections and the competitor answers it branches to.
+
+FILL IN
+- Persona: [persona]
+- Main competitors: [competitors]
+- Format: [an HTML file, or a spreadsheet with linked tabs]
+
+CONTEXT
+A script on paper falls apart at the first unexpected answer. I want one screen: the opener, then a button for each thing the buyer can say, each leading to the next line and the next question, with the evidence behind it a click away.
+
+FROM CALVEN
+- The persona canvas: pains, objections with responses, messaging hooks.
+- The messaging matrix row for the persona at the awareness stage, and objection handling.
+- The battlecard objection handling ("they say, you say") and discovery questions for each competitor.
+- Two or three customer quotes per pain, verbatim.
+
+BUILD
+- A tree: opener, reason for the call, then branches for interest, each objection, each competitor, and "not me". Each node has the line to say, a follow-up question, and a source note.
+- Keep every spoken line under 25 words.
+- If you can run code, write a single self-contained HTML file with buttons, a back button and a reset; otherwise give the tree as a table with node IDs I can paste into a spreadsheet.
+- Add a "dead ends" list: branches where the evidence has no good answer.
+
+OUTPUT
+The working file (or the table), plus the dead-ends list.
+
+GROUNDING
+Every line cites the messaging, canvas, battlecard or a quote. Don't write a response the Universe doesn't support; mark it as a dead end instead.
+```
+
+### Run an opener tournament judged by the buyer
+
+```
+Run a tournament between candidate openers, judged pair by pair by the persona, and rank them with an Elo rating. Use Calven MCP for the raw material and the judge.
+
+FILL IN
+- Persona: [persona]
+- My current opener: [paste it]
+
+CONTEXT
+I can't A/B test twelve openers on live calls. Pairwise judging is how you rank things when absolute scores are unreliable, and it's what I want before I spend a week of dials on one opener.
+
+FROM CALVEN
+- The persona canvas: pains, goals, messaging hooks.
+- The top themes for the persona from customer quotes, with mention counts and verbatim lines.
+- How our reps opened calls on won deals, from vendor quotes.
+- A persona review of the final shortlist.
+
+SIMULATE
+- Write eleven challengers to my opener, each built on a different pain, hook, quote or rep line. Each under 20 words spoken.
+- Run every pair: the persona hears both cold and picks the one that earns ten more seconds, with a one-line reason in their voice.
+- Score with Elo (start 1,000, K of 32), randomising the pair order. If you can run code, run three tournaments with different orders and average the ratings.
+- Send the top three to the persona review and adjust if the review flags something the tournament missed.
+
+OUTPUT
+A ranked table: opener, rating, wins, the persona's typical reason. Then the top two with their source, and why my current opener placed where it did.
+
+GROUNDING
+Label the ratings as simulated judgement, not call data. Every opener cites its source in the Universe. Don't invent a rep line or a quote.
+```
+
+### Find what drives meetings in your call log
+
+```
+Run a driver analysis on my call log to find what actually predicts a booked meeting. Use Calven MCP to map my contacts to personas and fit tiers and to tag each opener with the pillar it uses.
+
+FILL IN
+- Call log: [attach the dialer export: contact, title, account, date and time, opener used, outcome]
+- Window: [window]
+
+CONTEXT
+I have a feeling that some openers work better. The log has hundreds of calls. I want to separate the opener from everything else that differs between calls: who I called, how good the fit was, and when.
+
+FROM CALVEN
+- Personas with role titles, so each contact's title maps to a persona.
+- ICP fit tier for each account found in the CRM.
+- The value pillars and messaging hooks, so each opener is tagged with the pillar it leans on.
+
+METHOD
+- Clean the log: map titles to personas, accounts to fit tiers, openers to pillars. List what didn't map.
+- Describe first: connect rate and meeting rate by opener, persona, tier, hour and weekday, with counts.
+- If you can run code, fit a logistic regression of meeting booked on opener pillar, persona, tier and time slot. Report the effects with intervals and check for openers that only look good because I used them on Tier 1 accounts.
+- Say plainly how many calls a real difference needs, and which effects the log can't support.
+
+OUTPUT
+A driver table ranked by effect size, the confounders you found, and three changes to my calling plan.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine (from the log), or your assumption. Don't invent outcomes for calls the log doesn't record.
+```
+
 ## Ad hoc questions
 
 - What is [persona] measured on?
@@ -123,3 +218,9 @@ Stay true to the persona in the Universe. Do not make the buyer easier or harder
 - What should I never say to [persona] in the first minute?
 - Give me a warm-call opener for an inbound [persona] who downloaded [asset].
 - What question exposes [competitor]'s weakness without naming them?
+- Which pain do [persona]s mention most on calls, and has it grown this quarter?
+- Which value claim do our reps make on calls that buyers never repeat back?
+- What does [competitor]'s talk track say, so I know what the buyer heard last week?
+- Which objection does our messaging answer that buyers never actually raise?
+- Which discovery question shows up in vendor quotes from won deals but not lost ones?
+- What does a [persona] call the problem, in three words from the quotes?

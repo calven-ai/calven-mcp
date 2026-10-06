@@ -91,6 +91,100 @@ GROUNDING
 Report the dashboard's definition when they differ. Do not adjust Calven's number to match.
 ```
 
+## Advanced prompts
+
+### Shrink small-sample win rates before ranking
+
+```
+Rank our segments by win rate without being fooled by small samples: shrink each rate toward the overall average in proportion to how little data it has. Use Calven MCP for the win rates and their sample sizes.
+
+FILL IN
+- Window: [window]
+- Cut: [segment, competitor, persona or lead source]
+
+CONTEXT
+The top of every win-rate table is a segment that won four of five deals. Leadership reads it as a strategy. I want a ranking where a 60% on 80 deals beats an 80% on 5, with the reasoning shown.
+
+FROM CALVEN
+- Win rates by the cut from the dashboards, each with wins, losses and n for the window.
+- The company-wide win rate for the same window, with n.
+- Which cells are below the dashboard's reporting floor.
+
+METHOD
+- Use empirical Bayes: fit a beta prior to the cells, then compute each cell's shrunk rate and a 90% credible interval.
+- If you can run code, do it in a short script and show the prior's parameters.
+- Re-rank on the shrunk rate. Show which cells moved most and why.
+- Mark the pairs whose intervals don't overlap: those are the only differences worth a decision.
+
+OUTPUT
+A table: cell, raw rate, n, shrunk rate, interval, old rank, new rank. Then three lines on what the ranking supports and what it doesn't.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Never compute a rate from rows when the dashboard has it; cells below the floor stay out of the ranking.
+```
+
+### Split the win-rate change into mix and rate
+
+```
+Our overall win rate moved this quarter. Decompose the change into mix (we sold to different segments) and rate (we won more or less within each segment). Use Calven MCP for win rates and deal counts by segment for both periods.
+
+FILL IN
+- This period: [quarter]
+- Prior period: [quarter]
+- Cut: [segment, deal size band or competitor]
+
+CONTEXT
+A headline win rate can rise while every segment gets worse, just because the mix shifted toward easy deals. Before anyone takes credit or blame, I want to know which it was.
+
+FROM CALVEN
+- Win rate and number of decided deals per cell for both periods, from the dashboards, with n.
+- The overall win rate for both periods, with n.
+- The top deal drivers in the cells that moved most, with a buyer quote each.
+
+METHOD
+- Run a shift-share decomposition: total change = mix effect + rate effect + interaction. Show the arithmetic per cell.
+- Check for a Simpson's paradox: any cell where the direction disagrees with the total.
+- For the two cells contributing most, explain the move with the deal drivers.
+- If you can run code, chart a waterfall from prior rate to current rate.
+
+OUTPUT
+The waterfall (or table), the share of the change from mix versus rate, the paradox check, and a three-line explanation I can paste into the QBR.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Flag any cell under 10 deals in either period as too small to read.
+```
+
+### Debate where to double down
+
+```
+Run a structured debate on the planning question every win-rate review raises: double down on our strongest segment or fix our weakest. Use Calven MCP for the win rates, the deal drivers and the ICP's view of each segment.
+
+FILL IN
+- Strongest segment: [segment]
+- Weakest segment: [segment]
+- Budget or headcount at stake: [what's being allocated]
+
+CONTEXT
+The planning meeting usually picks whoever argues loudest. I want both cases made properly, with evidence, and judged by someone who has to answer for the number.
+
+FROM CALVEN
+- Win rate, average deal size, sales cycle and open pipeline for both segments, from the ICP dashboard, with n.
+- The deciding deal drivers in each segment, with evidence quotes.
+- The ICP's Segment Tiers and Priority Verticals, and any market opportunities or trends tagged to either segment.
+
+METHOD
+- Advocate A argues to double down: compounding win rate, cheaper pipeline, references.
+- Advocate B argues to fix the weak segment: size of the prize, fixable loss drivers, strategic need.
+- Two rounds: opening case, then rebuttal to the other side's strongest point.
+- A judge playing the CRO scores both on evidence, upside and risk, and rules. The judge may split the allocation.
+
+OUTPUT
+The two cases (200 words each), the rebuttals, the ruling with the score sheet, and the one metric that would reverse the ruling in a quarter.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Advocates may only cite recorded evidence; anything else is labelled as argument.
+```
+
 ## Ad hoc questions
 
 - What is our competitive win rate this quarter versus last, with n?
@@ -103,3 +197,9 @@ Report the dashboard's definition when they differ. Do not adjust Calven's numbe
 - What moved most in the last quarter?
 - What is the win rate for deals in [deal size band]?
 - Which cells are below the reporting floor this quarter?
+- Which segment's win rate rose while its deal count fell?
+- What is our win rate when two competitors are on the deal versus one?
+- Which persona's presence changes win rate most, with n?
+- Which competitor do we beat in Enterprise but lose to in Mid-market?
+- Where did win rate fall but pipeline won rise this quarter?
+- Which segment's losses are mostly no decision rather than a competitor?

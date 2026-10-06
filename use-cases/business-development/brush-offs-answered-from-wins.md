@@ -113,6 +113,98 @@ GROUNDING
 Stay true to the persona as defined in the Universe. Do not make the buyer easier than the canvas says.
 ```
 
+## Advanced prompts
+
+### Run a Delphi panel on which brush-offs mean no
+
+```
+Run a Delphi panel to decide which brush-offs are a real no and which are a reflex worth one more question. Use Calven MCP for the personas who sit on the panel and the evidence they argue from.
+
+FILL IN
+- Brush-offs I hear: [paste the five to eight you hear most]
+- Persona: [persona]
+- Segment: [segment]
+
+CONTEXT
+I treat every brush-off the same: one rebuttal, then move on. Some of them hide a real fit, others mean I'm wasting a call. I want a sorted list, with a rule for each.
+
+FROM CALVEN
+- The persona canvas: objections with responses, pains, goals.
+- Customer quotes tagged Objection for the persona, and quotes from customers who first said something similar and later bought.
+- Deal drivers and loss reasons for the segment, with the win/loss dashboard's top loss reasons and n.
+
+METHOD
+- Seat four panellists: the persona, a veteran BDR, a sales manager and a win/loss analyst. Each reads the evidence.
+- Round one: each rates every brush-off from 1 (real no) to 5 (reflex) with one line of reasoning, independently.
+- Share the anonymous spread. Round two: each revises, and anyone still more than 1 point from the median says why.
+- Stop at round three or when the spread is under 1 point.
+
+OUTPUT
+A table: brush-off, final median, spread, the evidence that moved the panel, and the rule (one question to ask, or let it go). Then the two brush-offs the panel couldn't agree on.
+
+GROUNDING
+Label every rating as the panel's judgement and every fact as Calven (cited, with n). Don't invent a won deal or a quote that turned a brush-off around.
+```
+
+### Replay lost incumbent deals with a better answer
+
+```
+Replay deals we lost to an incumbent and test, counterfactually, whether a different answer to "we already use them" would have changed the outcome. Use Calven MCP for the lost deals, what those buyers said and what changed minds in deals we won.
+
+FILL IN
+- Competitor: [competitor]
+- Window: [window]
+
+CONTEXT
+"We already use them" ends most of my calls. Before I rewrite my answer, I want to know whether a better answer would have mattered, or whether those deals were never winnable.
+
+FROM CALVEN
+- Lost deals against the competitor in the window, with loss reason, deal drivers and survey summaries where they exist.
+- Won deals against the same competitor, with the deal drivers that helped and the buyers' evidence quotes.
+- The battlecard: where we win, where we lose, landmines, objection handling.
+
+METHOD
+- Sort the lost deals into three groups from the evidence: never winnable (fit or a hard requirement), lost on something said or not said, and unclear.
+- For the middle group, replay the first conversation: write the answer that the won-deal evidence suggests, then judge whether the buyer's stated reason would plausibly have changed. Rate each as likely, possible or unlikely.
+- Count how much pipeline sits in each group.
+
+OUTPUT
+A table of lost deals with group, counterfactual answer and verdict, then the pipeline at stake, then the one answer to "we already use them" that the replay supports best.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Counterfactuals are your judgement and say so. Don't invent what a buyer said.
+```
+
+### Plot brush-offs on frequency and recoverability
+
+```
+Plot every brush-off on two axes, how often we hear it and how often we still win after it, and pick the two worth practising. Use Calven MCP for the counts and the outcomes.
+
+FILL IN
+- Persona: [persona]
+- Window: [window]
+
+CONTEXT
+I practise the brush-offs I find hardest, not the ones that cost the most. A 2x2 tells me where an hour of practice pays back.
+
+FROM CALVEN
+- Customer quotes tagged Objection for the persona in the window, and the themes they cluster into, with mention counts.
+- Costly objections from the voice-of-customer dashboard, with n.
+- Deals where each objection came up, with outcome, from quotes linked to deals and deal drivers.
+
+METHOD
+- Map each quote theme to a brush-off in plain words.
+- Frequency is the mention count. Recoverability is the share of deals with that objection we still won. Show the counts, and mark any point with fewer than 5 deals.
+- Draw the 2x2: frequent and recoverable (practise), frequent and unrecoverable (qualify out fast), rare and recoverable (keep a note), rare and unrecoverable (ignore).
+- For the practise quadrant, pull the winning answer from what changed buyers' minds.
+
+OUTPUT
+The 2x2 as a table or a simple chart, the two brush-offs to practise with a two-line answer each, and the one to qualify out on with the question that confirms it.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Don't invent an outcome for an objection no deal is linked to; leave it off the chart and list it.
+```
+
 ## Ad hoc questions
 
 - How do we answer "we already use [competitor]"?
@@ -127,3 +219,10 @@ Stay true to the persona as defined in the Universe. Do not make the buyer easie
 - What does [persona] find credible as proof?
 - Is there a won deal in [industry] where "no budget" came up?
 - What should I never claim when [competitor] is the incumbent?
+- Which brush-off do we hear more this quarter than last?
+- Which objection comes up in won deals almost as often as in lost ones?
+- What did [persona]s say about [competitor] after they switched to us?
+- Which loss reason against [competitor] has a won deal that beat it?
+- What does the [competitor] battlecard say their reps tell buyers about us?
+- Is "send me an email" more common from buyers or from users, per the quotes?
+- Which recent [competitor] signal gives me a new answer to "we already use them"?

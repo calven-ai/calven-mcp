@@ -121,6 +121,104 @@ GROUNDING
 Use only recorded versions, changes, signals and findings in the Universe and cite them.
 ```
 
+## Advanced prompts
+
+### Turn the pack into a spaced-repetition deck
+
+```
+Turn the company story into a spaced-repetition deck a new hire studies ten minutes a day for their first month. Use Calven MCP for the facts on every card.
+
+FILL IN
+- Role: [role]
+- Format: [Anki CSV, a spreadsheet, or a printable list]
+
+CONTEXT
+A week-one pack is read once and forgotten by week three. Spaced repetition is how people actually retain facts. I want the forty or so facts a new hire must know cold, as cards, on a schedule.
+
+FROM CALVEN
+- Positioning: one-liner, category, unique attributes, competitive alternatives.
+- The ICP summary and disqualifiers.
+- The personas with their top pain and top objection.
+- The battlecards for Tier 1 competitors: how we win, where we lose, one landmine each.
+- Three customer quotes worth repeating.
+
+BUILD
+- Write 40 to 60 cards. One fact per card. Questions that force recall, not recognition ("What does a Head of Data lose sleep over?" not "Is data quality a pain?").
+- Mix card types: fact, "in your own words", "they say, you say" for objections, and "which competitor said this?".
+- Tag each card by topic and difficulty, with the source.
+- Write a schedule: new cards per day, review intervals (1, 3, 7, 14, 30 days), and the day-30 check.
+- If you can run code, produce the CSV with front, back, tags and source columns.
+
+OUTPUT
+The deck file (or table), the schedule, and a ten-card day-one starter set.
+
+GROUNDING
+Every card's answer cites the Universe. Don't invent a fact, a quote or a competitor line to fill the deck.
+```
+
+### Rank the facts by how often they decide deals
+
+```
+Run a Pareto analysis on what a new hire could learn: rank each fact by how often it shows up in the moments that decide our deals, and build week one from the top of the list. Use Calven MCP for the evidence.
+
+FILL IN
+- Role: [role]
+- The current pack: [paste the table of contents or the pack]
+
+CONTEXT
+Onboarding packs list everything with equal weight. A new hire has a week. I want the few facts that come up in most deals at the top, and the ones that rarely matter pushed to month two.
+
+FROM CALVEN
+- Deal drivers, helped and hurt, by category, with the win/loss dashboard's breakdown and n.
+- Objections from customer quotes, grouped into themes, with mention counts.
+- Competitors by how often they appear in deals and our win rate against each, from the competitive dashboard.
+- Which pillars reps use on calls, from field adoption on the messaging dashboard.
+
+METHOD
+- List candidate facts from the pack and the Universe: each competitor, persona, objection, pillar, proof point.
+- Count how often each appears in deal drivers, objections and competitive deals. Normalise and combine into one frequency score; say how you weighted the sources.
+- Sort and draw the cumulative curve. Find the cut where the top facts cover 80 percent of occurrences.
+- Compare with the pack: what it teaches on day one that's below the cut, and what's above the cut that it skips.
+
+OUTPUT
+The ranked list with counts, the cumulative curve as a table or chart, and a re-ordered week-one plan.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Don't count a fact the records don't mention.
+```
+
+### Grade a teach-back to a sceptical buyer
+
+```
+Run a teach-back test: the new hire explains the company story to a sceptical buyer, and the AI tool grades what they got wrong, left out or made up. Use Calven MCP for the buyer and the approved story.
+
+FILL IN
+- New hire's explanation: [paste a written or transcribed five-minute explanation of what we do, for whom and why us]
+- Persona to play the buyer: [persona]
+- Day of onboarding: [day]
+
+CONTEXT
+A new hire who can recite the pack can't always explain it. Teaching it back to a sceptic exposes the gaps, the made-up claims and the competitor they can't distinguish us from. Better found in week one than on a customer call.
+
+FROM CALVEN
+- Positioning, messaging (one-liner, pillars) and the product brief.
+- The persona canvas: pains, objections.
+- The battlecard for the competitor the persona most likely uses.
+- Claims we must not make.
+
+METHOD
+- Play the persona reacting to the explanation in the first person: two follow-up questions, one objection, one "how is that different from what we have?".
+- Grade the explanation on five criteria: accuracy against the brief, the buyer's problem first, differentiation from the competitor, proof used, claims within bounds. Score 1 to 5 with evidence.
+- List every inaccurate or unapproved claim with the correct version and source.
+- Name the two things to study before the next teach-back, mapped to the pack sections.
+
+OUTPUT
+The buyer's reaction, the scorecard, the correction list, and the study plan for the next attempt.
+
+GROUNDING
+Grade only against the Universe, cited. Mark any judgement about delivery as yours. Don't add facts the new hire should have said that the Universe doesn't contain.
+```
+
 ## Ad hoc questions
 
 - What do we do, in one sentence from our positioning?
@@ -136,3 +234,9 @@ Use only recorded versions, changes, signals and findings in the Universe and ci
 - Which persona does an SDR call first, and what is their top objection?
 - What changed in the product in the last 60 days?
 - Which market trends does our story rely on?
+- Which three facts would a new hire most likely get wrong about our product, per the claims?
+- Which competitor do new hires confuse us with most, given our positioning?
+- What do customers say in their first month with us? Quote two.
+- Which persona does the company story speak to least?
+- Which objection comes up in almost every deal, per the voice-of-customer read?
+- What's the one number a new hire should know about how we win?

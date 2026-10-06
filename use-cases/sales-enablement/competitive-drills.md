@@ -87,6 +87,72 @@ GROUNDING
 Numbers with n and window. Pairs below the floor are listed as such.
 ```
 
+## Advanced prompts
+
+### Run a bake-off against their rep
+
+```
+Run a bake-off: the competitor's rep pitches the buyer first, then I pitch, and the buyer decides. Use Calven MCP for the competitor's pitch, the buyer and our battlecard.
+
+FILL IN
+- Competitor: [competitor]
+- Persona: [persona]
+- Segment: [segment]
+
+CONTEXT
+Role-plays usually have the buyer read objections off a list. Real deals are decided against a rival who pitched well the day before. I want to sit in that second slot.
+
+FROM CALVEN
+- The competitor's positioning, talk track, strengths and pricing from their dossier.
+- Our battlecard: how we win, where we lose, landmines, objection handling.
+- The persona canvas: goals, pains, objections.
+- Why buyers in the segment chose the competitor, from lost-deal drivers and quotes.
+
+SIMULATE
+- Part 1: play the competitor's best rep giving a 3-minute pitch to the persona, using their real strengths and setting their own landmines for us. Show it to me.
+- Part 2: play the persona. I pitch. Ask the questions their pitch left in the buyer's head, in the buyer's words, one at a time.
+- Part 3: step out of character as a neutral judge. The buyer picks who goes to the next round, with the two reasons that decided it, referencing both pitches.
+- Score me against the battlecard: landmines defused, landmines set, proof used, honesty about where we lose.
+
+OUTPUT
+Their pitch, the transcript, the buyer's decision, my scorecard, and the one line I should have said.
+
+GROUNDING
+Their pitch uses only what their dossier records, cited; mark extrapolation. The buyer's reactions trace to the canvas and real quotes, and the judge's reasons cite them.
+```
+
+### Build a drill ladder from real losses
+
+```
+Build a five-level drill ladder against one competitor, from the moments we actually lost deals to them, with a mastery bar at each level. Use Calven MCP for the losses, the buyers' words and the battlecard.
+
+FILL IN
+- Competitor: [competitor]
+- Mastery bar: [e.g. two clean passes in a row per level]
+
+CONTEXT
+Reps drill the easy version once and stop. A ladder makes them earn each level, and building it from real losses means they practise what actually beat us.
+
+FROM CALVEN
+- Lost deals against the competitor with deal drivers ranked as deciding, and the buyer quotes behind them.
+- The competitor's battlecard and dossier.
+- The personas on those deals, with canvases.
+- The competitor's signals from the last 90 days, for the hardest level.
+
+BUILD
+- Cluster the deciding drivers into the five moments we lose most: for example pricing pressure, a feature gap, the incumbent, a reference request, a late-stage discount.
+- Order them by difficulty, judged by how often reps lost when it came up.
+- For each level: the buyer setup, the opening line in the buyer's real words, two escalations, the model answer from the battlecard, and a scoring rubric (accurate, on-message, honest, advances the deal).
+- Level 5 combines two moments and adds a recent competitor move.
+- Write a progress tracker a rep fills in after each attempt.
+
+OUTPUT
+The five-level ladder as a drill pack, the rubric, and the tracker as a table.
+
+GROUNDING
+Every buyer line is verbatim or marked as paraphrase with its source quote. Levels must come from recorded losses, cited; don't invent a losing moment that isn't in the drivers.
+```
+
 ## Ad hoc questions
 
 - Play [persona] evaluating us against [competitor] and push back on price.
@@ -97,3 +163,10 @@ Numbers with n and window. Pairs below the floor are listed as such.
 - What is our proof point against [competitor]'s time-to-value claim?
 - Score this answer to "[competitor objection]" against the battlecard: [paste].
 - Which competitor should I rehearse against before a [segment] call?
+- Which competitor beats us most often in deals with a technical buyer?
+- What's the question [competitor]'s buyers ask us that reps have never had a good answer to?
+- Which landmine has [competitor] been setting for us, judging by what buyers repeated on calls?
+- What did the last three buyers who chose [competitor] say about pricing?
+- Which of our proof points has [competitor]'s dossier already tried to discredit?
+- How did the best rep on record handle [competitor] coming up on a call?
+- Which competitor has changed their pitch most in the last quarter, according to their signals?

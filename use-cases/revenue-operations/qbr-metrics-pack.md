@@ -92,6 +92,67 @@ GROUNDING
 Numbers as in the pack with n. Do not add numbers Calven does not hold beyond the ones I pasted.
 ```
 
+## Advanced prompts
+
+### Red-team the QBR story for cherry-picking
+
+```
+Red-team the QBR narrative for cherry-picked numbers, convenient windows and moves that are only noise. Use Calven MCP for the full set of headline KPIs, their prior periods and their samples.
+
+FILL IN
+- Draft narrative: [paste the QBR narrative or the slide text]
+- Quarter: [quarter]
+
+CONTEXT
+The QBR narrative gets written by the people being reviewed. That's normal, and it's why it needs an adversary before it goes in front of the exec team.
+
+FROM CALVEN
+- Every dashboard's headline KPIs for the quarter with the prior period and n, from the Insights overview.
+- The biggest movers and the dashboards with no data.
+- For each number the draft cites, the dashboard figure and its window.
+
+RED-TEAM
+- Play an analyst on the exec team whose job is to find what the narrative leaves out. Check every number the draft cites against the dashboard.
+- Flag: a number that doesn't match, a window chosen to flatter, a rate quoted without n, a move smaller than its noise (call it noise when n is under 30 or the change is under 5 points), a negative mover the draft skips.
+- For each flag, write the honest version of the sentence.
+
+OUTPUT
+A table: claim, flag, evidence, honest version. Then the two negative movers the narrative must address, and the narrative with the fixes applied.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Don't call a number wrong without showing the dashboard figure next to it.
+```
+
+### Trace pipeline won through a driver tree
+
+```
+Build a driver tree for pipeline won and show which branch explains the change from last quarter. Use Calven MCP for the win rates, deal counts, deal sizes and cycle times that make up each branch.
+
+FILL IN
+- Quarter: [quarter]
+- Prior period: [quarter]
+- Bookings: [paste bookings for both quarters if you want the tree tied to finance's number]
+
+CONTEXT
+The QBR says pipeline won went up or down. The useful question is which lever moved: more deals, better win rate, bigger deals, or a different mix. The tree makes that one picture.
+
+FROM CALVEN
+- Pipeline won and lost, deals decided and competitive win rate for both quarters, from the win/loss dashboard, with n.
+- Average deal size and sales cycle, from the ICP dashboard, with n.
+- ICP share of wins and the multi-threaded win rate, from the ICP and persona dashboards.
+
+MODEL
+- Tree: pipeline won = deals decided × win rate × average won deal size. Break win rate into in-profile and out-of-profile, and deals decided by segment where the dashboards allow.
+- For each node, compute this quarter, prior quarter and the contribution of its change to the total change (hold the others constant, then reconcile the interaction).
+- If you can run code, draw the tree with each node coloured by contribution.
+
+OUTPUT
+The tree, a table of contributions that sums to the total change, and a two-line headline naming the branch that moved most.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Don't derive a rate by adding rows; where a dashboard doesn't give a node, mark it as not available.
+```
+
 ## Ad hoc questions
 
 - What are every dashboard's headline KPIs for last quarter, with the prior period?
@@ -103,3 +164,9 @@ Numbers as in the pack with n. Do not add numbers Calven does not hold beyond th
 - What was the ICP share of wins this quarter versus last?
 - What are the top three customer themes this quarter?
 - How did our win rate against [competitor] change?
+- Which KPI moved against the trend of the last two quarters?
+- Which dashboard's sample is too small to report this quarter?
+- How did the ICP share of wins change while pipeline won changed?
+- Which competitor's win rate moved most, and on how many deals?
+- Which customer theme grew fastest this quarter, with a quote?
+- What share of lost pipeline went to no decision this quarter versus last?

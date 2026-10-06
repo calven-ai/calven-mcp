@@ -115,6 +115,100 @@ GROUNDING
 Use only the Universe, cited.
 ```
 
+## Advanced prompts
+
+### Backtest the scorecard against your reps
+
+```
+Check whether the scorecard's criteria predict which of our reps win, using their real deal outcomes. Use Calven MCP for each rep's deals and how buyers described them.
+
+FILL IN
+- Scorecard: [paste the criteria]
+- Rep ratings: [attach a CSV: rep name, hire date, and how each rep scored or would have scored on each criterion at hire]
+
+CONTEXT
+Scorecards are written from what managers believe good looks like. If the criteria don't separate our winners from the rest, I'm hiring against the wrong picture.
+
+FROM CALVEN
+- Closed deals per rep (owner) over the last four quarters: outcome, amount, segment.
+- What buyers said about the sales team in surveys, and deal drivers in the Experience category.
+- Vendor quotes per rep, to check the skills the criteria claim to test.
+
+BACKTEST
+- Compute each rep's win rate and average deal size from their closed deals, with counts. Drop reps with fewer than eight closed deals.
+- Correlate each criterion with win rate and with deal size. If you can run code, fit a simple regression and show it.
+- Check each criterion against the buyers: does it match what they praised or criticised?
+- Rank the criteria as predictive, neutral or noise, and suggest weights.
+
+OUTPUT
+A table (criterion, link to win rate, link to deal size, buyer support, verdict, new weight), the revised scorecard, and the one criterion to add.
+
+GROUNDING
+Rep metrics are computed by you from deal rows; show the counts. With a handful of reps this is directional, not proof; say so. Ratings are mine.
+```
+
+### Model when a new hire pays back
+
+```
+Model a new AE's ramp to show when they pay back and what moves that date. Use Calven MCP for our real cycle lengths, deal sizes and win rates by segment.
+
+FILL IN
+- Role: [AE segment and territory]
+- Cost: [fully loaded annual cost]
+- Gross margin: [percentage]
+- Ramp: [months to full quota and the quota ramp schedule]
+- Pipeline: [inherited pipeline, or write "none"]
+
+CONTEXT
+The headcount plan assumes every hire hits quota in month six. Our cycle lengths might say otherwise. I need the honest payback date before I ask for the req.
+
+FROM CALVEN
+- Average sales cycle, deal size and win rate for the segment from the ICP dashboard, with n.
+- In-profile accounts in the territory, and how many have never had a deal.
+
+MODEL
+- Month by month: pipeline built, deals opened, deals closed one cycle later at the segment's win rate and deal size.
+- Compare cumulative gross profit with cumulative cost to find the payback month.
+- Run sensitivities: cycle plus 30%, win rate minus five points, a territory with half the in-profile accounts. Give the payback month for each.
+- If you can run code, build it as a spreadsheet with the inputs at the top.
+
+OUTPUT
+The monthly ramp table, the payback month in the base, low and high cases, the variable that moves it most, and the line for the headcount request.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Don't assume a new hire performs at the team average from day one; state the ramp curve you use.
+```
+
+### Build a deal-review case from a real loss
+
+```
+Turn a real lost deal into a deal-review case for the interview loop, with an answer key the panel grades against. Use Calven MCP for the deal, what the buyer said and what actually decided it.
+
+FILL IN
+- Lost deal: [deal]
+- Role: [AE, senior AE, sales manager]
+
+CONTEXT
+Candidates rehearse role-plays. A review of a real loss shows how they think: what they'd ask, where they'd spot the risk, what they'd do differently.
+
+FROM CALVEN
+- The deal: segment, amount, stages reached, contacts by role, competitor, loss reason, price and product feedback.
+- The deal drivers and evidence quotes from its win/loss survey.
+- The competitor's battlecard.
+
+BUILD
+- Write the case pack as the deal looked at proposal: the account, the people, the competitor, the notes a rep would have had. Anonymise the account and the people.
+- Hide the outcome. Write three questions: what's the risk, what would you do this week, what do you need to know that isn't here.
+- Write the answer key from the drivers: what decided the deal, which signals were visible, what a strong answer catches.
+- Add a scoring sheet: four criteria, 1 to 4, with a description of each level.
+
+OUTPUT
+The one-page case pack, the three questions, the answer key, the scoring sheet, and the reveal: what happened and why.
+
+GROUNDING
+The case uses only what's in the deal record and the survey, anonymised. Don't add facts the record doesn't hold; mark any filler as invented for the exercise.
+```
+
 ## Ad hoc questions
 
 - Who do our AEs actually sell to? Which personas sit on won deals?
@@ -127,3 +221,9 @@ Use only the Universe, cited.
 - Give me a territory exercise using our segment tiers.
 - What does [persona] find credible from a seller?
 - Which discovery questions do our best reps ask on won calls?
+- Which segment has the longest sales cycle a new hire will face?
+- Which persona has the lowest contact coverage on open deals, according to the persona dashboard?
+- What do buyers who chose us say a rep did well?
+- Which objection costs us the most pipeline?
+- What do buyers say about [competitor]'s sales team in the dossier quotes?
+- Which value claims from our best reps' calls would make good interview prompts?

@@ -148,6 +148,97 @@ GROUNDING
 Use only the messaging, brief and battlecard in the Universe and cite them. Do not claim what the brief does not state. If the comment is right about a weakness, say so in the reply.
 ```
 
+## Advanced prompts
+
+### Find what drives engagement on your posts
+
+```
+Find what drives engagement on our company posts, using our own post data tagged against the messaging. Use Calven MCP for the pillars, themes and buyer language to tag each post with.
+
+FILL IN
+- Post export: [attach a CSV of the last six months of posts: text, date, format, impressions, reactions, comments, clicks]
+
+CONTEXT
+We post daily and judge by the last post's likes. I want to know which pillars, angles and formats earn engagement from the right people, so next quarter's calendar leans on them.
+
+FROM CALVEN
+- The value pillars and the messaging hooks per persona.
+- Themes from customer calls and verbatim quotes, so posts can be tagged for using buyer language.
+- Product changes in the same window, to tag launch posts.
+
+METHOD
+- Tag each post: pillar, persona it speaks to, uses a customer quote or buyer phrase (yes or no), format, launch post or not, has a number.
+- Normalise engagement by impressions.
+- If you can run code, run a regression of engagement rate on the tags with day of week as a control, and report effects with confidence intervals. Otherwise compare medians by tag.
+- Name the two tags that matter most, and the one everyone believes in that doesn't.
+
+OUTPUT
+A driver table (tag, effect, confidence, n), a chart of engagement by pillar, and five rules for next quarter's calendar.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Engagement numbers come only from my export. Don't claim a driver on fewer than 20 posts; call it directional.
+```
+
+### Design a post test that can conclude
+
+```
+Design an A/B test for our social posts with enough posts to reach a real answer. Use Calven MCP for the two message variants worth testing and the persona each should reach.
+
+FILL IN
+- Question: [what you want to learn, e.g. customer-quote posts versus product posts]
+- Baseline: [your average engagement rate and posts per week]
+- Smallest effect worth knowing: [e.g. a 20% lift]
+
+CONTEXT
+We test by posting two things and comparing likes, which tells us nothing with a sample of two. I want a design that answers the question in a set number of weeks, or tells me it can't.
+
+FROM CALVEN
+- The pillar and persona the test targets, with the messaging hook.
+- Three customer quotes approved for marketing on the theme, for the variant that uses buyer language.
+- A persona review of the two variants' first lines.
+
+METHOD
+- Turn the question into one hypothesis with one variable changed. Write two matched variant templates and four posts per variant from the Universe.
+- Run a power calculation: posts needed per variant to detect the smallest effect at 80% power and 5% significance, given my baseline. If you can run code, show it.
+- Translate that into weeks at my posting rate. If it takes longer than a quarter, propose a bigger effect, a pooled metric or a different question.
+- Write the rules: what counts as a result, when to stop, what we'll do with each outcome.
+
+OUTPUT
+A one-page test plan: hypothesis, variants with example posts, sample size and duration, decision rules.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Don't invent a baseline; use mine or say the plan needs one.
+```
+
+### Drill replies to hostile comments
+
+```
+Drill me on replying to hostile comments under our posts, in a scored practice round with the comments we're most likely to get. Use Calven MCP for the objections, the competitors' attack lines and the approved answers.
+
+FILL IN
+- Post: [paste the post that will draw comments]
+- Who replies: [your name or the community manager's]
+
+CONTEXT
+The post is safe. The replies under it are where we get into trouble: a competitor's employee, an unhappy customer, a sharp critic. I want to have answered each kind before it happens in public.
+
+FROM CALVEN
+- Objection handling from the messaging, and the objections on the target personas' canvases.
+- The competitors' talk tracks against us and their recent signals.
+- The product brief's known weaknesses and claims with a concern flagged.
+
+SIMULATE
+- Write eight comments the post is likely to draw, mild to hostile: a competitor's employee, a skeptical practitioner, a customer with a complaint, a pricing question, a troll.
+- Give me one at a time. I reply. Score my reply 1 to 5 on accuracy, tone, brevity and whether it helps the people reading along.
+- After each, show the reply that would have scored 5, and say whether this one belongs in a DM or should be left alone.
+
+OUTPUT
+The eight comments, my scored replies, the model replies, and a one-page reply guide for this post.
+
+GROUNDING
+Model replies cite the Universe. Don't concede a weakness the product brief doesn't record, and don't deny one it does.
+```
+
 ## Ad hoc questions
 
 - Which messaging pillar has had no post this month?
@@ -163,3 +254,8 @@ Use only the messaging, brief and battlecard in the Universe and cite them. Do n
 - What is our one-liner, for the profile and the pinned post?
 - Which objection does this comment raise, and what is our approved answer?
 - Did any competitor make a move worth commenting on this week, and what does the battlecard let me say?
+- Which customer quote approved for marketing has the sharpest number in it?
+- Which persona's messaging hook has the fewest customer quotes behind it?
+- What does [competitor] say about us that a post could answer without naming them?
+- Which rising trend does no pillar in our messaging speak to?
+- What did customers say on calls this week that would make a good first line?

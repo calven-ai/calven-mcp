@@ -101,6 +101,102 @@ GROUNDING
 Only the Universe, cited.
 ```
 
+## Advanced prompts
+
+### Backtest your qualification questions
+
+```
+Find out which discovery questions would have predicted our technical losses, and cut my list to the ones that work. Use Calven MCP for the closed deals and the technical reasons behind them.
+
+FILL IN
+- My discovery questions: [paste your current list]
+- Segment: [segment]
+- Window: [window]
+
+CONTEXT
+My discovery call has 25 questions and I can't tell which ones matter. I want the few whose answers, in hindsight, separated the technical wins from the technical losses.
+
+FROM CALVEN
+- Closed deals in the segment and window, won and lost, paged, with tech stack requirements, complexity, product feedback and loss reason.
+- Deal drivers in the Capability category, and survey answers on product, from those deals.
+- Technical buyer quotes from those deals tagged Objection or Pain.
+
+BACKTEST
+- Map each of my questions to the deal fields or quotes that hold its answer. Questions with no mapping get marked untestable.
+- For each testable question, compare the answers in won and lost deals and compute the lift.
+- Rank the questions by how well their answer predicts a technical loss. If you can run code, fit a small decision tree and show its first three splits.
+- Name questions I'm missing: patterns in the losses no question of mine would surface.
+
+OUTPUT
+My questions ranked with lift and n, the untestable ones, the three to ask in the first ten minutes, and two new questions to add.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Counts come from paged rows. Don't invent a deal field or a loss reason the record doesn't hold.
+```
+
+### Practise discovery on a buyer with secrets
+
+```
+Run a discovery practice round where you play a technical buyer with hidden requirements, and score how many I uncover. Use Calven MCP to build the buyer from the persona and from what real technical buyers asked.
+
+FILL IN
+- Persona: [technical buyer persona]
+- Segment: [segment]
+- Competitor in the deal: [competitor]
+
+CONTEXT
+New SEs ask the questions on the template and miss the requirement that kills the deal in week six. Practice on a real deal is expensive. I want a sparring partner.
+
+FROM CALVEN
+- The persona canvas: goals, KPIs, pains and objections.
+- Technical buyer quotes in the segment tagged Objection, Pain or Job to be done, and the product feedback tags on lost deals there.
+- The competitor's landmines and our known weaknesses from the product brief.
+
+ROLE-PLAY
+- Before we start, privately pick three requirements from the evidence: one dealbreaker, one that favours the competitor, one that's easy for us. Don't reveal them.
+- Play the buyer in the first person. Answer only what I ask, the way a busy technical buyer would: short, a bit guarded.
+- Run up to 15 exchanges.
+- Then reveal the three requirements and score me: found, partly found, missed. Add a score for whether I disqualified early on the dealbreaker.
+
+OUTPUT
+The transcript, the reveal, the scorecard, and the question that would have found each missed requirement.
+
+GROUNDING
+The hidden requirements come from cited quotes, feedback tags or the brief, shown at the reveal. Don't invent a buyer requirement with no evidence behind it.
+```
+
+### Map their stack on an evolution chart
+
+```
+Map the prospect's architecture on a Wardley-style evolution chart and show where our product fits and where the risk sits. Use Calven MCP for our architecture, our integrations and what buyers in the segment run.
+
+FILL IN
+- Prospect: [account]
+- Their architecture: [paste discovery notes: systems, data flows, who owns what]
+- The need: [the user need the evaluation is about]
+
+CONTEXT
+I've got pages of notes and a vague sense of risk. I want one picture the AE and the buyer can both read: what's custom, what's commodity, and which joins are fragile.
+
+FROM CALVEN
+- The product brief's technical architecture and integrations.
+- The account's tech stack and the tech stack requirements on deals in its segment.
+- Technical buyer quotes tagged Pain about their current stack.
+
+METHOD
+- Start from the user need and list the components it depends on, top to bottom.
+- Place each on the evolution axis (genesis, custom, product, commodity) with a one-line reason.
+- Place our product and mark each dependency it touches: native integration, supported through the API, or a gap.
+- Flag the risky edges: custom components we'd have to integrate with, and commodity ones the buyer would rather not replace.
+- If you can run code, draw the map; otherwise give it as a table with coordinates.
+
+OUTPUT
+The map, the three riskiest joins with what to prove in the POC, and one sentence on where we shouldn't compete.
+
+GROUNDING
+Integration status comes only from the brief, cited by section. Evolution placements are your judgement, labelled so. Don't invent an integration.
+```
+
 ## Ad hoc questions
 
 - What does a [technical buyer persona] care about in an evaluation?
@@ -113,3 +209,8 @@ Only the Universe, cited.
 - What did technical buyers object to most on calls this quarter?
 - Has the product changed in [area] recently?
 - Which product feedback tag appears most on lost deals?
+- Which tech stack requirements show up on deals we lost but never on deals we won?
+- What did technical buyers in [segment] say about their current tool before switching?
+- Which discovery question does the [competitor] battlecard say exposes their weak spot?
+- How complex were our won deals in [segment] compared with the lost ones?
+- Which persona usually joins the deal after technical discovery and changes the requirements?

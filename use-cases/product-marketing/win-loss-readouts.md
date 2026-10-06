@@ -140,6 +140,101 @@ GROUNDING
 Change nothing in the numbers or quotes. Recommendations must trace to a driver in the sections.
 ```
 
+## Advanced prompts
+
+### Test whether the win-rate move is real
+
+```
+Tell me whether this period's win-rate change is a real shift or noise before I put it on a slide. Use Calven MCP for the win rates, their sample sizes and the drivers behind them.
+
+FILL IN
+- Window: [time window, e.g. last quarter]
+- Prior belief: [what leadership thinks caused the change, or write "none"]
+
+CONTEXT
+Every readout gets a headline like "win rate up six points". On thirty deals that can be chance. If I present noise as a trend, product and sales act on it for a quarter.
+
+FROM CALVEN
+- Win rate and competitive win rate for the window and the prior period, with n, from the win/loss dashboard.
+- Win rate by segment and by competitor for both periods, with n.
+- The top win and loss drivers for both periods.
+
+METHOD
+- Treat each win rate as a Beta posterior built from its wins and losses. Give the 90% credible interval for each period and the probability the true rate went up.
+- Do the same for each segment and competitor. Flag the moves that clear 80% probability and the ones that don't.
+- Update the prior belief: given how the drivers shifted, is the stated cause more or less likely than before?
+- Work out how many more decided deals it would take to call the headline move with 90% confidence.
+- If you can run code, simulate it in Python and plot the two posteriors.
+
+OUTPUT
+A table: metric, prior period, this period, credible interval, probability of a real increase, verdict (real, likely, noise). Then the one sentence I should say in the readout and the one I shouldn't.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your calculation. Don't add up rows to make a rate; use the dashboard. Don't call anything a trend that fails the threshold.
+```
+
+### Find what predicts a win in closed deals
+
+```
+Run a driver analysis on our closed deals to find what predicts a win, not what we assume does. Use Calven MCP to page through the closed deals and their attributes.
+
+FILL IN
+- Window: [time window, e.g. the last four quarters]
+- Hypotheses: [list what the team believes drives wins, e.g. multi-threading, inbound source, Tier 1 fit]
+
+CONTEXT
+The readout tells us why buyers say they chose. The deal record tells us what was true of the deals that won. When the two disagree, the deal record is usually right.
+
+FROM CALVEN
+- Every won and lost deal closed in the window, paged from the CRM mirror, with segment, size band, region, ICP tier, lead source, deal type, competitors, contact role, complexity and furthest stage.
+- The ICP dashboard's predictive attributes and win rate by attribute, with n, as the benchmark.
+
+METHOD
+- Build a table with one row per deal and the outcome as won or lost.
+- Fit a logistic regression on the attributes (a shallow decision tree if n is small). Report each attribute's effect as an odds ratio with an interval.
+- Test each team hypothesis: supported, contradicted, or not enough data.
+- Hold out 20% of deals and check the model beats the base rate.
+- If you can run code, do it in Python and give me the notebook. If not, cross-tab each attribute against outcome and say that's what you did.
+- Compare your top attributes with the dashboard's predictive attributes and explain any disagreement.
+
+OUTPUT
+The five attributes that move win odds most, ranked, each with its effect and n; the hypothesis scorecard; and one chart I can rebuild.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your calculation. Say when n is too small to trust. This is correlation: don't claim an attribute causes wins.
+```
+
+### Replay the lost deals with one gap fixed
+
+```
+Replay last period's lost deals as if we'd fixed one thing, and tell me how many would have flipped. Use Calven MCP for the lost deals, the buyers' stated reasons and the deal drivers.
+
+FILL IN
+- Window: [time window, e.g. last two quarters]
+- Fixes to test: [list two to four, e.g. ship the missing integration, a cheaper entry tier, a security review pack]
+
+CONTEXT
+Product, pricing and sales each want next quarter's investment. I want the counterfactual: which fix would have won back the most revenue, deal by deal.
+
+FROM CALVEN
+- Lost deals in the window with loss reason, lost-to competitor, amount, price feedback and product feedback.
+- Deal drivers that hurt us on those deals, with rank and the evidence quote.
+- The surveyed-deal summary where one exists.
+
+METHOD
+- For each lost deal and each fix, judge whether the fix removes the deciding driver. Rate it flip, maybe or no, and quote the evidence that decides it.
+- A deal with two deciding drivers flips only if the fix removes both.
+- Weight flip as 0.7 and maybe as 0.3 (assumptions I can change), and sum recovered revenue per fix.
+- Check overlap: deals two fixes would both recover, so nothing is counted twice.
+- If you can run code, output the deal-by-fix grid as a CSV with the weights as inputs.
+
+OUTPUT
+A ranked table of fixes by expected recovered revenue and deals flipped, the deal-by-fix grid behind it, and the three deals no fix would have saved.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Each flip judgement cites the driver or quote it rests on. Don't guess a reason for a deal with no survey: mark it unknown.
+```
+
 ## Ad hoc questions
 
 - What is our competitive win rate for [window], and how did it move?
@@ -156,3 +251,9 @@ Change nothing in the numbers or quotes. Recommendations must trace to a driver 
 - Which deals were no decision, and what stopped them?
 - Which loss outcome grew: lost to a competitor, no decision, or built in-house?
 - Which persona answered the most surveys, and which never answers?
+- Which deals did we win despite losing on price, and what outweighed it?
+- Which deal driver helps us in won deals and hurts us in lost ones?
+- Is our win rate against [competitor] different on inbound and outbound deals?
+- Which segment has a high win rate but almost no pipeline?
+- What do buyers praise in won deals that our messaging never mentions?
+- Which lost deals have a survey answer that disagrees with the CRM loss reason?

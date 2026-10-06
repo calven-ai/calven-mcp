@@ -94,6 +94,67 @@ GROUNDING
 Only the Universe. No claim about controls, certifications or policies beyond the brief; say "the security team will cover that" instead.
 ```
 
+## Advanced prompts
+
+### Model the security review queue
+
+```
+Model security review as a queue across our open deals and show how much it delays revenue, and what would cut it. Use Calven MCP for how often security comes up and what it does to deals.
+
+FILL IN
+- Open deals: [paste deals in security review with amount and target close]
+- Throughput: [questionnaires your team completes per week, and how many arrive]
+- Turnaround: [average days per questionnaire, and per security call]
+
+CONTEXT
+Every enterprise deal waits on a questionnaire. We staff for the average week and drown at quarter end. I want the delay in weeks and dollars, and the fix with the best return.
+
+FROM CALVEN
+- Deals with product feedback Security, won and lost, and their stage history.
+- Deal drivers that mention security, with outcome and whether they decided the deal.
+- The product brief's technical architecture, to estimate how many questions it answers outright.
+
+MODEL
+- Treat the team as a queue with my arrival and service rates. Compute utilisation and the expected wait. If you can run code, simulate a quarter with end-of-quarter arrival spikes.
+- Translate the wait into pipeline delayed and, using the security-driven losses, pipeline at risk.
+- Test three fixes: a pre-filled answer pack from the brief, one more person, and a trust page that deflects early questions. Model each fix's effect on service rate as a stated assumption.
+
+OUTPUT
+The current wait and the quarter-end wait, the pipeline delayed and at risk, and the three fixes ranked by weeks saved per cost.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Don't infer certifications or controls the brief doesn't state.
+```
+
+### Red-team the answers as their CISO
+
+```
+Red-team my security questionnaire answers as the buyer's CISO, who's looking for the answer that overreaches. Use Calven MCP for what the brief supports and what security stakeholders challenged before.
+
+FILL IN
+- Answers: [paste the questionnaire answers]
+- Account: [account]
+
+CONTEXT
+An answer that overreaches costs more than one that says "see attached policy". The CISO's follow-up questions are what stall the deal for a month.
+
+FROM CALVEN
+- The product brief's technical architecture, integrations and known weaknesses.
+- Claims about security on our site and docs, with their status and concerns.
+- Security stakeholder quotes tagged Objection, and the security persona's canvas if one exists.
+
+RED-TEAM
+- Read each answer as the CISO. Mark it: clean, vague (invites a follow-up), overreaching (claims more than the evidence), or contradicts our own published claims.
+- For every vague or overreaching answer, write the follow-up question the CISO would send.
+- Rewrite those answers: what the brief supports, stated plainly, and the rest routed to security with a placeholder for the evidence they hold.
+
+OUTPUT
+The answer-by-answer verdict table, the predicted follow-up questions, and the rewritten answers ready to paste.
+
+GROUNDING
+Every rewritten answer cites the brief or a claim record. Don't state a certification, control or audit result; route it to the security team instead.
+```
+
 ## Ad hoc questions
 
 - What does the brief say about hosting, regions and data residency?
@@ -105,3 +166,9 @@ Only the Universe. No claim about controls, certifications or policies beyond th
 - What do security stakeholders object to most on calls?
 - What settled the security concern for buyers who bought?
 - Which questions in this questionnaire can the brief not answer? [paste]
+- Which security claims on our site have a concern flagged against them?
+- Which security objection appeared on deals we still won, and what settled it?
+- Which industry's buyers raise security most often in calls?
+- Did any product change in the last six months touch hosting, access or data handling?
+- How long did deals with a security feedback tag take to close compared with the rest?
+- What did the security persona say they need to see before signing off?

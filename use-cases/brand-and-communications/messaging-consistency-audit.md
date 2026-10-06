@@ -141,6 +141,98 @@ GROUNDING
 Use only drift findings and documents in the Universe and cite them with dates.
 ```
 
+## Advanced prompts
+
+### Run a blind recall test across channels
+
+```
+Run a blind test: strip our name off every channel's description of us and see whether buyers think it's one company or several. Use Calven MCP for the personas who read them and the positioning they should all match.
+
+FILL IN
+- Channel copy: [paste the description from each channel: homepage hero, LinkedIn about, deck intro, proposal template, job ad, listing]
+
+CONTEXT
+Each owner thinks their channel is on-message. The buyer meets four of them in a week. The real test is whether the buyer comes away with one idea of what we do.
+
+FROM CALVEN
+- Our positioning: category, frame of reference, unique attributes and value themes.
+- The buyer and stakeholder personas, with canvases.
+- A persona review of each channel's copy.
+
+SIMULATE
+- Shuffle the descriptions and remove the company name and channel labels.
+- Each persona reads them in random order, as they'd meet them in a buying week, and answers: how many companies is this, what does each do, and which would you take a meeting with?
+- Score each pair of descriptions on whether the persona believed they were the same company.
+- Then compare every description with the positioning: category, main difference, buyer named.
+
+OUTPUT
+A matrix of which channels read as the same company, each persona's one-sentence summary per channel, and the channels to fix first with the line to change.
+
+GROUNDING
+Persona answers are your simulation, shaped by the canvases and the review; cite them. Judge drift only against the approved positioning, cited by section.
+```
+
+### Test whether on-message calls win more
+
+```
+Test whether deals where our reps pitched on-message win more than deals where they didn't. Use Calven MCP for the reps' own words on calls and how those deals closed.
+
+FILL IN
+- Window: [window]
+- Segment: [segment, or write "all"]
+
+CONTEXT
+Leadership asks why a consistency audit matters. If on-message pitching tracks with wins, the audit has a revenue case. If it doesn't, we have a different problem.
+
+FROM CALVEN
+- Vendor quotes from our reps in the window, with the deal each came from.
+- The value pillars and the messaging matrix.
+- Those deals' status, furthest stage, segment and amount, paged from the CRM.
+- Field adoption (pillar pull-through) from the messaging dashboard, with n.
+
+BACKTEST
+- Classify each vendor quote as on-pillar, off-pillar or contradicting the messaging, with the pillar named.
+- Give each closed deal a consistency score: the share of its rep quotes that are on-pillar.
+- Compare win rates for the top, middle and bottom thirds of consistency. If you can run code, run a logistic regression with segment and deal size as controls and report the effect with a confidence interval.
+- List the off-pillar lines that show up most in lost deals.
+
+OUTPUT
+A one-page memo: win rate by consistency band with n, the effect size and how sure it is, and the five off-pillar lines to retire.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Correlation isn't cause; say what else could explain the gap. Don't report a band with too few deals; give the floor.
+```
+
+### Build a drift scorecard you can rerun
+
+```
+Build a reusable drift scorecard as a spreadsheet, so every channel gets scored the same way every quarter. Use Calven MCP for the approved story, flagged claims and the drift findings that set the baseline.
+
+FILL IN
+- Channels and owners: [paste the list of channels with owners]
+- Current copy: [paste the copy per channel, or the parts to score first]
+
+CONTEXT
+Audits fade because each one is a one-off judgement. A scorecard with fixed criteria and weights shows the trend and gives each owner a number to move.
+
+FROM CALVEN
+- Positioning and messaging: one-liner, category, pillars, boilerplate, words dropped.
+- Claims with status and concern, and open drift findings against our pages.
+- The messaging dashboard's message sharpness and messaging alignment KPIs, with n.
+
+BUILD
+- Eight weighted criteria: category named right, one-liner match, pillar coverage, dropped words absent, claims approved, proof present, buyer language used, no competitor frame.
+- A scoring guide for each, 0 to 3, with an example of each score.
+- Score every pasted channel and compute the weighted total.
+- If you can run code, produce the spreadsheet with formulas: one tab for criteria and weights, one for scores by channel and quarter, one with a trend chart.
+
+OUTPUT
+The scorecard file (or the tables, if you can't run code), this quarter's scores by channel and owner, and the three lowest items to fix.
+
+GROUNDING
+Every deduction cites the positioning, messaging or claims record it breaks. Don't score buyer language without a quote to compare against.
+```
+
 ## Ad hoc questions
 
 - What is our current one-liner, category and boilerplate, with the document version?
@@ -155,3 +247,8 @@ Use only drift findings and documents in the Universe and cite them with dates.
 - What changed in the messaging since [date]?
 - How many documents did the last product change leave stale?
 - What does our positioning say the competitive alternatives are, so listings and decks agree?
+- Which value pillar has the fewest proof points behind it?
+- Which words do customers use for our category that none of our documents use?
+- Which open drift finding has been open longest?
+- Which claim with a concern flagged appears in the most places?
+- Do reps describe our category the way the positioning does? Quote three.

@@ -191,6 +191,104 @@ GROUNDING
 Judge only against the Universe and cite what each flag conflicts with. If the draft is on-message and accurate, say so.
 ```
 
+## Advanced prompts
+
+### Pick the angle with a weighted decision matrix
+
+```
+Choose the angle for the piece with a weighted decision matrix, and show how sensitive the choice is to the weights. Use Calven MCP for how often buyers raise each angle, the deals it touches and the trends behind it.
+
+FILL IN
+- Topic: [topic]
+- Persona: [persona]
+- Candidate angles: [paste two to four angles, or write "propose three"]
+- Search data: [paste keyword volume and difficulty from your SEO tool, or write "none"]
+
+CONTEXT
+The angle decides whether the piece is read, cited and used by sales. Picking it in a meeting means picking the loudest opinion.
+
+FROM CALVEN
+- Themes and quotes from the persona on the topic, with mention counts from the voice-of-customer dashboard (n).
+- Objections and deal drivers on the topic, with the deals they touch.
+- Trends on the topic with severity and horizon, and what our positioning says we believe.
+
+MODEL
+- Score each angle 1 to 5 on: buyer evidence (how often they raise it), revenue link (deals and objections it touches), timeliness (trend severity and horizon), our right to win (does our positioning have a view), and search demand (from my data, or "unknown").
+- Weight the criteria with stated weights and total the scores.
+- Run a sensitivity check: for each pair of angles, which weight change would flip the ranking, and is that change plausible? If you can run code, sample random weights 1,000 times and report how often each angle wins.
+- Write the brief's opening for the winner: the one-sentence argument, the reader's tension in their own words, and the quote that opens the piece.
+
+OUTPUT
+The scored matrix, the sensitivity result, the recommendation with its confidence, and the opening for the brief.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Don't score an angle on buyer evidence the quotes and themes don't show.
+```
+
+### Red-team the brief as the sceptical reader
+
+```
+Have the most sceptical reader in our audience attack the brief before a writer starts, so the draft doesn't inherit the weak spots. Use Calven MCP for that persona, what they distrust and the proof we actually have.
+
+FILL IN
+- Brief: [paste the content brief]
+- Persona: [the persona the piece is for]
+
+CONTEXT
+Briefs are written by people who already believe the argument. The reader isn't one of them. Fixing a weak claim in the brief costs a minute; fixing it in a published piece costs the reader.
+
+FROM CALVEN
+- The persona canvas: goals, objections, what they distrust from vendors, watering holes.
+- Customer quotes from the persona on the topic, especially Objection and negative sentiment.
+- The proof points, claims and product brief entries the brief relies on.
+- A persona review of the brief's angle and key claims.
+
+RED-TEAM
+- Play the persona at their most sceptical: someone who's read twenty vendor pieces on this topic and believes none of them.
+- Go through the brief's argument, key claims and proof list. For each one: believe, doubt or dismiss, and the reason in their words.
+- Name the vendor tells: phrases, framings or claims that mark the piece as marketing in the first paragraph.
+- Name the missing question: what this reader would want answered that the brief doesn't plan for.
+- Then switch sides and fix: for each dismissed claim, a stronger version with proof on record, or a recommendation to cut it.
+
+OUTPUT
+The attack as a table (brief element, verdict, reason, fix), the vendor tells to ban, the missing question, and the brief revised with changes marked.
+
+GROUNDING
+The reader's reactions trace to the canvas, quotes and review, cited. Fixes use only proof on record; if the proof doesn't exist, say the claim must go.
+```
+
+### Predict where readers will drop off
+
+```
+Predict where the reader drops off the piece, section by section, before anyone writes it. Use Calven MCP for the reader, the questions they bring and the words they use.
+
+FILL IN
+- Outline: [paste the outline with section headings and one line per section]
+- Persona: [persona]
+- Entry point: [how they arrive: search, LinkedIn, newsletter, sales sent it]
+
+CONTEXT
+Most long pieces lose half their readers by the third section. Scroll data tells you that after publishing. I want to find the drop-off points while they're cheap to fix.
+
+FROM CALVEN
+- The persona canvas: goals, pains, jobs to be done, what they distrust.
+- Questions and pains the persona raised on the topic, verbatim, from customer quotes.
+- The messaging matrix entry for the persona at the stage the piece serves.
+
+SIMULATE
+- Play the persona arriving from the entry point with the question they'd bring, stated in their words.
+- Walk the outline. At each section, in character: is my question closer to answered, is this new to me, do I keep reading? Give a stay probability for the section.
+- Multiply through to an estimated share of readers reaching each section. Mark sections below 50 percent.
+- For each weak section: why they'd leave (already knew it, not my problem, sounds like a pitch, answer is buried) and the fix (cut, move up, merge, replace with a quote or a table).
+- Rerun the walk on the fixed outline.
+
+OUTPUT
+A table of sections with stay probability and reason, the reach curve before and after, and the revised outline.
+
+GROUNDING
+Stay probabilities are your assumption; label them. The persona's question and reactions trace to the canvas and quotes, cited.
+```
+
 ## Ad hoc questions
 
 - Who is [persona], what are they measured on, and what do they distrust from vendors?
@@ -207,3 +305,9 @@ Judge only against the Universe and cite what each flag conflicts with. If the d
 - What do customers say they tried before us?
 - What terms do we use that customers never do?
 - Can a "best [category] tools" page say [claim] about [competitor]?
+- Which question does [persona] ask on calls that no piece of ours answers in the first paragraph?
+- What's the claim on [topic] our proof points can't back, so the brief should ban it?
+- Which customer quote on [topic] would make the best opening line?
+- What's the one thing [persona] believes about [topic] that our positioning disagrees with?
+- Which competitor frames [topic] in a way we should avoid repeating?
+- What did buyers say they searched or asked before they found us?

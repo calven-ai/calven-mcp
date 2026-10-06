@@ -132,6 +132,101 @@ GROUNDING
 Judge against the Universe only and cite it. If my answer is sound, say so.
 ```
 
+## Advanced prompts
+
+### Debate two answers and let the buyer judge
+
+```
+Stage a structured debate between two ways to answer the same objection, with the buyer persona as the judge, and tell me which one wins and why. Use Calven MCP for the approved answer, what buyers actually said and the persona who judges.
+
+FILL IN
+- Objection: [the objection, in the buyer's words]
+- Answer A: [paste the approved or usual answer]
+- Answer B: [paste the alternative you're considering]
+- Persona: [persona]
+
+CONTEXT
+I've got two answers to this objection and the team is split. One is the approved line, one is what a top rep does. I want to see them argued properly before I commit.
+
+FROM CALVEN
+- The approved objection handling from the messaging document and, if a competitor is behind it, the battlecard's "they say, you say".
+- Verbatim buyer quotes raising this objection, and what happened on those deals.
+- The persona canvas for the judge, and a persona review of both answers.
+
+METHOD
+- Opening: each side argues for its answer in under 100 words, citing evidence.
+- Rebuttal: each side attacks the other's weakest point.
+- Judgment: the persona, in the first person, says which answer moves them and what still bothers them. Ground it in the canvas and the review.
+- Then write answer C, which keeps the winning answer's core and fixes the judge's remaining concern.
+
+OUTPUT
+The debate transcript in under 500 words, the verdict with the reason, and answer C in under 60 words.
+
+GROUNDING
+Both sides argue only from cited Calven evidence. The judge's reaction traces to the canvas and the review; mark anything beyond that as your extrapolation.
+```
+
+### Backtest which answers show up on won deals
+
+```
+Backtest the ways our reps answer this objection against deal outcomes, so I use the answer that has actually won. Use Calven MCP for the rep quotes, the deals they came from and how those deals ended.
+
+FILL IN
+- Objection: [the objection or its theme, e.g. "too complex to roll out"]
+- Window: [window]
+
+CONTEXT
+Every rep has a favourite answer to this objection. Nobody has checked which answer comes before a win. I want the evidence, not the folklore.
+
+FROM CALVEN
+- Our reps' quotes tagged Objection handling in the window, with account and deal, paged through until done.
+- The outcome of each linked deal from the CRM mirror: won, lost, open, and the loss reason.
+- Buyer quotes on the same deals tagged Objection, to confirm the objection was raised.
+
+BACKTEST
+- Keep only deals where the buyer raised this objection and a rep answered it.
+- Cluster the answers into three to five approaches (reframe, proof, concession, defer to SE, and so on).
+- For each approach: deals, won, lost, win rate. Compare with the overall win rate for deals that raised this objection.
+- Flag where the sample is too small to tell (under eight deals) and what confounds it: deal size, competitor, rep.
+
+OUTPUT
+A table of approaches with counts and win rates, the best-performing approach with two real rep quotes, and a one-paragraph caveat on what the data can't prove.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Counts you tally from paged rows are your tally, not a dashboard rate. Don't count a deal whose link to the quote is missing.
+```
+
+### Build a spaced-repetition drill for objections
+
+```
+Build me an interactive objection drill as a single HTML file, with flashcards that come back more often when I get them wrong. Use Calven MCP for the real objections, in buyers' words, and the approved answers.
+
+FILL IN
+- Personas I sell to: [persona list]
+- Competitors in my deals: [competitor list]
+
+CONTEXT
+I know the answers when I read them. On a call, under pressure, I fumble. I want ten minutes a day that builds the reflex.
+
+FROM CALVEN
+- The objection handling section of the messaging document.
+- The objections on each persona's canvas, with their responses.
+- The "they say, you say" from each competitor's battlecard.
+- Verbatim buyer quotes tagged Objection, to phrase the card fronts the way buyers talk.
+
+BUILD
+- A deck of 20 to 30 cards. Front: the objection as a real buyer said it, with the persona. Back: the approved answer in under 40 words, the proof point, and the question to ask back.
+- A simple spaced-repetition schedule (Leitner boxes are fine): I mark each card easy, hard or missed, and the card returns sooner when I miss it. Store progress in the browser.
+- A timed mode: 15 seconds to say my answer out loud before the back shows.
+- If you can't make files, give me the deck as a table I can import into a flashcard app.
+
+OUTPUT
+One self-contained HTML file with the deck embedded, plus the deck as a CSV.
+
+GROUNDING
+Every card front is a recorded quote or canvas objection and every back is approved content, cited in a source field. Don't invent objections to fill the deck.
+```
+
 ## Ad hoc questions
 
 - How do we answer "we already use [competitor]"?
@@ -146,3 +241,9 @@ Judge against the Universe only and cite it. If my answer is sound, say so.
 - What does the [competitor] battlecard say when they claim [competitor's claim]?
 - Which objection cost us the most pipeline this year?
 - What did the last buyer who said "no budget" end up doing?
+- Which objection do buyers raise most that has no theme behind it in the messaging?
+- Which objections show up on won deals as often as on lost ones, so they're mostly noise?
+- What does [persona] object to that [other persona] on the same deal doesn't?
+- Which objection got more frequent this quarter compared with last?
+- Is there a customer quote that answers "[objection]" better than our approved line?
+- Which of our approved objection answers makes a claim the claims register marks unproven?

@@ -84,6 +84,69 @@ GROUNDING
 Use only the dashboards and battlecard in the Universe and cite them.
 ```
 
+## Advanced prompts
+
+### Backtest which handoffs turn into wins
+
+```
+Backtest our handoffs: find which facts known at handoff actually predicted a won deal. Use Calven MCP for last year's closed deals and the fields they carried.
+
+FILL IN
+- Window: [window]
+- Segment: [segment, or "all"]
+- What my handoff notes say: [paste a typical note or the template]
+
+CONTEXT
+AEs say they want BANT. I'm not sure the fields they ask for are the ones that decide anything. I want the note to lead with the facts that separate the deals we win from the ones we waste time on.
+
+FROM CALVEN
+- Closed deals (won and lost) in the window and segment, paged through in full: ICP fit tier, lead source, contact role, competitors, deal size band, account size and industry, furthest stage, loss reason.
+- The win/loss dashboard's win rate for the same window, with n, as the check on my own count.
+
+BACKTEST
+- Treat each deal as a handoff and each field as something the BDR could have known on day one.
+- For each field value, compute the win rate and the lift over the base rate, with counts. Flag any cell under 10 deals.
+- If you can run code, fit a simple logistic regression on the fields and report which ones survive together, with a holdout of 20 percent of deals to check it isn't noise.
+- Compare the result with my template: which fields I lead with that don't predict anything, and which predictive ones I leave out.
+
+OUTPUT
+A table of field values ranked by lift with counts, the model's top three drivers, and a rewritten handoff template that leads with them.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. My counts from paged rows are mine; the dashboard rate is Calven. Don't claim a driver the sample is too small to support.
+```
+
+### Decide pass, nurture or drop on expected value
+
+```
+Decide whether to pass this prospect to an AE, nurture it or drop it, using an expected-value decision tree. Use Calven MCP for the win rate, deal size and cycle that apply to it.
+
+FILL IN
+- Account: [account]
+- What I learned on the call: [paste call notes]
+- AE time per first meeting: [hours, or write "assume"]
+
+CONTEXT
+A weak handoff costs an AE's week and my credibility. Holding a real one costs us the quarter. I want the call made on numbers, not on whether I need the meeting for quota.
+
+FROM CALVEN
+- The account row: ICP fit tier and score, size, industry, triggers.
+- Win rate, average deal size and sales cycle for the segment from the ICP dashboard, with n.
+- Win rate against the competitor I heard on the call, from the competitive dashboard, with n.
+- The disqualifiers in our ICP.
+
+MODEL
+- Build three branches. Pass: probability of acceptance, then of a win, times deal size, minus AE time. Nurture: a delayed version with a decay you state. Drop: zero, plus the cost of a competitor taking it.
+- Adjust probabilities for what the notes say (no timeline, no budget holder, competitor in place) and show each adjustment.
+- Run a sensitivity check: how low the win probability can go before nurture beats pass.
+
+OUTPUT
+The tree as a small table, the expected value of each branch, the break-even probability and a one-line recommendation with the condition that would flip it.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Don't invent a budget, timeline or champion the notes don't contain.
+```
+
 ## Ad hoc questions
 
 - Which MEDDIC fields can I fill from the Universe for [account]?
@@ -96,3 +159,10 @@ Use only the dashboards and battlecard in the Universe and cite them.
 - Who else at [account] should be on the first call?
 - What is the best-fit product for [account]?
 - What sinks deals in [industry]?
+- Which contact role on a handoff most often ends in a won deal for us?
+- What do lost deals in [segment] have in common at the first meeting?
+- Which competitor, once mentioned on a qualification call, means our odds drop most?
+- What does [persona] usually need to see before agreeing to a second meeting?
+- Which loss reason shows up most on deals sourced from [lead source]?
+- What's our average sales cycle for a [segment] deal, and on what n?
+- Which pain, in the buyer's words, shows up most on our won deals in [industry]?

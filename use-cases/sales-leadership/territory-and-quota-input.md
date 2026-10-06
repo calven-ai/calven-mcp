@@ -67,6 +67,68 @@ GROUNDING
 Dashboard figures only, cited. Note which figures ignore the window.
 ```
 
+## Advanced prompts
+
+### Size the team from the account base
+
+```
+Size how many reps each segment needs from the accounts we hold, the deals they produce and how long a deal takes, instead of from last year's headcount. Use Calven MCP for the in-profile accounts and our real conversion and cycle by segment.
+
+FILL IN
+- Bookings target: [next year's target by segment]
+- Rep capacity: [deals a rep can run at once, quota, ramp months]
+- Coverage rule: [accounts per rep you'd accept, or write "propose one"]
+
+CONTEXT
+Territories get drawn around last year's reps. The real question is how much selling each segment can absorb, and whether we have the accounts to feed it.
+
+FROM CALVEN
+- In-profile accounts per segment and region, by ICP tier, and how many have had a deal.
+- Win rate, average deal size and sales cycle per segment from the ICP dashboard, with n.
+- The share of open pipeline in profile per region.
+
+MODEL
+- Per segment: bookings target over deal size gives deals needed; over win rate gives opportunities; with the cycle, gives concurrent opportunities. Divide by rep capacity for reps needed.
+- Check against the account base: opportunities needed against untouched in-profile accounts. Flag where we'd run out of accounts.
+- Treat it as a queue: if opportunities arrive faster than reps can work them, show the wait and what it does to the cycle.
+- If you can run code, build it as a spreadsheet with the inputs on one tab.
+
+OUTPUT
+A table per segment (deals needed, opportunities, concurrent load, reps needed, accounts available, verdict), which segments are short on accounts and which are short on reps, and the hiring split that follows.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Don't assume a never-worked account converts at the segment rate; state the rate you use.
+```
+
+### Test the territories for fairness
+
+```
+Simulate each proposed territory's attainable bookings and check that no rep was handed a quota their accounts can't reach. Use Calven MCP for the accounts in each territory and how deals like theirs convert.
+
+FILL IN
+- Territories: [attach the territory map: account names or rules per rep]
+- Quotas: [quota per rep]
+
+CONTEXT
+Reps forgive a hard quota. They don't forgive one that's harder than the next rep's. I want the fairness check done before the plan goes out.
+
+FROM CALVEN
+- For each territory's accounts: ICP tier, segment, region, size, triggers, and open or past deals.
+- Win rate and average deal size per segment and tier from the ICP dashboard, with n.
+
+SIMULATE
+- For each territory, estimate attainable bookings: accounts times the chance of a deal times win rate times deal size, by tier.
+- Add variance. If you can run code, run 5,000 draws per territory and give P10, P50 and P90.
+- Compute each rep's chance of reaching quota and compare across reps.
+- Find the account swaps between territories that bring those chances closest together.
+
+OUTPUT
+A table (rep, accounts by tier, P50 attainable, quota, chance of reaching it), the fairness spread, the swaps that close it, and the one territory that needs a quota change.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. The chance of opening a deal at an account is your assumption; state it and show what happens if it halves.
+```
+
 ## Ad hoc questions
 
 - What is our win rate in EMEA versus NA, with samples?
@@ -76,4 +138,11 @@ Dashboard figures only, cited. Note which figures ignore the window.
 - What is the average deal size for Tier 1 versus Tier 3 accounts?
 - Which region has the most open pipeline out of profile?
 - Which attributes predict a win most strongly?
-- How many in-profile accounts have an open deal right now?
+- How many in-profile accounts have an open deal?
+- Which region has the most in-profile accounts that have never had a deal?
+- Which industry has the shortest sales cycle?
+- Which account trigger shows up most on accounts we've won?
+- Which competitor shows up most in each region's deals?
+- How many Tier 1 accounts in EMEA have an open deal?
+- Which size band has the highest win rate, with n?
+- Which Tier 2 industry wins like a Tier 1?

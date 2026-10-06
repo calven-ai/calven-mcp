@@ -115,6 +115,72 @@ GROUNDING
 Confirm only against the Universe and cite the section.
 ```
 
+## Advanced prompts
+
+### Score each account's deprecation risk
+
+```
+Score every affected account's risk from the deprecation and tell me who needs a call before the notice goes out. Use Calven MCP for what those accounts said about the capability and what we're selling them.
+
+FILL IN
+- Capability being removed: [capability]
+- Affected accounts: [paste or attach the list with ARR, renewal date and usage of the capability]
+- Replacement: [what replaces it, or write "none"]
+
+CONTEXT
+A deprecation notice that reaches the wrong account two months before renewal becomes a churn. I want a ranked list so CS calls the risky ones personally and the rest get the email.
+
+FROM CALVEN
+- Quotes from those accounts that mention the capability, with sentiment and date.
+- Open deals in the CRM for those accounts, renewals and expansions, with stage and amount.
+- Each account's ICP fit tier.
+- What the product brief says about the replacement.
+
+MODEL
+- Build a risk score from four factors: usage (mine), renewal within 120 days (mine), whether they spoke about the capability as important (Calven), and an open deal at stake (Calven).
+- State the weights and show how the top ten change if I double any one of them.
+- Bucket each account: call before notice, call after notice, email only.
+- If you can run code, return the scored list as a CSV.
+
+OUTPUT
+The ranked list with score, bucket and the quote or deal behind it, and a one-paragraph talk track for the top bucket.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Don't attribute a quote to an account it didn't come from.
+```
+
+### Design an A/B test for the launch email
+
+```
+Design an A/B test for the release announcement email, with a power calculation, so we learn which message actually drives adoption. Use Calven MCP to build the two variants from approved messaging and customer language.
+
+FILL IN
+- Release: [paste the release notes]
+- List size: [how many customers receive it]
+- Baselines: [paste past open, click and feature-adoption rates for release emails]
+- Persona: [persona]
+
+CONTEXT
+We send release emails and never know why one lands. This time I want two variants that test one real difference, and a sample size that can detect it.
+
+FROM CALVEN
+- The pillar and value proposition the release supports, from the messaging.
+- Customer quotes on the problem it solves, for the customer's own words.
+- A persona review of both variants.
+
+METHOD
+- Write variant A in the messaging's words and variant B in the customer's words. Change nothing else.
+- Pick the primary metric (adoption within 14 days, not opens) and a guardrail.
+- Run a power calculation: from the baseline and list size, the minimum detectable effect at 80% power and 5% significance. If the list is too small for a useful effect, say so and suggest a bigger change or a longer window.
+- If you can run code, show the calculation.
+
+OUTPUT
+Both variants, the test plan (metric, split, duration, minimum detectable effect), and the decision rule written before the result comes in.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Don't promise an effect size; the calculation sets it.
+```
+
 ## Ad hoc questions
 
 - Which pillar does [feature] support?
@@ -126,3 +192,9 @@ Confirm only against the Universe and cite the section.
 - Who relied on [capability], according to customer quotes?
 - What is the replacement for [capability] in the brief?
 - How would [persona] read this release note: "[paste]"?
+- Which customer quotes asked for what we just shipped, and from which accounts?
+- Which claim in our last release notes is now flagged with a concern in the claims register?
+- What did customers say last time we removed or changed a capability?
+- Which product changes in the last 90 days did no published document pick up?
+- How would [persona] describe the benefit of [feature] in their own words?
+- Which open renewals involve accounts that mentioned [capability] on calls?

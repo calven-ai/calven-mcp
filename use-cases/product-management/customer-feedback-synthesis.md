@@ -117,6 +117,103 @@ GROUNDING
 Use only the Universe and cite every quote and deal. Do not merge adjacent themes into this one.
 ```
 
+## Advanced prompts
+
+### Find which themes predict churn
+
+```
+Find out which customer themes predict churn or expansion in our base, not just which are loudest. Use Calven MCP for what each account said and when.
+
+FILL IN
+- Retention data: [attach a CSV: account, renewal outcome or NRR, ARR, renewal date]
+- Window: [window]
+- Product: [product]
+
+CONTEXT
+The loudest theme gets the roadmap slot. I want to know whether it's also the one that costs us revenue, or whether a quieter theme sits behind the churn.
+
+FROM CALVEN
+- Customer quotes in the window with account, theme, category, sentiment and date.
+- Themes with mentions and sentiment, for the full list.
+- Accounts with size, industry and ICP fit tier, for controls.
+
+METHOD
+- Build one row per account: which themes it raised, how often, with what sentiment, and how long before renewal.
+- Join it to my retention data on account name. List the accounts that didn't match.
+- If you can run code, fit a logistic regression of churn on theme presence, controlling for size and ARR, and report odds ratios with confidence intervals. Otherwise build a two-way table per theme: churn rate with and without it.
+- Rank themes two ways: by mention volume and by revenue association. The themes high on the second and low on the first are the finding.
+- Say plainly where the sample is too small to conclude anything.
+
+OUTPUT
+Two rankings side by side (loud versus costly), a chart of each theme's effect with its interval, and three sentences for the roadmap review.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. This is association, not cause; say so. Flag any effect that rests on fewer than ten accounts.
+```
+
+### Correct the synthesis for who you talk to
+
+```
+Check whether my feedback synthesis reflects the customer base or just the customers we happen to talk to, and reweight it if not. Use Calven MCP for who's in the conversations and who's in the base.
+
+FILL IN
+- Synthesis: [paste this period's synthesis or top-ten theme list]
+- Window: [window]
+- Revenue weights: [attach ARR by account, or "count accounts equally"]
+
+CONTEXT
+We talk most to accounts with active CSMs, open expansion deals and loud champions. A theme can top the list because of who's on the calls, not because the base feels it.
+
+FROM CALVEN
+- The conversations analysed in the window, with account and source type.
+- The accounts behind them, with size, industry, region and ICP fit tier.
+- All customer accounts in the CRM with the same attributes, for the base mix.
+
+METHOD
+- Compare the conversation mix with the base mix by size, segment and tier. Show the over- and under-represented cells.
+- Reweight each theme's mentions by the inverse of its cell's sampling rate (post-stratification), and by ARR if I attached it.
+- Re-rank the themes. Flag any that move three or more places, and any theme carried by one or two accounts.
+- List the segments we barely hear from, and the five accounts to call to close the gap.
+
+OUTPUT
+The original and reweighted rankings side by side, the coverage gaps, and the corrected top five with a line on what changed.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Don't guess what silent segments think; mark them "no evidence".
+```
+
+### Tell real momentum from noise
+
+```
+Put each top theme on a control chart and tell me which "rising" themes are a real shift and which are normal noise. Use Calven MCP for theme mentions over time and the number of conversations behind them.
+
+FILL IN
+- Themes: [paste the themes people are calling rising, or "the top ten"]
+- Window: [window, at least six months]
+- Events: [paste dated events that could move mentions: a launch, a price change, an outage, a big onboarding cohort]
+
+CONTEXT
+Every quarter someone says a theme is "blowing up" and asks for roadmap time. Mentions go up when we simply record more calls. I want a test before I move a priority.
+
+FROM CALVEN
+- Quotes per theme by month in the window, with sentiment.
+- The number of conversations analysed per month, to normalise.
+- The theme movers from the voice-of-customer dashboard, with n.
+
+METHOD
+- Turn mentions into a rate: mentions per hundred conversations per month.
+- If you can run code, build a p-chart per theme: centre line, control limits from the first half of the window, and the points that break them. Otherwise compute the limits by hand for the top five.
+- Apply the standard run rules: a point outside the limits, or seven months on one side of the centre line.
+- Line the breaks up against my events, and say which shifts an event explains and which it doesn't.
+- Compare the result with the dashboard's movers and flag where they disagree.
+
+OUTPUT
+A table per theme: rate, limits, signal or noise, the likely cause, and the call (act, watch, ignore), plus the charts.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Don't call a shift real on fewer than twenty conversations a month; say the data is too thin. A matching event is a hypothesis, not a cause.
+```
+
 ## Ad hoc questions
 
 - What are the top five customer pains this quarter for [product]?
@@ -131,3 +228,9 @@ Use only the Universe and cite every quote and deal. Do not merge adjacent theme
 - Which buying triggers appear most this period?
 - Which themes do enterprise accounts raise that mid-market does not?
 - What did customers say about [feature] after it shipped?
+- Which themes are rising in mentions but falling in sentiment?
+- Which pains do customers raise that none of our messaging pillars address?
+- Which themes appear in lost-deal drivers but almost never on customer calls?
+- What do end users complain about that buyers never mention?
+- Which accounts raised three or more negative themes in [window]?
+- Which customer quotes contradict a claim in our product brief?

@@ -86,6 +86,69 @@ GROUNDING
 Rank by dashboard numbers with n and window. Do not invent personas or verticals the documents do not list.
 ```
 
+## Advanced prompts
+
+### Run a five-second test with synthetic buyers
+
+```
+Run a five-second test and a sixty-second test on my one-pager with each target persona, the way a UX researcher would, and fix what doesn't stick. Use Calven MCP for the personas, their words and a persona review.
+
+FILL IN
+- One-pager: [paste the one-pager text, marking the headline, subhead and section heads]
+- Personas: [personas it's for]
+
+CONTEXT
+Buyers glance at a one-pager before deciding whether to read it, and forward it only if they can explain it in a sentence. I want to know what survives the glance.
+
+FROM CALVEN
+- Each persona's canvas: goals, pains, objections, messaging hooks.
+- How each persona describes the problem, from customer quotes.
+- A persona review of the one-pager against those personas.
+
+SIMULATE
+- Five-second pass: for each persona, show only what the eye catches first (headline, subhead, the biggest number, the first heading). In character, they answer: what is this, who is it for, would I read on?
+- Sixty-second pass: the persona skims the whole page. They answer: what's the one claim I remember, what don't I believe, who would I forward it to and with what note?
+- Compare their answers with what the page intended to say. Score recall, relevance and credibility.
+- Rewrite the headline and subhead until every persona's five-second answer matches the intent. Show two rounds.
+
+OUTPUT
+A table per persona for both passes, the scores, the rewritten top of the page, and the forwarding note each persona would write.
+
+GROUNDING
+Persona reactions trace to their canvas, quotes and the review, cited. Mark anything beyond that as your extrapolation, and don't let a persona approve a claim the product brief doesn't support.
+```
+
+### Run a conjoint on what to lead with
+
+```
+Find the best combination for my one-pager's lead with a conjoint-style trade-off test: the personas choose between versions and we infer what each element is worth. Use Calven MCP for the personas, the proof we have and how buyers describe the problem.
+
+FILL IN
+- Topic: [persona, segment, competitor or release the one-pager covers]
+- Personas: [personas]
+
+CONTEXT
+Every one-pager argument is about what goes first: the pain or the outcome, a number or a logo, demo or ROI. A conjoint settles it by forcing trade-offs instead of asking people what they like.
+
+FROM CALVEN
+- Each persona's canvas: goals, pains, objections, hooks.
+- Customer quotes for the topic tagged Quantified outcome, Time-to-value or Competitive win.
+- The messaging matrix for the personas and the value pillar the topic sits under.
+- A persona review of the final version.
+
+SIMULATE
+- Define four attributes with two or three levels each: headline framing (pain, outcome, contrarian), proof type (number, customer quote, named competitor win), length (half page, full page), call to action (demo, ROI estimate, case study).
+- Build 12 version pairs that vary the levels. For each persona, choose the version they'd forward, with a one-line reason drawn from their canvas.
+- Estimate each level's value per persona. If you can run code, fit a simple logit on the choices and show part-worths.
+- Assemble the winning combination and write it, using only proof on record. Then run the persona review on it.
+
+OUTPUT
+The part-worths table per persona, where personas disagree, and the finished lead section with the review findings.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. The part-worths come from simulated choices, so call them directional, and every proof point used must be on record, cited.
+```
+
 ## Ad hoc questions
 
 - Draft a one-pager for [persona] on [capability].
@@ -97,3 +160,9 @@ Rank by dashboard numbers with n and window. Do not invent personas or verticals
 - What is our boilerplate paragraph?
 - How does [persona] describe the problem we solve?
 - Which one-pagers did the last release make stale?
+- Which value pillar has the strongest quantified customer quote for a one-pager?
+- What's the one sentence [persona] would use to forward a one-pager about us?
+- Which segment has won deals but no proof point I can name on a one-pager?
+- What do buyers in [segment] say the cost of doing nothing is, in their words?
+- Which claim on our one-pagers would a technical buyer challenge first?
+- What's the most common reason [persona] gives for not taking a meeting, from their canvas?

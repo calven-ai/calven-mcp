@@ -86,6 +86,68 @@ GROUNDING
 Use only the two dashboards for the same window, with n. A number with no n in the Universe is "unverified", never confirmed.
 ```
 
+## Advanced prompts
+
+### Correct the readout for non-response bias
+
+```
+Check whether the buyers who answer our win/loss surveys look like the deals we actually decide, and reweight the loss readout if they don't. Use Calven MCP for coverage by segment, the responses and the decided deals behind them.
+
+FILL IN
+- Window: [window]
+- Readout to check: [paste the loss drivers or win/loss findings you're about to present]
+
+CONTEXT
+If winners answer more than losers, or SMB buyers more than Enterprise, the readout tells the story of whoever replied. Survey researchers fix that with weighting. Nobody does it for win/loss.
+
+FROM CALVEN
+- Decided deals in the window by outcome, segment, size band and competitor, from the win/loss program health dashboard's coverage by segment.
+- Completed responses by the same cuts, with n.
+- The deal drivers behind the readout, with outcome, segment and whether each decided the deal.
+
+METHOD
+- Compare response share with deal share per cell. Flag cells over- or under-represented by more than 1.5 times.
+- Reweight each response by deal share over response share (rake on outcome and segment if two cuts matter).
+- Recompute the top loss drivers with the weights and compare with the unweighted readout.
+- If you can run code, show both rankings side by side.
+
+OUTPUT
+A representativeness table, the reweighted driver ranking next to the original, and a sentence for the readout that says how far to trust it.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Cells with fewer than five responses get no weight; say which ones.
+```
+
+### Find the response count each cut needs
+
+```
+Work out how many completed responses each segment and competitor cut needs before its win/loss findings mean anything, and how long that takes at our pace. Use Calven MCP for completion rates, enrollment and responses per cut.
+
+FILL IN
+- Cuts that matter: [segments, competitors or personas leadership asks about]
+- Precision wanted: [e.g. plus or minus 10 points on a driver share]
+
+CONTEXT
+Leadership asks for the loss reasons against every competitor. Half the cells have four responses. I want a clear rule for which questions the program can answer this quarter and what it would take for the rest.
+
+FROM CALVEN
+- Completion rate, deals enrolled and analyzed, and AI interview pick rate, from the program health dashboard, with n.
+- Completed responses per cut in the last four quarters.
+- Decided deals per cut per quarter, to project the inflow.
+
+METHOD
+- For each cut, compute the responses needed for the precision I asked for on a proportion (use 50% as the worst case).
+- Project months to reach it at the current completion rate and deal volume.
+- Show the lever: how much faster each cut gets there if completion rises by 10 points or enrollment covers every decided deal.
+- If you can run code, build it as a small calculator I can rerun each quarter.
+
+OUTPUT
+A table: cut, responses held, responses needed, months to get there at current pace, months with each lever. Then the cuts to stop reporting until they're ready.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. The precision maths is yours; label it as such.
+```
+
 ## Ad hoc questions
 
 - What share of decided deals had a completed survey this quarter?
@@ -97,3 +159,9 @@ Use only the two dashboards for the same window, with n. A number with no n in t
 - How many deals are enrolled but unanswered?
 - Which lost deals above [amount] have no buyer response?
 - How satisfied were respondents with the interview?
+- Do lost deals or won deals answer the survey more often?
+- Which competitor's losses have the fewest completed responses?
+- How long after close does a typical response come in?
+- Does the AI interview produce more deal drivers per response than the online survey?
+- Which deal size band has the lowest enrollment coverage?
+- How many decided deals this quarter were never enrolled?

@@ -114,6 +114,102 @@ GROUNDING
 Use only the overview, signals and quotes, cited. If the sample is too small for a rate, report counts instead.
 ```
 
+## Advanced prompts
+
+### Write the bear case before the partner does
+
+```
+Write the bear case a skeptical investor would write about us, then tell me which parts the evidence beats and which it doesn't. Use Calven MCP for our competitive record, the market and the proof behind our claims.
+
+FILL IN
+- Deck: [paste or attach the fundraising deck]
+- Investor type: [seed, Series A, growth, strategic]
+- Metrics we'll share: [paste ARR, growth, retention, burn]
+
+CONTEXT
+Every partner writes an investment memo with a risks section. If I've written it first, I choose how to answer it.
+
+FROM CALVEN
+- Competitors' funding and size from their dossiers, and their high-severity signals from the last two quarters.
+- Our competitive win rate and win rate per competitor, with n.
+- Trends and analyst findings on the category.
+- The claims in the deck that appear in our claims list, with their status.
+
+RED-TEAM
+- Write the bear case in a partner's voice: the five strongest reasons not to invest, one paragraph each.
+- For each reason, pull the evidence for and against it from Calven and my metrics.
+- Classify each: beaten (the evidence answers it), contested (evidence on both sides) or real (we can't answer it).
+- For the real ones, write the honest answer that keeps the investor in the process.
+
+OUTPUT
+The bear case memo, a table (risk, evidence for, evidence against, verdict), and the slide or appendix change for each contested risk.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Don't invent a competitor's funding or a market size Calven doesn't hold; say what's missing.
+```
+
+### Build a bottom-up market size
+
+```
+Build a bottom-up market size from the companies that fit our ICP, not a top-down share of an analyst number. Use Calven MCP for the ICP definition, the in-profile accounts we hold and our real deal sizes.
+
+FILL IN
+- Market counts: [paste the number of companies per segment from your data provider, or write "none"]
+- Pricing: [list price per tier, or write "use the product brief"]
+- Horizon: [years]
+
+CONTEXT
+Investors discount a top-down TAM. A bottom-up number built from our real ICP and deal sizes holds up in diligence, and it shows how much of the market we've touched.
+
+FROM CALVEN
+- The ICP: firmographics, segment tiers, priority and secondary verticals, disqualifiers.
+- CRM account counts by ICP tier, size and region, and how many have had a deal.
+- Average deal size by segment from the ICP dashboard, with n, plus pricing from the product brief.
+- Market opportunities with their sizing.
+
+MODEL
+- For each segment, multiply the companies that fit by the share that passes the disqualifiers by the expected annual contract value. Show each multiplier and its source.
+- Split it into TAM, the segments we sell to (SAM), and what three years of plausible share gets us (SOM), each with low, base and high.
+- Show coverage: the share of SAM already in our CRM, and the share that has had a deal.
+- If you can run code, build it as a spreadsheet with formulas and one input tab.
+
+OUTPUT
+The market-size table by segment (TAM, SAM, SOM, low to high), the coverage line, and a one-slide version with every source footnoted.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Company counts come from me, not Calven; if I gave none, show the formula with blanks instead of guessing them.
+```
+
+### Backtest every claim in the narrative
+
+```
+Check every claim in my investor narrative against what actually happened in our deals, and tell me which ones survive diligence. Use Calven MCP for the deals, the drivers and the buyers' own words.
+
+FILL IN
+- Narrative: [paste the deck or the narrative memo]
+
+CONTEXT
+"We win on time-to-value." "Customers switch from the incumbent." Diligence calls our customers and reads our CRM export. Every line in the narrative should hold up when they do.
+
+FROM CALVEN
+- Closed deals from the last four quarters: outcome, segment, competitor, loss reason.
+- Deal drivers with direction and evidence quotes.
+- Quotes highlighted as Competitive win, Quantified outcome or Time-to-value.
+- Win rate by segment and per competitor, with n.
+
+BACKTEST
+- Pull every testable claim from the narrative and restate it as a prediction: if this is true, the deals should show this.
+- Page through the deals and drivers and test each prediction. Count the deals that support it and the ones that contradict it.
+- Grade each claim: holds, holds with a caveat, unsupported or contradicted.
+- For a contradicted claim, find what the data does support and write that line instead.
+
+OUTPUT
+A table (claim, prediction, deals for, deals against, grade, best quote), the rewritten lines, and the three claims a diligence call is most likely to test.
+
+GROUNDING
+Counts come from the rows you paged, with the total stated; rates come from dashboards, cited with n. Quotes are verbatim and cited. Don't count a deal as support unless a driver or quote says so.
+```
+
 ## Ad hoc questions
 
 - What is our positioning statement and category?
@@ -127,3 +223,9 @@ Use only the overview, signals and quotes, cited. If the sample is too small for
 - What did competitors do last month?
 - What share of wins were in-profile this year?
 - Which analyst reports mention our category?
+- Which competitor raised money or made a major move in the last two quarters?
+- Which competitor do won deals' drivers say we displaced most often?
+- Which customer quote has the strongest quantified outcome?
+- Which unique attribute in our positioning has the least proof behind it?
+- What do analyst findings say about how fast our category is growing?
+- Which market opportunity has the largest sizing, and on what timeline?

@@ -96,6 +96,74 @@ GROUNDING
 Only from the canvas.
 ```
 
+## Advanced prompts
+
+### Chart each persona's attention beat by beat
+
+```
+Run my demo storyline past a synthetic focus group of the buying group and chart where each person's attention rises and drops. Use Calven MCP to build each panelist from our personas and their own words.
+
+FILL IN
+- Storyline: [paste the demo beats in order, with minutes per beat]
+- Attendees: [persona per attendee]
+- Segment: [segment]
+
+CONTEXT
+Forty-five minutes, four people, four different reasons to be there. A storyline that holds the technical buyer can lose the economic buyer by minute ten. I want to see that before the call, not in the silence after it.
+
+FROM CALVEN
+- Each attendee's persona canvas: goals, pains, jobs to be done, objections.
+- Verbatim quotes from those roles in the segment about what they wanted to see.
+- A persona review of the storyline text.
+
+SIMULATE
+- Play each panelist through the beats in order, in the first person, one line per beat.
+- Each scores every beat for attention from 1 to 10, with the reason in their words.
+- Build the attention curve per persona and the group average. Mark the beats where any key person drops below 4.
+- Find the moment each person decides, yes or no, whether this is worth more of their time.
+- If you can run code, chart the curves.
+
+OUTPUT
+The attention table (beats by persona), the chart or a text version of it, the two dead zones, and a reordered storyline that keeps every key person above 5.
+
+GROUNDING
+Label every score as from the canvas, a quote or the review, or as your extrapolation. Don't give a persona an interest the canvas doesn't support.
+```
+
+### Pick the features to show in your time
+
+```
+Decide which capabilities make the cut for a time-boxed demo, as a trade-off, not a wish list. Use Calven MCP for what each buyer values, what the product does and what wins against the competitor.
+
+FILL IN
+- Time: [minutes available for product]
+- Candidate features: [paste the capabilities you could show, with minutes each takes]
+- Attendees: [persona per attendee, with their weight in the decision]
+- Competitor: [competitor]
+
+CONTEXT
+We have more good material than minutes. Every feature I add pushes another out. I want the set that moves the people who decide, not the set the SE likes showing.
+
+FROM CALVEN
+- The persona canvases for the attendees: pains and jobs to be done.
+- The product brief entry for each candidate feature, to confirm it exists and what it does.
+- The battlecard for the competitor: feature comparison and where we win.
+- Deal drivers from won and lost deals against them that name a capability, with n.
+
+METHOD
+- Score each feature per persona on value, 0 to 3, from the canvas. Add a differentiation score from the battlecard and drivers.
+- Weight by each persona's say in the decision and divide by the minutes it costs.
+- Solve it like a knapsack: the set with the most weighted value that fits the time.
+- Show the runner-up set and what you'd give up to switch.
+- If you can run code, do the optimization in code.
+
+OUTPUT
+A table of features with scores, cost and value per minute, the chosen set in demo order, and what to cut with one line on why.
+
+GROUNDING
+Label every score as Calven (cited), mine, or your assumption. Drop any feature the product brief doesn't list and say so.
+```
+
 ## Ad hoc questions
 
 - What does a [persona] need to see in a demo?
@@ -106,3 +174,10 @@ Only from the canvas.
 - What do technical buyers ask about in demos, from our calls?
 - Which use case in the brief matches [segment]?
 - What is the "last thing first" outcome for a [persona]?
+- Which capability do buyers in [segment] mention most in won-deal drivers?
+- What did lost buyers say they wanted to see that we didn't show?
+- Which [competitor] landmine can I set during the demo without naming them?
+- Which known weakness in the product brief should the demo steer clear of?
+- What job to be done does a [persona] hire us for, in their words?
+- Which integration do [segment] buyers ask about on calls most often?
+- What's the shortest proof quote for the [capability] moment, verbatim?

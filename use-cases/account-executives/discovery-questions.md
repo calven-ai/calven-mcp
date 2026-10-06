@@ -127,6 +127,98 @@ GROUNDING
 Only the canvas, quotes and dashboard figures, cited. If the persona has no quotes, say so.
 ```
 
+## Advanced prompts
+
+### Build a switch interview on the four forces
+
+```
+Build a discovery guide around the four forces of a switch (push, pull, anxiety, habit) so I learn whether this buyer will actually change. Use Calven MCP for the pains, triggers and fears real buyers of this persona have voiced.
+
+FILL IN
+- Persona: [persona]
+- Segment: [segment]
+- What they use for this: [their current tool or process, or "unknown"]
+
+CONTEXT
+Buyers say yes to pain and still don't switch. Most of my stalled deals had plenty of push and nobody asked about the anxiety or the habit. I want a first call that measures all four.
+
+FROM CALVEN
+- The persona canvas: pains, jobs to be done, objections.
+- Verbatim quotes from this persona and segment tagged Pain, Buying trigger and Objection, and the themes they cluster into.
+- Deal drivers on lost deals tagged in-house or no decision, with evidence quotes.
+
+METHOD
+- For each force, write two or three open questions that make the buyer describe a real moment, not an opinion. Push: the struggle in the current way. Pull: the picture of the new way. Anxiety: what scares them about switching. Habit: what keeps the current way comfortable.
+- Under each question, list the answers that signal a strong or weak force, in buyers' recorded words.
+- Add a scoring sheet: rate each force 1 to 5 after the call, and the rule that says when push plus pull outweigh anxiety plus habit enough to forecast it.
+
+OUTPUT
+The guide grouped by force, the signal answers, and the scoring sheet as a table I can fill in after the call.
+
+GROUNDING
+Signal answers come from recorded quotes, cited. Mark any you wrote yourself as your assumption. Don't invent a fear the canvas or quotes don't show.
+```
+
+### Rank questions by what the answer is worth
+
+```
+Rank my discovery questions by expected value of information: which answer would change my forecast or my plan the most. Use Calven MCP for what has actually separated won from lost deals in this segment.
+
+FILL IN
+- Deal: [deal]
+- My question list: [paste the questions you plan to ask]
+- Call length: [minutes]
+
+CONTEXT
+I have more questions than minutes. I want to spend the call on the questions whose answers would move the deal, not the ones I ask out of habit.
+
+FROM CALVEN
+- Deal drivers ranked as deciding on won and lost deals in the deal's segment, grouped by category.
+- Win rates by the attributes the ICP dashboard says predict a win, with n.
+- Loss reasons for the segment, with counts, from the win/loss dashboard.
+
+MODEL
+- For each question, list the plausible answers and how likely each is for a deal like mine.
+- For each answer, estimate how much it would shift the win probability or change my next action, using the drivers and rates above.
+- Value of the question = how likely the answer surprises me times how much it changes. Rank by value per minute.
+- Add the two questions missing from my list that test the biggest deciding driver.
+
+OUTPUT
+A ranked table: question, likely answers, shift in odds or plan, value per minute, keep or cut. Then the final list that fits the call length.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Don't invent a driver; if the segment has too few surveyed deals, say so and use company-wide drivers labelled as such.
+```
+
+### Write a rubric to grade your own discovery calls
+
+```
+Write a scoring rubric for discovery calls, then grade my last calls against it, so I can see where my discovery is thin. Use Calven MCP for what our best discovery sounds like and what buyers needed to be asked.
+
+FILL IN
+- My transcripts: [paste or attach two or three of your own discovery call transcripts or notes]
+- Qualification framework: [MEDDICC or the one your team uses]
+
+CONTEXT
+I think my discovery is good. My stalled deals say otherwise. I want an objective grader I can run after every call, not another training.
+
+FROM CALVEN
+- Our reps' quotes tagged Discovery question from calls on deals that were won.
+- The ICP's qualifying attributes and disqualifiers, and the deciding deal drivers for the segment.
+- The persona canvases for the buyers I usually sell to: their pains and objections.
+
+BUILD
+- A rubric of eight to ten criteria from the framework and the evidence: each with a definition, a 0 to 2 scale, and an example of a 2 taken from a real rep quote.
+- Grade each of my transcripts line by line: score, the line that earned or lost it, the question I should have asked.
+- Write the rubric so another AI tool can apply it unchanged: a clear instruction block and the scoring format.
+
+OUTPUT
+The rubric, a scored table per call, my three weakest criteria across calls, and the instruction block to reuse.
+
+GROUNDING
+Examples come from recorded rep quotes, cited. Grades come from my transcripts only. Don't credit me for a question the transcript doesn't show.
+```
+
 ## Ad hoc questions
 
 - What does a [persona] care about most, and what are they measured on?
@@ -141,3 +233,9 @@ Only the canvas, quotes and dashboard figures, cited. If the persona has no quot
 - Which questions did our reps ask on calls that went well?
 - What is the economic buyer's persona for a deal like this?
 - What does [persona] need to see to become a champion?
+- What do buyers who ended in no decision say they never got asked?
+- Which pain does [persona] mention most that our messaging matrix doesn't address?
+- What question would tell me early that an account is an anti-profile fit?
+- Which job to be done on the [persona] canvas has the fewest customer quotes behind it?
+- What did buyers who chose to build in-house say about why?
+- Which tech stack entries on an account predict a win, according to the ICP dashboard?

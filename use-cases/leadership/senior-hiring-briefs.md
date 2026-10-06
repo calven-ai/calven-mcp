@@ -87,6 +87,70 @@ GROUNDING
 Judge only against the Universe, cited with samples. Mark a question as "no evidence either way" rather than scoring on opinion. Do not include financials.
 ```
 
+## Advanced prompts
+
+### Pressure-test a finalist's 90-day plan
+
+```
+Pressure-test a finalist's 90-day plan against what our deals, buyers and market say. Use Calven MCP for the evidence the plan should rest on.
+
+FILL IN
+- Role: [VP of Sales, CMO, head of product]
+- Candidate's plan: [paste the 90-day plan or presentation]
+
+CONTEXT
+A polished plan can be written from any company's website. I want to know whether this one would work here, and whether the candidate found what the evidence says.
+
+FROM CALVEN
+- The ICP, the top loss reasons and win rate by segment, with n.
+- Our Tier 1 competitors and our win rate against each, with n.
+- The primary personas' pains and objections.
+- Product gaps that cost deals, and the trends our positioning cites.
+
+RED-TEAM
+- Break the plan into its bets: each initiative and what it assumes about the market, the buyers or the team.
+- Test each assumption against Calven: supported, contradicted or not on record.
+- Play the hostile reviewer: a CRO who has watched three VPs fail, asking where this plan goes wrong in month four.
+- Find what the plan misses that the evidence says is the biggest issue.
+
+OUTPUT
+A table (bet, assumption, evidence, verdict), three follow-up questions for the final interview, and a one-paragraph read on whether the candidate understood our situation.
+
+GROUNDING
+Label every number as Calven (cited, with n). Verdicts cite the evidence. Don't mark the candidate down for not knowing internal data; grade the reasoning.
+```
+
+### Calibrate the panel on synthetic candidates
+
+```
+Calibrate the interview panel before the first real candidate: write three synthetic candidates' answers and have every interviewer score them blind. Use Calven MCP to write the answer key from our real market.
+
+FILL IN
+- Role: [role]
+- Questions: [paste the interview questions]
+- Panel: [names or roles of the interviewers]
+
+CONTEXT
+Panels disagree because they grade against different pictures of the job. Scoring the same answers before the loop starts shows where each interviewer's bar sits.
+
+FROM CALVEN
+- The ICP, the positioning and the primary personas' pains.
+- Our win rate against the main competitors and the top loss reasons, with n.
+- The trends and product gaps a person in this role would have to deal with.
+
+SIMULATE
+- Write the answer key for each question: what a strong answer covers, grounded in the evidence.
+- Write answers from three synthetic candidates: strong and specific to us, polished but generic, and confident but wrong about our market.
+- Shuffle them and produce a blind scoring sheet for the panel.
+- When I paste the panel's scores back, show each interviewer's bias against the key: too generous, too harsh, or fooled by polish.
+
+OUTPUT
+The answer key, the three anonymised answer sets, the scoring sheet, and, once scores come back, a calibration table with one coaching note per interviewer.
+
+GROUNDING
+The answer key cites Calven. The synthetic candidates are fiction; label them that way everywhere and never present them as real people.
+```
+
 ## Ad hoc questions
 
 - What is our ICP in one paragraph?
@@ -98,3 +162,9 @@ Judge only against the Universe, cited with samples. Mark a question as "no evid
 - What is our positioning statement?
 - Which segment does the ICP dashboard say we should expand into, and would a [role] candidate know why?
 - What is our competitive win rate against [competitor], with n?
+- Which loss reason would a new [role] be expected to fix?
+- What changed in our market this year that a candidate's research could miss?
+- What should a candidate who worked at [competitor] be able to tell us that the battlecard doesn't cover?
+- What do buyers say about our sales team in surveys?
+- Which personas sit on our won deals most often?
+- Which pillar is weakest according to the messaging dashboard?

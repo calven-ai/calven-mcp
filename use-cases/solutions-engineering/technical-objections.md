@@ -126,6 +126,100 @@ GROUNDING
 Against the Universe only. Say so if it is sound.
 ```
 
+## Advanced prompts
+
+### Debate the objection before the buyer does
+
+```
+Stage a structured debate on a technical objection: one side argues it holds, the other that it doesn't, and a judge decides. Use Calven MCP for the product facts, the buyers' words and how the objection played out in deals.
+
+FILL IN
+- Objection: [paste the objection as the buyer said it]
+- Persona: [technical buyer persona]
+
+CONTEXT
+I have a stock answer and I believe it. That's the risk. I want the strongest case for the objection before I answer it in front of the buyer.
+
+FROM CALVEN
+- The product brief sections the objection touches, including known weaknesses.
+- Buyer quotes raising the objection, and our reps' answers on calls we won.
+- Deal drivers where the objection appears, with outcome.
+
+METHOD
+- Side A, the buyer's skeptic, steelmans the objection from the weaknesses and the losses. Three arguments with evidence.
+- Side B, our SE, answers each from the brief and the wins. No claim beyond the brief.
+- One rebuttal round each.
+- A judge playing the persona scores each argument on evidence and relevance to their goals, and declares who carried each point.
+- Where A wins, write the honest concession and the mitigation.
+
+OUTPUT
+The debate in under 500 words, the judge's scorecard, and the answer to give: concede what's true, win what's winnable, in five sentences.
+
+GROUNDING
+Every argument cites the brief, a quote or a driver. Don't let Side B claim a capability the brief doesn't list, and don't invent a deal outcome.
+```
+
+### Measure what the objection costs
+
+```
+Measure how much this objection really costs us in win rate, separating it from segment and competitor effects. Use Calven MCP for the closed deals and the tags that mark the objection.
+
+FILL IN
+- Objection: [the objection]
+- Product feedback tag: [the closest tag, for example Integrations, Security, API]
+- Window: [window]
+
+CONTEXT
+Everyone says this objection loses us deals. Product wants a number before they fund the fix, and I suspect it mostly shows up in a segment we lose anyway.
+
+FROM CALVEN
+- Closed deals in the window, won and lost, paged, with product feedback, account size, industry, competitors and loss reason.
+- Deal drivers that mention the objection, with direction and whether they decided the deal.
+- The overall win rate from the win/loss dashboard, with n, as the reference.
+
+METHOD
+- Flag deals where the objection appears, by tag or by driver.
+- Compare win rates with and without the flag, then within segment and within competitor, to see if the gap survives.
+- If you can run code, fit a logistic regression with the flag plus segment and competitor, and report the effect with a confidence interval.
+- Translate the effect into pipeline: deals affected times the win-rate gap times average amount.
+
+OUTPUT
+A short memo: the raw gap, the adjusted gap with n, the pipeline at stake as a range, and whether the objection is a product problem or a targeting problem.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Row counts are labelled as counts. With fewer than 30 flagged deals, say the result is directional.
+```
+
+### Write the test that settles it
+
+```
+Design a short, falsifiable technical test that settles the objection, which the buyer can run themselves. Use Calven MCP for what the product supports and how buyers phrased the doubt.
+
+FILL IN
+- Objection: [the objection, for example "it won't scale to our volume"]
+- Their environment: [paste what you know: data volumes, systems, constraints]
+
+CONTEXT
+Arguing about an objection loses to proving it. A test the buyer designs with me, runs in two hours and can't argue with beats any slide.
+
+FROM CALVEN
+- The product brief's technical architecture, integrations and known limits for the area.
+- Buyer quotes raising the objection, to see what would convince them.
+- Product changes in the area in the last six months.
+
+METHOD
+- Turn the objection into a hypothesis with one metric and a pass threshold the buyer agrees is meaningful.
+- Design the test: setup, data, steps, what's measured, how many runs to separate signal from noise.
+- Pre-register the result: write down what pass and fail look like and what each means for the deal, before running it.
+- Check the test against the brief's limits: if the brief says it may fail, say so and scope the test to where we're strong, openly.
+
+OUTPUT
+A one-page test protocol the buyer can follow, the pass threshold, the pre-registered decision, and a two-line note to the AE on the risk.
+
+GROUNDING
+Every capability the test relies on is in the brief, cited by section. Don't invent a performance figure; thresholds are the buyer's or a stated assumption.
+```
+
 ## Ad hoc questions
 
 - Does the product do [capability], per the brief?
@@ -138,3 +232,9 @@ Against the Universe only. Say so if it is sound.
 - What is our known weakness on [topic]?
 - Which buyer raised [concern] and bought anyway? What did they say?
 - Is "[claim on our docs]" a supported claim?
+- Which technical objection shows up most on deals we still won?
+- What did our SEs say on calls when [objection] came up and the deal closed?
+- Is [objection] more common in one segment or with one competitor?
+- Which objection have buyers raised that the product brief doesn't address at all?
+- Has a product change in the last six months made an old objection answer wrong?
+- Which persona raises [objection], and what are they really worried about?

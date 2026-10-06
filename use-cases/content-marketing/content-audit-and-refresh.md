@@ -147,6 +147,102 @@ GROUNDING
 Use only facts, messaging and quotes in the Universe and cite them. Do not add claims the brief does not support.
 ```
 
+## Advanced prompts
+
+### Score refresh priority with a decay model
+
+```
+Rank the library for refresh by traffic at risk: how fast each page is decaying, times how wrong it has become. Use Calven MCP for what changed in the product and the market and which pages it left stale.
+
+FILL IN
+- Traffic: [attach a CSV: URL, month, sessions, conversions for the last 12 to 18 months]
+- Page list: [attach or paste URLs with title and topic, if not in the traffic file]
+
+CONTEXT
+I can refresh ten pages a month and I have three hundred. Refreshing by age or by gut picks the wrong ten.
+
+FROM CALVEN
+- Product changes in the period, with severity and date.
+- Drift findings: published documents each change left stale, with classification and confidence.
+- Claims records with concerns or unsupported status, and where each appears.
+- Competitive signals for competitors our comparison pages cover.
+
+MODEL
+- If you can run code, fit a decay curve per page (exponential or linear on log sessions) and estimate traffic over the next six months if nothing changes.
+- Score staleness per page: drift findings against it, unsupported claims on it, product changes in its topic, competitor signals since its last update. Weight by severity.
+- Priority = projected traffic × conversion rate × staleness. Show the top 30.
+- Separate the two failure types: pages decaying because they're stale (refresh) and pages decaying because the topic died (merge or retire).
+
+OUTPUT
+The ranked list with traffic trend, staleness reasons and priority, next month's ten pages with the fix each needs, and the merge or retire list.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. A page counts as stale only with a drift finding, claim or dated change behind it; don't guess staleness from age.
+```
+
+### Prove refreshes pay off with a control group
+
+```
+Find out whether our refreshes actually work, with a difference-in-differences test: refreshed pages against similar pages we left alone. Use Calven MCP for which pages had drift and claims problems, so the comparison is fair.
+
+FILL IN
+- Traffic: [attach a CSV: URL, month, sessions, conversions]
+- Refresh log: [attach or paste URL and refresh date for every page refreshed in the last year]
+
+CONTEXT
+Leadership asks whether the refresh program is worth a writer's time. I can show refreshed pages went up, but so did the whole site. I need a real comparison.
+
+FROM CALVEN
+- Drift findings and their dates, by published document.
+- Claims flagged with concerns, by where they appear.
+- Product changes with dates, to mark when each page went stale.
+
+METHOD
+- Build a control group: pages not refreshed that had a similar staleness signal and traffic level before the refresh date. Show how you matched them.
+- If you can run code, compute the difference in differences: change in sessions and conversions for refreshed pages minus change for controls, three and six months after.
+- Split by refresh type if the log says so (facts updated, rewritten, merged).
+- Report the effect with a confidence interval and the number of pages behind it. Name the threats: seasonality, pages picked because they were already recovering.
+- Translate into the business case: sessions and conversions gained per refresh.
+
+OUTPUT
+A one-page memo: method in three lines, effect with uncertainty, effect by refresh type, the business case, and whether to scale, change or stop the program.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Traffic numbers are mine from the file; Calven only marks staleness. Don't claim a cause the design can't support.
+```
+
+### Build a keep, merge or kill decision tree
+
+```
+Build a decision tree every page in the library runs through: keep, refresh, merge, redirect or kill. Then run the library through it. Use Calven MCP for the staleness, claim and messaging evidence each branch tests.
+
+FILL IN
+- Library: [attach a CSV: URL, title, topic, persona, stage, sessions last 6 months, backlinks]
+- Thresholds: [traffic and backlink levels you consider meaningful, or write "suggest them"]
+
+CONTEXT
+Audits stall because every page is a judgement call and every call is a debate. A tree makes the calls consistent and lets a junior writer run the audit.
+
+FROM CALVEN
+- Drift findings by published document and claims flagged with concerns.
+- The current messaging: pillars, persona value propositions, the matrix by stage.
+- The positioning's category frame, to catch pages using a dropped frame.
+- Themes from customer calls with mention counts, to test whether a topic still matters to buyers.
+
+BUILD
+- Draw the tree: does the page carry wrong facts, does buyers' interest in its topic persist, does it serve a persona and stage the matrix covers, does another page cover the same intent, does it carry traffic or links. Each branch ends in a decision.
+- Write each test so it can be answered from the evidence or the CSV, with the Calven input named.
+- Run every page through it and record the path.
+- Flag pages where the tree's answer would surprise you, and explain why the tree is right or which threshold should change.
+- If you can run code, output the tree as a reusable script plus the results CSV.
+
+OUTPUT
+The tree as a diagram or nested list, the results table per page with its path, counts per outcome, and the edge cases.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Every "wrong facts" verdict cites a drift finding or claim; don't route a page to kill on a hunch.
+```
+
 ## Ad hoc questions
 
 - What changed in our product in the last 90 days?
@@ -161,3 +257,9 @@ Use only facts, messaging and quotes in the Universe and cite them. Do not add c
 - What does the drift finding on [page] say exactly?
 - Which pricing statements are live on our site, and do they match the product brief?
 - Is there a newer customer quote on [topic] than the one on this page?
+- Which product change caused the most drift findings across our published documents?
+- Which page makes a claim that a newer customer quote contradicts?
+- Which competitor named on our pages has changed their positioning since we last mentioned them?
+- Which messaging pillar has no published page behind it at all?
+- What's the oldest proof point still in use that has a fresher replacement on record?
+- Which drift findings have been open longest, and on which documents?

@@ -213,6 +213,101 @@ GROUNDING
 Describe every alternative only from its dossier in the Universe and cite it. Do not describe a competitor we do not track. Do not invent pricing.
 ```
 
+## Advanced prompts
+
+### Build the buyer's weighted scorecard honestly
+
+```
+Build the comparison the way a careful buyer would: weighted criteria, honest scores, and a sensitivity check that shows exactly which buyers should pick the competitor. Use Calven MCP for what decides deals, both products and where we lose.
+
+FILL IN
+- Competitor: [competitor]
+- Segment: [segment]
+
+CONTEXT
+Comparison pages that say we win on everything convert nobody who's done their homework. A page that shows the buyer's real trade-offs, including when the competitor is the better fit, gets trusted and cited.
+
+FROM CALVEN
+- Deal drivers in deals against the competitor, helped and hurt, ranked as deciding, with how often each appears.
+- The competitor's battlecard and dossier: strengths, weaknesses, feature comparison, pricing.
+- Our product brief, including known weaknesses.
+- Win rate against the competitor from the competitive intelligence dashboard, with n.
+
+MODEL
+- Derive the buyer's criteria from the deciding drivers, and weight each by how often it decided a deal.
+- Score both products 1 to 5 on each criterion with a cited reason. Where we're weaker, score us weaker.
+- Total the weighted scores.
+- Run the sensitivity check: for each criterion, how much would its weight have to rise for the competitor to win? Those thresholds describe the buyer who should choose them.
+- If you can run code, build the scorecard as a spreadsheet with the weights editable, so sales can rerun it with a buyer's own priorities.
+
+OUTPUT
+The scorecard, the flip thresholds, a "who should choose which" section written for the page, and the spreadsheet.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Every competitor score cites their dossier, and every weakness of ours cites the product brief; don't round a weakness away.
+```
+
+### Red-team the page as their legal team
+
+```
+Hand the comparison page to the competitor's marketing lead and their counsel and let them challenge every claim. Use Calven MCP for the evidence behind each claim and the dates it was gathered.
+
+FILL IN
+- Page: [paste the comparison page draft]
+- Competitor: [competitor]
+
+CONTEXT
+Comparison pages draw complaints, and the first complaint is the one that gets a page pulled. I'd rather know which claims can't stand up before we publish than after their lawyer emails.
+
+FROM CALVEN
+- The competitor's dossier and battlecard, with sources and freshness for each section.
+- Their signals from the last 6 months, for anything that may have changed.
+- Our product brief and the claims records, for every claim we make about ourselves.
+
+RED-TEAM
+- Play their marketing lead: for each claim about them, would they dispute it publicly? Why? Is it out of date, unfair framing, cherry-picked, or simply wrong?
+- Play their counsel: for each claim, is it a verifiable fact, an opinion, or a comparison implying superiority? What evidence would a reasonable reader expect us to hold?
+- Check each challenged claim against the evidence: source, date, and whether a signal since contradicts it.
+- Rate each claim: defensible, defensible with a date or source shown, soften, or remove.
+
+OUTPUT
+A claim table: claim, their challenge, evidence and its date, rating, rewritten line. Then the page with every change marked and a sources footnote ready to publish.
+
+GROUNDING
+Every rating cites the dossier section and date or the product brief. This isn't legal advice: flag the claims a real lawyer should see. Don't invent their response beyond what their positioning and signals support.
+```
+
+### Read both pages as the buyer choosing
+
+```
+Put our comparison page and the competitor's side by side in front of the buyer and see which one they believe. Use Calven MCP for the buyer personas, why buyers chose each side, and a persona review of our page.
+
+FILL IN
+- Our page: [paste our comparison page]
+- Their page: [paste the competitor's comparison or "vs us" page]
+- Personas: [personas who make this choice]
+
+CONTEXT
+Buyers read both pages. They don't read ours alone and decide. I want to know which page earns trust when they sit next to each other.
+
+FROM CALVEN
+- Each persona's canvas: goals, objections, what they distrust from vendors.
+- Why buyers chose us and why they chose the competitor, from deal drivers and quotes.
+- A persona review of our page.
+
+SIMULATE
+- Each persona reads both pages with a real decision to make. In character, in their words: first impression of each, the claim they believe most on each side, the claim they believe least, and which vendor seems to understand their problem.
+- Track the tells that cost trust: a missing weakness, a stale fact, a feature list instead of an outcome, a dig that reads as defensive.
+- Compare with reality: do the persona's conclusions match what decided real deals against this competitor? If not, our page is arguing the wrong criteria.
+- Rewrite our three weakest sections to win the side-by-side.
+
+OUTPUT
+A table per persona: trust verdict, believed and doubted claims on each page, deciding reason. Then the gap between the pages' arguments and real deal drivers, and the three rewritten sections.
+
+GROUNDING
+Persona reactions trace to the canvas, the review and real deal drivers, cited. Their page is what I pasted; don't add claims about the competitor that aren't in it or in their dossier.
+```
+
 ## Ad hoc questions
 
 - Which competitor shows up in the most deals, and what is our win rate against them?
@@ -229,3 +324,9 @@ Describe every alternative only from its dossier in the Universe and cite it. Do
 - Is "[claim about competitor]" supported by anything in the dossier?
 - Who should buy [competitor] instead of us, honestly?
 - What is [competitor]'s target buyer, according to the dossier?
+- Which criterion decides most deals against [competitor] that our comparison page doesn't mention?
+- What's the one honest weakness that would make our [competitor] page more believable?
+- Which competitor has changed pricing since our comparison page was last updated?
+- What do buyers who chose [competitor] say they'd miss about us?
+- Which segment should we tell, on the page, to pick [competitor] instead?
+- What does [competitor] say about us, according to their dossier?

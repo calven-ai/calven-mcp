@@ -138,6 +138,98 @@ GROUNDING
 Match only where the change record and the theme clearly describe the same thing. Say "no matching theme" otherwise.
 ```
 
+## Advanced prompts
+
+### Find what's really driving ticket volume
+
+```
+Run a driver analysis on our ticket export: what's actually pushing volume up, and is any of it caused by a product change. Use Calven MCP for the company's theme taxonomy and the dated product changes.
+
+FILL IN
+- Ticket export: [attach a CSV: date, account, tags, category, text]
+- Window: [window]
+
+CONTEXT
+Volume is up and everyone has a theory. Product thinks it's onboarding, sales thinks it's one big account. I want the answer from the data before the weekly review.
+
+FROM CALVEN
+- The customer themes with labels, category and mentions, so tickets map to the same taxonomy as calls.
+- Product changes in the window with their dates and severity.
+- Net sentiment and the fastest-moving themes from the voice-of-customer dashboard, with n.
+
+METHOD
+- Map each ticket to a Calven theme by its text. Report the share you couldn't map; that's a theme Calven doesn't have.
+- Decompose the change in volume by theme, by account and by tag. Check how much one account explains.
+- Mark each product change on the timeline and test for a step change in its theme's volume in the two weeks after. If you can run code, fit a simple interrupted time series per theme and show the charts.
+- Compare ticket-side movement with the call-side theme movement. Agreement is a stronger signal than either.
+
+OUTPUT
+A ranked list of drivers with the share of the increase each explains, the changes that caused a step, the unmapped tickets as candidate new themes, and a three-line summary for product.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine (from the export), or your assumption. Don't claim a change caused a spike unless the timing and the theme both match.
+```
+
+### Settle which request gets the roadmap slot
+
+```
+Stage a debate between two customer requests competing for one roadmap slot, with a judge who decides on evidence. Use Calven MCP for what each request costs in deals and what customers say about it.
+
+FILL IN
+- Request A: [request A, with your ticket count]
+- Request B: [request B, with your ticket count]
+- Window: [window]
+
+CONTEXT
+Product will build one this quarter. Support has two loud requests and no way to compare them except volume, which favours whoever complains most. I want the case for each made as well as it can be, then judged.
+
+FROM CALVEN
+- For each request, the matching theme with mentions, sentiment and momentum.
+- Product gaps from the win/loss dashboard and deal drivers that hurt, matched to each request, with deals touched and amount, with n.
+- The three strongest customer quotes for each.
+
+DEBATE
+- The advocate for A argues in three rounds: reach, revenue at stake, severity. Then the advocate for B.
+- Each gets one rebuttal attacking the other's weakest evidence.
+- A judge, playing a skeptical head of product, scores both on reach, deals at stake, severity for the customer, and evidence quality. The judge must say which argument moved the score and which was noise.
+
+OUTPUT
+The debate in under 500 words, the judge's scorecard, the verdict, and a one-paragraph note support can send to product with the numbers.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine (ticket counts), or your assumption. Quotes verbatim. Don't match a request to a theme or deal driver unless the text supports it; say when there's no match.
+```
+
+### Backtest whether tickets predict lost renewals
+
+```
+Backtest whether the themes in an account's tickets predicted a lost renewal, and turn what holds up into an early-warning rule. Use Calven MCP for the renewal outcomes and the product feedback on closed deals.
+
+FILL IN
+- Ticket history: [attach a CSV of tickets: account, date, tags, text, for the last 12 to 24 months]
+- Window: [window of closed renewals to test, e.g. last four quarters]
+
+CONTEXT
+Support sees trouble early but can't prove which trouble matters. If certain ticket patterns reliably come before a lost renewal, CS should hear about them the week they start.
+
+FROM CALVEN
+- Every renewal deal closed in the window, paged from the CRM: account, status won or lost, close date, loss reason, product feedback categories.
+- The customer themes, so tickets map to the same taxonomy as calls.
+- Deal drivers on lost renewals, where surveys ran.
+
+BACKTEST
+- Map tickets to themes and keep only those filed in the 180 days before each renewal closed.
+- For each theme and simple pattern (count, recency, escalations, a competitor named), compare the lost rate when present against when absent.
+- Build a rule from the strongest two or three signals, then test it on the half of the data you didn't build it on. Report precision, recall and how many lost renewals it would have caught early. If you can run code, do it in a notebook and show the confusion matrix.
+- Say how small the sample is and how much to trust it.
+
+OUTPUT
+A table of signals with lift and n, the rule, its holdout performance, and the alert wording for CS.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine (from the export), or your assumption. Don't treat a pattern with fewer than ten renewals behind it as a finding.
+```
+
 ## Ad hoc questions
 
 - Which themes did customers raise most in the last 30 days?
@@ -152,3 +244,8 @@ Match only where the change record and the theme clearly describe the same thing
 - Which help articles went stale after the last release?
 - What do customers say about onboarding, in their words?
 - Which product feedback categories appear most on lost deals?
+- Which theme has rising mentions on calls but no matching product change to answer it?
+- Which product feedback category shows up on lost renewals but rarely on new business losses?
+- What's the most positive theme customers mention, so the report isn't only complaints?
+- Which theme do buyers in win/loss name as a reason they chose us, that support also hears about?
+- Is [theme] concentrated in one segment or spread across all of them?

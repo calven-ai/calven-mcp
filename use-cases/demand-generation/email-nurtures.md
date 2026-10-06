@@ -241,6 +241,101 @@ GROUNDING
 Ground the diagnosis in the Universe and cite it. If the Universe does not explain the drop, say so and suggest what to test instead.
 ```
 
+## Advanced prompts
+
+### Design an A/B test the list can power
+
+```
+Design an A/B test for my nurture that my list can actually power, and pick the variants worth testing. Use Calven MCP for the persona's reaction to each variant and the customer language behind it.
+
+FILL IN
+- Nurture: [paste the sequence or the email to test]
+- Persona: [persona]
+- List size: [contacts entering the nurture per month]
+- Baseline: [paste current open, click and reply or meeting rates, per email]
+
+CONTEXT
+Most nurture tests end in "no significant difference" because the list was too small or the variants were too alike. I want a test that can return an answer, on a difference that matters.
+
+FROM CALVEN
+- The persona's top pains and objections from the canvas and from call quotes.
+- A persona review of the candidate variants you write.
+
+METHOD
+- Write four variants that each differ on one real idea (the pain, the proof, the ask), not on word swaps. Run them past the persona review and keep the two it separates most clearly.
+- Pick the primary metric. Replies or meetings beat opens if the volume allows.
+- Run a power calculation: the minimum detectable effect at 80% power and 5% significance for each candidate metric, given my list size and baseline. Show how many weeks each needs.
+- If you can run code, show the calculation and a chart of weeks to result against effect size.
+
+OUTPUT
+A test plan: hypothesis, the two variants, metric, sample per arm, duration, stop rule, and what I change in the nurture for each outcome.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. The persona review picks the variants; it doesn't predict the lift, so don't present it as one.
+```
+
+### Find where the nurture loses people
+
+```
+Find the email where my nurture starts losing people, with a survival analysis on my own data. Use Calven MCP to explain why that email loses them.
+
+FILL IN
+- Engagement export: [attach a CSV: contact, entry date, email step, opened, clicked, unsubscribed, became opportunity]
+- Nurture: [paste the emails in order]
+- Persona: [persona]
+
+CONTEXT
+The email platform shows an average open rate per email. It hides when people actually stop paying attention, and whether the ones who stay are the ones who buy.
+
+FROM CALVEN
+- The messaging matrix for the persona by stage, to place each email on the journey.
+- The persona's pains and objections from the canvas, and objection quotes from calls.
+- Which contacts in the export are CRM contacts on won deals.
+
+METHOD
+- Treat the last engaged step as survival time and unsubscribe or silence as the event. Plot a Kaplan-Meier curve of engagement by step, split by segment or source if the export allows.
+- Find the step where the hazard jumps. Check whether contacts who reached opportunity follow a different curve.
+- Read the email at that step against its matrix stage and the persona's objections: wrong stage, an objection left open, an ask that comes too early.
+- If you can run code, use the lifelines library and plot the curves.
+
+OUTPUT
+The survival chart, the drop-off step with the evidence for why, and a rewrite brief for that email.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. The curve comes only from my export; the diagnosis cites the canvas, the matrix or quotes. Don't link a contact to a deal the CRM doesn't link.
+```
+
+### Score the sequence on the forces of switching
+
+```
+Score my nurture on the four forces that decide whether a buyer switches: push, pull, anxiety and habit. Use Calven MCP for what really pushes, pulls and worries our buyers.
+
+FILL IN
+- Nurture: [paste the sequence]
+- Persona: [persona]
+- Alternative: [competitor, or the status quo, e.g. "spreadsheets and the current process"]
+
+CONTEXT
+Most nurtures pile on pull (features, benefits) and say nothing about the anxiety of switching or the comfort of the status quo. That's usually why a sequence gets opens and no meetings.
+
+FROM CALVEN
+- Call quotes for the persona tagged Pain and Buying trigger (push) and Gain (pull).
+- Quotes tagged Objection and the deal drivers that hurt us (anxiety), with n.
+- The alternative's battlecard, or the competitive alternatives in our positioning (habit).
+
+METHOD
+- Build the forces diagram for this persona from the evidence: three to five items per force, each with its quote or source.
+- Score each email on which force it moves, how hard, and whether it moves the wrong one (an email that adds anxiety).
+- Find the force the sequence never touches and where in the sequence it should land.
+- Write the missing email in the buyer's words.
+
+OUTPUT
+The forces diagram, a scored table of email by force, the gap, and the new email ready to drop in.
+
+GROUNDING
+Every force item cites a quote, a deal driver or the battlecard. Mark your reading of an email as your judgement, and don't invent a quote to fill a force.
+```
+
 ## Ad hoc questions
 
 - What does [persona] care about at the evaluation stage, and what do they object to?
@@ -257,3 +352,8 @@ Ground the diagnosis in the Universe and cite it. If the Universe does not expla
 - Would [persona] open an email with this subject line: "[subject]"?
 - What did we change in the product in the last 90 days that a nurture might still get wrong?
 - Which stage of the funnel has the least customer evidence behind it for [persona]?
+- Which objection do won deals get past that lost deals never do?
+- What does [persona] say right before they buy, from quotes tagged Buying trigger?
+- Which quotes with a Time-to-value highlight could carry a mid-nurture email?
+- Which stage of [persona]'s messaging matrix row is empty or thinnest?
+- What's the most common loss reason on deals from [lead source], with n?

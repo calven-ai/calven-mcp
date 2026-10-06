@@ -130,6 +130,97 @@ GROUNDING
 Fit and win rates from the Universe only, cited with n. Accounts not in the CRM mirror are marked "not on record", not scored.
 ```
 
+## Advanced prompts
+
+### Price each whitespace play by expected value
+
+```
+Build a decision tree for the whitespace plays at my account and rank them by expected value, so I spend the quarter on the right one. Use Calven MCP for our win rates, deal sizes and cycle lengths for each kind of play.
+
+FILL IN
+- Account: [account]
+- Plays I'm considering: [paste two to four: new team, new product, upsell, displacement of a rival]
+- My hours this quarter for this account: [hours]
+- What I know about each play: [paste notes: sponsor, budget signal, timing]
+
+CONTEXT
+Every play on an account plan looks plausible on the page. I have one quarter and limited hours, and I want to know which play is worth the most once odds, size and time are counted.
+
+FROM CALVEN
+- The account's ICP tier, fit score, best-fit product and triggers on record.
+- Win rate, average deal size and sales cycle by deal type (new business, expansion, upsell) for the account's segment and tier, from the ICP and win/loss dashboards, with n.
+- Past deals at the account and their loss reasons.
+
+MODEL
+- Draw the tree for each play: get a meeting, get a sponsor, reach evaluation, win. Put a probability on each branch from the base rates, adjusted by my notes, and say how much you moved each one.
+- Expected value per play: probability of a win times deal size, discounted for cycle length past quarter end. Then divide by my hours.
+- If you can run code, vary every probability by plus or minus 15 points and show which play stays on top.
+
+OUTPUT
+A ranked table: play, win probability, deal size, close quarter, expected value, value per hour. Then the tree for the top play, and the one fact I'd need to learn to switch plays.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Don't invent a base rate for a deal type with no history; say so and use a labelled range.
+```
+
+### Map who moves the decision and how to reach them
+
+```
+Map the buying group at my account on a power and interest grid, then trace the shortest path of influence to the person who signs. Use Calven MCP for the contacts we know, the roles that sit on won deals and what each persona cares about.
+
+FILL IN
+- Account: [account]
+- Org notes: [paste what you know: reporting lines, who talks to whom, recent hires]
+
+CONTEXT
+I know four people at this account and none of them signs. Before I spend weeks threading, I want to see who holds the power, who cares, and which introductions get me to the economic buyer fastest.
+
+FROM CALVEN
+- The account's contacts with their roles and lifecycle stage.
+- The contact roles present on won deals versus lost deals in the segment, and the multi-threading win rate from the persona dashboard, with n.
+- The persona canvases for the economic buyer and the likely blocker: goals, pains, objections.
+
+METHOD
+- Place every known and missing role on a 2x2: power over the decision against interest in the problem. Missing roles go on the grid in a dashed outline.
+- Draw the influence paths from my contacts to the economic buyer. Score each path on hops, the strength of each link and the risk of the blocker hearing first.
+- For the best path, write the ask to each person on it in one line, from what their canvas says they care about.
+
+OUTPUT
+The grid as a table or a simple diagram, the ranked paths, and the three asks in order.
+
+GROUNDING
+Contacts and roles come from the CRM mirror; reporting lines come from my notes. Label any relationship you inferred as your assumption. Don't name a person who isn't on record or in my notes.
+```
+
+### Replay how lookalike accounts were won
+
+```
+Find the closed-won accounts most like mine and replay how we won them, step by step, as a path to copy. Use Calven MCP for the lookalike accounts, their deals and what the buyers said decided it.
+
+FILL IN
+- Account: [account]
+- Where we are with them: [paste the current state: contacts, last meeting, open deal if any]
+
+CONTEXT
+Somebody on this team has already won an account like this one. I'd rather copy a path that worked than invent one.
+
+FROM CALVEN
+- My account's industry, size, region, tech stack, triggers and fit tier.
+- Won deals in the same segment, paged from the CRM mirror, with their accounts' attributes, stages reached, contact roles, lead source and cycle length.
+- The deal drivers and survey summaries for those deals, where they exist.
+
+METHOD
+- Score each won account's similarity to mine on industry, size, tech stack, triggers and tier. Show the weights. Keep the top five.
+- For each, rebuild the path: how it started, who came in when, the competitor, what decided it in the buyer's words.
+- Find the steps all five share and the step mine is missing.
+
+OUTPUT
+A lookalike table with similarity scores, a five-row timeline comparison, and a 90-day path for my account built on the shared steps.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. If fewer than five lookalikes exist, say how many and don't pad the list.
+```
+
 ## Ad hoc questions
 
 - Is [account] in our ICP? Which tier, and why?
@@ -144,3 +235,9 @@ Fit and win rates from the Universe only, cited with n. Accounts not in the CRM 
 - Which accounts in my territory have a trigger and no open deal?
 - Is there a surveyed deal at [account] and what did the buyer say?
 - What does the ICP say disqualifies an account?
+- Which contacts at [account] were on a deal we won there before, and are they still Champions?
+- Which tech stack entries show up most on our won accounts in [segment], and does [account] have them?
+- What is the expansion win rate in [segment] compared with new business, and over how many deals?
+- Which trends make [account]'s industry more urgent this year?
+- Which of my Tier 1 accounts have contacts but no economic buyer on record?
+- What did buyers at accounts like [account] say nearly stopped them from buying?

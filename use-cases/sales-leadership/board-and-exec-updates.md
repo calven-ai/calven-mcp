@@ -94,6 +94,98 @@ GROUNDING
 Verbatim only, from the Universe.
 ```
 
+## Advanced prompts
+
+### Split the win-rate change into mix and rate
+
+```
+Split the quarter's win-rate change into mix (we worked different deals) and rate (we won more or less often on the same kind of deal). Use Calven MCP for the win rates and deal counts by segment.
+
+FILL IN
+- Quarter: [quarter]
+- Comparison: [last quarter or the same quarter last year]
+- Cut: [segment, deal size band, competitor or region]
+
+CONTEXT
+"Win rate fell four points" invites the wrong fix. If the mix moved toward harder segments, the team didn't get worse; the pipeline changed. The board needs to know which.
+
+FROM CALVEN
+- Win rate and deal count per segment for both periods from the ICP and win/loss dashboards, with n.
+- The share of pipeline in profile for both periods.
+- The top loss reasons in the segments that moved most.
+
+MODEL
+- Run a mix-rate decomposition: the change from deal share shifting across segments at the old win rates, and the change from win rates moving within each segment.
+- Check for Simpson's paradox: a segment whose rate went up while the total went down.
+- Flag segments with n under 15 as too small to read.
+- If you can run code, compute it and draw a waterfall from last period's win rate to this one.
+
+OUTPUT
+The waterfall, a table per segment (share then and now, rate then and now, contribution), the one-line explanation for the board, and what we do about each component.
+
+GROUNDING
+Label every number as Calven (cited, with n) or computed by you, with the method. Use the dashboard rates and counts; don't rebuild them from deal rows.
+```
+
+### Debate whether it was the market or us
+
+```
+Run a structured debate on why the number moved: one side argues it was the market, the other argues it was execution, and a judge rules on the evidence. Use Calven MCP for the evidence both sides can cite.
+
+FILL IN
+- Quarter: [quarter]
+- What moved: [the metric and the move, e.g. win rate down or cycle up]
+
+CONTEXT
+Every board update answers "was it the market or was it us?" whether it means to or not. Sales leaders lean toward the market, boards lean toward execution. I want the strongest version of each before I choose the story.
+
+FROM CALVEN
+- Competitive signals and trends from the quarter.
+- Win rate per competitor and per segment, with n and the change against last quarter.
+- Deal drivers by category (Competitive, Capability, Experience, Commercials) and the buyer quotes behind them.
+- What buyers said about the sales team in surveys.
+
+DEBATE
+- The market side opens with its three strongest pieces of evidence. The execution side does the same.
+- Each side rebuts the other once.
+- The judge, a board member with an operator background, weighs the evidence, gives a split (for example 60% execution, 40% market) and says what would change the ruling.
+
+OUTPUT
+The debate in under 500 words, the ruling with the split, the evidence table, and the paragraph for the board update that reflects the ruling honestly.
+
+GROUNDING
+Label every number as Calven (cited, with n). Each side may only cite recorded evidence. The split is the judge's opinion; say so.
+```
+
+### Pre-register next quarter's predictions
+
+```
+Write down next quarter's predictions with probabilities, so the next board update starts by scoring them. Use Calven MCP for the baseline each prediction starts from.
+
+FILL IN
+- Next quarter: [quarter]
+- Commitments to the board: [paste what we're committing to]
+
+CONTEXT
+Boards trust leaders whose calls come true. Predictions written down with probabilities and scored afterwards show calibration in a way a forecast slide can't.
+
+FROM CALVEN
+- Competitive win rate, win rate per top competitor, in-profile share of pipeline, average deal size and cycle, with n and the trend.
+- Open deals against each top competitor.
+- Competitor signals that could shift the numbers.
+
+METHOD
+- Write 8 to 10 predictions that can be checked next quarter, such as win rate against a named competitor staying above a stated level.
+- Give each a probability. Start from the trend and the sample size; a rate on a small n gets a wider band.
+- After the quarter, I paste the results and you compute the Brier score and a calibration line: of the calls I made at 70%, how many happened.
+
+OUTPUT
+The prediction list (prediction, baseline, probability, how it's checked), a one-slide version for the board, and the scoring template for next quarter.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. The probabilities are ours; never present them as Calven forecasts.
+```
+
 ## Ad hoc questions
 
 - What is our competitive win rate this quarter versus last, with n?
@@ -106,3 +198,9 @@ Verbatim only, from the Universe.
 - What is our win rate by deal size band?
 - How many deals did the win/loss program cover this quarter?
 - What are the three biggest movers across all dashboards this quarter?
+- Which segment's win rate moved opposite to the overall rate this quarter?
+- Which competitor cost us the most pipeline this quarter, and how much?
+- How does the sales cycle for in-profile deals compare with out-of-profile ones?
+- Which loss reason do buyers give in surveys that reps rarely record in the CRM?
+- What did buyers say in the surveys on this quarter's biggest losses?
+- Did the multi-threading win rate change this quarter, and on what n?

@@ -147,6 +147,101 @@ GROUNDING
 Use only quotes in the Universe, verbatim and cited. If there are no new quotes, say so.
 ```
 
+## Advanced prompts
+
+### Run a quote tournament with your buyers
+
+```
+Run a pairwise tournament between my candidate quotes and find the one that actually persuades the buyer. Use Calven MCP for the verbatim quotes, the buyer persona and a persona review of the finalists.
+
+FILL IN
+- Claim the quote must prove: [the claim, as it appears on the page]
+- Persona: [persona]
+- Where it runs: [page, ad, deck slide or review request]
+
+CONTEXT
+I have a dozen quotes that all sort of prove the claim, and the team picks by gut. The quote that wins should be the one the buyer believes, not the one we like.
+
+FROM CALVEN
+- Up to 12 verbatim quotes that support the claim, with speaker, role, account, highlight and date.
+- The persona's canvas: goals, pains, objections, the words they use.
+- A persona review of the final four, each set in the line of copy it will sit under.
+
+METHOD
+- Screen out any quote older than 18 months, any without a named speaker, and any from a role the persona wouldn't trust.
+- Play the persona judging every remaining pair: which of the two makes you believe the claim, and why, in one sentence. Judge each pair twice with the order swapped, and count a split decision as a tie.
+- Rank the quotes with a Bradley-Terry fit on the wins. If you can run code, do the fit and show each strength score with a bootstrap interval, so I can see where two quotes are really a tie.
+- Send the top four through the persona review and let it break ties.
+
+OUTPUT
+A ranked table: quote, speaker and role, account, strength score, why it wins, the review's flag. Then the winner set in the copy, and the runner-up for a second placement.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Quotes stay verbatim and attributed. The pairwise verdicts are your role-play of the canvas, so label them that way; the review findings come from the review. Don't trim a quote into saying more than the speaker said.
+```
+
+### Build an eval set for quote picks
+
+```
+Build an eval set that grades any quote pick our team or an AI tool makes, so quote quality stops depending on who's on shift. Use Calven MCP for real quotes, good and bad, and the claims they get attached to.
+
+FILL IN
+- Assets that use quotes: [paste three to five recent pages, ads or slides with their quotes]
+- House rules: [paste your quote policy, or write "none"]
+
+CONTEXT
+Quotes go out every week from three people and an AI tool. I want a test I can rerun on every new pick: verbatim, attributed, fresh, from a customer and not a rep, and actually proving the line it sits under.
+
+FROM CALVEN
+- 30 quotes spread across themes and sentiment, including negative and neutral ones, with speaker, role, account, highlight and date.
+- The claims from our documents and site that quotes most often support.
+- The verbatim original behind each quote in my pasted assets, so you can check it.
+
+BUILD
+- A rubric with five to seven criteria, each with a pass and fail definition and an example from the Calven quotes.
+- 25 test cases: a claim, a candidate quote, the expected verdict and the reason. Include traps: a paraphrase passed off as verbatim, a line from one of our own reps, a quote that proves a different claim, a negative quote trimmed into a positive one.
+- Grade my pasted assets against the rubric as the first run.
+- If you can run code, save the eval as a CSV plus a short script that scores a new pick against it.
+
+OUTPUT
+The rubric, the 25-case eval set as a table, and the scorecard for my pasted assets.
+
+GROUNDING
+Every test case uses a real Calven quote, cited. Expected verdicts are your judgement against the rubric, labelled. Don't invent a quote to build a trap; alter a real one and say what you changed.
+```
+
+### Size the quote test before you run it
+
+```
+Design an A/B test of a customer quote on one of our pages, with a power calculation, so we know whether it's worth running before we run it. Use Calven MCP for the candidate quotes and the persona the page is written for.
+
+FILL IN
+- Page: [page URL and the section the quote goes in]
+- Traffic and baseline: [monthly visitors to the page and its current conversion rate]
+- Persona: [persona]
+- Smallest lift worth shipping: [e.g. 10% relative]
+
+CONTEXT
+Everyone says quotes convert. I want to know whether ours do, on this page, with this traffic, and how long it takes to prove.
+
+FROM CALVEN
+- The three strongest verbatim quotes for the page's main claim, with speaker, role and highlight.
+- The persona canvas: the objection the quote has to answer at this point on the page.
+- A persona review of the page section with each quote in place.
+
+METHOD
+- Pick the challenger from the three quotes using the review, and write the hypothesis: which objection it answers and what behaviour should change.
+- Run the power calculation for a two-sided test at 80% power and 5% significance with my traffic and baseline. Show the sample per arm and the weeks to reach it. If it takes longer than eight weeks, propose a higher-traffic page or a bolder change and recompute.
+- Set the primary metric, one guardrail metric, the stopping rule and what we do with each result.
+- If you can run code, show the sensitivity as a small grid: weeks to significance across baselines and lifts.
+
+OUTPUT
+A one-page test plan: hypothesis, variants with the exact copy, sample size, duration, metrics, stopping rule, decision rules. Plus the grid.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Traffic and conversion come only from me. Don't predict the lift; the test exists to measure it.
+```
+
 ## Ad hoc questions
 
 - Give me three customer quotes about time to value, with who said them.
@@ -161,3 +256,9 @@ Use only quotes in the Universe, verbatim and cited. If there are no new quotes,
 - Who at [account] has spoken on a call, and what is their role?
 - Is this quote verbatim: "[paste]"? Who said it and when?
 - Which quotes support our [pillar] pillar?
+- Which quotes say the same thing as our [pillar] pillar, but in plainer words?
+- Which accounts gave us both a positive and a negative quote on the same theme?
+- Which quote from a lost deal praises something we do well?
+- Do we have an economic buyer saying it on [theme], or only end users?
+- Which of our claims do reps make on calls that no customer ever says back?
+- What's the most specific before-and-after a customer has described?

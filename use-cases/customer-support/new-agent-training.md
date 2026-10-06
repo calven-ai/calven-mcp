@@ -100,6 +100,70 @@ GROUNDING
 Every answer must be checkable against the Universe. No trick questions on facts the documents do not state.
 ```
 
+## Advanced prompts
+
+### Run a scored ticket simulator for new agents
+
+```
+Run a ticket simulator: you play customers, the new agent answers, and you score every reply against our approved facts. Use Calven MCP for the customers' real language, the product facts and the competitor answers.
+
+FILL IN
+- Agent's level: [first week, second week, or ready to certify]
+- Focus: [product, pricing, competitors, or a mix]
+- Rounds: [number of tickets, e.g. ten]
+
+CONTEXT
+Reading the brief doesn't teach anyone to answer a frustrated customer. New agents need reps against realistic tickets with feedback on each one, before they touch a real queue.
+
+FROM CALVEN
+- The product brief: capabilities, limits, pricing and packaging, known weaknesses.
+- Customer quotes tagged Product feedback, Usability or Pricing, to write tickets in real customer language.
+- The battlecards' objection handling for the competitors customers mention most.
+
+SIMULATE
+- Play one customer at a time, in their words, with a believable account situation. Mix easy questions, near-miss traps where a careless yes is wrong, a competitor mention and one angry customer.
+- Wait for the agent's reply. Score it on accuracy against the brief, honesty about limits, tone, and whether it should have escalated, one to five each, with the line that cost the point and the approved answer.
+- Raise the difficulty after two strong answers in a row; drop it after two weak ones.
+- After the last round, give a summary: strengths, the two gaps to study, and the brief sections to read.
+
+OUTPUT
+One ticket at a time, then the score and feedback after each reply, then the final scorecard.
+
+GROUNDING
+Ticket wording comes from real quotes; scoring cites the brief or battlecard. Don't invent a product fact to make a scenario harder.
+```
+
+### Build a spaced-repetition deck for the ramp
+
+```
+Build a spaced-repetition flashcard deck that gets a new agent fluent in the product, the customers and the competitors in two weeks. Use Calven MCP for the facts the cards test.
+
+FILL IN
+- Card count: [how many cards, e.g. 150]
+- Format: [CSV for Anki or another flashcard app, or a printable sheet]
+- Weak spots: [paste common mistakes new agents make, or write "none"]
+
+CONTEXT
+New agents forget most of what they read in week one. Cards they review on a schedule stick. The hard part is writing good cards from the right facts, which is what I want done.
+
+FROM CALVEN
+- The product brief: capabilities, integrations, limits, pricing and packaging, known weaknesses.
+- The ICP summary and disqualifiers, and the persona roster with what each cares about.
+- Each tracked competitor's battlecard: where we win, where we lose, objection handling.
+
+BUILD
+- Write cards in three types: fact (what does plan Y include), judgement (a customer asks X, what do you say, and when do you escalate), and recognition (a quote, which persona or competitor is this about).
+- Tag each card by topic and difficulty. Weight cards toward known weaknesses, recent product changes and my weak spots.
+- Write a 14-day schedule: new cards per day, review intervals, and a day 7 and day 14 self-test.
+- If you can run code, output the deck as a CSV with front, back, source and tags, ready to import.
+
+OUTPUT
+The deck file, the 14-day schedule, and a ten-card sample shown inline.
+
+GROUNDING
+Every card's answer cites the brief, ICP, persona canvas or battlecard. Don't write a card whose answer isn't in Calven; list those topics as gaps instead.
+```
+
 ## Ad hoc questions
 
 - Give me a one-page summary of the product brief for someone new.
@@ -112,3 +176,9 @@ Every answer must be checkable against the Universe. No trick questions on facts
 - What should a support agent never claim about [feature]?
 - What are the most common objections and the approved responses?
 - Which plan includes what?
+- What are the three things a new agent most often gets wrong, judging by the brief's known weaknesses?
+- Which persona files the most support-type feedback on calls?
+- Give me five real customer quotes a new agent should be able to answer.
+- What does each tracked competitor claim that a new agent should know is false?
+- Which features changed in the last 90 days, so training doesn't teach the old way?
+- Which customer themes should every new agent recognise by name?

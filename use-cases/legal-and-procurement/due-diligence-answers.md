@@ -87,6 +87,68 @@ GROUNDING
 Cite the battlecard and the brief. Do not use the AI tool's own knowledge of the competitor. Do not overstate our side.
 ```
 
+## Advanced prompts
+
+### Find every answer that contradicts another
+
+```
+Cross-check every answer we've given buyers against each other and against what we publish, and find the contradictions before a buyer's risk team does. Use Calven MCP for the product description and our public claims.
+
+FILL IN
+- Answer sets: [paste or attach the last three to five completed questionnaires, with buyer and date]
+- Current draft: [paste the questionnaire in progress]
+- Areas: [the areas to focus on, e.g. hosting, data retention, subprocessors, SSO]
+
+CONTEXT
+Enterprise buyers compare our answer to the same question across years, and their risk teams read our website. One answer that says "EU hosting only" next to another that says "US and EU" turns a review into an escalation.
+
+FROM CALVEN
+- The product brief: technical architecture, integrations, capabilities, plan inclusions.
+- The claims register rows about security, data handling and compliance, with where each appears.
+- Product changes in the last 12 months that touch those areas, with dates.
+
+METHOD
+- Normalise every answer into a canonical question, then line up every version of it: past answer sets, the draft, the brief, the public claims.
+- Classify each pair: identical, compatible (worded differently, same fact), drifted (true when given, changed since, with the product change that explains it), or contradictory.
+- If you can run code, build it as a matrix with one row per canonical question and one column per source.
+
+OUTPUT
+The contradictions first, each with both versions, the correct one per the brief and the buyers who received the wrong one. Then the drifted answers, then a clean canonical answer per question for the answer bank.
+
+GROUNDING
+The brief and the claims register decide which version is correct, cited. Where neither covers it, say "owner to confirm" and name the area. Don't pick a winner from your general knowledge of how SaaS products work.
+```
+
+### Write the test set for drafted answers
+
+```
+Write a test set that grades any AI-drafted questionnaire answer before it reaches a buyer. Use Calven MCP for the facts the golden answers must match and the questions the product brief can't answer.
+
+FILL IN
+- Question bank: [paste or attach the questions we see most, 30 to 100]
+- Owners: [who owns policy, certification and infrastructure answers]
+
+CONTEXT
+We'll draft more questionnaire answers with AI tools, and the dangerous failure isn't a clumsy answer, it's a confident one about a certification we don't hold. I want a fixed set of test questions with golden answers so any draft, from any tool, can be graded the same way.
+
+FROM CALVEN
+- The product brief sections that answer product, integration, hosting and plan questions.
+- The claims register rows about security and data handling.
+- Product changes in the last 12 months, so golden answers reflect the current product.
+
+BUILD
+- Pick 25 test questions: 15 the brief answers, 5 it answers only partly, 5 it can't answer at all (policy, certifications, pen tests, insurance).
+- For each, write the golden answer with its source, or the golden behaviour for the unanswerable ones: decline and route to the named owner.
+- Write a grading rubric: factual match, no claim beyond the source, correct refusal, consistent with public claims. Score 0 to 2 on each.
+- Add five trap questions that invite a confident wrong answer.
+
+OUTPUT
+The test set as a table or CSV, the rubric, and a pass mark. Then instructions to rerun it after every product change.
+
+GROUNDING
+Every golden answer cites the brief, a claim or a product change. Don't write a golden answer for a certification or policy; route it. Label your trap questions as constructed.
+```
+
 ## Ad hoc questions
 
 - Where does the product brief say the product is hosted?
@@ -100,3 +162,8 @@ Cite the battlecard and the brief. Do not use the AI tool's own knowledge of the
 - How does our feature comparison with [competitor] treat [area]?
 - Which questions in this questionnaire can the brief answer: [paste]
 - What support terms does the brief describe?
+- Which product changes in the last year touched hosting, data handling or integrations?
+- Which security or compliance claims on our site have a flagged concern in the claims register?
+- What does the brief list as a known weakness that a security reviewer might ask about?
+- Do any customer quotes mention security review, procurement delays or compliance as an objection?
+- Which deals were lost with Security as the product feedback, and at what stage?

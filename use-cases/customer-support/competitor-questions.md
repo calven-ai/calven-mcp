@@ -115,6 +115,100 @@ GROUNDING
 Count only quotes in the Universe; my ticket mentions are not in Calven, I will add them. Cite every quote and signal.
 ```
 
+## Advanced prompts
+
+### Update the churn odds on a competitor mention
+
+```
+Tell me how worried to be when a customer names a competitor in a ticket, as a probability that moves with each piece of evidence. Use Calven MCP for how we fare against that competitor and what they've been doing.
+
+FILL IN
+- Ticket: [paste the ticket or thread]
+- Competitor: [competitor]
+- Account: [account]
+- Base churn rate: [your annual churn or non-renewal rate for accounts like this, or write "estimate"]
+
+CONTEXT
+Not every "we're looking at X" is a churn signal. Some are leverage, some are curiosity, some are real. I want a consistent way to read it, so CS gets the right ones fast and the rest don't cry wolf.
+
+FROM CALVEN
+- Our win rate against the competitor from the competitive intelligence dashboard, with n, and the top reasons we lose to them.
+- The competitor's signals from the last 90 days: pricing changes, launches, campaigns.
+- The account's tier, any open renewal or expansion deal, and the contacts we know there with their roles.
+
+METHOD
+- Start from my base churn rate as the prior.
+- Treat each piece of evidence as a likelihood ratio: who wrote the ticket (role), what they mentioned (price, a feature, a migration), whether the competitor just made a move that matches, how close the renewal is, how we fare against this rival.
+- Update step by step and show the posterior after each. Say which ratios are your judgement and how sensitive the result is to them.
+
+OUTPUT
+The update table, the final probability with a low and high bound, the action it implies (answer and log, flag to CS, flag to CS and the account owner the same day) and the reply to the customer.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Don't invent a competitor move or a contact role nobody recorded.
+```
+
+### War-game their switching offer
+
+```
+War-game what happens when a competitor targets our customers with a switching offer, and write support's side of each round. Use Calven MCP for the competitor's battlecard, their recent moves and why customers stay or leave.
+
+FILL IN
+- Competitor: [competitor]
+- Their offer: [paste what customers are telling us they've been offered, or describe the rumour]
+- Segment at risk: [segment]
+
+CONTEXT
+Support hears it first: three tickets in a week asking whether we'll match the offer. I want to know how this plays out over the next quarter, and what we say on day one so support isn't improvising.
+
+FROM CALVEN
+- The competitor's battlecard: where we win, where we lose, objection handling, landmines.
+- Their signals from the last 90 days.
+- Deal drivers and quotes from customers who chose us over them, and from deals we lost to them, with n.
+
+WAR-GAME
+- Round 1: their offer lands. Play three customer types reacting (happy, neutral, already frustrated) and support's reply to each.
+- Round 2: their likely next move if the first works. Base it on their signals and pattern, labelled as your inference. Our counter, within what support can say.
+- Round 3: what CS and sales would need to step in with, and the trigger that hands the ticket over.
+- After each round, score our position: accounts likely kept, at risk, lost, as rough shares with reasons.
+
+OUTPUT
+A three-round table (their move, customer reaction, our response, position), the day-one macro, and the escalation trigger list.
+
+GROUNDING
+Their moves come from recorded signals or are labelled as your inference. Responses stay inside the battlecard and the product brief, cited. Don't invent a discount we can offer.
+```
+
+### Map the accounts that mention a rival
+
+```
+Map every account that mentioned a competitor in a ticket this quarter on a 2x2 of threat against value, so CS works the right ten first. Use Calven MCP for each account's value and tier and how strong each competitor is against us.
+
+FILL IN
+- Ticket mentions: [attach a CSV of tickets naming a competitor: account, competitor, date, ticket text]
+- Window: [window]
+
+CONTEXT
+Support logs competitor mentions; nobody looks at them together. I want one picture CS can act on, not a list of forty accounts in date order.
+
+FROM CALVEN
+- For each account: ICP tier, size, and any open renewal or expansion deal with its amount and close date.
+- For each competitor named: our win rate against them from the competitive intelligence dashboard, with n, and their signals in the window.
+- Customer quotes that name each competitor, to read what draws people to them.
+
+METHOD
+- Score threat per account from the competitor's strength against us, how recent and how often the account mentioned them, and what the mention was about (price, feature, migration).
+- Score value from tier, contract size and how soon the renewal is.
+- Place every account on the 2x2. If you can run code, draw it and output the scored table as a CSV.
+- Check the result: does any competitor dominate the high-threat corner, and is that matched by a recent signal?
+
+OUTPUT
+The 2x2, the top-right accounts with the reason for each and the owner, and a two-line note on which competitor is the pattern.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Scoring weights are your assumption and stated. Don't invent a renewal date or amount.
+```
+
 ## Ad hoc questions
 
 - How do we compare to [competitor] on [capability]?
@@ -129,3 +223,8 @@ Count only quotes in the Universe; my ticket mentions are not in Calven, I will 
 - Does the [account] have a renewal coming up, and who owns it?
 - Which deals did we lose to [competitor] on [loss reason]?
 - What does the competitor's dossier say about their pricing?
+- Which competitor wins most often against us in [segment], and on what?
+- What's the one thing customers who stayed with us say [competitor] couldn't do?
+- Which competitor signals in the last 30 days would make a customer ask us about switching?
+- Where does the battlecard say we lose to [competitor] that a support agent should admit honestly?
+- Which of [competitor]'s claims does the battlecard's bullshit detector call out?

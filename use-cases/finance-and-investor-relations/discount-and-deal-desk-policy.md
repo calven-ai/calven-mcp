@@ -117,6 +117,70 @@ GROUNDING
 Use only the deal record, battlecard and win/loss evidence in the Universe and cite them. Do not invent the buyer's position.
 ```
 
+## Advanced prompts
+
+### Find the discount where returns stop
+
+```
+Fit a discount response curve on our closed deals and find the discount level past which extra discount stops buying win rate. Use Calven MCP for each deal's outcome, price feedback, competitor and segment.
+
+FILL IN
+- Discount export: [attach a CSV of closed deals with deal name and discount %, from the CPQ or deal desk log]
+- Window: [window]
+
+CONTEXT
+Reps ask for more discount because it feels like it helps. If win rate flattens at 15%, everything above that is margin given away. That's the single most useful number for the approval matrix.
+
+FROM CALVEN
+- Closed deals in the window, matched by name to my export: status, segment, size band, competitors, price feedback, loss reason.
+- Deal drivers in the Commercials category with direction and whether they decided the deal.
+- Win rate by segment and by competitor from the dashboards, with n.
+
+METHOD
+- Join my discount data to the deals. Report how many matched.
+- Bucket discounts (0, 1 to 10, 11 to 20, 21 to 30, over 30) and show win rate per bucket, then split by segment and by whether a competitor was present.
+- If you can run code, fit a logistic regression of won on discount, segment and competitor, and plot predicted win rate against discount.
+- Find the knee: the discount where the marginal gain per extra point falls below a labelled threshold.
+
+OUTPUT
+The curve or bucket table, the knee per segment, and a proposed approval band for each with the evidence in one line.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Discount comes only from my file; never infer one from amount. Deals that don't match are listed, not dropped silently.
+```
+
+### Price a discount request as a decision tree
+
+```
+Turn one non-standard discount request into an expected-value decision tree: approve, hold the line, or trade for something. Use Calven MCP for the deal's facts and the win rates that set each branch's odds.
+
+FILL IN
+- Deal: [deal]
+- Request: [the discount and terms the rep is asking for]
+- Trade options: [what we could ask for instead, e.g. multi-year, case study, prepayment]
+
+CONTEXT
+The deal desk has 24 hours and a gut feeling. A decision tree with real odds makes the call defensible, and shows when a trade beats a discount.
+
+FROM CALVEN
+- The deal: amount, stage, segment, fit tier, competitors, contact roles, price feedback.
+- Win rate for deals like this one (segment, tier, competitor), with n.
+- Deal drivers in the Commercials category from similar deals, with evidence quotes, so we know whether price decided them.
+- The battlecard's guidance on what to trade instead of price against this competitor.
+
+MODEL
+- Branches: approve as asked, approve half, hold price, trade. For each, the probability of winning (from the base rate, adjusted by a labelled amount per branch) and the value if won (amount, margin, plus the trade's value).
+- Expected value per branch. Show the arithmetic.
+- Sensitivity: how much the win probability under "hold" would have to fall for approval to win.
+- If you can run code, draw the tree.
+
+OUTPUT
+The tree with expected values, the recommended branch, the break-even probability, and the two-line reply to the rep.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Branch adjustments are your assumption; keep them small and state them.
+```
+
 ## Ad hoc questions
 
 - How often did a commercial concession decide a deal we won?
@@ -129,3 +193,8 @@ Use only the deal record, battlecard and win/loss evidence in the Universe and c
 - Is [deal] in profile, and who is in it from the competition?
 - What price feedback did the buyer give on [deal]?
 - How many deals had "More expensive" feedback and still closed won?
+- Which competitor's deals do we win without any Commercials driver helping?
+- In deals lost on price, did the buyer rate us more expensive or similar?
+- Which segment has the most deals where price helped us win?
+- What do buyers say about payment terms or contract length on calls?
+- Which reps' calls contain the most Pricing vendor quotes?

@@ -120,6 +120,99 @@ GROUNDING
 Use only the Universe and cite it.
 ```
 
+## Advanced prompts
+
+### Backtest which handoff signals predict churn
+
+```
+Find out which facts about a deal at handoff predicted a lost renewal, then score my new account on them. Use Calven MCP for the closed renewals and the original deals behind them.
+
+FILL IN
+- Account: [account]
+- Renewal history: [attach your renewal list with outcome and churn reason if the CRM mirror lacks renewal deals, or write "none"]
+
+CONTEXT
+Every handoff brief says the account looks fine. I want to know which things we can see at signature (segment, fit tier, competitor in the deal, who was threaded, what they worried about) have predicted a lost renewal, so I can watch the right ones from day one.
+
+FROM CALVEN
+- Renewal deals in the CRM mirror, won and lost, paged in full, with loss reason.
+- The original new-business deal for each of those accounts: ICP fit tier, deal size band, competitors, contact roles, complexity, product feedback.
+- Deal drivers and survey answers from those original deals, where surveyed.
+- The same fields for the account above.
+
+BACKTEST
+- Join each renewal to its original deal. List the candidate signals and their hit rate in renewed versus lost accounts.
+- Fit a simple scoring rule (a point per signal, or a logistic regression if you can run code) and check it on a holdout: precision, recall and how many lost renewals it would have flagged.
+- Say plainly when the sample is too small to trust a signal. Fewer than ten lost renewals means directional only.
+- Score the account above on the rule and name the two signals to watch in its first 90 days.
+
+OUTPUT
+A table of signals with counts and lift, the scoring rule with its holdout result, and the account's score with the watch list.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Counts come from rows you paged, labelled as row counts, not dashboard rates. Don't invent a churn reason the record doesn't hold.
+```
+
+### Run a Delphi panel on the account
+
+```
+Run a three-round Delphi panel on how this account's first year goes. Use Calven MCP to brief each panellist from the deal record and the buyers' own words.
+
+FILL IN
+- Account: [account]
+- What I know so far: [paste kickoff notes, the order form summary, anything sales told you]
+
+CONTEXT
+The AE thinks the account is a lock, the SE has doubts about the integration, and I've had one call. One confident voice shouldn't set the plan. I want independent estimates that converge, with the reasoning visible.
+
+FROM CALVEN
+- The won deal: stage history, competitors, contact roles, deal drivers and the buyer's survey answers.
+- Quotes from the account's sales calls, by category, plus our reps' own quotes (value claims, caveats, next steps).
+- The product brief's known weaknesses for the use case they bought.
+
+METHOD
+- Seat four panellists, each reading only the evidence their role would have seen: the AE, the SE, a CSM, and the customer's sponsor.
+- Round 1: each gives a probability of renewal, of expansion inside 12 months, and of a serious escalation, with three reasons citing evidence.
+- Round 2: show everyone the anonymised spread and reasons. Each revises or defends.
+- Round 3: final estimates. Report the median, the range and where they still disagree.
+
+OUTPUT
+A one-page panel report: the three estimates as median and range, the disagreement that matters most, and the evidence that would settle it in the first 30 days.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Panellist reasons must cite a quote, a driver or the brief. Don't invent a promise or a stakeholder the record doesn't hold.
+```
+
+### Red-team the handoff as their sponsor
+
+```
+Read the handoff from the customer's side and find what they'll hold us to that nobody wrote down. Use Calven MCP for what our reps said, what the buyers said they needed, and what the product does.
+
+FILL IN
+- Account: [account]
+- Handoff notes: [paste the sales handoff note or CRM summary]
+
+CONTEXT
+The sponsor remembers the sales cycle as a set of promises. Our handoff note remembers it as a closed deal. The gap between those two is the first escalation.
+
+FROM CALVEN
+- Our reps' quotes on the deal's calls: value claims, proof points, caveats, next steps.
+- The buyers' quotes tagged Goal, Job to be done and Objection.
+- The product brief's capabilities, integrations and known weaknesses.
+
+RED-TEAM
+- Build a promise ledger: every expectation the buyer could reasonably hold, from either side's words, with the quote behind it.
+- Classify each: in the brief, partly in the brief, not in the brief, or never discussed.
+- Then play the sponsor at the 90-day check-in, reading the handoff note cold. List what they'd say is missing, wrong or late, in their own voice.
+- Rank the gaps by how much each would hurt the renewal and how cheap it is to close early.
+
+OUTPUT
+The promise ledger as a table, the sponsor's critique in under 200 words, and three things to say at kickoff to reset expectations.
+
+GROUNDING
+Every promise cites a rep or buyer quote. Don't treat a buyer's wish as our promise unless a rep agreed to it on the record, and don't invent a capability the brief doesn't list.
+```
+
 ## Ad hoc questions
 
 - Why did [account] choose us? Quote the buyer.
@@ -134,3 +227,9 @@ Use only the Universe and cite it.
 - Has anything changed in the product since [account] signed?
 - What lead source did the [account] deal come from?
 - Summarise the [account] sales calls in five lines.
+- Which of [account]'s contacts never spoke on a recorded call?
+- What did our rep caveat on the [account] deal that the handoff note leaves out?
+- How long did the [account] deal take compared with the average sales cycle for its segment?
+- Which quotes from [account] would a skeptical sponsor still remember at renewal?
+- What did buyers in [segment] say went wrong in their first 90 days?
+- Is there a buyer quote from [account] that contradicts what the rep wrote in the CRM?

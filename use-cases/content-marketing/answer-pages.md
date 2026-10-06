@@ -115,6 +115,71 @@ GROUNDING
 Judge only against the Universe and cite. If an answer is clean, say so.
 ```
 
+## Advanced prompts
+
+### Simulate an AI assistant choosing a source
+
+```
+Simulate an AI assistant answering a buyer's question and choosing which source to cite: our page, a competitor's, or a generic one. Then rewrite ours until it wins. Use Calven MCP for what assistants already say about us and the evidence our answer can stand on.
+
+FILL IN
+- Question: [the buyer question]
+- Our page: [paste our answer page]
+- Competing sources: [paste one or two competing pages answering the same question]
+
+CONTEXT
+Buyers ask the assistant, not the search box. The assistant reads a handful of sources and cites the one that answers most directly with the most credible evidence. I want to know whether that's us.
+
+FROM CALVEN
+- What AI assistants currently answer about us, from the positioning dashboard, and the answer to this question if it's recorded.
+- Our positioning and the product brief on the topic.
+- Customer quotes and a proof point that answer the question in the buyer's words.
+
+SIMULATE
+- Act as an answer engine: read all the sources and write the answer you'd give a buyer, citing the sources you used and why.
+- Score each source on: answers in the first two sentences, specific facts, evidence a buyer can check, freshness, and neutrality of tone.
+- Explain why the losing sources lost, passage by passage.
+- Rewrite our page's opening and the passages that lost, using only Universe evidence. Rerun the simulation and show whether we win.
+
+OUTPUT
+The simulated answer with citations, the source scorecard, the rewritten page with changes marked, and the rerun result.
+
+GROUNDING
+Our rewritten page uses only what the Universe holds, cited. The simulation shows how an assistant may reason; label it, and don't claim it predicts any specific assistant's behaviour.
+```
+
+### Write the eval set for answers about us
+
+```
+Write an eval set for answers about us: the questions buyers ask AI assistants, a gold answer for each from our approved story, and a rubric to grade what any assistant says. Use Calven MCP for the questions, the gold answers and the assistant answers Calven has on record.
+
+FILL IN
+- Assistants to test: [e.g. ChatGPT, Claude, Gemini, Perplexity]
+- Size: [how many questions, e.g. 30]
+
+CONTEXT
+I can't fix what AI assistants say about us if I can't measure it. A fixed eval set run monthly tells me which answers are wrong, whether my answer pages are working, and where to write next.
+
+FROM CALVEN
+- Questions buyers asked on calls, from customer quotes, across personas and stages.
+- Our positioning, messaging and product brief, for the gold answers.
+- The competitor battlecards, for comparison questions.
+- What AI assistants currently answer about us, from the positioning dashboard.
+
+BUILD
+- Pick questions across five types: what is it, who is it for, how does it compare, what does it cost, what doesn't it do. Weight by how often buyers ask.
+- For each: the question as a buyer types it, the gold answer in two to four sentences with sources, the must-include facts, and the must-not-say errors (a competitor's framing, a capability we don't have, an outdated price).
+- Write the rubric: 0 to 3 per question on accuracy, completeness and framing, with examples of each score.
+- Grade the recorded assistant answers against the set as a baseline.
+- If you can build files, deliver the set as a CSV and the grading as a reusable prompt.
+
+OUTPUT
+The eval set table, the rubric, the baseline scores and the five worst answers with the page that would fix each.
+
+GROUNDING
+Gold answers cite the Universe only. Don't write a must-include fact the documents don't contain, and label the baseline as the recorded answers, not a fresh test.
+```
+
 ## Ad hoc questions
 
 - What questions did [persona] ask about [topic] on calls?
@@ -127,3 +192,9 @@ Judge only against the Universe and cite. If an answer is clean, say so.
 - Which buyer questions have no answer anywhere in our messaging?
 - Give me a customer quote that answers "[question]".
 - What does our positioning say the category is, in one sentence?
+- Which buyer question gets the most wrong answer from AI assistants, according to the positioning dashboard?
+- What's the question [persona] asks that our competitors' messaging answers better than ours?
+- Which of our approved claims is short and factual enough for an assistant to quote verbatim?
+- What do buyers call our category, in their own words, versus what our positioning calls it?
+- Which question about pricing do buyers ask most, and what does the product brief let us say?
+- Which competitor do AI assistants mention when answering questions about us?

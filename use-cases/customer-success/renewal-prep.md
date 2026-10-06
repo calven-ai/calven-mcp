@@ -163,6 +163,103 @@ GROUNDING
 Use only the Universe and cite it. If the renewal was not surveyed, say so and recommend enrolling the next ones.
 ```
 
+## Advanced prompts
+
+### Update the renewal odds evidence by evidence
+
+```
+Give me a renewal probability for this account that I can defend in the forecast call, built as a Bayesian update. Use Calven MCP for the base rate and the account's evidence.
+
+FILL IN
+- Account: [account]
+- My evidence: [paste usage trend, tickets, NPS, anything outside Calven]
+- Renewal date: [renewal date]
+
+CONTEXT
+The forecast says "commit" because the CSM feels good. I want a number that starts from how often accounts like this renew and moves only as far as the evidence justifies.
+
+FROM CALVEN
+- Renewal deals in the CRM mirror for the account's segment and size, won and lost, paged and counted, with loss reasons.
+- The account's quotes over the year by sentiment and category, competitor mentions, and contacts by buying role.
+- Deal drivers from lost renewals, so we know which signals preceded a loss.
+
+MODEL
+- Set the prior from the segment's renewal outcomes. Say how many rows it rests on.
+- Take each piece of evidence in turn (mine and Calven's). Give its likelihood ratio: how much more often it shows up before a loss than before a renewal, from the lost-renewal drivers where possible, from a stated assumption otherwise.
+- Update step by step and show the running probability.
+- Run the update again with each likelihood ratio halved and doubled to show how fragile the answer is.
+
+OUTPUT
+The update table (evidence, likelihood ratio, source, running probability), the final probability with its range, and the one piece of evidence that would move it most if I went and got it.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. The prior is a count of rows, not a dashboard rate; say so. Don't invent a likelihood ratio and present it as data.
+```
+
+### Map the renewal negotiation as a game
+
+```
+Model my renewal negotiation as a game, with both sides' walk-away points and the moves that change them. Use Calven MCP for the competitor's pricing, what the account said about price and how price has decided deals.
+
+FILL IN
+- Account: [account]
+- Current terms: [ACV, term, discount]
+- Our target: [uplift or term you want]
+- Competitor: [competitor]
+
+CONTEXT
+Procurement will open with a cut. I want to know where their real walk-away is, where ours is, and which moves change the payoff before I'm on the call.
+
+FROM CALVEN
+- The competitor's pricing and packaging from the dossier, and any pricing signals in the last six months.
+- The account's price feedback and quotes tagged Pricing / cost, from the original deal and this year.
+- Deals lost with loss reason Price in the segment, and the pricing section of the win/loss dashboard, with n.
+
+MODEL
+- Estimate the customer's BATNA: switch to the competitor, go in-house, or do nothing. Cost each with switching effort as a stated assumption.
+- Set out our BATNA and the zone of possible agreement.
+- Build a payoff matrix for three of their moves (demand a cut, threaten to switch, ask for a longer term) against three of ours (hold, trade price for term, add scope).
+- Find the stable outcome and the concession that costs us least and is worth most to them.
+
+OUTPUT
+The ZOPA in one line, the payoff matrix, our opening position, the walk-away, and the three concessions in the order to give them.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Competitor prices come only from the dossier; if it doesn't record one, say so. Don't invent a quote about price.
+```
+
+### Test the price uplift on a persona ladder
+
+```
+Find the renewal uplift this account will accept by running a Gabor-Granger price ladder played by its buying group. Use Calven MCP for the personas and what buyers in the segment said about price.
+
+FILL IN
+- Account: [account]
+- Current price: [annual price]
+- Uplift steps: [the steps to test, for example 0, 5, 10, 15, 20 percent]
+- Value delivered: [paste the value you can show this year]
+
+CONTEXT
+Finance wants an uplift. I don't want to find the breaking point by breaking the renewal.
+
+FROM CALVEN
+- The economic buyer, champion and procurement personas with their canvases, especially objections on price.
+- Quotes tagged Pricing / cost from the account and from customers in the same segment.
+- The account's original price feedback and the pricing section of the win/loss dashboard, with n.
+
+SIMULATE
+- For each persona, walk the ladder from the lowest step up. At each step, the persona says renew, renegotiate or evaluate alternatives, with a reason in their own voice.
+- Repeat three times per persona with the value delivered framed differently (cost saved, risk avoided, time saved). Note which framing moves the threshold.
+- Combine into a demand curve: the share of the committee still at renew per step. If you can run code, chart it.
+- Name the step where the economic buyer flips and the framing that pushes it highest.
+
+OUTPUT
+The ladder table per persona, the demand curve, the recommended uplift and the framing to use, and the step to avoid.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Persona thresholds are simulated; say so and tie each to a canvas line or quote. Don't present the curve as measured willingness to pay.
+```
+
 ## Ad hoc questions
 
 - Which renewals close in the next 90 days?
@@ -178,3 +275,8 @@ Use only the Universe and cite it. If the renewal was not surveyed, say so and r
 - What is [sponsor persona] measured on?
 - Draft five talking points for the [account] renewal in the sponsor's language.
 - What nearly stopped the original deal at [account]?
+- Which accounts renewing this quarter were single-threaded when they signed?
+- Did any lost renewal mention [competitor] in the six months before it closed?
+- What did customers who renewed at a higher price say made it worth it?
+- Which renewals in [segment] slipped past their close date, and what did the accounts say in the meantime?
+- What did [account]'s economic buyer object to in the original deal, and is it still true?

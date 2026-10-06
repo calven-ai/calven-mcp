@@ -90,6 +90,73 @@ GROUNDING
 Use only the Universe and cite it.
 ```
 
+## Advanced prompts
+
+### Build a fault tree of the escalation
+
+```
+Build a fault tree for this escalation and find its root cause before I reply. Use Calven MCP for what we promised, what the product does and what changed.
+
+FILL IN
+- Account: [account]
+- The escalation: [paste the email or ticket summary]
+- What I know: [anything from support, engineering or usage data]
+
+CONTEXT
+Escalations get answered at the symptom. If the cause is a promise our rep made, a fix to the product won't calm the sponsor, and vice versa.
+
+FROM CALVEN
+- Our reps' quotes on the account's sales calls: value claims and caveats.
+- The product brief's capabilities and known weaknesses for the area.
+- Product changes in the area in the last six months.
+- Quotes from other customers about the same issue.
+
+METHOD
+- Put the failure the customer describes at the top. Branch into four causes: product gap, product change, expectation set in the sale, and onboarding or configuration.
+- Under each, list the conditions that would have to be true, and mark each true, false or unknown from the evidence.
+- Find the minimal cut set: the smallest combination of true conditions that explains the escalation.
+- Say what to check to turn the biggest unknown into a known.
+
+OUTPUT
+The fault tree as an indented list with evidence on each node, the root cause in two lines, and the first sentence of the reply that addresses the cause rather than the symptom.
+
+GROUNDING
+Every node cites a quote, the brief or a change, or is marked unknown. Don't invent a promise or a product behaviour the record doesn't hold.
+```
+
+### Choose the remedy with a decision tree
+
+```
+Choose how to resolve this escalation by laying out the remedies as a decision tree. Use Calven MCP for what the account cares about, its renewal context and how similar complaints ended.
+
+FILL IN
+- Account: [account]
+- The escalation: [paste the summary]
+- Remedies on the table: [credit, workaround, exec call, roadmap conversation, re-onboarding, anything else]
+- ARR and renewal date: [ARR, renewal date]
+
+CONTEXT
+Each remedy costs something and buys something. The loudest option, a credit, often buys the least.
+
+FROM CALVEN
+- Why the account bought, from deal drivers and buyer quotes.
+- Quotes from other customers with the same complaint, and whether those accounts renewed.
+- Deal drivers from lost renewals that match the issue.
+- The sponsor persona's goals and objections.
+
+MODEL
+- For each remedy: cost, probability the customer accepts it, probability of renewal if they do and if they don't.
+- Estimate the probabilities from the matched cases where they exist and a stated assumption where they don't.
+- Roll back the tree to expected ARR retained minus cost. Show the tree as an indented list.
+- Test the result: how wrong would the best remedy's acceptance probability have to be before the second best wins?
+
+OUTPUT
+The tree, the recommended remedy with its expected value, the break-even probability, and the message that offers it in the sponsor's terms.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Don't invent a matched case; if there are none, say the probabilities are assumptions.
+```
+
 ## Ad hoc questions
 
 - What did [account] buy from us for?
@@ -100,3 +167,10 @@ Use only the Universe and cite it.
 - Which theme does this complaint belong to, and how many mentions does it have?
 - Who is the sponsor at [account]?
 - Write an honest two-line acknowledgement of a problem with [feature].
+- Which customers raised the same issue as [account], and did they renew?
+- Did any lost renewal list [topic] as a deciding driver?
+- What did our rep say about [area] on the [account] deal, word for word?
+- Which product change in [area] could have caused this?
+- How did customers describe [feature] when it worked for them?
+- Which escalation themes grew this quarter compared with last?
+- What does the sponsor persona care about that the escalation threatens?

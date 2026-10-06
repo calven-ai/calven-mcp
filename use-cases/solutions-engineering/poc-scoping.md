@@ -130,6 +130,99 @@ GROUNDING
 Only the brief and the record, cited. "Not in the brief" is "confirm", never "yes".
 ```
 
+## Advanced prompts
+
+### Simulate whether the POC lands on time
+
+```
+Simulate my proof of concept plan and tell me the odds it finishes on time with every criterion passed. Use Calven MCP for what similar evaluations tripped on and what the product supports.
+
+FILL IN
+- POC plan: [paste criteria, tasks, owners and your best, likely and worst durations]
+- Deadline: [the date the buyer expects a decision]
+- Segment: [segment]
+
+CONTEXT
+POCs die from slippage, not from failed tests. A customer integration that takes two weeks longer turns a technical win into a no decision.
+
+FROM CALVEN
+- The product brief's integrations and technical architecture, to check each criterion is achievable as written.
+- Deal drivers and product feedback from evaluations in the segment, especially Integrations and Onboarding tags.
+- Lost deals in the segment with loss reason No decision or Integrations, with what the buyers said.
+
+SIMULATE
+- Model each task as a three-point estimate with its dependencies, and each criterion's chance of passing from the brief and the evidence.
+- If you can run code, run 5,000 draws; report the probability of finishing by the deadline and of passing every criterion, and the joint probability.
+- Find the task that most often makes it late and the criterion most likely to fail.
+- Test two fixes: cutting the weakest criterion, and adding a week. Report what each does to the joint probability.
+
+OUTPUT
+The two probabilities and the joint one, the critical task, the fragile criterion, and the change to the plan I should negotiate with the buyer this week.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Durations are mine or stated assumptions. Don't mark a criterion achievable unless the brief supports it.
+```
+
+### Pick criteria with a payoff matrix
+
+```
+Choose the POC success criteria by game theory: which criteria to push, given what the competitor will push. Use Calven MCP for both products' strengths and how head-to-head deals were decided.
+
+FILL IN
+- Competitor: [competitor]
+- Candidate criteria: [paste the criteria on the table, ours and the buyer's]
+- Buyer's priorities: [what the buyer said matters most]
+
+CONTEXT
+The buyer will accept five or six criteria. The competitor's SE is lobbying for theirs. Whoever sets the criteria usually wins the bake-off.
+
+FROM CALVEN
+- The feature comparison, strengths and weaknesses from the competitor's dossier.
+- Our capabilities and known weaknesses from the product brief.
+- The head-to-head record from the competitive dashboard, with n, and capability drivers from those deals.
+
+MODEL
+- Score each criterion for us and for them: likely pass, partial, fail, with the evidence.
+- Build a payoff matrix: our choice of three criteria to push against their likely three. The payoff is the expected score gap, weighted by the buyer's priorities.
+- Find our dominant or best-response set. Say which criterion they'll fight hardest to remove, and why.
+- Check fairness: a criteria set the buyer sees as rigged backfires. Drop anything the buyer wouldn't defend to their own boss.
+
+OUTPUT
+The criterion table, the payoff matrix, the five criteria to propose with the wording, and the one to concede.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Competitor capability comes only from the dossier. Don't invent a feature for either side.
+```
+
+### Stress-test the POC plan as procurement
+
+```
+Stress-test my POC plan as the buyer's procurement lead, who'll review it before anyone signs off. Use Calven MCP for the commercial and legal concerns buyers raised and what our packaging allows.
+
+FILL IN
+- POC plan: [paste the plan: scope, criteria, timeline, resources, what happens on success]
+- Account: [account]
+
+CONTEXT
+Technical teams agree a POC, then procurement adds four weeks and a paper process. If the success path isn't commercially clear, a passed POC still stalls.
+
+FROM CALVEN
+- The pricing and packaging section of the product brief.
+- The pricing and legal section of the win/loss dashboard, with n, and deal drivers in the Commercials category.
+- The procurement or economic buyer persona canvas: goals, objections.
+
+RED-TEAM
+- Read the plan as procurement. List every point you'd challenge: unclear success-to-purchase path, resources the buyer must commit, data handling, unpriced extras, who owns the result.
+- Rate each as a blocker, a delay or a nit, and say how many weeks a blocker adds.
+- Rewrite the plan's commercial section so the step from pass to order is explicit and nothing is left for procurement to invent.
+
+OUTPUT
+The challenge list with severity, the rewritten commercial section, and the email I send procurement before they ask.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Pricing terms come only from the brief. Don't invent a legal requirement; mark it as one to confirm with legal.
+```
+
 ## Ad hoc questions
 
 - What does the brief say we can demonstrably do for [use case]?
@@ -140,3 +233,10 @@ Only the brief and the record, cited. "Not in the brief" is "confirm", never "ye
 - Which customer ran this use case, and what did they say?
 - What is the [technical buyer persona]'s KPI?
 - Did integrations decide any lost deal in [segment]?
+- Which POC criteria did buyers in [segment] say actually decided the evaluation?
+- How often did evaluations in [segment] end in no decision, and what did the buyers say?
+- Which integration most often slowed evaluations down, per buyer quotes?
+- What did [competitor]'s won deals have as criteria that ours lacked?
+- Which persona usually signs off the POC result, and what are they measured on?
+- What did buyers who passed a POC and still didn't buy say?
+- Which of our known weaknesses would a strict success criterion expose?

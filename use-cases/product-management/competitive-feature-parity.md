@@ -146,6 +146,104 @@ GROUNDING
 Use only wording the product brief supports. Do not claim the capability or a date. Cite the won deal.
 ```
 
+## Advanced prompts
+
+### Run the bake-off the buyer will run
+
+```
+Rebuild the weighted evaluation a buyer's team would use to pick between us and the competitor, then find the weight at which the missing capability flips the result. Use Calven MCP for what buyers weigh, how each product scores, and what decided past deals.
+
+FILL IN
+- Competitor: [competitor]
+- Capability: [capability]
+- Segment: [segment]
+- Buyer scorecard: [paste a real RFP or evaluation matrix from a deal, or "build one"]
+
+CONTEXT
+Buyers rarely pick on one feature. They score a list of criteria, weight them, and add up. I want to know whether the capability we lack is heavy enough in that sum to lose us the deal, or whether it's noise on the scorecard.
+
+FROM CALVEN
+- The competitor's dossier feature comparison and the battlecard's strengths and weaknesses, for how each product scores.
+- Deal drivers on deals against the competitor in the segment, grouped by category, with whether each decided the deal.
+- The canvases of the buyer and technical buyer personas: goals, KPIs, objections, for the criteria they weigh.
+
+METHOD
+- Build the criteria list from the drivers and canvases, or adopt my pasted scorecard. Set weights from how often each criterion decided a deal.
+- Score both products 1 to 5 per criterion, each score citing the dossier or a buyer quote.
+- Compute the weighted totals. Then run a flip-point analysis: how much weight would the capability need to carry for the competitor to win, and does any recorded deal show buyers weighing it that heavily?
+- Repeat for a second weighting that reflects the technical buyer instead of the economic buyer.
+- If you can run code, output the matrix as a spreadsheet with the weights as editable inputs.
+
+OUTPUT
+The scorecard for both weightings, the flip-point weight for the capability, and a one-paragraph verdict: decisive, tie-breaker or noise.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Scores trace to the dossier or a quote; if the dossier doesn't compare a criterion, say "not compared" rather than scoring it.
+```
+
+### Map the parity call as a payoff matrix
+
+```
+Model the parity decision as a game between us and the competitor, and find our best move whatever they do. Use Calven MCP for the competitor's recorded moves, where we win and lose, and our win rate against them.
+
+FILL IN
+- Competitor: [competitor]
+- Capability: [capability]
+- Our options: [match, leapfrog, reposition, ignore, or your own list]
+- Deal economics: [average deal size and deals per quarter where we meet them, or "use Calven"]
+
+CONTEXT
+Every parity plan assumes the competitor stands still. They don't. I want to see each of our options against their likely responses before I pick one.
+
+FROM CALVEN
+- The competitor's signals from the last twelve months, by type, to see the moves they tend to make.
+- The battlecard: how we win and where we lose.
+- Our win rate against the competitor, and how often the capability shows up as a driver that hurt us, from the win/loss dashboards, with n.
+
+WAR-GAME
+- List their plausible responses to each of our options (double down on the capability, cut price, bundle it, ignore us), grounded in the moves their signals show.
+- Fill a payoff matrix: for each pair, the change in our win rate against them and the revenue effect over four quarters. Show the arithmetic.
+- Find the dominant strategy if one exists. If not, pick the minimax move: the option whose worst case hurts least.
+- Name the one signal from them that would change our best move.
+
+OUTPUT
+The payoff matrix, the recommended move with its worst case, and the signal to watch.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Their responses trace to recorded signals or are marked as speculation. Don't predict a launch nobody recorded.
+```
+
+### Run a Kano survey on your personas
+
+```
+Run a Kano survey on our personas to sort the parity requests into must-haves, performance features, delighters and noise. Use Calven MCP to build the respondents from our approved personas and the buyers' own words.
+
+FILL IN
+- Capabilities: [paste the five to ten parity requests from sales]
+- Competitor: [competitor]
+- Personas: [the buyer and user personas to survey]
+
+CONTEXT
+Sales sends me a list of what the competitor has. Some items are must-haves that knock us out of deals, some are nice-to-haves nobody pays for. I want them sorted before roadmap planning.
+
+FROM CALVEN
+- The personas' canvases: goals, pains, gains, objections.
+- Quotes from those roles that mention each capability or the competitor.
+- The competitor's dossier feature comparison, for where they actually lead.
+
+METHOD
+- For each persona and capability, ask the two Kano questions: how do you feel if the product has it, and how do you feel if it doesn't. Answer in the persona's voice, from their canvas and quotes.
+- Classify each answer pair on the standard Kano table: must-be, performance, attractive, indifferent, reverse or questionable.
+- Aggregate across personas. Flag capabilities where buyers and users disagree.
+- Cross-check against the dossier: a must-be where they don't actually lead is a perception problem, not a build problem.
+
+OUTPUT
+A Kano grid per capability with the category, the quote that drove it, and a call: match, leapfrog, reposition or ignore.
+
+GROUNDING
+Every answer traces to a canvas line or a quote, cited, or is marked as your extrapolation. Don't make a persona care about a capability nobody in that role mentioned; mark it indifferent with "no evidence".
+```
+
 ## Ad hoc questions
 
 - Where is [competitor] ahead of us according to their dossier?
@@ -159,3 +257,9 @@ Use only wording the product brief supports. Do not claim the capability or a da
 - What do we tell prospects about [capability] today? Is that in the battlecard?
 - Which Tier 1 competitor did we lose the most deals to this quarter?
 - Which parity requests from sales have no deal evidence at all?
+- Which capability gaps against [competitor] show up in enterprise deals but not mid-market?
+- What did buyers who chose us over [competitor] say we did better?
+- Which of [competitor]'s claims does their dossier's bullshit detector flag?
+- Which deals did we lose to [competitor] with loss reason Missing feature in [window]?
+- Which competitors have signals about [capability] in the last six months?
+- Which capabilities do buyers praise us for that no competitor's dossier lists as a strength?

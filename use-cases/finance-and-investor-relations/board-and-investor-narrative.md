@@ -118,6 +118,95 @@ GROUNDING
 Judge only against the documents and dashboards in the Universe and cite the conflict. If the draft is consistent, say so.
 ```
 
+## Advanced prompts
+
+### Rehearse the board Q&A with three directors
+
+```
+Run a mock board meeting on the GTM section with three directors who each probe it differently, and score my answers. Use Calven MCP for the win/loss, competitive and pipeline evidence I'll be answering with.
+
+FILL IN
+- Board section: [paste the GTM and competitive slides or text]
+- Directors: [describe each, e.g. lead investor from the last round, independent with a sales background, new board observer]
+
+CONTEXT
+The board section takes twenty minutes and the questions decide whether the board trusts the plan. I want to have heard the hard ones before the meeting, with my evidence checked.
+
+FROM CALVEN
+- Competitive win rate, pipeline won and lost and top loss drivers for the quarter and the prior one, with n.
+- Win rate against each Tier 1 competitor and their signals from the last 90 days.
+- The ICP share of wins and in-profile pipeline, with n.
+
+SIMULATE
+- Play each director in turn: the investor asks about growth efficiency and the competitive threat, the independent about pipeline quality and sales execution, the observer the naive question that exposes a gap.
+- Each asks three questions grounded in what the slides say and don't say. I answer in the chat. After each answer, the director follows up once.
+- After the session, score each answer 1 to 5 on directness, evidence and consistency with the slides, and show the evidence I should have used.
+
+OUTPUT
+The transcript, a scorecard per answer, the three questions I handled worst with a model answer for each, and any slide claim the evidence doesn't support.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Directors only ask about things in the slides or the evidence; model answers cite Calven or say the data isn't held.
+```
+
+### Map every board claim to its evidence
+
+```
+Turn the board narrative into an argument map: each claim with its evidence, the warrant that connects them and the strongest rebuttal. Use Calven MCP for the evidence behind each claim and the counter-evidence a director could find.
+
+FILL IN
+- Narrative: [paste the board narrative or investor update draft]
+
+CONTEXT
+A board narrative is a chain of claims. One weak link (a win rate on six deals, a trend nobody checked since spring) and the whole section loses credibility. I want to see the chain laid out and the weak links fixed.
+
+FROM CALVEN
+- For each quantitative claim, the dashboard figure with n and window.
+- The positioning document's Relevant Market Trends and Proof Points, with when each trend was last seen.
+- Battlecard Where We Lose sections and competitor signals that cut against any competitive claim.
+- Customer quotes tagged Quantified outcome for any outcome claim.
+
+METHOD
+- Break the narrative into claims. For each, apply a Toulmin structure: claim, data, warrant, qualifier, rebuttal.
+- Rate each link: strong (dashboard figure with n of 30 or more, or two independent sources), moderate, or weak (small n, stale, single quote, or none).
+- For weak links, propose the honest qualifier or a replacement claim the evidence supports.
+
+OUTPUT
+An argument map as a table, the weak links in order of how much they'd hurt if challenged, and the narrative rewritten with the qualifiers in place.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. A rebuttal must come from recorded evidence; if none exists, say the claim stands unchallenged.
+```
+
+### Plan two scenarios the board should watch
+
+```
+Build a two-by-two scenario plan for the next two quarters from the two market uncertainties that matter most to our plan, with signposts the board can track. Use Calven MCP for the trends, competitor moves and win/loss shifts that define the uncertainties.
+
+FILL IN
+- Plan: [paste the plan's key GTM assumptions: growth, segments, pricing]
+- Horizon: [e.g. the next two quarters]
+
+CONTEXT
+Boards like a single plan and then get surprised. Scenario planning names the two forces that could break it, sketches four futures, and gives each a signpost so we see which one we're in early.
+
+FROM CALVEN
+- High-severity trends and market opportunities, with horizon and last-seen date.
+- Competitor signals from the last two quarters, by competitor and type.
+- Movers on the win/loss and competitive dashboards versus the prior period, with n.
+
+METHOD
+- Pick the two uncertainties with the highest impact on the plan and the least predictability. Explain the choice.
+- Draw the two-by-two. Name each quadrant and write a 100-word story of how the next two quarters unfold in it.
+- For each scenario: the effect on pipeline and win rate (a labelled range), the decision we'd take, and the signpost (a metric or signal Calven tracks) that would tell us we're heading there.
+
+OUTPUT
+The two-by-two, the four stories, a signpost table the board can review each quarter, and the one decision that holds in all four.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Scenarios are judgement; the uncertainties and signposts must trace to recorded trends, signals or dashboard movers.
+```
+
 ## Ad hoc questions
 
 - What is our competitive win rate for last quarter, and how does it compare with the quarter before?
@@ -133,3 +222,9 @@ Judge only against the documents and dashboards in the Universe and cite the con
 - Is the "we win on time to value" line on this slide backed by win/loss evidence?
 - What are buyers saying about our pricing compared with [competitor]?
 - Which dashboards have no data yet, so I do not promise the board a number we cannot show?
+- Which competitor's win rate against us improved most since the last board meeting?
+- Which positioning proof point has the weakest evidence behind it?
+- What share of lost pipeline went to no decision this quarter?
+- Which customer quote this quarter best shows a quantified outcome?
+- Which board-level claim about time to value can I back with a buyer quote?
+- Which trend in our positioning hasn't been seen in the last six months?

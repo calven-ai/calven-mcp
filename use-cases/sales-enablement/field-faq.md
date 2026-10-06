@@ -81,6 +81,70 @@ GROUNDING
 Cite the quotes. Do not write the answers; mark them for the next FAQ pass.
 ```
 
+## Advanced prompts
+
+### Cluster the field's questions and find root causes
+
+```
+Cluster every question the field asked in the last year and find out why each cluster keeps coming back: a gap in the documents, or an answer nobody can find. Use Calven MCP to check each cluster against what the Universe already says.
+
+FILL IN
+- Questions: [attach an export of field questions: Slack messages, form submissions or tickets, with dates]
+- Current FAQ: [paste the FAQ, or write "none"]
+
+CONTEXT
+I answer the same twenty questions a month. Writing more FAQ entries hasn't helped. I want to know which questions are a content problem and which are a findability problem.
+
+FROM CALVEN
+- The product brief, messaging (including objection handling and boilerplate), positioning and ICP.
+- The battlecards, for competitor questions.
+- Product changes in the last year, for questions that spike after a release.
+
+METHOD
+- Clean and cluster the questions by intent. If you can run code, embed and cluster them, then name each cluster; otherwise group by hand and show your groups.
+- For each cluster: volume, trend by month, and whether it spikes after a product change.
+- Check each cluster against the Universe: answered clearly, answered but buried, contradicted between documents, or not answered.
+- Root cause per cluster: content gap, findability, contradiction, or a release we didn't brief.
+
+OUTPUT
+A table of clusters: example questions, volume, trend, Universe status, root cause, fix. Then the ten FAQ entries that would remove the most questions, each with its source.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. An answer counts as in the Universe only with a cited document and section; don't write an FAQ answer the documents don't support.
+```
+
+### Forecast the questions the next release will trigger
+
+```
+Predict the questions the next release will trigger from the field and from buyers, using what happened after past releases as the reference class, and have the answers ready. Use Calven MCP for past product changes and what buyers said after them.
+
+FILL IN
+- Release: [paste the release notes or describe the change]
+- Release date: [date]
+
+CONTEXT
+After every release, the same thing happens: a week of reps asking the same questions in Slack and getting different answers. I want to be ahead of it this time.
+
+FROM CALVEN
+- Past product changes with dates, severity and so-what.
+- Customer quotes and objections in the 60 days after each of those changes that touch the changed area.
+- Drift findings each change caused: what went stale.
+- The product brief entry for the area being changed.
+
+METHOD
+- Pick the three past changes most like this one (same area, same severity, same audience) and say why.
+- For each, list what buyers asked or objected to afterwards and what went stale.
+- Generalise: question types that follow a change like this (does it work with, what does it cost, does it replace, what happens to existing customers, how does it compare).
+- Forecast the 15 most likely questions for this release, each with a likelihood (high, medium, low) and the past evidence that supports it.
+- Answer each from the product brief. Where the brief doesn't answer, write the question PMM must answer before launch.
+
+OUTPUT
+The forecast table: question, likelihood, evidence, approved answer with source or "PMM to answer". Then the FAQ section ready to publish on release day.
+
+GROUNDING
+Likelihoods are your judgement; label them. Every answer cites the product brief, and every "past evidence" entry cites a dated change or quote.
+```
+
 ## Ad hoc questions
 
 - Do we integrate with [system]?
@@ -93,3 +157,9 @@ Cite the quotes. Do not write the answers; mark them for the next FAQ pass.
 - What changed in pricing this year?
 - What is our boilerplate?
 - Where is the claim "[claim]" supported?
+- Which questions do buyers ask on calls that our FAQ doesn't answer?
+- Where do two of our documents give different answers to the same question?
+- What's the honest answer to "[question]" if the product brief says we don't do it?
+- Which integration do buyers ask about most that the product brief doesn't list?
+- What did we change in packaging that reps might still be quoting the old way?
+- Which FAQ answer is most likely out of date after this month's product changes?

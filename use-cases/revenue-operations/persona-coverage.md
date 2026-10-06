@@ -90,6 +90,67 @@ GROUNDING
 Shares and rates from the persona dashboard with n and window. A persona absent from the data is "not recorded on any deal", never "does not matter". Do not count contacts yourself.
 ```
 
+## Advanced prompts
+
+### Price each missing persona in pipeline
+
+```
+Estimate what adding each missing persona is worth on our open deals, controlling for deal size so bigger deals don't fake the effect. Use Calven MCP for the roles on each deal and the win rates by persona and threading.
+
+FILL IN
+- Open deals: [segment or quarter to cover, or write "all open deals"]
+- Cost of a touch: [rough rep or exec hours to bring in one new stakeholder]
+
+CONTEXT
+Everyone agrees multi-threading helps. Nobody knows which persona is worth an exec's afternoon on which deal. I want a ranked list of "add this person to this deal" with the expected pipeline it buys.
+
+FROM CALVEN
+- Closed deals, paged through, with contact roles, size band, fit tier and status.
+- Win rate by persona present and multi-threaded versus single-threaded, from the persona dashboard, with n.
+- Open deals with amount, stage and the roles already on each.
+
+METHOD
+- Estimate the uplift of each role (economic buyer, technical buyer, champion, exec sponsor) by comparing win rates with and without it, within the same size band and tier. That stratification is the point; report the raw and stratified uplift side by side.
+- For each open deal and each missing role: expected gain = amount × stratified uplift.
+- If you can run code, rank the pairs and cut at the hours available.
+
+OUTPUT
+A ranked table: deal, missing role, uplift used, expected pipeline gained, effort. Then the top ten actions with the persona canvas hook a rep uses to open the conversation.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Uplift from strata under 10 deals is not used; say which ones were dropped.
+```
+
+### Rehearse the missing stakeholder before the rep meets them
+
+```
+Build a role-play where the rep meets the stakeholder missing from their deal, played by the AI tool from our persona canvas, with a scorecard at the end. Use Calven MCP for the persona, the deal and what that role has said on past calls.
+
+FILL IN
+- Deal: [deal]
+- Missing persona: [persona]
+- Rep: [rep]
+
+CONTEXT
+Reps avoid the economic buyer or the security lead because they don't know what that person will ask. Ten minutes of practice against a realistic version of them changes that, and RevOps can run it for any deal flagged as thin.
+
+FROM CALVEN
+- The persona canvas: goals and KPIs, pains, objections with responses, messaging hooks.
+- The deal: stage, competitors, contacts and roles, account fit.
+- Quotes from people in that role on past calls, tagged Objection or Pain.
+
+SIMULATE
+- Play the persona in the first person, with the canvas's priorities and objections, at this account's stage and against this competitor.
+- Open cold. Let the rep pitch, then push back three times with the strongest objections. Stay in character.
+- After the rep types "end", score the conversation 1 to 5 on: discovery questions asked, link to the persona's KPI, handling of each objection, a clear next step.
+
+OUTPUT
+The role-play, then the scorecard with one line of coaching per criterion and the approved objection response the rep should have used.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Objections and priorities come from the canvas and quotes, cited in the scorecard. Anything else the persona says is labelled improvisation.
+```
+
 ## Ad hoc questions
 
 - What is the win rate for multi-threaded versus single-threaded deals?
@@ -100,3 +161,10 @@ Shares and rates from the persona dashboard with n and window. A persona absent 
 - How many contacts does a won deal have on average, in bands?
 - Which deals have a blocker and no champion?
 - What does [persona] care about, for a first email?
+- Which persona appears on won deals but almost never on lost ones?
+- Which open deals have an end user but no buyer persona?
+- How many won deals had an exec sponsor, and how does their deal size compare?
+- Which segment has the lowest multi-threading rate?
+- What objections does the economic buyer persona raise most on calls?
+- Which reps' open deals are most often single-threaded?
+- Which personas have no contact anywhere in the CRM?

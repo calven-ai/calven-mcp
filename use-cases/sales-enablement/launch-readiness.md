@@ -121,6 +121,102 @@ GROUNDING
 Questions are answerable from the Universe. Stale assets come only from drift findings and the claims register.
 ```
 
+## Advanced prompts
+
+### Size the pipeline the launch can reopen
+
+```
+Size how much lost and stalled pipeline this launch could reopen, so the field goes after it on day one. Use Calven MCP for the deals we lost for lack of the capability and the buyers' own words.
+
+FILL IN
+- Capability: [the capability being launched]
+- Lookback: [window, e.g. last 18 months]
+- Reopen assumptions: [your guess at how many lost buyers would take a call, or write "use ranges"]
+
+CONTEXT
+Launches usually get a press release and a training. The fastest revenue is the buyers who already told us this was the reason they said no.
+
+FROM CALVEN
+- Lost CRM deals in the lookback with loss reason Missing feature or the related product feedback, with amount, segment, close date and the competitor they went to. Page through all of them.
+- Deal drivers and buyer quotes from those deals that name the missing capability.
+- The product brief entry for the capability: what it does and what it doesn't.
+
+MODEL
+- Screen each deal: did the buyer name this capability, something close, or something it still doesn't cover? Use the brief's limits to cut honestly.
+- For the qualifying deals, model three stages: buyer takes a call, re-enters a cycle, wins. Give low, expected and high rates for each, as my assumptions or yours, labelled.
+- Discount deals that went to a competitor with a long contract, and deals older than a year.
+- If you can run code, run a Monte Carlo over the stage rates and show the distribution of recovered revenue.
+
+OUTPUT
+A ranked list of the deals to reopen (account, amount, what they said, owner), the recovered-revenue range, and a 50-word reopen message per persona built from the buyers' own complaint.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Don't count a deal unless a quote, driver or feedback field ties it to this capability.
+```
+
+### Run a failure mode analysis on day one
+
+```
+Run a failure mode and effects analysis on the launch from the field's side: every way a rep could get it wrong, scored, and the worst ones fixed before day one. Use Calven MCP for what the capability does and doesn't do, the stale documents and the objections it will draw.
+
+FILL IN
+- Capability: [the capability being launched]
+- Launch date: [date]
+- Field touchpoints: [where reps will talk about it: first calls, demos, renewals, RFPs]
+
+CONTEXT
+Most launch problems aren't the product. They're a rep promising what it doesn't do, an old one-pager still in circulation, or an objection nobody prepared for.
+
+FROM CALVEN
+- The product brief entry: capabilities, integrations, pricing and packaging, known weaknesses.
+- Drift findings: published documents the change left stale.
+- Objections and questions buyers raised on calls about this area, verbatim.
+- Competitors with something similar, from their dossiers.
+
+METHOD
+- For each touchpoint, list the failure modes: over-promise, wrong pricing, stale asset sent, unprepared objection, wrong persona pitched, competitor comparison fumbled.
+- Score each 1 to 10 on severity, likelihood and detection (10 means nobody would notice until the customer does). Multiply into a risk priority number.
+- For the top five, write the control: an FAQ line, a do-not-say rule, an asset to pull, a certification question.
+- Re-score with the control in place.
+
+OUTPUT
+The FMEA table sorted by risk, the five controls with before and after scores, and a one-page day-one checklist for managers.
+
+GROUNDING
+Scores are your judgement; label them. Every capability limit cites the product brief and every objection cites a quote. Don't invent a limitation the brief doesn't state.
+```
+
+### Put reps through a launch gauntlet
+
+```
+Build a launch gauntlet: five back-to-back buyer conversations about the new capability, each harder than the last, scored against the product brief. A rep is cleared to pitch when they pass. Use Calven MCP for the buyers, the facts and the competitor angle.
+
+FILL IN
+- Capability: [the capability being launched]
+- Pass mark: [e.g. 80 percent, no fails on accuracy]
+
+CONTEXT
+A launch quiz checks recall. A gauntlet checks whether a rep can explain the capability to an actual buyer, handle the limits honestly and not fold when a competitor comes up.
+
+FROM CALVEN
+- The product brief entry for the capability, including what it doesn't do and pricing.
+- The positioning and messaging for the launch, if published.
+- The personas most likely to care, with their canvases.
+- Competitors with a similar offer, from their battlecards.
+
+SIMULATE
+- Station 1: a friendly user persona asks what it does. Station 2: a buyer persona asks what it costs and what's included. Station 3: a technical buyer probes integrations and limits. Station 4: a buyer says a competitor already has it. Station 5: an economic buyer asks why it matters to their number.
+- Play each persona in character. One question, the rep answers, one follow-up.
+- Score each station on accuracy (pass or fail against the brief), clarity, persona fit and honesty about limits.
+- Package it as a script a manager or the rep can run alone in an AI tool. If you can build files, make it a reusable prompt plus a scoring sheet.
+
+OUTPUT
+The gauntlet script, model answers per station with sources, the scoring sheet, and the pass rule.
+
+GROUNDING
+Model answers and every persona question trace to the brief, the canvases or the battlecards, cited. Don't let a station test a fact the brief doesn't contain.
+```
+
 ## Ad hoc questions
 
 - What does the product brief say [capability] does?
@@ -135,3 +231,9 @@ Questions are answerable from the Universe. Stale assets come only from drift fi
 - Which persona should reps lead with for [capability]?
 - Write five quiz questions on [capability] with answers.
 - Which battlecards need updating because of [capability]?
+- Which open deals mention [capability] in their product feedback or tech requirements?
+- Which competitor launched something like [capability] most recently, and what did they claim?
+- Which persona has [capability]'s main pain on their canvas, word for word?
+- What did buyers who lost to [competitor] say about [capability] specifically?
+- Which claims on our site does the [capability] launch make outdated?
+- Which customer quotes could serve as early proof for [capability]?

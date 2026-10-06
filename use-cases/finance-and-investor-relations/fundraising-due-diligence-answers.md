@@ -146,6 +146,99 @@ GROUNDING
 Use only quotes and responses in the Universe, attributed. Do not invent what a customer will say beyond what they said. Respect withheld names.
 ```
 
+## Advanced prompts
+
+### Red-team the data room as the investor's analyst
+
+```
+Go through our DDQ answers, deck and data room the way the investor's associate would, hunting for numbers that don't reconcile and claims that won't survive a reference call. Use Calven MCP for the facts the answers should match.
+
+FILL IN
+- DDQ answers: [paste or attach the answers]
+- Pitch deck: [paste the deck text]
+- Investor: [the fund, and what they're known to dig into]
+
+CONTEXT
+An associate spends a week on our data room looking for one inconsistency. Every one they find costs trust and time. I'd rather find them first.
+
+FROM CALVEN
+- Win rates by competitor and segment, and the top loss drivers, with n and window.
+- The positioning statement, Competitive Alternatives and Proof Points.
+- The ICP Summary and Segment Tiers.
+- Customer quotes tagged Quantified outcome, with account.
+
+RED-TEAM
+- Play a sharp associate. Cross-check every number and claim across the three documents and against Calven.
+- Flag: a number that differs between documents, a claim with no evidence, a win rate without n, a competitor framing the battlecard contradicts, an outcome a reference customer couldn't confirm in their own words.
+- For each flag, write the follow-up question the associate would send and the fix.
+
+OUTPUT
+A table of flags in order of damage, with the follow-up question and fix for each. Then the three answers to rewrite before the data room opens, rewritten.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Flag missing evidence as missing; don't fill it.
+```
+
+### Rehearse a reference call before the investor does
+
+```
+Simulate the investor's reference call with one of our customers, played from what that customer has actually said, and show me where the call could go wrong. Use Calven MCP for the customer's quotes, conversations and deal history.
+
+FILL IN
+- Reference customer: [account]
+- Investor's angle: [what the investor is trying to verify, e.g. retention risk, competitive displacement]
+
+CONTEXT
+Reference calls are where pitch claims meet a customer's own words. I want to know what this customer is likely to say about us, good and bad, before I put them forward.
+
+FROM CALVEN
+- Every quote from the account: category, sentiment, theme, competitor mentions, with date.
+- The account's conversations and the situation recorded on each.
+- The account's deals: type, amount band, competitors, outcome, and any deal drivers from a survey.
+
+SIMULATE
+- Play the investor asking twelve questions a good reference call covers: why they bought, the alternative they considered, time to value, what's missing, renewal intent, would they buy again.
+- Play the customer answering only from the evidence: their quotes, their themes, their deal facts. Where there's no evidence, the customer says something vague, and you mark it.
+- Score the call: strong, neutral or risky per answer.
+
+OUTPUT
+The transcript, a risk table (question, likely answer, evidence, risk), and a one-paragraph verdict: put them forward, brief them, or pick someone else.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Every customer answer cites a quote or record; anything else is marked as simulated. Never invent a quote.
+```
+
+### Argue the bear case in front of an IC
+
+```
+Stage an investment committee debate on our company: a bear argues against the investment, a bull argues for, and a partner rules. Use Calven MCP for the competitive, win/loss and market evidence both sides use.
+
+FILL IN
+- Round: [round, amount and valuation range]
+- Our thesis: [paste the investment thesis slide or the three-line pitch]
+
+CONTEXT
+Investors won't show us their bear case. If I write it myself I'll go easy on us. A debate where the bear has access to our real weaknesses gives me the strongest objections to answer in the deck.
+
+FROM CALVEN
+- Battlecards: Where We Lose for each Tier 1 competitor, and their recent signals.
+- Win rate against each competitor and top loss drivers, with n.
+- The product brief's Known Weaknesses.
+- Market opportunities and analyst findings on the category, with sizing and publisher.
+
+METHOD
+- The bear opens with five arguments, each citing evidence: competitive pressure, a loss pattern, a weakness, a market risk, a concentration or segment risk.
+- The bull answers each with evidence.
+- Second round: each side attacks the other's weakest point.
+- The partner scores each argument as decisive, material or noise, and writes the IC memo verdict.
+
+OUTPUT
+The debate, the partner's score table and memo, and the three bear arguments we must answer in the deck with a draft answer for each.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Both sides argue from recorded evidence only; anything else is labelled as opinion.
+```
+
 ## Ad hoc questions
 
 - Which competitors do we track, by tier, and how do we differ from each in one line?
@@ -160,3 +253,8 @@ Use only quotes and responses in the Universe, attributed. Do not invent what a 
 - Which customers mention us versus [competitor] positively?
 - Does our product brief state our integrations and architecture, so I can answer the technical questions?
 - What do customers complain about most, so I can pre-empt it?
+- Which competitor do we displace most often, and what did those buyers say?
+- What do our Known Weaknesses say that an investor would find on a reference call?
+- Which analyst finding is the most recent, and what does it say about the category?
+- How has our competitive win rate changed over the last four quarters, with n?
+- Which customer has said the most about switching from a competitor?

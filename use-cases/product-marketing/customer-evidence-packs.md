@@ -116,6 +116,99 @@ GROUNDING
 Objections and proof verbatim and cited. If an objection has no proof quote, say so and leave the slot empty.
 ```
 
+## Advanced prompts
+
+### Map proof coverage against what costs deals
+
+```
+Map our proof against the objections that cost us deals, weighted by revenue, to find where we argue without evidence. Use Calven MCP for the objections, the deals they hurt and the quotes we hold.
+
+FILL IN
+- Window: [time window, e.g. last four quarters]
+- Personas: [personas]
+
+CONTEXT
+We have plenty of quotes, mostly about ease of use. Deals are lost on other things. I want the next round of evidence work pointed at the gap that costs most.
+
+FROM CALVEN
+- Loss drivers and costly objections from the win/loss and voice-of-customer dashboards, with n and the amount at stake.
+- Quotes tagged by category, highlight and theme, with account and role.
+- The objection handling section of the messaging, and the proof points in the positioning.
+
+METHOD
+- Build a grid: rows are the objections and loss drivers, columns are the personas.
+- In each cell, count the usable proof (positive quotes, quantified outcomes, displacement wins) that answers that objection for that persona.
+- Weight each row by the revenue at stake behind it. Coverage = proof count capped at three, divided by three.
+- Gap score = revenue at stake times (1 minus coverage). Rank the cells by gap score.
+- For the top five gaps, name the accounts most likely to hold the missing proof: customers whose quotes touch the topic positively.
+
+OUTPUT
+The heatmap as a table, the ranked gap list, and for each top gap the accounts to interview and the question to ask them.
+
+GROUNDING
+Label every number as Calven (cited, with n) or your calculation. Count only quotes that genuinely answer the objection. Don't invent proof to fill a gap.
+```
+
+### Rank quotes in a credibility tournament
+
+```
+Run a credibility tournament: put our candidate quotes head to head in front of skeptical buyers and rank them with Elo scores. Use Calven MCP for the quotes and to build the judges from our personas.
+
+FILL IN
+- Theme: [theme or claim the quotes must support]
+- Judge personas: [personas]
+
+CONTEXT
+We pick the quotes we like. Buyers believe different ones: specific, a bit rough, from someone like them. I want the quote that persuades a skeptic, not the one that flatters us.
+
+FROM CALVEN
+- Every quote on the theme, with author role, account, segment, sentiment and highlight.
+- The judge personas' canvases: objections, what they're measured on, how they talk.
+
+METHOD
+- Shortlist up to sixteen quotes on the theme.
+- Play each judge persona. Run pairwise rounds: two quotes, the judge picks the more believable and persuasive one, with a one-line reason.
+- Score with Elo, every quote starting at 1,000. Run enough rounds that each quote meets at least five others per judge.
+- Compare rankings across judges: which quote wins everywhere, which wins with one persona only.
+- Pull out what the winners share (specificity, numbers, role match, an admitted downside) as a checklist for picking quotes.
+
+OUTPUT
+A leaderboard per judge and overall, the top three quotes with the judges' reasons, and the checklist.
+
+GROUNDING
+Quote verbatim and cite each. Label the scores as simulated from persona canvases. Don't edit a quote to help it win.
+```
+
+### Audit the pack for selection bias
+
+```
+Audit our evidence pack for selection bias: does it represent what customers say, or only the happiest ones? Use Calven MCP for the full population of quotes and the accounts behind them.
+
+FILL IN
+- Evidence pack: [paste the quotes in the current pack]
+
+CONTEXT
+A pack built from favourites drifts toward one segment, one account and one kind of praise. Buyers and analysts notice. I want to know how skewed ours is and what a fair sample looks like.
+
+FROM CALVEN
+- The full set of quotes on the same themes, with account, segment, role, sentiment and date.
+- Themes with mentions and sentiment, for the true distribution.
+- Accounts behind won deals in the same period, from the CRM mirror.
+
+METHOD
+- Profile the pack: share by account, segment, role, sentiment, recency and highlight.
+- Profile the population the same way.
+- Compare the two. Flag any dimension the pack over-represents by more than double, and any single account supplying more than a quarter of the pack.
+- List the themes customers raise often that the pack never touches.
+- Propose a rebalanced pack of the same size, drawn from the population, that keeps the strongest proof and matches the real mix.
+
+OUTPUT
+A side-by-side table of pack versus population, the three biggest skews, and the rebalanced pack with citations.
+
+GROUNDING
+Label every share as Calven (cited, with n) or your calculation. Quote verbatim. Don't drop a negative theme from the population to make the pack look fair.
+```
+
 ## Ad hoc questions
 
 - What are the top three pains customers named this quarter, with quotes?
@@ -130,3 +223,9 @@ Objections and proof verbatim and cited. If an objection has no proof quote, say
 - Give me three customer phrases for "[our marketing phrase]".
 - Which quotes are marked as suggested marketing-ready?
 - What did the buyer at [deal] say about why they chose us?
+- Which account supplies most of our quotes, and is it in our ICP?
+- Which objection has the fewest customer quotes answering it?
+- Which persona role do we have no positive quotes from?
+- Which won deals have a deal driver with an evidence quote we've never used?
+- Which theme swung from positive to negative sentiment this quarter?
+- Do we have a quote with a number in it from a customer who switched from [competitor]?

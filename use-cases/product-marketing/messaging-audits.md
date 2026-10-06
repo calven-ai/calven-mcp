@@ -144,6 +144,100 @@ GROUNDING
 Change nothing in the findings. Every fix traces to a check in the results.
 ```
 
+## Advanced prompts
+
+### Size an A/B test for the new message
+
+```
+Design an A/B test that can actually tell whether the new message beats the old one, power calculation included. Use Calven MCP for the approved message, the persona read on each version and the customer language.
+
+FILL IN
+- Control: [paste the current headline and subhead]
+- Challenger: [paste the new version]
+- Traffic: [monthly visitors to the page and its current conversion rate]
+- Minimum lift worth acting on: [e.g. 15% relative]
+
+CONTEXT
+We change homepage messaging on opinion, then call any bump a win. I want a test sized to give a real answer, and a challenger worth testing in the first place.
+
+FROM CALVEN
+- The messaging framework: the pillar and value proposition each version claims to express.
+- A persona review of both versions against the buyer personas the page targets.
+- Customer language: the phrases customers use for this problem, and the language gaps on the messaging dashboard.
+
+METHOD
+- First check both versions against the messaging and the review. If the challenger is off-message or the review finds a serious issue, fix it before spending traffic.
+- Write the hypothesis in one line and pick one primary metric.
+- Compute the sample size per arm for the minimum lift at 80% power and 5% significance, and how many weeks the traffic needs.
+- If the test would run too long, say what changes it: a bigger lift threshold, a higher-traffic page, or a sequential design.
+- Set guardrail metrics and the stop rule. If you can run code, show the calculation.
+
+OUTPUT
+A one-page test plan: hypothesis, versions, metric, sample size, duration, stop rule, and the persona risks to watch.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your calculation. Don't invent a baseline conversion rate: use mine.
+```
+
+### Build an eval set that grades future copy
+
+```
+Build an eval set and a grading rubric that score any future copy against our messaging, so audits stop depending on who reads them. Use Calven MCP for the messaging framework, the customer language and examples of reps on and off message.
+
+FILL IN
+- Asset types: [e.g. homepage sections, outbound emails, ad headlines]
+- Personas: [personas]
+
+CONTEXT
+Every audit I run is a judgement call, and two reviewers disagree. I want a rubric an AI tool applies the same way every time, with examples that pin down what good looks like.
+
+FROM CALVEN
+- The messaging framework: narrative, pillars, value propositions by persona, objection handling, boilerplate.
+- Customer quotes that express each pillar in the buyer's words, and the language gaps from the messaging dashboard.
+- Vendor quotes from rep calls tagged Value claim and Differentiation, strong and off-message.
+
+BUILD
+- A rubric with five criteria (on-pillar, persona fit, customer language, proof, claim accuracy), each scored 1 to 4 with a written anchor for every level.
+- Twenty test cases per asset type: short samples written to hit known scores, including tricky near-misses, each with the expected score and why.
+- A grader prompt that applies the rubric and returns scores with a one-line reason per criterion.
+- Run the grader on the test cases and report agreement with the expected scores. Tighten the anchors where it disagrees.
+
+OUTPUT
+The rubric, the test set as a table (a CSV if you can write files), the grader prompt, and the agreement score.
+
+GROUNDING
+Every anchor cites the messaging section or quote it's built from. Label the test cases as written by you. Don't invent a pillar or value proposition.
+```
+
+### Run a recall test on synthetic buyers
+
+```
+Run a five-second recall test on our page with synthetic buyers: what do they remember, and is it what we meant to say? Use Calven MCP to build each buyer from our personas and to define the message we intended.
+
+FILL IN
+- Page copy: [paste the page, top to bottom]
+- Personas: [personas]
+
+CONTEXT
+A buyer gives a page a few seconds. The audit question isn't "is everything on-message" but "which single idea survives", and whether it's ours.
+
+FROM CALVEN
+- The approved one-liner and the value proposition for each persona.
+- Each persona's canvas: pains, KPIs, and the words they'd scan for.
+- Recent customer quotes describing what we do, in their words.
+
+SIMULATE
+- For each persona, play ten buyers in different situations drawn from the canvas. Each skims only the hero and the section headings, then answers: what does this company do, for whom, why pick it, and what's the one thing you remember?
+- Score each answer against the intended one-liner and value proposition: match, partial, wrong.
+- Compare the words the buyers use to describe us after the skim with the words real customers use in the quotes.
+
+OUTPUT
+A recall table by persona (match rate, most common takeaway, most common misread), the line on the page that causes the misread, and a rewrite of the hero and first section.
+
+GROUNDING
+Label results as simulated from the canvases, not measured. Don't invent buyer reactions beyond what the canvases and quotes support. Confirm with a real five-second test before you ship.
+```
+
 ## Ad hoc questions
 
 - Is this headline on-message for [persona]: "[headline]"?
@@ -158,3 +252,9 @@ Change nothing in the findings. Every fix traces to a check in the results.
 - Does this paragraph adopt [competitor]'s framing: [paste]?
 - Which value proposition do we use for [persona] at the [stage] stage?
 - What did the messaging agent flag as weak in the framework?
+- Which pillar do reps pitch most that customers never mention?
+- Which of our boilerplate phrases does no customer ever use?
+- Which persona's value proposition has no proof point behind it?
+- Which objection costs us the most deals, and how strong is our approved answer to it?
+- Which priority vertical in our ICP has no variation in the messaging document?
+- How do AI assistants describe us, and does it match our one-liner?

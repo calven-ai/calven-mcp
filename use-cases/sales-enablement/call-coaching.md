@@ -142,6 +142,101 @@ GROUNDING
 Cite every quote. Do not write the missing lines; mark them as gaps.
 ```
 
+## Advanced prompts
+
+### Find the rep behaviours that predict wins
+
+```
+Find which rep behaviours on calls go with won deals, so coaching targets what moves outcomes instead of what managers like to hear. Use Calven MCP for what reps said on calls and how each deal ended.
+
+FILL IN
+- Window: [window, e.g. last 12 months]
+- Segment: [segment, or "all"]
+
+CONTEXT
+Every manager has a theory of what good looks like on a call. I want to check the theories against outcomes before I build a coaching program on them.
+
+FROM CALVEN
+- Rep quotes from calls in the window, with category (value claim, differentiation, proof point, discovery question, objection handling, pricing, caveat, next step), author and deal.
+- CRM deals in the window with status, amount, stage reached and segment.
+- The overall win rate for the segment from the win/loss dashboard, with n, as the baseline.
+
+MODEL
+- Build one row per closed deal: counts of each rep-quote category, whether a proof point came before pricing, number of discovery questions, deal size band.
+- Compare won and lost deals on each behaviour. Show the win rate with and without it and the gap.
+- If you can run code, fit a logistic regression with deal size and segment as controls, report coefficients with confidence intervals, and flag anything resting on fewer than 15 deals.
+- Name the confounders: big deals get more calls, so more of everything. Say how you handled it.
+
+OUTPUT
+A ranked table of behaviours: win rate with, without, gap, confidence, n. Then the three behaviours worth coaching, one call excerpt each that shows it done well, and the one manager theory the data doesn't support.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Say plainly where the sample is too small to conclude anything, and never call a correlation a cause.
+```
+
+### Calibrate managers on one call scorecard
+
+```
+Calibrate my managers so a 3 on the call scorecard means the same thing from every one of them. Use Calven MCP for what was actually said on the calls and the approved story to score against.
+
+FILL IN
+- Scorecard: [paste the scorecard criteria and scale]
+- Manager scores: [attach a CSV: manager, call, criterion, score]
+- Calls scored: [account names or call titles of the calls they all scored]
+
+CONTEXT
+Reps get different feedback depending on who coaches them, and they've noticed. Before I roll the scorecard out, I want to know where managers disagree and why.
+
+FROM CALVEN
+- For each scored call, the rep quotes and buyer quotes on record.
+- The approved messaging: value pillars, objection handling and the persona's value proposition.
+- The persona canvas for the buyer on each call.
+
+METHOD
+- Measure agreement per criterion. If you can run code, compute Cohen's or Fleiss' kappa and the spread of scores per call.
+- For the three criteria with the worst agreement, go back to the call evidence: quote what the rep said and show which reading of the criterion each manager must have used.
+- Rewrite those criteria with anchored examples: what a 1, 3 and 5 sound like, built from real rep quotes on these calls.
+- Write a 20-minute calibration exercise: two calls, score alone, compare, discuss.
+
+OUTPUT
+An agreement table per criterion, the three rewritten criteria with anchors, and the calibration exercise ready to run.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Anchor examples must be verbatim rep quotes from the calls, never written lines dressed up as real ones.
+```
+
+### Drill the one moment a rep keeps fumbling
+
+```
+Run a deliberate practice loop on the one moment a rep keeps getting wrong: same objection, rising difficulty, scored every round. Use Calven MCP for the rep's real line, the buyer's real words and the approved answer.
+
+FILL IN
+- Rep: [rep]
+- Moment: [the objection or question they fumble, e.g. "you're more expensive than the incumbent"]
+- Persona: [persona they'll face]
+
+CONTEXT
+Coaching notes don't change muscle memory. Reps fix a moment by doing it again and again with feedback, which managers never have time for.
+
+FROM CALVEN
+- What the rep actually said on calls when this came up, verbatim.
+- How buyers phrased it, from customer quotes tagged Objection.
+- The approved answer from messaging objection handling, plus a proof point that supports it.
+- The persona canvas: what they're measured on and what they distrust.
+
+SIMULATE
+- Round 1: you play the persona and raise the objection plainly. The rep answers. Stop.
+- Score against a 4-point rubric: acknowledges, reframes to the persona's goal, proves with evidence, moves to a next step. One line of feedback, then the next round.
+- Each round gets harder: a follow-up challenge, then a competitor named, then a sceptical second stakeholder, then a time-pressed buyer who gives the rep one sentence.
+- Five rounds. Keep the persona in character and in their own words throughout.
+
+OUTPUT
+The scored transcript, a score trend across rounds, the rep's best answer cleaned up as their version of the line, and a 2-minute warm-up they can rerun before calls.
+
+GROUNDING
+The buyer's lines come from the canvas and real quotes, cited. Don't let the persona raise objections the evidence doesn't support, and mark any escalation you invented as practice, not evidence.
+```
+
 ## Ad hoc questions
 
 - What objections did [rep name] hear on calls this month?
@@ -156,3 +251,9 @@ Cite every quote. Do not write the missing lines; mark them as gaps.
 - Give me three quotes where a rep handled the price objection well.
 - What does [persona] care about that our reps are not asking about?
 - Which deals did [rep name] lose, and what decided them?
+- Which rep gives the most caveats on calls, and do those deals close at a lower rate?
+- Which value claims do reps make on calls that no customer quote backs up?
+- Which discovery questions did reps ask on won deals that never came up on lost ones?
+- What do reps say about pricing before the buyer asks?
+- Which objection do reps answer with a feature when the approved answer is an outcome?
+- Show me the strongest rep quote on record for each value pillar.

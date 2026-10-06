@@ -88,6 +88,70 @@ GROUNDING
 Judge only against the Universe and cite each flag. Do not supply numbers from your own knowledge.
 ```
 
+## Advanced prompts
+
+### Triangulate the market three ways
+
+```
+Size our market three independent ways (top-down, bottom-up and value-based) and reconcile them, so the number survives an investor who checks. Use Calven MCP for the analyst figures, our account mix and the value buyers say they get.
+
+FILL IN
+- Market definition: [the category and geography you're sizing]
+- Account universe: [paste or attach a count of companies by size and vertical in your geography, from a data provider]
+- ACV: [your average contract value by segment, if not using Calven's deal size]
+
+CONTEXT
+A single TAM number from one analyst report won't hold up in diligence. Three methods that land near each other will, and where they disagree tells me which assumption to defend.
+
+FROM CALVEN
+- Analyst findings with a market size or growth metric: publisher, report, period, value, excerpt.
+- The ICP's Firmographic Attributes, Priority Verticals and Disqualifiers, to filter the account universe.
+- Average deal size by segment from the ICP dashboard, with n.
+- Customer quotes tagged Quantified outcome, for the value-based method.
+
+MODEL
+- Top-down: the analyst figure, narrowed to our category and geography with stated cuts.
+- Bottom-up: in-ICP companies from my universe × ACV by segment.
+- Value-based: the outcome buyers report, priced at a labelled share of value captured, across the in-ICP count.
+- Reconcile: show the three side by side, the ratio between them and the assumption that explains the biggest gap.
+
+OUTPUT
+A table of the three methods with every input and its source, the reconciled range for TAM and SAM, and the sentence for the deck.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Analyst figures keep their publisher and period. If no analyst finding carries a size, say the top-down method can't run on Calven data.
+```
+
+### Turn the SOM into a range with a tornado
+
+```
+Turn our serviceable obtainable market into a probability range and show which assumption moves it most. Use Calven MCP for the win rates, deal sizes and segment counts that feed the SOM.
+
+FILL IN
+- SOM model: [paste the current SOM calculation and its inputs]
+- Horizon: [e.g. three years]
+
+CONTEXT
+A SOM is a stack of guesses multiplied together, presented as one number. A range with the biggest drivers named is more honest and more useful when the board asks how confident we are.
+
+FROM CALVEN
+- Count of Tier 1 and Tier 2 accounts in the CRM by segment.
+- Win rate, average deal size and sales cycle by segment from the ICP dashboard, with n and the prior period.
+- Market opportunities with sizing tier and timeline, for any expansion the SOM assumes.
+
+MODEL
+- Give each input a low, likely and high value. Use Calven rates and their prior period for the spread where they exist; label the rest.
+- If you can run code, run a Monte Carlo with 10,000 draws using triangular distributions and report P10, P50, P90.
+- Build a tornado chart: swing each input from low to high with the others at likely, and rank by effect.
+- Show what the SOM is if the top input sits at its low end.
+
+OUTPUT
+The distribution, the tornado chart (or ranked table), and a two-line statement of the SOM as a range with its biggest driver named.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Don't widen or narrow a Calven rate's range without saying why.
+```
+
 ## Ad hoc questions
 
 - What market category do we claim in our positioning?
@@ -99,3 +163,9 @@ Judge only against the Universe and cite each flag. Do not supply numbers from y
 - What is our average deal size by segment?
 - Which opportunity has the biggest sizing, and what is the "so what"?
 - Is there any analyst finding about [vertical]?
+- Which analyst finding gives a growth rate for our category, and from which year?
+- Which trends have a horizon beyond two years?
+- How many Tier 1 accounts are in each priority vertical?
+- Which market opportunity's sizing is most out of date?
+- What share of our won deals came from secondary verticals?
+- Which regions do our won deals come from, and how does that match the ICP?

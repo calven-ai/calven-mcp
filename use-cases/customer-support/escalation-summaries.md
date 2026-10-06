@@ -87,6 +87,69 @@ GROUNDING
 Rank only on what the CRM data in the Universe shows. If an account has no deal data, place it last and say why.
 ```
 
+## Advanced prompts
+
+### Model the escalation queue against capacity
+
+```
+Model our escalation queue as a capacity problem and compare first-in-first-out with a priority rule weighted by account value. Use Calven MCP for each account's tier, size and renewal exposure.
+
+FILL IN
+- Escalation log: [attach a CSV of escalations: id, account, opened, resolved, severity, team]
+- Capacity: [engineers or tier 2 agents on escalations, and hours a week each]
+- Target: [your resolution target for escalations]
+
+CONTEXT
+The tier 2 queue runs hot and everything is "urgent". Some of what waits belongs to accounts up for renewal next month. I want to know what a smarter rule buys us, and what it costs the smaller accounts.
+
+FROM CALVEN
+- For each account in the log: ICP tier, size, and any open renewal or expansion deal with amount and close date.
+- The ICP dashboard's average deal size and win rate by tier, with n, to value accounts without a deal on file.
+
+MODEL
+- Fit arrival and service rates from the log, by severity. Report utilisation and the expected wait.
+- Simulate the last quarter under two rules: first in first out, and priority by severity times revenue at risk in the next 90 days. If you can run code, run a discrete-event simulation and show wait time distributions per tier.
+- Show who waits longer under the priority rule and by how much.
+- Find the capacity at which first in first out meets the target, so the choice between a rule and a hire is visible.
+
+OUTPUT
+A table comparing both rules: median and 90th percentile wait by tier, revenue at risk exceeding the target, and the capacity break-even. Then the recommended rule in three lines.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine (from the log), or your assumption. Don't invent a renewal date or contract value; accounts without one are valued from the tier average and labelled.
+```
+
+### Stress-test the escalation as their executive
+
+```
+Stress-test our escalation summary and customer reply by reading them as the customer's most senior, least patient stakeholder. Use Calven MCP for who that person is and what they care about.
+
+FILL IN
+- Escalation summary: [paste the internal summary]
+- Customer reply: [paste the reply we plan to send]
+- Account: [account]
+
+CONTEXT
+This one will reach their exec. A reply that reads fine to support can read as evasive to the person who signs the renewal. I want it torn apart before it goes.
+
+FROM CALVEN
+- The contacts we know at the account with their roles, and which one is the economic buyer or exec sponsor.
+- The persona canvas for that role: goals, KPIs, pains, objections.
+- What the account said on calls, with quotes, and any open renewal deal with its close date.
+- A persona review of the customer reply.
+
+METHOD
+- Read the reply in the exec's voice, line by line: what they'd underline, what they'd forward to their team with a comment, what makes them call their account owner.
+- Then read the internal summary as our own VP of Customer Experience: is the business impact clear enough to get engineering moving?
+- Score both on clarity, ownership, timeline and tone, one to five, with the line that cost each point.
+
+OUTPUT
+The annotated reply, the scores, and a rewritten reply and summary. Keep the facts; fix the framing.
+
+GROUNDING
+The exec's reactions trace to the canvas, the quotes or the persona review, cited; anything else is labelled as your extrapolation. Don't add a promise, date or fix the summary doesn't contain.
+```
+
 ## Ad hoc questions
 
 - Who is [account] to us: tier, size, what they bought?
@@ -99,3 +162,9 @@ Rank only on what the CRM data in the Universe shows. If an account has no deal 
 - What is the open pipeline on [account]?
 - Which of these accounts is Tier 1?
 - Has [account] raised this before?
+- Which open renewals close in the next 60 days at accounts with an escalation open?
+- Is anyone at [account] a Blocker on a current deal?
+- What's the total open pipeline at the accounts in this week's escalations?
+- Did [account] raise the same pain on calls before it became a ticket?
+- Which of [account]'s contacts has the most recent call with us?
+- Has [account] been surveyed for win/loss, and what did they say?

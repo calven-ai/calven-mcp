@@ -119,6 +119,101 @@ GROUNDING
 Use only the deals and responses recorded in the Universe and cite them. If a deal has no loss reason or survey, list it as "no recorded reason" rather than inferring one.
 ```
 
+## Advanced prompts
+
+### Backtest stage weights against fit weights
+
+```
+Backtest two ways of weighting the pipeline on last year's quarters, stage-based and fit-based, and tell me which one would have forecast better. Use Calven MCP for the deals as they stood and how they closed, plus the win rates by tier.
+
+FILL IN
+- Quarters to test: [e.g. the last four quarters]
+- Current stage weights: [paste the probability per stage finance uses]
+- Actual bookings: [paste bookings per quarter, or write "use won deals"]
+
+CONTEXT
+Finance weights the pipeline by stage. If fit and threading predict closure better, the forecast is wrong in a way we can fix, and the board will notice the difference in a quarter or two.
+
+FROM CALVEN
+- Deals with a close date in each test quarter, paged through: amount, status, furthest stage, fit tier, contact role, competitors.
+- Win rate by fit tier and by threading from the ICP and persona dashboards, with n.
+- Win rate by competitor from the competitive dashboard, with n.
+
+BACKTEST
+- Method A: amount × my stage weight for the furthest stage reached.
+- Method B: amount × the tier win rate, adjusted for threading and competitor.
+- Method C: a blend (state the weights).
+- Compare each method's forecast with actual bookings per quarter. Report error and mean absolute percentage error.
+- If you can run code, do it in a notebook and show which deals drove the biggest misses.
+
+OUTPUT
+A table: quarter, actual, forecast A, B, C, error each. Then the winning method, how much it would have improved accuracy, and the caveats.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Furthest stage is a proxy for the stage at forecast time; say so. Using full-year win rates leaks some hindsight into the backtest; flag it.
+```
+
+### Find the coverage each segment needs
+
+```
+Work out the pipeline coverage ratio each segment actually needs to hit its number, from its own win rate and slip, instead of the 3x rule. Use Calven MCP for win rates, cycles and the slip history by segment.
+
+FILL IN
+- Targets: [paste the bookings target by segment for the quarter]
+- Open pipeline: [paste pipeline by segment, or write "use Calven"]
+- Confidence wanted: [e.g. 80% chance of hitting target]
+
+CONTEXT
+A flat 3x coverage target is too much for one segment and far too little for another. The CFO needs to know where the plan is under-covered before the quarter starts.
+
+FROM CALVEN
+- Win rate, average deal size and sales cycle by segment from the ICP dashboard, with n.
+- Open deals by segment with amount and close date, if I said to use Calven.
+- Closed deals from last year with close date and stage history, to estimate how often deals slip out of the quarter.
+
+MODEL
+- Required coverage = 1 ÷ (win rate × share that closes in quarter). Compute it per segment.
+- Add a buffer for variance: with deal counts per segment, use a binomial approximation to get the coverage that hits target at my confidence level.
+- Compare required coverage with actual coverage. Show the gap in dollars.
+- Run sensitivity: the coverage needed if win rate is 5 points lower.
+
+OUTPUT
+A table: segment, win rate (n), slip rate, required coverage, actual coverage, gap. Then the two segments to fix and the sensitivity table.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Slip rate from stage history is approximate where history is incomplete; report how many deals had it.
+```
+
+### Run a pre-mortem on the quarter's number
+
+```
+Run a pre-mortem on the quarter: assume it's the last day and we missed by 20%, and tell me why while I can still act. Use Calven MCP for the risks sitting in the pipeline and the patterns that sank past quarters.
+
+FILL IN
+- Quarter: [quarter]
+- Forecast: [the number you're committing to the board]
+- Known risks: [anything sales has already flagged]
+
+CONTEXT
+The forecast has been reviewed by everyone who built it. A pre-mortem makes it safe to say what could go wrong before it does, and gives me the early signals to watch.
+
+FROM CALVEN
+- Open deals closing in the quarter with fit tier, competitors, contact roles, stage and amount.
+- Top loss drivers and no-decision share for the last two quarters, with n.
+- Competitor signals from the last 90 days for competitors in the open deals.
+
+METHOD
+- Write five short failure stories, each with a different cause: concentration in a few large deals, a competitor move, buyers stalling to no decision, out-of-profile pipeline that never converts, deals slipping past quarter end.
+- Rate each for likelihood and dollar impact, grounded in the pipeline and the loss history.
+- For the top two, name the signal I'd see by week four and the action that limits the damage.
+
+OUTPUT
+A table of the five failure modes with likelihood, impact, early signal and action. Then a revised forecast range and the week-four checklist.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Don't invent a competitor move that isn't in the signals.
+```
+
 ## Ad hoc questions
 
 - What share of our open pipeline is in ICP profile right now?
@@ -133,3 +228,8 @@ Use only the deals and responses recorded in the Universe and cite them. If a de
 - What is the win rate on deals where the economic buyer is a contact?
 - Are deal amounts visible to me through MCP, or withheld?
 - What did buyers on no-decision deals say about why they stalled?
+- How much open pipeline is in deals older than our average won cycle?
+- What share of last quarter's losses had been in commit at some point, by stage history?
+- Which segment's win rate is moving down while its pipeline grows?
+- What's the win rate on deals with three or more contacts versus one?
+- How concentrated is the open pipeline: what share sits in the ten largest deals?

@@ -87,6 +87,70 @@ GROUNDING
 Use only the Universe. Accounts not in the CRM get "unknown" for conflict and a note to score manually.
 ```
 
+## Advanced prompts
+
+### Settle a channel conflict with a payoff matrix
+
+```
+Settle a clash between a partner registration and a direct rep on the same account with a payoff matrix, not seniority. Use Calven MCP for the account, the open deal and how each route tends to end.
+
+FILL IN
+- Partner: [partner]
+- Account: [account]
+- Registration: [paste the partner's registration]
+- Partner economics: [margin or referral fee, and what the partner is worth to us over the next year]
+
+CONTEXT
+Channel conflicts usually go to whoever shouts loudest, and the partner remembers the result for a year. I want the options laid out with the money and the relationship cost on the table.
+
+FROM CALVEN
+- The account's ICP tier, its open and recent deals, their owners, stages and lead sources.
+- The contacts we know there and their roles.
+- Closed deals in the segment paged by lead source, to compare partner-sourced and direct outcomes, next to the segment win rate from the ICP dashboard with n.
+
+METHOD
+- Lay out the options: give it to the partner, keep it direct, co-sell with a split, or let the partner lead with our rep in support.
+- For each, estimate win probability, deal value net of fees, time to close and the effect on the partner's effort next quarter.
+- Build the payoff matrix from both sides (us and the partner) and find the option neither side would walk away from.
+- Run the sensitivity: how far would the partner's win probability have to differ from direct for the call to change?
+
+OUTPUT
+The matrix, the recommended option, the break-even difference, and two notes of four lines each: one to the direct rep, one to the partner.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Lead-source comparisons from paged deals are row counts, so say so and give n. Keep deal amounts out of the partner note.
+```
+
+### Build a registration scoring sheet
+
+```
+Build a reusable spreadsheet that scores every deal registration the same way, and calibrate it on last quarter's registrations. Use Calven MCP for the ICP scorecard and the conflict and competitor checks.
+
+FILL IN
+- Last quarter's registrations: [attach a CSV: partner, account, date, competitor named, decision, outcome if known]
+- Approval rule: [your current rule, or write "propose one"]
+
+CONTEXT
+Registrations get decided by whoever picks them up, so two partners get different answers for the same kind of deal. A sheet with visible formulas makes the call consistent and lets me defend a decline.
+
+FROM CALVEN
+- The ICP Fit Scorecard and the disqualifiers.
+- For each account in my CSV: its CRM ICP tier and score, and any open direct deal with its owner.
+- Our win rate against each competitor named, from the competitive intelligence dashboard, with n.
+
+BUILD
+- Design the columns: fit (from the scorecard), conflict (open direct deal, recent loss), competitor strength (head-to-head win rate), partner track record (from my CSV). Write out the weights and the formula.
+- Score every registration in my CSV and compare with the decision we made. List the disagreements and say which side looks right.
+- Tune the threshold so the sheet approves the registrations that went on to win and flags the ones that stalled, without fitting it to a handful of deals.
+- If you can run code, produce the spreadsheet with live formulas, not pasted values.
+
+OUTPUT
+The spreadsheet, the weights, the calibrated threshold, the disagreement list, and a one-paragraph rule I can send to partners.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Say plainly when the CSV has too few outcomes to calibrate on, and flag any tuning done on fewer than twenty registrations.
+```
+
 ## Ad hoc questions
 
 - Is [account] in our ICP, and what tier?
@@ -99,3 +163,9 @@ Use only the Universe. Accounts not in the CRM get "unknown" for conflict and a 
 - What should a partner ask first when [competitor] is in play?
 - Did [account] appear on any customer call?
 - Which registered accounts this week are Tier 1?
+- What's the most common loss reason for [segment] deals of this registration's size?
+- Has [contact] appeared on any open or closed deal?
+- Which buying triggers does [account] show in the CRM?
+- Does [account] list [competitor] in its tech stack?
+- What's our sales cycle for deals like this, so I can set the registration's expiry?
+- Which accounts in the same industry as [account] did we lose to [competitor] last year?

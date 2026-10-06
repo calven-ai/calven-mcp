@@ -158,6 +158,101 @@ GROUNDING
 Judge only against the Universe and cite. If a post is clean, say so.
 ```
 
+## Advanced prompts
+
+### Map the topics the executive can own
+
+```
+Map the topics our executive could write about on a 2x2 of what buyers care about against what we can credibly own, and pick the quarter's three. Use Calven MCP for buyer pains, tracked trends and our point of view.
+
+FILL IN
+- Executive: [executive name and role]
+- Candidate topics: [paste topics they want to write about, or write "suggest them"]
+- Recent posts: [paste five recent posts]
+
+CONTEXT
+Most executive feeds drift to whatever was on their mind that week. A feed that keeps returning to two or three topics the market cares about, where we have something only we can say, builds authority.
+
+FROM CALVEN
+- Themes from customer calls with mention counts and how they moved this quarter.
+- Trends with severity and horizon, and analyst findings on the same subjects.
+- Our positioning's point of view, unique attributes and proof points.
+
+METHOD
+- Score each topic on buyer salience (theme mentions, trend severity) and on ownability (do we hold a view, proof and customer quotes others don't).
+- Plot them on a 2x2: own it, contested, niche, avoid. If you can run code, draw the chart.
+- For each contested topic, say what proof would move it to own it.
+- Pick three topics for the quarter, each with a contrarian thesis in one sentence and the evidence behind it.
+
+OUTPUT
+The 2x2 with every topic placed and scored, then the three picks with thesis, evidence and a first post angle.
+
+GROUNDING
+Salience comes from Calven counts with n, cited. Don't give the executive a view our positioning doesn't hold; flag it as a new position that needs their sign-off.
+```
+
+### Write an eval set for the ghostwriter
+
+```
+Write an eval set that grades every ghostwritten post for sounding like our executive and saying something true. Use Calven MCP for the positioning, the claims we can make and the buyer language the posts should echo.
+
+FILL IN
+- Executive: [executive name]
+- Their best posts: [paste ten posts they wrote themselves]
+- Rejected drafts: [paste drafts they killed, with their reason if you know it]
+
+CONTEXT
+The ghostwriter, the agency and the AI tool all write for this executive. Without a shared test, approval depends on mood. I want a rubric anyone can run before a draft reaches them.
+
+FROM CALVEN
+- Our positioning and messaging pillars.
+- Claims on record with their status and any concern flagged.
+- Verbatim buyer quotes on the topics the executive writes about.
+
+BUILD
+- From the posts they wrote and the drafts they rejected, pull the voice markers: sentence length, openings, words they use and never use, how they take a stance.
+- Write 12 to 15 test criteria in three groups: voice, substance (is there a claim a reader could disagree with) and truth (every fact traces to a claim or quote on record).
+- For each criterion, a pass example and a fail example from the pasted posts.
+- Grade three of their real posts and two rejected drafts to check the rubric separates them. Tune it until it does.
+
+OUTPUT
+The eval set as a table (criterion, test, pass, fail, weight), the calibration results, and a short prompt that runs the eval on a new draft.
+
+GROUNDING
+Voice markers come only from the pasted posts; truth tests cite the Universe. Don't invent a stance the executive hasn't taken.
+```
+
+### Put odds on the executive's prediction
+
+```
+Put a number on the executive's big public prediction and update it with the evidence we hold, before they stake their name on it. Use Calven MCP for the trends, analyst findings and buyer signals for and against.
+
+FILL IN
+- Prediction: [the claim, e.g. within two years most teams in our category will ...]
+- Executive: [executive name]
+- Their confidence: [how sure they are, as a percentage]
+
+CONTEXT
+A sharp prediction builds authority if it holds and costs it if it doesn't. I want honest odds and the evidence that would change them, so the post says it with the right strength.
+
+FROM CALVEN
+- Trends and market opportunities bearing on the prediction, with horizon and severity.
+- Analyst findings that support or contradict it.
+- Customer quotes and themes that show the shift happening, or not, with counts.
+
+METHOD
+- Start from the executive's confidence as the prior.
+- Take each piece of evidence in turn: does it point for or against, and how strongly (a likelihood ratio, stated and justified)? Update the probability after each one. If you can run code, show the running number.
+- Name the evidence that would move the number most if it appeared, and where it would show up first.
+- Recommend the wording that matches the final number: "will", "is likely to", "might", or don't post it.
+
+OUTPUT
+An update table (evidence, direction, strength, running probability), the final number, and the prediction rewritten at the matching strength.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Likelihood ratios are your judgement; state each. Don't count one piece of evidence twice under two names.
+```
+
 ## Ad hoc questions
 
 - Which trends do we track with a near horizon that [executive] could have a view on?
@@ -172,3 +267,8 @@ Judge only against the Universe and cite. If a post is clean, say so.
 - What has [competitor] done this month that is worth a comment?
 - Which persona does this post speak to, and what would they object to?
 - Give me the three customer pains our positioning answers, in the customers' words.
+- Which customer pain rose most this quarter, and does our positioning take a view on it?
+- Which analyst finding would make the strongest contrarian post for [executive]?
+- Which trends have we marked as acted on that [executive] could write about from experience?
+- What do [persona] buyers get wrong about [topic], judging by our calls?
+- Which phrase do buyers use for [topic] that our messaging never does?

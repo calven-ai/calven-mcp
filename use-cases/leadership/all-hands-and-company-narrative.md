@@ -88,6 +88,67 @@ GROUNDING
 Quotes verbatim and attributed as the workspace allows. Respect withheld deal names and amounts. Do not add a reason the survey or the calls do not record.
 ```
 
+## Advanced prompts
+
+### Run the telephone test on the narrative
+
+```
+Find out how the company story mutates as it gets retold, before the all-hands sends it out. Use Calven MCP for the approved positioning, the messaging and how our reps actually tell the story on calls.
+
+FILL IN
+- Narrative: [paste the all-hands narrative or the company story slide]
+- Audiences: [list who retells it: new hire, engineer, recruiter, customer success]
+
+CONTEXT
+The story leaves the all-hands in one shape and reaches a customer in another. I want to see where it breaks while I can still fix the source.
+
+FROM CALVEN
+- The positioning statement, value themes and unique attributes.
+- The one-liner and value pillars from the messaging.
+- Vendor quotes tagged Value claim and Differentiation from the last 90 days: how reps tell the story on calls.
+
+SIMULATE
+- Run a chain of retellings. Each audience on my list hears the previous version and retells it in 80 words, in their own register, losing what people usually lose: nuance, proof, the category frame.
+- After each hop, score the version against the positioning on four checks: category, who it's for, the differentiator, the proof. Show which element drops first.
+- Compare the last hop with the real rep quotes. Where they match, the drift has already happened in the field.
+
+OUTPUT
+The chain of retellings, a drift table (hop by element), the element that dies first, and a rewrite of the narrative's weakest paragraph so that element survives three hops.
+
+GROUNDING
+Each check passes or fails against a cited Calven section. Rep quotes are verbatim and cited; don't paraphrase them to prove a drift.
+```
+
+### Build an eval set for every telling of the story
+
+```
+Write an eval set that grades any version of the company story against the approved narrative, so drift gets caught by a rubric, not by me. Use Calven MCP for the positioning, the messaging, the boilerplate and the claims we can back.
+
+FILL IN
+- Tellings to grade first: [paste two or three: the careers page, the pitch deck opener, last month's all-hands]
+- Pass bar: [how strict: board-grade, public, internal]
+
+CONTEXT
+Recruiting, sales, product and I retell the story every month. I want one rubric any AI tool can apply, so each new telling gets a score before it goes out.
+
+FROM CALVEN
+- The positioning statement, market category and value themes.
+- The core narrative, one-liner, pillars and boilerplate from the messaging.
+- The claims list with each claim's status, so the rubric knows which ones are backed.
+
+BUILD
+- Turn the approved narrative into 8 to 12 graded criteria: each a yes/no question with a weight and a failing example.
+- Add a hard-fail list: a claim with no backing, a category we don't use, a competitor framed in a way the positioning avoids.
+- Write six test cases: three that should pass, three that should fail for different reasons. Run the rubric on them and fix any criterion that grades them wrong.
+- Then grade my tellings.
+
+OUTPUT
+The rubric as a table (criterion, weight, pass example, fail example), the hard-fail list, the six test cases with expected grades, and a scorecard for each of my tellings with the three fixes that matter most.
+
+GROUNDING
+Every criterion cites the Calven section it comes from. Don't create a criterion the approved documents don't support; label any style preference as your own judgement.
+```
+
 ## Ad hoc questions
 
 - What is our one-liner, according to the messaging document?
@@ -98,3 +159,10 @@ Quotes verbatim and attributed as the workspace allows. Respect withheld deal na
 - Which trend strengthened last quarter?
 - What are our value themes?
 - Does this sentence match our positioning: "[sentence]"?
+- Which value pillar do reps quote most on calls, and which least?
+- Which claims in our boilerplate are not backed in the claims list?
+- Which customer quote from last quarter explains why we exist better than our one-liner does?
+- Which competitor's positioning sounds closest to ours, according to the dossiers?
+- Which win last quarter had the clearest quantified outcome, in the buyer's words?
+- What changed in the product last quarter that the company narrative doesn't mention?
+- Which customer theme grew most last quarter, and on how many mentions?

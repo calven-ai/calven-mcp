@@ -119,6 +119,101 @@ GROUNDING
 Use only hooks, quotes and product facts from the Universe, cited.
 ```
 
+## Advanced prompts
+
+### Model where the sequence leaks, touch by touch
+
+```
+Model my sequence as a chain of states and find the touch where we lose the most prospects, then size what fixing it is worth. Use Calven MCP for the review of each touch and what a meeting is worth.
+
+FILL IN
+- Sequence: [paste every touch with its channel and day]
+- Step stats: [attach sequencer export: sends, opens, replies, meetings per step]
+- Persona: [persona]
+- Segment: [segment]
+
+CONTEXT
+The sequence reply rate is low and everyone wants to rewrite the first email. The leak might be somewhere else. I want the data to say which touch to fix first.
+
+FROM CALVEN
+- A persona review of each touch.
+- Win rate and average deal size for the segment from the ICP dashboard, with n.
+- The objections the persona raises, from the canvas and quotes, to check which touch fails to address them.
+
+MODEL
+- Treat each step as a state with transition probabilities to reply, meeting, unsubscribe or next step, from my stats.
+- If you can run code, build it as an absorbing Markov chain and compute the probability that a prospect who starts the sequence ends in a meeting, and the expected meetings per 100 starts.
+- For each touch, raise its reply rate by a realistic step (state it) and recompute. The touch with the biggest gain is the one to fix.
+- Read that touch with the persona review and say why it leaks.
+
+OUTPUT
+The chain as a table, meetings per 100 starts, the gain from fixing each touch in meetings and pipeline, and the rewrite of the leakiest touch.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Don't invent step stats; if a step has no data, say so and leave it out.
+```
+
+### Red-team the sequence as the rival's SDR lead
+
+```
+Red-team my sequence from the other side: hand it to the competitor's SDR lead and have them plan how to beat it. Use Calven MCP for what the competitor says, where they win and what buyers say about them.
+
+FILL IN
+- Sequence: [paste every touch]
+- Competitor: [competitor]
+- Persona: [persona]
+
+CONTEXT
+We review sequences against our own messaging. The buyer reads them next to the competitor's. I want the person whose job is to beat us to read it first.
+
+FROM CALVEN
+- The competitor's battlecard: positioning, strengths, where they win, their talk track, landmines they'd see coming.
+- Their competitive signals from the last 90 days.
+- Loss reasons and deal drivers on deals we lost to them, with buyer quotes.
+- Our win rate against them from the competitive dashboard, with n.
+
+RED-TEAM
+- Play their SDR lead reading our six touches. Mark every claim they can undercut, every promise they also make, and every gap where their story is stronger.
+- Write their counter-sequence: three touches aimed at the same persona, landing the same week.
+- Then switch back: for each weak point found, propose the change to our touch that removes it.
+
+OUTPUT
+The red-team notes touch by touch, their counter-sequence, and a table of our fixes ranked by how much ground they win back.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Their counter-sequence is simulated from the battlecard and says so. Don't invent a claim or a move the competitor hasn't made.
+```
+
+### Build a reusable grading rubric for sequences
+
+```
+Build a grading rubric and an eval set for sequences, so every future sequence is scored the same way before it launches. Use Calven MCP for the standards the rubric checks against.
+
+FILL IN
+- Sequences to calibrate on: [paste two or three: one that worked, one that flopped, one new]
+- Persona: [persona]
+
+CONTEXT
+Every manager reviews sequences by taste, and the feedback changes with the reviewer. I want a rubric anyone (or any AI tool) can score with, and examples that show what a 2 and a 5 look like.
+
+FROM CALVEN
+- The messaging matrix for the persona and the objection handling.
+- The product brief's capabilities, and claims marked unsupported or concerning.
+- The persona canvas: pains, objections, what they find credible.
+- Customer quotes on the persona's top pains.
+
+BUILD
+- Six criteria (for instance: buyer's problem first, claim accuracy, proof strength, objection coverage, variety across touches, ask size). For each, a 1 to 5 scale with an anchored description of a 1, 3 and 5.
+- Score my calibration sequences against it, with evidence for each score. Adjust anchors where the scores feel wrong.
+- Write ten short graded examples (single touches) covering the scale, as an eval set to check any reviewer, human or AI, against.
+
+OUTPUT
+The rubric as a table, the scored calibration sequences, and the ten-item eval set with answer key.
+
+GROUNDING
+Every anchor and score cites the messaging, brief, canvas or quotes. Don't invent a standard the Universe doesn't set; mark house-style criteria as mine.
+```
+
 ## Ad hoc questions
 
 - Is this sequence on-message for [persona]? [paste]
@@ -133,3 +228,9 @@ Use only hooks, quotes and product facts from the Universe, cited.
 - Give me a different opener for touch 2 using a pain from calls.
 - Which loss reason against [competitor] does this sequence ignore?
 - Rank the five touches by how likely [persona] is to reply.
+- Which touch in a typical sequence should answer the objection [persona] raises first?
+- Which claim in our messaging was flagged as unsupported or concerning?
+- What has [competitor] changed in their messaging in the last 90 days?
+- Which persona replies least in [segment], per the persona dashboard?
+- Which product change in the last quarter makes an older sequence wrong?
+- Which customer quote works as a proof line in a sequence for [persona]?

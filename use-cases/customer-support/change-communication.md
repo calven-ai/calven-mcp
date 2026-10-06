@@ -84,6 +84,69 @@ GROUNDING
 List only accounts with a recorded quote. Usage data is not in the Universe; say so.
 ```
 
+## Advanced prompts
+
+### Run a pre-mortem on the deprecation
+
+```
+Run a pre-mortem on a deprecation: it's sixty days after the change and it went badly. Tell me the stories of how. Use Calven MCP for what changed, who relies on it and what they've said about it.
+
+FILL IN
+- Change: [the feature being changed or removed]
+- Plan: [paste the comms plan and dates]
+- Affected accounts: [attach the list of accounts using the feature, or write "find from calls"]
+
+CONTEXT
+Deprecations go wrong in predictable ways: the wrong people hear about it, too late, in words that sound like a downgrade. I want the failures named while there's still time to change the plan.
+
+FROM CALVEN
+- The product change record: summary, so-what, severity, date.
+- Drift findings: every document and article the change left stale.
+- Customer quotes and conversations that mention the feature, with the accounts, and any open renewal at those accounts.
+
+METHOD
+- Write five short failure stories, each from a different cause: a key account learns from a broken workflow, a stale article contradicts the notice, a renewal lands mid-change, the replacement doesn't cover a use customers rely on, a competitor uses it in a pitch.
+- Rate each for likelihood and damage from the evidence above.
+- For the top two, name the signal in the first week and the change to the plan that prevents it.
+
+OUTPUT
+A table of the five failure modes (likelihood, damage, early signal, fix), the accounts to contact personally, and the plan with the fixes marked.
+
+GROUNDING
+Every failure cause cites Calven evidence or is labelled as your judgement. Don't invent a use case or an account no quote or record names.
+```
+
+### Forecast the ticket spike after a release
+
+```
+Forecast the ticket spike a release will cause, as a low, expected and high range, and staff for it. Use Calven MCP for what's changing, how much customer-facing content it breaks and how much customers care about the features involved.
+
+FILL IN
+- Release: [paste the release notes or list of changes]
+- Past spikes: [attach daily ticket counts around two or three past releases, or write "none"]
+- Team: [agents on shift and tickets per agent per day]
+
+CONTEXT
+Every release brings "what happened to X" tickets. We guess the staffing and usually guess low. I want a forecast built from how big the change is, not from hope.
+
+FROM CALVEN
+- The product changes in this release with severity and change type.
+- Drift findings: how many published documents and articles each change left stale.
+- Themes and quote mentions for the affected features, to weight how many customers use and care about each.
+
+MODEL
+- From the past spikes, estimate the extra tickets per release and how fast they decay. Without history, state an assumed range.
+- Scale each change by severity, stale-content count and customer mentions, and sum to an expected spike curve over 14 days.
+- Give low, expected and high. If you can run code, simulate it and plot the daily range against team capacity.
+- Show the effect of fixing stale articles before launch on the high case.
+
+OUTPUT
+A daily forecast table for 14 days with the range, the days capacity is exceeded, the staffing call, and the three articles to fix first.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine (past spikes, team), or your assumption. Don't invent a past spike.
+```
+
 ## Ad hoc questions
 
 - What changed in the product in the last 30 days?
@@ -96,3 +159,9 @@ List only accounts with a recorded quote. Usage data is not in the Universe; say
 - Does the product brief still describe [feature] the old way?
 - Which accounts with a renewal this quarter raised [feature]?
 - What is the so-what of the [change] record?
+- Which product change this month has the most stale documents attached?
+- Which customers praised [feature] on calls before we changed it?
+- Do any open deals list [feature] in their tech stack requirements?
+- What did the last change to [feature] say in its so-what, and did tickets follow?
+- Which competitor could use [change] against us, according to their battlecard?
+- Is there a theme that complained about [feature] before we changed it?

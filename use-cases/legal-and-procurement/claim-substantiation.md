@@ -141,6 +141,100 @@ GROUNDING
 Include only claims the Universe backs and cite the source beside each. Do not add general industry claims.
 ```
 
+## Advanced prompts
+
+### Rank the claims by challenge exposure
+
+```
+Score every live claim on how likely it is to be challenged and how much it would cost if it were, and give me the audit order. Use Calven MCP for the claims register, the proof we hold and the competitors most likely to object.
+
+FILL IN
+- Product: [product, or leave blank if we have only one]
+- Past challenges: [paste any complaints, competitor letters or ad-standards rulings we've had, or write "none"]
+- Review capacity: [hours legal can spend on this audit]
+
+CONTEXT
+I can't review every claim this quarter. I want a defensible order: the claims most likely to be challenged, weighted by what that would cost.
+
+FROM CALVEN
+- The claims register: each claim, where it appears, claim type and flagged concern.
+- For each claim, the proof the product brief, positioning proof points, quantified customer quotes or deal drivers hold.
+- The competitors named or implied in comparative and superlative claims, with their signal activity in the last 90 days.
+
+MODEL
+- Score likelihood of challenge from 1 to 5: claim type, whether it names an active rival, how public the placement is, and whether proof is missing.
+- Score exposure from 1 to 5: where it appears, whether it's a number, whether it touches security, pricing or a named customer.
+- Rank by likelihood times exposure.
+- Fit the ranked list to my review capacity at a stated minutes-per-claim. If you can run code, build it as a spreadsheet with the scoring formulas visible so I can change a weight.
+
+OUTPUT
+A likelihood by exposure grid, the ranked audit queue that fits my hours, and the three claims to pull before any review because they score high and have no proof.
+
+GROUNDING
+Label every score input as Calven (cited), mine, or your assumption. Don't invent a challenge we never had, and don't treat missing proof as proof the claim is false. This is a triage, not legal advice.
+```
+
+### Test the net impression with a reader panel
+
+```
+Find the claims our pages make by implication, the ones nobody wrote down but every buyer reads. Use Calven MCP for the personas who read the page and the proof we hold.
+
+FILL IN
+- Page: [paste the page or asset copy]
+- Personas: [two to four personas who read it]
+
+CONTEXT
+Substantiation covers what a reasonable reader takes away, not only the literal words. A headline, a logo row and a chart can promise more together than any sentence does alone. I want to see the page through the buyer's eyes before a regulator or a rival does.
+
+FROM CALVEN
+- The persona canvases: goals, pains, how each persona talks about outcomes.
+- A persona review of the page.
+- The claims register rows for this page and the product brief sections they touch.
+
+METHOD
+- Have each persona read the page cold and write, in the first person, the three things they now believe the product does or achieves.
+- Pool those beliefs, merge duplicates, and mark each as express (the page says it) or implied (the page suggests it).
+- Match each belief to proof: product brief, a quantified quote, a deal driver, or nothing.
+- For every implied belief with no proof, find the element that creates it (a word, an image caption, an ordering) and give the smallest edit that removes it.
+
+OUTPUT
+A table of beliefs: who formed it, express or implied, proof or none, the edit. Then the page with the edits marked.
+
+GROUNDING
+Persona readings trace to the canvas and the review, cited. Mark anything else as your extrapolation. Don't upgrade a quote into proof of a broader belief than the customer stated.
+```
+
+### Estimate the unproven share from a sample
+
+```
+Estimate what share of our live claims we couldn't prove today, with a confidence interval, from a sample I can audit in a day. Use Calven MCP for the claims register and the proof behind each sampled claim.
+
+FILL IN
+- Product: [product, or leave blank if we have only one]
+- Audit budget: [how many claims I can check by hand]
+- Tolerance: [the unproven share the board or GC would accept, e.g. 5%]
+
+CONTEXT
+The register is too big to check line by line, and "we think most of it holds" won't satisfy the general counsel. I want an audit-grade number: a random sample, a rate, an interval, and a yes or no against our tolerance.
+
+FROM CALVEN
+- The total count of claims in the register, by claim type.
+- The full rows for the sampled claims.
+- For each sampled claim, the proof the product brief, positioning, quotes, deal drivers or analyst findings hold.
+
+METHOD
+- Stratify by claim type so comparative, numeric and security claims get their share of the sample. Draw at random within each stratum and show the seed.
+- Grade each sampled claim proven, partly proven or no proof, citing the source.
+- Estimate the unproven share per stratum and overall, with a 95% interval. If you can run code, use a Wilson interval and show the calculation.
+- Say whether the upper bound clears my tolerance, and how many more claims I'd need to sample to tighten the interval to plus or minus five points.
+
+OUTPUT
+The sample with grades, the estimate and interval per stratum, the verdict against tolerance, and a one-paragraph note for the GC.
+
+GROUNDING
+Label every number as Calven (cited, with n), computed, or your assumption. Don't hand-pick the sample. A claim with no proof in the Universe is "no proof held", not "false".
+```
+
 ## Ad hoc questions
 
 - Which claims on our site have a flagged concern?
@@ -155,3 +249,9 @@ Include only claims the Universe backs and cite the source beside each. Do not a
 - Where does the claim "[claim]" appear across our documents?
 - What are our approved proof points for [value theme]?
 - Which outcome claims have no quote or deal behind them?
+- Which of our superlatives ("first", "only", "fastest") have no proof in the Universe?
+- Which claims appear in five or more places, so one fix touches many pages?
+- Which claims rest on a single customer quote, and is that customer still a customer in the CRM?
+- Which claims name a number that differs between two of our documents?
+- What did we claim about [capability] before the last product change, and where is the old wording still live?
+- Which analyst findings could back a claim we currently make without proof?

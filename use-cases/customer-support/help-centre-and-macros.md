@@ -107,6 +107,68 @@ GROUNDING
 Match on what the change record says. Where you cannot tell from the title whether an article is affected, say "check".
 ```
 
+## Advanced prompts
+
+### Walk the article as three first-time readers
+
+```
+Run a cognitive walkthrough of a help article: three different readers follow it step by step, and you log every point where they'd get stuck or open a ticket. Use Calven MCP for who the readers are and how they describe the problem.
+
+FILL IN
+- Article: [paste the article]
+- Task: [what the reader is trying to get done]
+
+CONTEXT
+An article can be accurate and still fail. If the reader is an admin setting it up, an end user who just wants the result, or an engineer wiring an integration, they read the same page differently. I want to know where each one drops off.
+
+FROM CALVEN
+- The user and buyer personas with their canvases: goals, jobs, pains, the words they use.
+- Customer quotes about the task, tagged Usability or Onboarding.
+- The product brief section the article describes.
+- A persona review of the article.
+
+METHOD
+- Pick the three personas who'd most likely land on this article. For each, walk the steps in order and answer four questions per step: do they know what to do, can they find it, do they understand the result, do they know they're done?
+- Log every failure with the step, the persona, the reason and the ticket it would create.
+- Check each step's facts against the brief.
+
+OUTPUT
+A step by persona grid of passes and failures, the top five fixes in order of tickets avoided, and the revised article.
+
+GROUNDING
+Persona reactions come from the canvases, quotes and review, cited; mark anything else as your extrapolation. Facts in the revision stay inside the brief. Don't invent a UI step the article doesn't describe.
+```
+
+### Rank the articles to write by deflection
+
+```
+Model which help articles are worth writing next by the tickets they'd deflect, and find the break-even for each. Use Calven MCP for how often each topic comes up on calls and which topics a product change just made urgent.
+
+FILL IN
+- Ticket counts: [attach ticket volume by topic or tag for the last quarter]
+- Handle time: [average handle time per ticket, by topic if you have it]
+- Candidate articles: [paste the list of articles you're considering, or write "suggest"]
+
+CONTEXT
+The backlog has thirty article ideas and capacity for six this month. Volume alone favours the obvious ones. I want the six that save the most time, including the ones calls say are coming.
+
+FROM CALVEN
+- Customer themes with mentions and momentum, to see what's rising before it shows in tickets.
+- Product changes in the last 60 days and the help articles they left stale.
+- The product brief sections each candidate would draw on, to check it can be written from approved facts.
+
+MODEL
+- For each candidate: monthly tickets on the topic, a deflection rate range (state it), handle time saved, writing and upkeep cost, and a momentum boost if the theme is rising on calls.
+- Compute hours saved per month and the months to break even. If you can run code, build it as a spreadsheet and run a sensitivity on deflection rate.
+- Flag any candidate the brief can't support.
+
+OUTPUT
+A ranked table (article, tickets, deflection range, hours saved, break-even, momentum, brief coverage), the top six, and the assumption that most changes the ranking.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine (tickets, handle time), or your assumption (deflection rate). Don't invent a ticket count.
+```
+
 ## Ad hoc questions
 
 - What are the top five questions customers ask about [feature], in their words?
@@ -119,3 +181,9 @@ Match on what the change record says. Where you cannot tell from the title wheth
 - Which capability has the most customer confusion themes?
 - Rewrite this macro in plain language, keeping only claims the brief supports: [paste]
 - What limits does the brief state for [feature]?
+- Which customer themes have no help article that covers them?
+- What word do customers use for [feature] that our articles never use?
+- Which known weaknesses in the brief should an article state upfront?
+- Which product changes this quarter have drift findings still open?
+- What does the brief say about [integration] setup that a macro might get wrong?
+- Which onboarding pains come up most on calls with new customers?

@@ -134,6 +134,101 @@ GROUNDING
 Fit and contacts from the Universe only.
 ```
 
+## Advanced prompts
+
+### Backtest the target list on last year's deals
+
+```
+Backtest how I pick ABM accounts against last year's closed deals before I commit the list. Use Calven MCP for the ICP scorecard and the closed deals to test it on.
+
+FILL IN
+- Segment: [segment]
+- Window: [window, e.g. the last 12 months]
+- My selection rule: [paste how you pick accounts: fit score cut-off, size, triggers, intent signals]
+
+CONTEXT
+I'm about to put a quarter of sales and marketing time behind a list of named accounts. If my rule can't tell last year's winners from last year's losers, it won't pick next year's either.
+
+FROM CALVEN
+- The ICP fit scorecard and the segment tiers from the ICP document.
+- Every closed deal in the segment for the window, paged from the CRM, with account, ICP tier, fit score, triggers, tech stack, outcome and amount.
+- The ICP dashboard's predictive attributes and win rate by attribute, with n.
+
+BACKTEST
+- Apply my rule to the accounts behind those deals and split them into "would have picked" and "would have skipped".
+- Compare win rate, average deal size and revenue captured for each half. Show precision (wins among picks) and recall (share of all wins the rule caught).
+- Then try two alternatives: the ICP scorecard alone, and the scorecard plus the strongest predictive attribute. Same metrics.
+- If you can run code, do it in a notebook and show a lift chart for each rule.
+
+OUTPUT
+A table of the three rules with precision, recall, win rate, revenue captured and list size. Then the rule I should use and the wins my current rule would have missed.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Fit scores and triggers are as the CRM holds them, not as of the deal date; say so. Flag the segment if too few deals closed to trust the comparison, and don't backfill a field a deal doesn't carry.
+```
+
+### Split the ABM budget by expected value
+
+```
+Split my ABM budget across one-to-one, one-to-few and one-to-many by expected value, not by habit. Use Calven MCP for win rates, deal sizes and cycle length by ICP tier.
+
+FILL IN
+- Budget: [ABM budget for the period]
+- Tier mapping: [which ICP tiers go into 1:1, 1:few and 1:many]
+- Cost per account: [paste what one account costs you in each program tier, or write "estimate it"]
+- Window: [window]
+
+CONTEXT
+Every quarter the 1:1 tier gets the most money because it feels most strategic. I want to know whether the marginal dollar earns more there or one tier down.
+
+FROM CALVEN
+- Win rate, average deal size and sales cycle for Tier 1, Tier 2 and Tier 3 from the ICP dashboard, with n.
+- The count of CRM accounts per ICP tier, and how many already have an open deal.
+- The multi-threading win rate against single-threaded from the persona dashboard, with n.
+
+MODEL
+- For each program tier, expected value per account = chance of an opportunity × win rate × deal size, discounted for cycle length. The opportunity rate is my number or a labelled assumption.
+- Treat heavier coverage as a lift on win rate, capped by the multi-threading gap. Range it.
+- Allocate so the last dollar in each tier earns about the same. Show the diminishing-returns curve per tier.
+- Build it as a spreadsheet with formulas I can change, not a static table.
+
+OUTPUT
+The spreadsheet, a one-line allocation per program tier, and the two assumptions that would flip it.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. The multi-threading gap is a ceiling, not proof that ABM causes it; don't present it as the effect.
+```
+
+### Plan the path into the buying committee
+
+```
+Plan the order I reach the buying committee at one account, as a decision tree with odds. Use Calven MCP for who we know there, which roles sit on our wins and what threading does to the win rate.
+
+FILL IN
+- Account: [account]
+- Deal: [deal, or write "no open deal"]
+
+CONTEXT
+We have one or two contacts at this account and a quarter to turn it into a real opportunity. Who I go to next, and through whom, matters more than what the first email says.
+
+FROM CALVEN
+- The account's contacts with role and lifecycle stage, and its deal history, from the CRM.
+- Contact roles on won versus lost deals in the account's segment, and win rate by persona and by threading from the persona dashboard, with n.
+- The persona canvases for the roles missing at the account: goals, pains, objections, watering holes.
+
+METHOD
+- Map the committee: known contacts, missing roles, the likely blocker. Take each role from the CRM, not from a guess at the title.
+- Build a decision tree of entry sequences (champion first, then economic buyer; technical buyer first; and so on). At each branch, estimate the chance the next person engages and what that does to the deal's odds, anchored on the persona dashboard.
+- Pick the sequence with the highest expected value, plus the fallback if the first contact goes quiet.
+- For each step, write the one message that persona needs, from their canvas.
+
+OUTPUT
+The committee map, the decision tree with probabilities, the recommended path with a message per step, and the signal that says switch to the fallback.
+
+GROUNDING
+Label every probability as Calven (cited, with n) or your assumption. Don't invent contacts or roles the CRM doesn't hold; list missing roles as gaps to source.
+```
+
 ## Ad hoc questions
 
 - Which Tier 1 accounts in [segment] has nobody worked?
@@ -148,3 +243,10 @@ Fit and contacts from the Universe only.
 - What proof do we have from accounts like [account]?
 - What is [account]'s ICP fit score and why?
 - Which segment closes fastest for us?
+- Which Tier 1 accounts picked up a trigger in the last 90 days but have no open deal?
+- Which accounts we lost to [competitor] still have their champion in the CRM?
+- How much higher is the win rate on multi-threaded deals than single-threaded, with n?
+- Which contact role is most often missing on our lost deals in [segment]?
+- Which Tier 2 accounts share the most attributes with our last five Tier 1 wins?
+- Which open deals in [segment] have only one contact on them?
+- What did [persona] at won accounts say made them buy, verbatim?

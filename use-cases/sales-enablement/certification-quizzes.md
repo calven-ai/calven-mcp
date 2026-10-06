@@ -82,6 +82,69 @@ GROUNDING
 Change a verdict only on a recorded document change or product change, cited.
 ```
 
+## Advanced prompts
+
+### Find the questions that don't measure anything
+
+```
+Run an item analysis on the last certification cohort so I can cut the questions that don't measure anything. Use Calven MCP to check each answer key against the current documents.
+
+FILL IN
+- Results: [attach a CSV: rep, question id, answer chosen, correct yes or no, total score]
+- Question bank: [paste the questions with options and the answer key]
+
+CONTEXT
+Everyone passes, so the certification proves nothing. Some questions are trivia, some may have stale answers, and some might reward the reps who memorise over the ones who sell.
+
+FROM CALVEN
+- The current messaging, positioning, product brief and battlecards, to check every answer key.
+- Product changes and drift findings since the bank was written.
+
+METHOD
+- If you can run code, compute for each question: difficulty (share correct), discrimination (point-biserial correlation with total score, or top third versus bottom third), and how often each wrong option was picked.
+- Flag questions that nearly everyone gets right, that nobody gets right, or where strong reps do worse than weak ones.
+- For flagged questions, check the answer key against the current documents. A "hard" question is often a stale one.
+- Check distractors: a wrong option nobody picks isn't working; one that strong reps pick may be defensible.
+- Estimate overall reliability (Cronbach's alpha) and how many questions you'd need to make the pass mark meaningful.
+
+OUTPUT
+A per-question table: difficulty, discrimination, distractor notes, answer key still current, verdict (keep, fix, cut). Then the reliability figure and the five replacement questions for the worst cuts.
+
+GROUNDING
+Label every number as Calven (cited, with n), mine, or your assumption. Every answer-key check cites the document and section; with fewer than 15 reps, say the statistics are rough.
+```
+
+### Build an adaptive certification
+
+```
+Build an adaptive certification: it starts at medium, gets harder when the rep answers right, easier when they're wrong, and finds their real level in 12 questions instead of 40. Use Calven MCP for the content and the real buyer moments behind the hard questions.
+
+FILL IN
+- Scope: [what it certifies: pitch, personas, competitors, objections, a launch]
+- Competitors: [competitors to include, or "Tier 1"]
+
+CONTEXT
+A fixed quiz bores the strong reps and crushes the new ones. An adaptive one is shorter and tells me more, and I can rerun it every quarter.
+
+FROM CALVEN
+- The ICP, messaging (pillars, objection handling, matrix) and product brief.
+- The personas' canvases.
+- The battlecards for the competitors.
+- Real buyer quotes tagged Objection and Competitor mention, for the hardest scenario questions.
+
+BUILD
+- Write 45 questions in three levels. Easy: recall a fact. Medium: apply it to a persona or segment. Hard: a scenario built from a real buyer quote where the rep must choose the best response and the worst one is tempting.
+- Each question carries its answer, the reason, and the source document.
+- Adaptive rule: start at medium; two right in a row moves up, one wrong moves down. Score by level reached and accuracy at that level.
+- If you can build files, make it a single self-contained HTML page: the rep takes it, sees feedback with the source after each answer, and gets a result they can screenshot.
+
+OUTPUT
+The question bank as a table and the HTML quiz (or, if you can't build files, the bank plus the scoring rule as a manager script).
+
+GROUNDING
+Every answer cites a document and section. Scenario questions quote the buyer verbatim; don't invent a buyer line or a competitor claim that isn't on record.
+```
+
 ## Ad hoc questions
 
 - Write ten multiple-choice questions on our ICP with answers.
@@ -92,3 +155,10 @@ Change a verdict only on a recorded document change or product change, cited.
 - Write three questions on what we do not do.
 - Which personas should a certification cover, by buying role?
 - Write a short-answer question on our positioning statement.
+- Which facts in our product brief changed since last quarter's certification was written?
+- Which competitor appears in the most deals but has the thinnest battlecard to quiz on?
+- Which objection is hardest to answer well, judging by how reps handled it on calls?
+- Write a scenario question from a real lost deal against [competitor].
+- Which persona's canvas would make the toughest exam question, and what is it?
+- Give me three wrong answers to "[question]" that a half-trained rep would find convincing.
+- Which battlecard claims are most likely to be misremembered as stronger than they are?
