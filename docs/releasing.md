@@ -88,7 +88,7 @@ The registry accepts each version once. To change published metadata, release a 
 
 ### First release
 
-The first tag is `mcp-v2.0.0`, matching `server.json#version`. Version 1.0.0 shipped the earlier endpoint and was never published to the registry.
+The first tag is `mcp-v1.1.0`, matching `server.json#version`. Version 1.0.0 shipped the earlier endpoint and was never published to the registry.
 
 ## Updating mcp-publisher
 
