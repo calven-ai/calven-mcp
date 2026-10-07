@@ -1,23 +1,25 @@
 # Tool catalog
 
-Calven exposes 14 focused tools. Results reflect the connected user's workspace permissions and product scope.
+Calven exposes 14 tools. Results reflect the connected user's workspace permissions and product scope.
 
-| Tool | Behavior | Mode |
-| --- | --- | --- |
-| `get_workspace_overview` | Shows the workspace, products, available strategy documents, and record counts. | Read |
-| `list_products` | Lists products used to scope later requests. | Read |
-| `get_strategy_document` | Reads positioning, messaging, ICP, or the product brief, company-wide or per product. | Read |
-| `list_documents` | Finds published documents available to the user. | Read |
-| `read_document` | Reads one published document by its returned identifier. | Read |
-| `list_records` | Searches and filters a supported record kind. | Read |
-| `get_record` | Reads one record by identifier or, where supported, exact name. | Read |
-| `get_competitor` | Reads a competitor dossier, battle card, recent signals, or a selected subset. | Read |
-| `get_persona` | Reads a named buyer, stakeholder, or user persona. | Read |
-| `get_insights` | Reads one Insights dashboard as data: KPIs with their change against the prior period, breakdowns, rankings, trends. | Read |
-| `get_insights_overview` | Reads every dashboard's headline KPIs, the biggest movers, top loss reasons, product gaps, and data availability. | Read |
-| `get_insight_detail` | Reads the rows behind one dashboard number: deals in a bucket, deals against a competitor, survey answers, verbatims, one AI answer, the signal feed. | Read |
-| `review_against_personas` | Starts an asynchronous review of supplied copy against selected personas. | Action |
-| `get_task` | Polls an asynchronous task and returns its status or result. | Read |
+| Tool | Behavior | Mode | Annotations |
+| --- | --- | --- | --- |
+| `get_workspace_overview` | Shows the workspace, products, available strategy documents, and record counts. | Read | read-only |
+| `list_products` | Lists products used to scope later requests. | Read | read-only |
+| `get_strategy_document` | Reads positioning, messaging, ICP, or the product brief, company-wide or per product. | Read | read-only |
+| `list_documents` | Finds published documents available to the user. | Read | read-only |
+| `read_document` | Reads one published document by its returned identifier. | Read | read-only |
+| `list_records` | Searches and filters a supported record kind. | Read | read-only |
+| `get_record` | Reads one record by identifier or, where supported, exact name. | Read | read-only |
+| `get_competitor` | Reads one competitor: its battlecard, recent signals and the outline of its deep-dive dossier. The full dossier is read with `read_document`. | Read | read-only |
+| `get_persona` | Reads a named buyer, stakeholder, or user persona. | Read | read-only |
+| `get_insights` | Reads one Insights dashboard as data: KPIs with their change against the prior period, breakdowns, rankings, trends. | Read | read-only |
+| `get_insights_overview` | Reads every dashboard's headline KPIs, the biggest movers, top loss reasons, product gaps, and data availability. | Read | read-only |
+| `get_insight_detail` | Reads the rows behind one dashboard number: deals in a bucket, deals against a competitor, survey answers, verbatims, one AI answer, the signal feed. | Read | read-only |
+| `review_against_personas` | Starts an asynchronous review of supplied copy against selected personas. | Action | not read-only, non-destructive |
+| `get_task` | Polls an asynchronous task and returns its status or result. | Read | read-only |
+
+Every tool sets a display `title` and explicit annotations. Read tools: `readOnlyHint: true`, `destructiveHint: false`, `idempotentHint: true`, `openWorldHint: false`. `review_against_personas`: `readOnlyHint: false`, `destructiveHint: false`, `idempotentHint: true`, `openWorldHint: false`. No tool reaches outside the Calven workspace, edits workspace content, or sends anything. Every tool declares an `outputSchema`.
 
 ## Prompts
 
@@ -52,4 +54,4 @@ The tool schema returned by `tools/list` is authoritative for current filters, r
 
 ## Public catalog changes
 
-Adding or removing a tool is a product and security decision. A change must update this catalog, the relevant skills, validation fixtures, and compatibility notes in the same release.
+A tool change updates this catalog, the skills that use it and the validator in the same release.

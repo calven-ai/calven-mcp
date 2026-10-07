@@ -1,0 +1,150 @@
+# Publishes server.json to the Official MCP Registry as ai.calven/mcp.
+# One-time setup and the release procedure: docs/releasing.md.
+
+name: Publish to MCP Registry
+
+on:
+  push:
+    tags: ["mcp-v*"]
+  # To re-run a publish, dispatch this workflow from the mcp-v* tag
+  # ("Use workflow from" -> Tags). A dispatch from a branch fails the tag check.
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publish-registry
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    # MCP_REGISTRY_PRIVATE_KEY is an environment secret. The environment is
+    # restricted to mcp-v* tags; see docs/releasing.md.
+    environment: registry
+    env:
+      MCP_PUBLISHER_VERSION: "1.8.1"
+      # sha256 of mcp-publisher_linux_amd64.tar.gz from
+      # https://github.com/modelcontextprotocol/registry/releases/download/v1.8.1/registry_1.8.1_checksums.txt
+      MCP_PUBLISHER_SHA256: "a06c9096dcb9727c13555b6be26c7effa707b01f06a4c561ba7a3635443cf2cc"
+      REGISTRY_DOMAIN: calven.ai
+      REGISTRY_URL: https://registry.modelcontextprotocol.io
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Check tag, server.json version, and main ancestry
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ "$GITHUB_REF_TYPE" != "tag" || ! "$GITHUB_REF_NAME" =~ ^mcp-v[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?$ ]]; then
+            echo "::error::Run this workflow from an mcp-v<semver> tag, not '$GITHUB_REF_NAME' ($GITHUB_REF_TYPE)."
+            exit 1
+          fi
+          tag_version="${GITHUB_REF_NAME#mcp-v}"
+          server_version="$(jq -r '.version' server.json)"
+          if [[ "$tag_version" != "$server_version" ]]; then
+            echo "::error file=server.json::Tag $GITHUB_REF_NAME does not match server.json version $server_version."
+            exit 1
+          fi
+          if ! git merge-base --is-ancestor "$GITHUB_SHA" origin/main; then
+            echo "::error::Tag $GITHUB_REF_NAME points at $GITHUB_SHA, which is not on main."
+            exit 1
+          fi
+          echo "Publishing ai.calven/mcp version $server_version from $GITHUB_SHA."
+
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Validate public surface
+        run: |
+          npm ci
+          npm run validate
+
+      - name: Install pinned mcp-publisher
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(uname -s)-$(uname -m)" = "Linux-x86_64"
+          archive="$RUNNER_TEMP/mcp-publisher.tar.gz"
+          curl --fail --silent --show-error --location --proto '=https' --tlsv1.2 \
+            --output "$archive" \
+            "https://github.com/modelcontextprotocol/registry/releases/download/v${MCP_PUBLISHER_VERSION}/mcp-publisher_linux_amd64.tar.gz"
+          echo "${MCP_PUBLISHER_SHA256}  ${archive}" | sha256sum --check --strict
+          mkdir -p "$RUNNER_TEMP/bin"
+          tar -xzf "$archive" -C "$RUNNER_TEMP/bin" mcp-publisher
+          echo "$RUNNER_TEMP/bin" >> "$GITHUB_PATH"
+
+      - name: Validate server.json against the registry
+        run: mcp-publisher validate server.json
+
+      - name: Check whether this version is already published
+        id: existing
+        shell: bash
+        run: |
+          set -euo pipefail
+          version="$(jq -r '.version' server.json)"
+          url="${REGISTRY_URL}/v0.1/servers/ai.calven%2Fmcp/versions/${version}"
+          status="$(curl --silent --show-error --output "$RUNNER_TEMP/existing.json" --write-out '%{http_code}' "$url")"
+          case "$status" in
+            404)
+              echo "published=false" >> "$GITHUB_OUTPUT"
+              ;;
+            200)
+              if jq -e --slurpfile local server.json '(.server | del(."$schema")) == ($local[0] | del(."$schema"))' "$RUNNER_TEMP/existing.json" >/dev/null; then
+                echo "ai.calven/mcp $version is already published with the same metadata; skipping publish."
+                echo "published=true" >> "$GITHUB_OUTPUT"
+              else
+                echo "::error::ai.calven/mcp $version is already published with different metadata. Bump server.json#version."
+                exit 1
+              fi
+              ;;
+            *)
+              echo "::error::Registry lookup returned HTTP $status for $url."
+              exit 1
+              ;;
+          esac
+
+      - name: Log in with calven.ai DNS proof
+        if: steps.existing.outputs.published == 'false'
+        shell: bash
+        env:
+          MCP_REGISTRY_PRIVATE_KEY: ${{ secrets.MCP_REGISTRY_PRIVATE_KEY }}
+        run: |
+          set -euo pipefail
+          if [[ ! "$MCP_REGISTRY_PRIVATE_KEY" =~ ^[0-9a-fA-F]{64}$ ]]; then
+            echo "::error::MCP_REGISTRY_PRIVATE_KEY must be the 64-character hex Ed25519 private key. See docs/releasing.md."
+            exit 1
+          fi
+          mcp-publisher login dns --domain "$REGISTRY_DOMAIN" --private-key "$MCP_REGISTRY_PRIVATE_KEY"
+
+      - name: Publish
+        if: steps.existing.outputs.published == 'false'
+        run: mcp-publisher publish server.json
+
+      - name: Confirm the registry serves this version
+        shell: bash
+        run: |
+          set -euo pipefail
+          version="$(jq -r '.version' server.json)"
+          url="${REGISTRY_URL}/v0.1/servers/ai.calven%2Fmcp/versions/${version}"
+          for attempt in 1 2 3 4 5 6; do
+            if body="$(curl --fail --silent --show-error "$url")" \
+              && jq -e --arg v "$version" '.server.name == "ai.calven/mcp" and .server.version == $v' <<<"$body" >/dev/null; then
+              echo "Registry lists ai.calven/mcp $version."
+              exit 0
+            fi
+            sleep $((attempt * 5))
+          done
+          echo "::error::Registry does not list ai.calven/mcp $version at $url."
+          exit 1
+
+      - name: Remove registry token
+        if: always()
+        run: mcp-publisher logout || true

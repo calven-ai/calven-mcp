@@ -1,12 +1,13 @@
 # Versioning
 
-The hosted server, Official MCP Registry descriptor, and Agent Plugin have related but distinct release trains.
+The hosted server, Official MCP Registry descriptor, and Agent Plugin are versioned separately.
 
 ## Registry metadata
 
 - Version field: `server.json#version`
 - Tag format: `mcp-v<semver>`
 - Increment when published registry metadata or the documented remote contract changes.
+- Publishing: see [releasing.md](releasing.md).
 
 ## Agent Plugin
 
@@ -19,6 +20,8 @@ The hosted server, Official MCP Registry descriptor, and Agent Plugin have relat
 - Patch: copy, links, examples, or workflow guidance that does not change the expected tool contract.
 - Minor: additive tool documentation, a new optional skill, or another compatible public capability.
 - Major: a removed or renamed tool, a required authentication change, a skill contract change that breaks existing use, or a new endpoint that requires migration.
+
+1.1.0 changed the endpoint and sign-in in a minor version because no clients were using 1.0.0.
 
 The production MCP implementation can be deployed without a repository release when its public contract is unchanged. A public contract change must update this repository before or with the deployment.
 

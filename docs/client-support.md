@@ -1,35 +1,29 @@
 # Client support
 
-Calven uses remote Streamable HTTP. A client must support that transport and either OAuth discovery or a custom bearer header.
+Calven uses remote Streamable HTTP and OAuth sign-in. See [authentication](authentication.md#client-requirements).
 
-## Verification states
+## Supported clients
 
-- **Verified:** a clean-account connection, authentication, tool discovery, and one read workflow passed on the recorded version.
-- **Documented:** the client publishes the required capability, but Calven has not recorded the complete clean-account test here.
-- **Unsupported:** the client lacks a required transport or authentication capability.
+Setup steps for each client are in the [README](../README.md#connect).
 
-## Matrix
+- Claude (claude.ai and desktop)
+- Claude Code
+- ChatGPT
+- Codex
+- Cursor
+- VS Code and GitHub Copilot
 
-| Client | Remote HTTP | OAuth | Custom header | Status | Setup |
-| --- | --- | --- | --- | --- | --- |
-| Claude Code | Yes | Yes | Yes | Documented | `claude mcp add --transport http calven https://api.calven.ai/mcp` |
-| Codex CLI | Yes | Yes | Client dependent | Documented | `codex mcp add calven --url https://api.calven.ai/mcp` |
-| Claude (claude.ai, desktop) | Yes | Yes | No | Pending clean-account test | Settings → Connectors → Add custom connector → paste the URL → Connect. OAuth discovery, consent and tool use confirmed from a founder account on 2026-10-05; the clean-account record is still open. |
-| ChatGPT | Yes | Yes | No public custom-header path | Pending clean-account test | Add the URL as a custom connector. |
-| Cursor | Yes | Yes | Yes | Pending clean-account test | Add a remote MCP server named `calven`. |
-| VS Code and GitHub Copilot | Yes | Yes | Yes | Pending clean-account test | Add a remote MCP server through the MCP configuration UI. |
-
-The table is intentionally conservative. Client behavior changes independently of the MCP specification. Do not infer support from a logo or marketplace listing.
+Using another MCP client? Email support@calven.ai or [open a connection issue](https://github.com/calven-ai/calven-mcp/issues/new/choose) and we will add it.
 
 ## Clean-account test record
 
-When promoting a client to Verified, record:
+For each supported client, record:
 
 - client name, version, operating system, and test date;
 - installation path used;
-- whether OAuth discovery or a personal key was used;
+- the client registration method used;
 - whether browser consent opened and completed;
-- `initialize`, tools, resources, and prompts discovery;
+- protocol handshake, tool and prompt discovery;
 - one sourced read workflow;
 - credential persistence, revocation, and reconnection behavior;
 - any client-specific limitation.
