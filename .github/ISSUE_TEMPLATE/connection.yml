@@ -10,7 +10,7 @@ body:
 
         Anything security-sensitive belongs in the private channel in [SECURITY.md](https://github.com/calven-ai/calven-mcp/blob/main/SECURITY.md), not here. That includes an authentication bypass, token or key leakage, cross-tenant access, or a report that needs customer data to explain.
 
-        Do not include an MCP key, OAuth token, customer name, tenant identifier, or private workspace content.
+        Do not include an access token, customer name, tenant identifier, or private workspace content.
   - type: input
     id: client
     attributes:
@@ -25,13 +25,23 @@ body:
       placeholder: macOS 15.6
     validations:
       required: true
-  - type: dropdown
-    id: authentication
+  - type: input
+    id: server-url
     attributes:
-      label: Authentication path
+      label: Server URL you added
+      placeholder: https://api.calven.ai/mcp
+    validations:
+      required: true
+  - type: dropdown
+    id: stage
+    attributes:
+      label: Where it failed
       options:
-        - OAuth
-        - Not sure
+        - Adding the server
+        - Browser sign-in
+        - Consent
+        - Tool list
+        - Tool call
     validations:
       required: true
   - type: textarea

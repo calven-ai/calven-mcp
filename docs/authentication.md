@@ -2,9 +2,7 @@
 
 The hosted MCP server uses OAuth 2.1. Each user signs in to Calven as themselves.
 
-## OAuth 2.1
-
-Use OAuth for clients that support authorization discovery for remote MCP servers.
+## Endpoint
 
 ```text
 Resource: https://api.calven.ai/mcp
@@ -14,9 +12,7 @@ PKCE method: S256
 
 The server publishes OAuth Protected Resource Metadata and points clients to Calven's authorization server. The authorization and token requests carry the MCP resource so the resulting access token can be checked for the intended audience.
 
-OAuth access remains subject to the user's Calven membership, role, workspace permissions, and the scopes granted to the client.
-
-### Discovery
+## Discovery
 
 | Step | URL |
 | --- | --- |
@@ -27,15 +23,15 @@ OAuth access remains subject to the user's Calven membership, role, workspace pe
 
 The authorization server advertises the `authorization_code` and `refresh_token` grants, PKCE with `S256`, and the `none` token endpoint auth method for public clients.
 
-### Client registration
+## Client registration
 
-Clients register with a [Client ID Metadata Document](https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization/client-registration) (CIMD): the client uses an HTTPS URL that hosts its metadata as its `client_id`, and the authorization server fetches that document. The authorization server metadata reports `client_id_metadata_document_supported: true`. The MCP authorization specification (2026-07-28) prefers CIMD and deprecates Dynamic Client Registration (DCR).
+Clients register with a [Client ID Metadata Document](https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization/client-registration) (CIMD): the client uses an HTTPS URL that hosts its metadata as its `client_id`, and the authorization server fetches that document. The authorization server metadata reports `client_id_metadata_document_supported: true`.
 
-Calven does not offer DCR. The authorization server metadata has no `registration_endpoint`. A client that can only register with DCR cannot complete OAuth with Calven yet. [Client support](client-support.md) lists the status of each client.
+Calven does not offer Dynamic Client Registration (DCR). The authorization server metadata has no `registration_endpoint`. A client that can only register with DCR cannot sign in to Calven. [Client support](client-support.md) lists the supported clients.
 
 Redirect URIs belong to the client and are declared in its own metadata document. Users do not register a redirect URI with Calven.
 
-### Scopes
+## Scopes
 
 The protected resource metadata lists these scopes. Clients that follow the MCP scope-selection rules request them during sign-in.
 
@@ -52,15 +48,14 @@ Scopes identify the user. The user's Calven role and workspace permissions decid
 | Client capability | Result |
 | --- | --- |
 | Remote MCP with OAuth discovery and Client ID Metadata Documents | Supported |
-| Remote MCP with OAuth through Dynamic Client Registration only | Not supported yet |
-| Local stdio only | A trusted local HTTP-to-stdio bridge that completes OAuth, if the client supports one |
+| Remote MCP with OAuth through Dynamic Client Registration only | Not supported |
+| Local stdio only | Untested. A local stdio-to-HTTP bridge that handles OAuth with CIMD may work |
 | No OAuth | Not compatible with the hosted server |
 
 ## Troubleshooting authorization
 
 - A `401` response means the access token is missing, invalid, expired, issued for another resource, or lacks the `user:org:read` scope. Sign in again.
-- A successful sign-in does not override Calven workspace permissions.
-- If a client caches an earlier OAuth registration or token, remove the connection and authenticate again.
+- If a client caches an earlier OAuth registration or token, remove the connection and sign in again.
 - If a client reports that registration is not supported, or that no registration endpoint was found, it needs Dynamic Client Registration, which Calven does not offer. Use a client or client version that supports Client ID Metadata Documents.
 
 Never post an access token when asking for support. Include the client name and version, the HTTP status, and redacted response headers instead.

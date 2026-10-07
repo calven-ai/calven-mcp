@@ -1,35 +1,29 @@
 # Client support
 
-Calven uses remote Streamable HTTP. A client must support that transport and OAuth discovery with Client ID Metadata Documents. See [authentication](authentication.md#client-requirements).
+Calven uses remote Streamable HTTP and OAuth sign-in. See [authentication](authentication.md#client-requirements).
 
-## Verification states
+## Supported clients
 
-- **Verified:** a clean-account connection, authentication, tool discovery, and one read workflow passed on the recorded version.
-- **Documented:** the client publishes the required capability, but Calven has not recorded the complete clean-account test here.
-- **Unsupported:** the client lacks a required transport or authentication capability.
+Setup steps for each client are in the [README](../README.md#connect).
 
-## Matrix
+- Claude (claude.ai and desktop)
+- Claude Code
+- ChatGPT
+- Codex
+- Cursor
+- VS Code and GitHub Copilot
 
-| Client | Remote HTTP | OAuth | Status | Setup |
-| --- | --- | --- | --- | --- |
-| Claude Code | Yes | Yes | Documented | `claude mcp add --transport http calven https://api.calven.ai/mcp`, then `claude mcp login calven` (or `/mcp` in a session → `calven` → browser sign-in). |
-| Codex CLI | Yes | Yes | Documented | `codex mcp add calven --url https://api.calven.ai/mcp`, then `codex mcp login calven`. |
-| Claude (claude.ai, desktop) | Yes | Yes | Pending clean-account test | Customize → Connectors → Add custom connector → paste the URL → Add → Connect. If asked how Claude identifies itself, choose Use Claude's published identity (Calven supports CIMD, not dynamic client registration). Team and Enterprise: an Owner adds it under Organization settings → Connectors → Add → Custom → Web; members then click Connect on the Custom connector under Customize → Connectors. OAuth discovery, consent and tool use confirmed from a founder account on 2026-10-05; the clean-account record is still open. |
-| ChatGPT | Yes | Yes | Pending clean-account test | Plugins (`chatgpt.com/plugins`) → plus button → Add custom MCP server → Server URL, Authentication OAuth → Create as a plugin; install it from personal plugins, then select it with `@` in a chat. Plan and workspace settings apply; see OpenAI's [Add custom MCP server](https://developers.openai.com/api/docs/guides/custom-mcp-server). |
-| Cursor | Yes | Yes | Pending clean-account test | [README install button](../README.md#connect), or add a remote MCP server named `calven` with the URL. |
-| VS Code and GitHub Copilot | Yes | Yes | Pending clean-account test | [README install button](../README.md#connect), or Command Palette → MCP: Add Server → HTTP → the URL, named `calven`. |
-
-The table is intentionally conservative. Client behavior changes independently of the MCP specification. Do not infer support from a logo or marketplace listing.
+Using another MCP client? Email support@calven.ai or [open a connection issue](https://github.com/calven-ai/calven-mcp/issues/new/choose) and we will add it.
 
 ## Clean-account test record
 
-When promoting a client to Verified, record:
+For each supported client, record:
 
 - client name, version, operating system, and test date;
 - installation path used;
-- which client registration method was used (Client ID Metadata Document or a pre-registered client);
+- the client registration method used;
 - whether browser consent opened and completed;
-- `initialize`, tools, resources, and prompts discovery;
+- protocol handshake, tool and prompt discovery;
 - one sourced read workflow;
 - credential persistence, revocation, and reconnection behavior;
 - any client-specific limitation.

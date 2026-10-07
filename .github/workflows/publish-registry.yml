@@ -84,7 +84,35 @@ jobs:
       - name: Validate server.json against the registry
         run: mcp-publisher validate server.json
 
+      - name: Check whether this version is already published
+        id: existing
+        shell: bash
+        run: |
+          set -euo pipefail
+          version="$(jq -r '.version' server.json)"
+          url="${REGISTRY_URL}/v0.1/servers/ai.calven%2Fmcp/versions/${version}"
+          status="$(curl --silent --show-error --output "$RUNNER_TEMP/existing.json" --write-out '%{http_code}' "$url")"
+          case "$status" in
+            404)
+              echo "published=false" >> "$GITHUB_OUTPUT"
+              ;;
+            200)
+              if jq -e --slurpfile local server.json '(.server | del(."$schema")) == ($local[0] | del(."$schema"))' "$RUNNER_TEMP/existing.json" >/dev/null; then
+                echo "ai.calven/mcp $version is already published with the same metadata; skipping publish."
+                echo "published=true" >> "$GITHUB_OUTPUT"
+              else
+                echo "::error::ai.calven/mcp $version is already published with different metadata. Bump server.json#version."
+                exit 1
+              fi
+              ;;
+            *)
+              echo "::error::Registry lookup returned HTTP $status for $url."
+              exit 1
+              ;;
+          esac
+
       - name: Log in with calven.ai DNS proof
+        if: steps.existing.outputs.published == 'false'
         shell: bash
         env:
           MCP_REGISTRY_PRIVATE_KEY: ${{ secrets.MCP_REGISTRY_PRIVATE_KEY }}
@@ -97,6 +125,7 @@ jobs:
           mcp-publisher login dns --domain "$REGISTRY_DOMAIN" --private-key "$MCP_REGISTRY_PRIVATE_KEY"
 
       - name: Publish
+        if: steps.existing.outputs.published == 'false'
         run: mcp-publisher publish server.json
 
       - name: Confirm the registry serves this version

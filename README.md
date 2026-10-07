@@ -12,40 +12,33 @@
 <p align="center">Your approved ICP, positioning, messaging and competitive intel, with sources, in the AI tool your team already uses.</p>
 
 <p align="center">
-  <a href="#connect">Connect</a> · <a href="#try-it">Prompts</a> · <a href="use-cases/">Use cases by team</a> · <a href="https://calven.ai/mcp">calven.ai/mcp</a> · <a href="https://app.calven.ai/sign-up">14-day trial, no card</a>
+  <a href="#connect">Connect</a> · <a href="#try-it">Try it</a> · <a href="use-cases/">Use cases by team</a> · <a href="https://calven.ai/mcp">calven.ai/mcp</a> · <a href="https://app.calven.ai/sign-up">14-day trial, no card</a>
 </p>
 
 <p align="center">
-  <!-- MCP Registry badge removed: ai.calven/mcp is not published yet. Restore it after the first mcp-v* tag publishes to the registry:
-  <a href="https://registry.modelcontextprotocol.io/?search=calven"><img src="https://img.shields.io/badge/MCP_Registry-ai.calven%2Fmcp-7C3AED" alt="MCP Registry"></a>
-  -->
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-262626" alt="MIT"></a>
 </p>
 
 <p align="center">
-  <img src="docs/assets/mcp-diagram.png" width="860" alt="Online research, documents, call notes, CRM and win/loss surveys flow through nine Calven agents into one GTM source of truth, which answers with sources in Claude, ChatGPT, Codex, Cursor, Copilot or any MCP client">
+  <img src="docs/assets/mcp-diagram.png" width="860" alt="Online research, documents, call notes, CRM and win/loss surveys flow through nine Calven agents into one GTM source of truth, which answers with sources in Claude, ChatGPT, Codex, Cursor, Copilot and other MCP clients">
 </p>
 
-Calven's nine product marketing agents keep one source of truth on your market, buyers and positioning. Calven MCP puts it inside Claude, ChatGPT, Codex, Cursor, Copilot and any other MCP client that connects to remote servers over Streamable HTTP with OAuth, so sales, marketing, product and leadership work from the same answers your team approved.
+Calven's nine product marketing agents keep one source of truth on your market, buyers and positioning. Calven MCP puts it inside Claude, ChatGPT, Codex, Cursor, Copilot and other MCP clients that sign in with OAuth (see [client support](docs/client-support.md)), so sales, marketing, product and leadership work from the same answers your team approved.
 
 ## Connect
 
-Paste this URL where your client asks for an MCP server, choose **OAuth**, and sign in to Calven:
+Paste this URL where your client asks for an MCP server, choose **OAuth** if asked, and sign in to Calven:
 
 ```text
 https://api.calven.ai/mcp
 ```
 
-In Cursor or VS Code, you can add it in one click:
-
-[![Install in Cursor](https://img.shields.io/badge/Cursor-Install_server-262626)](https://cursor.com/install-mcp?name=calven&config=eyJ1cmwiOiJodHRwczovL2FwaS5jYWx2ZW4uYWkvbWNwIn0%3D) [![Install in VS Code](https://img.shields.io/badge/VS_Code-Install_server-262626)](https://vscode.dev/redirect/mcp/install?name=calven&config=%7B%22type%22%3A%22http%22%2C%22url%22%3A%22https%3A%2F%2Fapi.calven.ai%2Fmcp%22%7D)
-
-You need a Calven workspace ([14-day trial, no card](https://app.calven.ai/sign-up)). Test status for each client is in [client support](docs/client-support.md).
+You need a Calven workspace ([14-day trial, no card](https://app.calven.ai/sign-up)). Using another client? See [client support](docs/client-support.md).
 
 <details>
 <summary><b>Claude</b> (claude.ai, desktop)</summary>
 
-**Customize → Connectors → Add custom connector**, paste the URL (name it `Calven` if asked), **Add**, then **Connect** and sign in to Calven. If the dialog asks how Claude identifies itself, choose **Use Claude's published identity**; Calven does not support automatic (dynamic) client registration. In a chat, turn Calven on under **+ → Connectors**.
+**Customize → Connectors → Add custom connector**, paste the URL (name it `Calven` if asked), **Add**, then **Connect** and sign in to Calven. If the dialog asks how Claude identifies itself, choose **Use Claude's published identity**; automatic (dynamic) registration does not work with Calven. In a chat, turn Calven on under **+ → Connectors**.
 
 On Team and Enterprise plans, an Owner adds the connector once: **Organization settings → Connectors → Add → Custom → Web**, paste the URL, **Add**. Each member then opens **Customize → Connectors**, finds Calven with the **Custom** label, and clicks **Connect**.
 
@@ -61,7 +54,9 @@ Open **Plugins** in ChatGPT (`chatgpt.com/plugins`), select the plus button, the
 <details>
 <summary><b>Cursor</b></summary>
 
-**Settings → MCP → Add new MCP server**, name `calven`, type **HTTP**, the URL. Or in `~/.cursor/mcp.json`:
+[![Install in Cursor](https://img.shields.io/badge/Cursor-Install_server-262626)](https://cursor.com/install-mcp?name=calven&config=eyJ1cmwiOiJodHRwczovL2FwaS5jYWx2ZW4uYWkvbWNwIn0%3D)
+
+Or add this to `~/.cursor/mcp.json`:
 
 ```json
 { "mcpServers": { "calven": { "url": "https://api.calven.ai/mcp" } } }
@@ -72,7 +67,9 @@ Open **Plugins** in ChatGPT (`chatgpt.com/plugins`), select the plus button, the
 <details>
 <summary><b>VS Code and GitHub Copilot</b></summary>
 
-Command palette → **MCP: Add Server** → **HTTP**, paste the URL, name it `calven`.
+[![Install in VS Code](https://img.shields.io/badge/VS_Code-Install_server-262626)](https://vscode.dev/redirect/mcp/install?name=calven&config=%7B%22type%22%3A%22http%22%2C%22url%22%3A%22https%3A%2F%2Fapi.calven.ai%2Fmcp%22%7D)
+
+Or command palette → **MCP: Add Server** → **HTTP**, paste the URL, name it `calven`.
 
 </details>
 
@@ -128,17 +125,17 @@ What is our win rate by competitor this year versus last, and why do we win and 
 **Anyone:** no unsupported claims.
 
 ```text
-Check every product, pricing and competitor claim in this draft against our approved product brief and battle cards. [paste draft]
+Check every product, pricing and competitor claim in this draft against our approved product brief and battlecards. [paste draft]
 ```
 
-190 more, by team, in [use-cases/](use-cases/).
+190 use cases for 19 teams, each with ready-to-paste prompts, in [use-cases/](use-cases/).
 
 ## What it reads, and what it won't do
 
-Your assistant reads, with sources: positioning, messaging, ICP and product brief; competitor dossiers and battle cards; personas; calls, customer quotes and win/loss; market trends; Insights dashboards; and CRM accounts and deals where your workspace allows it.
+Your assistant reads, with sources: positioning, messaging, ICP and product brief; competitor dossiers and battlecards; personas; calls, customer quotes and win/loss; market trends; Insights dashboards; and CRM accounts and deals where your workspace allows it.
 
-- **Every claim shows its source.** An empty result means nothing is recorded, and it says so. No web search, no gaps filled from model memory.
-- **Thirteen read tools and one review action.** The action, `review_against_personas`, starts a review task in Calven and returns findings. No tool edits your workspace content, and nothing is published or sent.
+- **Results carry their sources.** An empty result says nothing is recorded. Calven does no web search, and its server instructions tell the model not to fill gaps from its own knowledge.
+- **Thirteen read tools and one review action**, listed in the [tool catalog](docs/tool-catalog.md), plus four server prompts. The action, `review_against_personas`, starts a review task in Calven and returns findings. No tool edits your workspace content, and nothing is published or sent.
 - **Your permissions.** Each user signs in as themselves and sees only what their Calven role allows. Admins decide whether transcripts and pipeline are readable over MCP. Removing a user removes their MCP access.
 
 > [!IMPORTANT]
@@ -148,14 +145,7 @@ Data is stored in the EU, a DPA with EU SCCs covers every plan, and the SOC 2 Ty
 
 ## The plugin
 
-The Calven plugin ([Agent Plugins 1.0](https://agent-plugins.org/)) adds three workflows on the same server: a **workspace brief**, a **competitive brief** and a **persona copy review**. See [plugin setup](docs/plugin.md).
-
-<details>
-<summary><b>Tools</b></summary>
-
-Thirteen read tools and one action, listed in the [tool catalog](docs/tool-catalog.md). The server also ships four prompts (how we compete with a competitor, a competitor's strengths, who our competitors are, a monthly insights review), shown in your client's prompts or slash commands.
-
-</details>
+The Calven plugin ([Agent Plugins 1.0](https://agent-plugins.org/)) adds three workflows on the same server: a **workspace brief**, a **competitive brief** and a **persona copy review**. Contents and requirements: [plugin](docs/plugin.md).
 
 ## Help
 

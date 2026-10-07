@@ -1,6 +1,6 @@
 # Data handling
 
-The Calven MCP server gives an authenticated agent access to the same workspace intelligence the user is permitted to access in Calven.
+The Calven MCP server gives an authenticated agent access to the same workspace data the user is permitted to access in Calven.
 
 ## Access boundary
 
@@ -24,10 +24,10 @@ Workspace data includes text written by third parties: customer call transcripts
 
 ## Workflow actions
 
-Most tools only read workspace data. `review_against_personas` starts a review task and returns a task ID. The caller polls `get_task` for the findings. The action does not publish the reviewed copy.
+Thirteen of the 14 tools only read workspace data. `review_against_personas` starts a review task and returns a task ID. The caller polls `get_task` for the findings. The action does not publish the reviewed copy.
 
 ## Public repository boundary
 
-This repository contains no customer data, production credentials, server logs, or private implementation code. Examples use placeholders only.
+This repository contains no customer data, production credentials, server logs, or private implementation code.
 
 For Calven's contractual terms and current privacy disclosures, use [calven.ai/privacy](https://calven.ai/privacy) and [calven.ai/terms](https://calven.ai/terms). Those pages are authoritative if this repository's summary becomes stale.

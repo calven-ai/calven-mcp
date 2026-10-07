@@ -1,6 +1,6 @@
 # Agent Plugin
 
-The Calven Agent Plugin packages the hosted MCP connection with reusable PMM workflows.
+The Calven Agent Plugin packages the hosted MCP connection with product marketing workflows. No client has been tested with this package yet.
 
 ## Portable package
 
@@ -26,9 +26,9 @@ Use direct MCP when the client does not implement Agent Plugins. Use the plugin 
 
 ## Source boundaries
 
-The public `skills/` directory is the source of truth for portable workflow instructions. The private Calven product repository is the source of truth for server behavior, schemas, resources, prompts, and server-level instructions.
+The public `skills/` directory is the source of truth for portable workflow instructions. The production server is the source of truth for server behavior, schemas, resources, prompts, and server-level instructions.
 
-Public skills may reference documented tools. They must not copy private server prompts. `node scripts/validate.mjs` fails when a skill names a tool outside the public catalog.
+Public skills may reference documented tools. They must not copy private server prompts. `npm run validate` fails when a skill names a tool outside the public catalog.
 
 ## Versioning
 

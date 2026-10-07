@@ -2,7 +2,7 @@
 
 ## Report a vulnerability
 
-Do not open a public issue for a vulnerability, an exposed credential, a report that contains customer data, or an authentication vulnerability such as an authentication bypass, token or key leakage, or cross-tenant access.
+Do not open a public issue for a vulnerability (such as an authentication bypass, token leakage or cross-tenant access), an exposed credential, or a report that contains customer data.
 
 Report it privately by either route:
 

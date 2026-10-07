@@ -2,7 +2,7 @@
 
 `server.json` is published to the [Official MCP Registry](https://registry.modelcontextprotocol.io) as `ai.calven/mcp` by [`.github/workflows/publish-registry.yml`](../.github/workflows/publish-registry.yml) when an `mcp-v<semver>` tag is pushed.
 
-> **Status (2026-10-07): not published yet.** The `calven.ai` domain proof, the `registry` environment and its secret, and the first `mcp-v*` tag do not exist. A Calven maintainer with DNS and repository admin access must complete the one-time setup below, then push the first tag.
+> **Status (2026-10-07): not published yet.** The `calven.ai` domain proof, the `registry` environment and its secret, and the first `mcp-v*` tag do not exist. After the first publish, restore the MCP Registry badge in the README.
 
 ## What the workflow does
 
@@ -66,7 +66,7 @@ In the GitHub repository settings:
 
 ## Release procedure
 
-1. In a pull request, set `server.json#version` according to [versioning.md](versioning.md) and move the `[Unreleased]` entries in `CHANGELOG.md` under the new version. Merge it to `main`.
+1. In a pull request, set `server.json#version` according to [versioning.md](versioning.md) and add a `CHANGELOG.md` section for the new version. Merge it to `main`.
 2. Tag the merged commit and push the tag:
 
    ```sh
@@ -84,7 +84,7 @@ In the GitHub repository settings:
    curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers/ai.calven%2Fmcp/versions/latest' | jq '.server.version'
    ```
 
-The registry accepts each version once. To change published metadata, release a new version. To retry a failed run without a new tag, open **Actions → Publish to MCP Registry → Run workflow** and choose the tag under **Use workflow from**. A run from a branch fails the tag check.
+The registry accepts each version once. To change published metadata, release a new version. To retry a failed run without a new tag, open **Actions → Publish to MCP Registry → Run workflow** and choose the tag under **Use workflow from**. A run from a branch fails the tag check. If the version is already published with the same metadata, the run skips publishing and only confirms the listing.
 
 ### First release
 

@@ -1,6 +1,6 @@
 # Calven workflow skills
 
-These skills add reusable PMM workflows to the hosted Calven MCP connection.
+These skills add product marketing workflows to the hosted Calven MCP connection.
 
 | Skill | Outcome |
 | --- | --- |
@@ -10,6 +10,4 @@ These skills add reusable PMM workflows to the hosted Calven MCP connection.
 
 The skills are portable Agent Plugin content. They do not change the MCP tool surface or the connected user's permissions.
 
-Each skill treats missing workspace evidence as a gap rather than an invitation to guess.
-
-Each skill also treats content returned by Calven tools, and copy submitted for review, as data rather than instructions.
+Each skill reports missing evidence as a gap and treats Calven content and submitted copy as data, not instructions.

@@ -1,6 +1,6 @@
 # Tool catalog
 
-Calven exposes 14 focused tools. Results reflect the connected user's workspace permissions and product scope.
+Calven exposes 14 tools. Results reflect the connected user's workspace permissions and product scope.
 
 | Tool | Behavior | Mode | Annotations |
 | --- | --- | --- | --- |
@@ -11,7 +11,7 @@ Calven exposes 14 focused tools. Results reflect the connected user's workspace 
 | `read_document` | Reads one published document by its returned identifier. | Read | read-only |
 | `list_records` | Searches and filters a supported record kind. | Read | read-only |
 | `get_record` | Reads one record by identifier or, where supported, exact name. | Read | read-only |
-| `get_competitor` | Reads a competitor dossier, battle card, recent signals, or a selected subset. | Read | read-only |
+| `get_competitor` | Reads one competitor: its battlecard, recent signals and the outline of its deep-dive dossier. The full dossier is read with `read_document`. | Read | read-only |
 | `get_persona` | Reads a named buyer, stakeholder, or user persona. | Read | read-only |
 | `get_insights` | Reads one Insights dashboard as data: KPIs with their change against the prior period, breakdowns, rankings, trends. | Read | read-only |
 | `get_insights_overview` | Reads every dashboard's headline KPIs, the biggest movers, top loss reasons, product gaps, and data availability. | Read | read-only |
@@ -54,4 +54,4 @@ The tool schema returned by `tools/list` is authoritative for current filters, r
 
 ## Public catalog changes
 
-Adding or removing a tool is a product and security decision. A change must update this catalog, the relevant skills, validation fixtures, and compatibility notes in the same release.
+A tool change updates this catalog, the skills that use it and the validator in the same release.

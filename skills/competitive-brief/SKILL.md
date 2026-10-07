@@ -7,7 +7,7 @@ description: Build a sourced competitive brief from Calven when the user asks ho
 
 Ground the analysis in the connected Calven workspace. Separate documented evidence from inference and gaps.
 
-1. Call `get_competitor` with the competitor name. Request only the needed parts from `deep_dive`, `battlecard`, and `signals`; request all three for a full brief.
+1. Call `get_competitor` with the competitor name. It returns the battlecard, recent signals and the outline of the deep-dive dossier. For pricing, packaging or a full brief, read the dossier with the `read_document` call the result prints.
 2. Read the company's relevant positioning or messaging with `get_strategy_document`.
 3. Use `list_records` for additional evidence when needed:
    - `competitive_signals` for dated moves by the competitor;

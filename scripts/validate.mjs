@@ -264,8 +264,6 @@ function checkInstallLinks(relative, source) {
     const query = raw.slice(raw.indexOf('?') + 1);
     const candidates = [];
     const config = new URLSearchParams(query).get('config');
-    // An empty config is a placeholder in prose (`config=<base64 ...>`), not a working link.
-    if (config === '') continue;
     if (config !== null) {
       candidates.push(config);
       candidates.push(Buffer.from(config.replace(/ /g, '+'), 'base64').toString('utf8'));
