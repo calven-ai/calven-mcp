@@ -7,6 +7,7 @@ The hosted server, Official MCP Registry descriptor, and Agent Plugin have relat
 - Version field: `server.json#version`
 - Tag format: `mcp-v<semver>`
 - Increment when published registry metadata or the documented remote contract changes.
+- Publishing: pushing an `mcp-v<semver>` tag whose version equals `server.json#version` runs `.github/workflows/publish-registry.yml`, which publishes `server.json` to the Official MCP Registry. One-time setup and the release steps are in [releasing.md](releasing.md). Until that setup is done, the registry does not list `ai.calven/mcp`.
 
 ## Agent Plugin
 

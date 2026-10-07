@@ -14,10 +14,18 @@ The hosted server uses Streamable HTTP. A stdio-only client needs a trusted brid
 
 The client may not implement remote MCP OAuth discovery, may be running without browser access, or may have cached a failed registration. Remove the connection and add it again. If the client supports custom headers, use a personal MCP key.
 
+Some clients register the server without signing in. Start the sign-in yourself:
+
+- Claude Code: `claude mcp login calven`, or `/mcp` in a session and select `calven`. Add `--no-browser` over SSH to get a URL to open locally.
+- Codex: `codex mcp login calven`. It also accepts `--no-browser`.
+
+Calven's authorization server supports Client ID Metadata Documents and does not offer dynamic client registration. If a client asks how to register, choose the metadata-document option (in Claude, **Use Claude's published identity**), not automatic registration.
+
 ## A personal key fails
 
 - Confirm the header is `Authorization: Bearer <key>`.
 - Confirm the key begins with `cmcp_`.
+- Confirm the placeholder uses your client's variable syntax: `${CALVEN_MCP_KEY}` in Claude Code, `${env:CALVEN_MCP_KEY}` in Cursor, `${input:...}` in VS Code. An unexpanded placeholder is sent as literal text and fails with `401`. See the [client-specific examples](../examples/README.md).
 - Generate a replacement in [Settings → API & MCP](https://app.calven.ai/settings/api). This revokes the earlier key.
 - Do not paste the key into an issue or support message.
 

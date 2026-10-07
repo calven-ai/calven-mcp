@@ -1,11 +1,16 @@
 name: Connection problem
-description: Report a client setup, authentication, discovery, or compatibility problem.
+description: Report a client setup, sign-in, discovery, or compatibility failure. Not for security vulnerabilities.
 title: "[Connection]: "
 labels: [connection]
 body:
   - type: markdown
     attributes:
-      value: Do not include an MCP key, OAuth token, customer name, tenant identifier, or private workspace content.
+      value: |
+        Use this form when a client cannot be set up, cannot sign in, or cannot discover or call the server.
+
+        Anything security-sensitive belongs in the private channel in [SECURITY.md](https://github.com/calven-ai/calven-mcp/blob/main/SECURITY.md), not here. That includes an authentication bypass, token or key leakage, cross-tenant access, or a report that needs customer data to explain.
+
+        Do not include an MCP key, OAuth token, customer name, tenant identifier, or private workspace content.
   - type: input
     id: client
     attributes:

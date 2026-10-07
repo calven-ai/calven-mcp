@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "calven": {
+      "url": "https://api.calven.ai/mcp",
+      "headers": {
+        "Authorization": "Bearer ${env:CALVEN_MCP_KEY}"
+      }
+    }
+  }
+}

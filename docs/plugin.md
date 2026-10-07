@@ -18,7 +18,7 @@ The plugin adds workflow instructions. It does not change authentication, permis
 
 | Direct MCP | Agent Plugin |
 | --- | --- |
-| Connects the 11 Calven tools | Connects the same 11 tools |
+| Connects the 14 Calven tools | Connects the same 14 tools |
 | Uses server instructions and prompts | Adds three portable workflow skills |
 | Works in compatible remote MCP clients | Requires an Agent Plugins 1.0 compatible client |
 

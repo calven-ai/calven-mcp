@@ -11,7 +11,7 @@ This repository is the public distribution surface for Calven's hosted MCP serve
 - `docs/assets/mcp-diagram.png` (README) and `docs/assets/hero.png` (GitHub social preview) are rendered from Calven's brand library (`templates/mcp-diagram.html`, preset `github-readme-diagram`; `templates/hero.html`, preset `github-social`); re-render rather than edit.
 - `https://api.calven.ai/mcp` is the only production endpoint.
 
-Keep `mcp.json`, `.mcp.json`, examples, documentation, and skills aligned with that endpoint. Run `node scripts/validate.mjs` after every change.
+Keep `mcp.json`, `.mcp.json`, examples, documentation, and skills aligned with that endpoint. Run `npm ci` once, then `npm run validate` after every change.
 
 ## Boundaries
 

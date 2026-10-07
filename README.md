@@ -16,7 +16,9 @@
 </p>
 
 <p align="center">
+  <!-- MCP Registry badge removed: ai.calven/mcp is not published yet. Restore it after the first mcp-v* tag publishes to the registry:
   <a href="https://registry.modelcontextprotocol.io/?search=calven"><img src="https://img.shields.io/badge/MCP_Registry-ai.calven%2Fmcp-7C3AED" alt="MCP Registry"></a>
+  -->
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-262626" alt="MIT"></a>
 </p>
 
@@ -24,7 +26,7 @@
   <img src="docs/assets/mcp-diagram.png" width="860" alt="Online research, documents, call notes, CRM and win/loss surveys flow through nine Calven agents into one GTM source of truth, which answers with sources in Claude, ChatGPT, Codex, Cursor, Copilot or any MCP client">
 </p>
 
-Calven's nine product marketing agents keep one source of truth on your market, buyers and positioning. Calven MCP puts it inside Claude, ChatGPT, Codex, Cursor, Copilot and any other MCP client, so sales, marketing, product and leadership work from the same answers your team approved.
+Calven's nine product marketing agents keep one source of truth on your market, buyers and positioning. Calven MCP puts it inside Claude, ChatGPT, Codex, Cursor, Copilot and any other MCP client that connects to remote servers over Streamable HTTP with OAuth or a custom header, so sales, marketing, product and leadership work from the same answers your team approved.
 
 ## Connect
 
@@ -34,19 +36,25 @@ Paste this URL where your client asks for an MCP server, choose **OAuth**, and s
 https://api.calven.ai/mcp
 ```
 
+In Cursor or VS Code, you can add it in one click:
+
+[![Install in Cursor](https://img.shields.io/badge/Cursor-Install_server-262626)](https://cursor.com/install-mcp?name=calven&config=eyJ1cmwiOiJodHRwczovL2FwaS5jYWx2ZW4uYWkvbWNwIn0%3D) [![Install in VS Code](https://img.shields.io/badge/VS_Code-Install_server-262626)](https://vscode.dev/redirect/mcp/install?name=calven&config=%7B%22type%22%3A%22http%22%2C%22url%22%3A%22https%3A%2F%2Fapi.calven.ai%2Fmcp%22%7D)
+
 You need a Calven workspace ([14-day trial, no card](https://app.calven.ai/sign-up)). Test status for each client is in [client support](docs/client-support.md).
 
 <details>
 <summary><b>Claude</b> (claude.ai, desktop)</summary>
 
-**Settings → Connectors → Add custom connector**, name it `Calven`, paste the URL, **Connect**. Enable Calven from the tools menu in a new chat.
+**Customize → Connectors → Add custom connector**, paste the URL (name it `Calven` if asked), **Add**, then **Connect** and sign in to Calven. If the dialog asks how Claude identifies itself, choose **Use Claude's published identity**; Calven does not support automatic (dynamic) client registration. In a chat, turn Calven on under **+ → Connectors**.
+
+On Team and Enterprise plans, an Owner adds the connector once: **Organization settings → Connectors → Add → Custom → Web**, paste the URL, **Add**. Each member then opens **Customize → Connectors**, finds Calven with the **Custom** label, and clicks **Connect**.
 
 </details>
 
 <details>
 <summary><b>ChatGPT</b></summary>
 
-**Settings → Apps & Connectors → Advanced settings**, turn on Developer mode, then **Create**: name `Calven`, the URL, **OAuth**. Add Calven from the **+** menu in a new chat. Needs Plus, Pro, Business or Enterprise.
+Open **Plugins** in ChatGPT (`chatgpt.com/plugins`), select the plus button, then **Add custom MCP server**. Name it `Calven`, enter the URL as the **Server URL**, choose **OAuth**, accept the risk warning and select **Create as a plugin**. Install Calven from your personal plugins, then type `@` in a chat and select it. Your plan and workspace settings decide whether you can add custom MCP servers; see OpenAI's [Add custom MCP server](https://developers.openai.com/api/docs/guides/custom-mcp-server) guide.
 
 </details>
 
@@ -71,17 +79,24 @@ Command palette → **MCP: Add Server** → **HTTP**, paste the URL, name it `ca
 <details>
 <summary><b>Claude Code and Codex</b></summary>
 
+Register the server, then sign in. Each `login` opens your browser for the Calven sign-in.
+
 ```sh
 claude mcp add --transport http calven https://api.calven.ai/mcp
+claude mcp login calven
+
 codex mcp add calven --url https://api.calven.ai/mcp
+codex mcp login calven
 ```
+
+Inside a Claude Code session, you can instead run `/mcp`, select `calven` and follow the browser sign-in.
 
 </details>
 
 <details>
 <summary><b>A client without OAuth</b></summary>
 
-Create a personal key in [Calven → Settings → API & MCP](https://app.calven.ai/settings/api) and send it as `Authorization: Bearer <key>`. See [authentication](docs/authentication.md). Keep the key out of shared config.
+Create a personal key in [Calven → Settings → API & MCP](https://app.calven.ai/settings/api) and send it as `Authorization: Bearer <key>`. See [authentication](docs/authentication.md) and the client-specific configs in [examples/](examples/). Keep the key out of shared config.
 
 </details>
 
@@ -130,7 +145,7 @@ Check every product, pricing and competitor claim in this draft against our appr
 Your assistant reads, with sources: positioning, messaging, ICP and product brief; competitor dossiers and battle cards; personas; calls, customer quotes and win/loss; market trends; Insights dashboards; and CRM accounts and deals where your workspace allows it.
 
 - **Every claim shows its source.** An empty result means nothing is recorded, and it says so. No web search, no gaps filled from model memory.
-- **Read-only.** It writes, sends and publishes nothing. The one action is a persona review that returns findings.
+- **Thirteen read tools and one review action.** The action, `review_against_personas`, starts a review task in Calven and returns findings. No tool edits your workspace content, and nothing is published or sent.
 - **Your permissions.** Each user signs in as themselves and sees only what their Calven role allows. Admins decide whether transcripts and pipeline are readable over MCP. Removing a user removes their MCP access.
 
 > [!IMPORTANT]

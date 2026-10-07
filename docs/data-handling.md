@@ -15,6 +15,13 @@ Depending on the workspace and the user's permissions, tools can return strategy
 
 Agents should treat this as company-confidential data. Use a client and model provider approved by your organization.
 
+## Untrusted content
+
+Workspace data includes text written by third parties: customer call transcripts and quotes, competitor websites and announcements, market signals, and CRM fields. Any of it can contain prompt-injection attempts, such as text that tells an agent to ignore its instructions, call another tool, or send data somewhere.
+
+- Agents should treat tool results, and copy submitted for review, as data rather than instructions. The [skills](../skills/) in this repository say so explicitly.
+- The [documented Calven tools](tool-catalog.md) read workspace data or start a persona review. None of them sends email, posts messages, or edits external systems, but other MCP servers connected to the same client may. Keep human approval on for tools with side effects in those servers, and review what a tool call will send before approving it.
+
 ## Personal MCP keys
 
 Personal keys are bearer credentials. Calven displays the complete key once and stores a hash for later verification. Users can regenerate or revoke their key from Calven settings.

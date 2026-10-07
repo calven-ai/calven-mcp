@@ -12,12 +12,12 @@ Calven uses remote Streamable HTTP. A client must support that transport and eit
 
 | Client | Remote HTTP | OAuth | Custom header | Status | Setup |
 | --- | --- | --- | --- | --- | --- |
-| Claude Code | Yes | Yes | Yes | Documented | `claude mcp add --transport http calven https://api.calven.ai/mcp` |
-| Codex CLI | Yes | Yes | Client dependent | Documented | `codex mcp add calven --url https://api.calven.ai/mcp` |
-| Claude (claude.ai, desktop) | Yes | Yes | No | Pending clean-account test | Settings → Connectors → Add custom connector → paste the URL → Connect. OAuth discovery, consent and tool use confirmed from a founder account on 2026-10-05; the clean-account record is still open. |
-| ChatGPT | Yes | Yes | No public custom-header path | Pending clean-account test | Add the URL as a custom connector. |
-| Cursor | Yes | Yes | Yes | Pending clean-account test | Add a remote MCP server named `calven`. |
-| VS Code and GitHub Copilot | Yes | Yes | Yes | Pending clean-account test | Add a remote MCP server through the MCP configuration UI. |
+| Claude Code | Yes | Yes | Yes | Documented | `claude mcp add --transport http calven https://api.calven.ai/mcp`, then `claude mcp login calven` (or `/mcp` in a session → `calven` → browser sign-in). Bearer config: [`examples/claude-code-bearer.json`](../examples/claude-code-bearer.json). |
+| Codex CLI | Yes | Yes | Yes (`--bearer-token-env-var` or `bearer_token_env_var`) | Documented | `codex mcp add calven --url https://api.calven.ai/mcp`, then `codex mcp login calven`. |
+| Claude (claude.ai, desktop) | Yes | Yes | Beta, limited organizations (Request headers) | Pending clean-account test | Customize → Connectors → Add custom connector → paste the URL → Add → Connect. If asked how Claude identifies itself, choose Use Claude's published identity (Calven supports CIMD, not dynamic client registration). Team and Enterprise: an Owner adds it under Organization settings → Connectors → Add → Custom → Web; members then click Connect on the Custom connector under Customize → Connectors. OAuth discovery, consent and tool use confirmed from a founder account on 2026-10-05; the clean-account record is still open. |
+| ChatGPT | Yes | Yes | No public custom-header path | Pending clean-account test | Plugins (`chatgpt.com/plugins`) → plus button → Add custom MCP server → Server URL, Authentication OAuth → Create as a plugin; install it from personal plugins, then select it with `@` in a chat. Plan and workspace settings apply; see OpenAI's [Add custom MCP server](https://developers.openai.com/api/docs/guides/custom-mcp-server). |
+| Cursor | Yes | Yes | Yes (`${env:NAME}`) | Pending clean-account test | [README install button](../README.md#connect), or add a remote MCP server named `calven` with the URL. Bearer config: [`examples/cursor-bearer.json`](../examples/cursor-bearer.json). |
+| VS Code and GitHub Copilot | Yes | Yes | Yes (`${input:...}`) | Pending clean-account test | [README install button](../README.md#connect), or Command Palette → MCP: Add Server → HTTP → the URL, named `calven`. Bearer config: [`examples/vscode-bearer.json`](../examples/vscode-bearer.json). |
 
 The table is intentionally conservative. Client behavior changes independently of the MCP specification. Do not infer support from a logo or marketplace listing.
 
