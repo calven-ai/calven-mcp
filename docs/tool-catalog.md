@@ -1,20 +1,27 @@
 # Tool catalog
 
-Calven exposes 11 focused tools. Results reflect the connected user's workspace permissions and product scope.
+Calven exposes 14 focused tools. Results reflect the connected user's workspace permissions and product scope.
 
 | Tool | Behavior | Mode |
 | --- | --- | --- |
 | `get_workspace_overview` | Shows the workspace, products, available strategy documents, and record counts. | Read |
 | `list_products` | Lists products used to scope later requests. | Read |
-| `get_strategy_document` | Reads positioning, messaging, ICP, product, or win/loss strategy. | Read |
+| `get_strategy_document` | Reads positioning, messaging, ICP, or the product brief, company-wide or per product. | Read |
 | `list_documents` | Finds published documents available to the user. | Read |
 | `read_document` | Reads one published document by its returned identifier. | Read |
 | `list_records` | Searches and filters a supported record kind. | Read |
 | `get_record` | Reads one record by identifier or, where supported, exact name. | Read |
 | `get_competitor` | Reads a competitor dossier, battle card, recent signals, or a selected subset. | Read |
 | `get_persona` | Reads a named buyer, stakeholder, or user persona. | Read |
+| `get_insights` | Reads one Insights dashboard as data: KPIs with their change against the prior period, breakdowns, rankings, trends. | Read |
+| `get_insights_overview` | Reads every dashboard's headline KPIs, the biggest movers, top loss reasons, product gaps, and data availability. | Read |
+| `get_insight_detail` | Reads the rows behind one dashboard number: deals in a bucket, deals against a competitor, survey answers, verbatims, one AI answer, the signal feed. | Read |
 | `review_against_personas` | Starts an asynchronous review of supplied copy against selected personas. | Action |
 | `get_task` | Polls an asynchronous task and returns its status or result. | Read |
+
+## Prompts
+
+The server also publishes four ready-made prompts, listed by clients that support MCP prompts (slash commands or a prompt picker): how do we compete with a competitor, what are a competitor's strengths, who our competitors are, and a monthly insights review.
 
 ## Record kinds
 
@@ -24,8 +31,13 @@ Calven exposes 11 focused tools. Results reflect the connected user's workspace 
 - personas;
 - trends, market opportunities, analyst findings, and raw market signals;
 - customer conversations, themes, customer quotes, vendor quotes, and deal drivers;
+- surveyed deals and survey responses;
 - product changes, product drift findings, and claims;
 - permitted CRM accounts, contacts, and deals.
+
+## Insights dashboards
+
+`get_insights`, `get_insights_overview`, and `get_insight_detail` cover win/loss, win/loss program health, competitive intelligence, voice of customer, ICP, persona, positioning, messaging, market research, and product intelligence. Every rate comes with its sample size and window.
 
 The tool schema returned by `tools/list` is authoritative for current filters, required arguments, limits, and output structure.
 
@@ -35,6 +47,7 @@ The tool schema returned by `tools/list` is authoritative for current filters, r
 - Do not replace missing evidence with model memory.
 - Distinguish a security-restricted field from missing data.
 - Preserve source references returned by Calven.
+- Dashboard numbers come from the Insights tools, never from adding up rows.
 - Use the product name for scope when the user supplies one. Use returned identifiers only where the tool requires them.
 
 ## Public catalog changes

@@ -14,7 +14,7 @@ Calven uses remote Streamable HTTP. A client must support that transport and eit
 | --- | --- | --- | --- | --- | --- |
 | Claude Code | Yes | Yes | Yes | Documented | `claude mcp add --transport http calven https://api.calven.ai/mcp` |
 | Codex CLI | Yes | Yes | Client dependent | Documented | `codex mcp add calven --url https://api.calven.ai/mcp` |
-| Claude Desktop | Client dependent | Client dependent | Client dependent | Pending clean-account test | Add the URL through the client's connector settings. |
+| Claude (claude.ai, desktop) | Yes | Yes | No | Pending clean-account test | Settings → Connectors → Add custom connector → paste the URL → Connect. OAuth discovery, consent and tool use confirmed from a founder account on 2026-10-05; the clean-account record is still open. |
 | ChatGPT | Yes | Yes | No public custom-header path | Pending clean-account test | Add the URL as a custom connector. |
 | Cursor | Yes | Yes | Yes | Pending clean-account test | Add a remote MCP server named `calven`. |
 | VS Code and GitHub Copilot | Yes | Yes | Yes | Pending clean-account test | Add a remote MCP server through the MCP configuration UI. |
