@@ -7,7 +7,7 @@ The hosted server implementation is maintained privately. Use a GitHub issue to 
 ## Before opening a pull request
 
 1. Keep every endpoint set to `https://api.calven.ai/mcp`.
-2. Use placeholders for credentials. Never include a real `cmcp_` key or OAuth token.
+2. Use placeholders for credentials. Never include a real credential or OAuth token.
 3. Update the tool catalog when a documented production tool changes.
 4. Record the exact client and version for compatibility changes.
 5. With Node.js 22 or later, install the pinned dev dependencies and run the validator:

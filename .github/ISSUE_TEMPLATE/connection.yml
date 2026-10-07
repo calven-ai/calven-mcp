@@ -31,7 +31,6 @@ body:
       label: Authentication path
       options:
         - OAuth
-        - Personal MCP key
         - Not sure
     validations:
       required: true

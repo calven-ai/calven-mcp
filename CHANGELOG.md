@@ -10,10 +10,10 @@ All notable changes to the public MCP distribution and Agent Plugin are recorded
   - Affected: every connection added with the previous URL, in any client, and Agent Plugin installs made from a copy of this repository before commit 52f3e79.
   - What to do: remove the old Calven connection, add `https://api.calven.ai/mcp`, then sign in again. For Claude Code, run `claude mcp remove calven`, then `claude mcp add --transport http calven https://api.calven.ai/mcp`, then authenticate from `/mcp`. Reinstall or update the Agent Plugin so its `mcp.json` uses the new URL.
   - OAuth: sign in again after adding the new URL. Access tokens are issued for one resource URL, and tokens issued for `https://app.calven.ai/api/mcp` are not valid for `https://api.calven.ai/mcp`.
-  - Personal MCP keys: the key setup in `docs/authentication.md` is unchanged. Change the URL in the client configuration.
 - Add `.github/workflows/publish-registry.yml`, which publishes `server.json` to the Official MCP Registry when an `mcp-v<semver>` tag matching `server.json#version` is pushed, and document the one-time domain verification and release steps in `docs/releasing.md`. The registry does not list `ai.calven/mcp` until that setup is done and the first tag is pushed.
-- Remove the MCP Registry badge until the first publish; add Cursor and VS Code one-click install links; update the Claude, ChatGPT, Claude Code and Codex setup steps, including the sign-in step; add client-specific bearer examples for Claude Code, Cursor, VS Code and Codex.
-- Document OAuth discovery, Client ID Metadata Document registration (dynamic client registration is not offered), the requested scopes, and that personal keys do not expire.
+- Remove the MCP Registry badge until the first publish; add Cursor and VS Code one-click install links; update the Claude, ChatGPT, Claude Code and Codex setup steps, including the sign-in step.
+- Remove personal MCP key (bearer token) documentation and examples. OAuth is the only documented sign-in for the hosted server.
+- Document OAuth discovery, Client ID Metadata Document registration (dynamic client registration is not offered), and the requested scopes.
 - Document every tool's annotations in the tool catalog.
 - Add an untrusted-content rule to the skills, an untrusted-content section to data handling, and safe-use guidance and private vulnerability reporting to `SECURITY.md`; limit the connection issue form to non-security setup failures.
 - Extend `validate.mjs`: client examples, endpoint URLs and install links across public files, tool counts in prose, and YAML-parsed skill frontmatter against the Agent Skills rules. Fix the stale tool count in `docs/plugin.md`.

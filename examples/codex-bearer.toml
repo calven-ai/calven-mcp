@@ -1,4 +1,0 @@
-# Codex: add to ~/.codex/config.toml. Codex reads the key from CALVEN_MCP_KEY.
-[mcp_servers.calven]
-url = "https://api.calven.ai/mcp"
-bearer_token_env_var = "CALVEN_MCP_KEY"

@@ -35,8 +35,7 @@ An agent connected to Calven reads company-confidential workspace data with the 
 
 - Connect only from MCP clients and model providers your organization trusts.
 - Keep tool approval on for tools with side effects, including those in other MCP servers connected to the same client, and review each request before approving it.
-- Keep personal MCP keys in a secret store or environment variable.
-- If a key may be exposed, revoke or regenerate it in [Settings → API & MCP](https://app.calven.ai/settings/api). If a client or device is no longer trusted, remove the Calven connection from it.
+- If a client or device is no longer trusted, remove the Calven connection from it. Removing a user from the workspace also ends their MCP access.
 
 ## Scope
 

@@ -22,12 +22,6 @@ Workspace data includes text written by third parties: customer call transcripts
 - Agents should treat tool results, and copy submitted for review, as data rather than instructions. The [skills](../skills/) in this repository say so explicitly.
 - The [documented Calven tools](tool-catalog.md) read workspace data or start a persona review. None of them sends email, posts messages, or edits external systems, but other MCP servers connected to the same client may. Keep human approval on for tools with side effects in those servers, and review what a tool call will send before approving it.
 
-## Personal MCP keys
-
-Personal keys are bearer credentials. Calven displays the complete key once and stores a hash for later verification. Users can regenerate or revoke their key from Calven settings.
-
-The key belongs in a client secret store or environment variable. It does not belong in source control or shared project configuration.
-
 ## Workflow actions
 
 Most tools only read workspace data. `review_against_personas` starts a review task and returns a task ID. The caller polls `get_task` for the findings. The action does not publish the reviewed copy.

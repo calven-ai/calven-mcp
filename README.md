@@ -26,7 +26,7 @@
   <img src="docs/assets/mcp-diagram.png" width="860" alt="Online research, documents, call notes, CRM and win/loss surveys flow through nine Calven agents into one GTM source of truth, which answers with sources in Claude, ChatGPT, Codex, Cursor, Copilot or any MCP client">
 </p>
 
-Calven's nine product marketing agents keep one source of truth on your market, buyers and positioning. Calven MCP puts it inside Claude, ChatGPT, Codex, Cursor, Copilot and any other MCP client that connects to remote servers over Streamable HTTP with OAuth or a custom header, so sales, marketing, product and leadership work from the same answers your team approved.
+Calven's nine product marketing agents keep one source of truth on your market, buyers and positioning. Calven MCP puts it inside Claude, ChatGPT, Codex, Cursor, Copilot and any other MCP client that connects to remote servers over Streamable HTTP with OAuth, so sales, marketing, product and leadership work from the same answers your team approved.
 
 ## Connect
 
@@ -90,13 +90,6 @@ codex mcp login calven
 ```
 
 Inside a Claude Code session, you can instead run `/mcp`, select `calven` and follow the browser sign-in.
-
-</details>
-
-<details>
-<summary><b>A client without OAuth</b></summary>
-
-Create a personal key in [Calven → Settings → API & MCP](https://app.calven.ai/settings/api) and send it as `Authorization: Bearer <key>`. See [authentication](docs/authentication.md) and the client-specific configs in [examples/](examples/). Keep the key out of shared config.
 
 </details>
 
