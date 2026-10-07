@@ -88,7 +88,7 @@ The registry accepts each version once. To change published metadata, release a 
 
 ### First release
 
-`server.json#version` is `1.0.0` and the registry has never listed `ai.calven/mcp`, so the first tag is `mcp-v1.0.0`. Before pushing it, confirm that version: the `[1.0.0]` entry in `CHANGELOG.md` describes the descriptor with the earlier endpoint, and [versioning.md](versioning.md) treats an endpoint change that requires migration as a major change.
+The first tag is `mcp-v2.0.0`, matching `server.json#version`. Version 1.0.0 shipped the earlier endpoint and was never published to the registry.
 
 ## Updating mcp-publisher
 
