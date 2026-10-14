@@ -18,7 +18,7 @@ The hosted server, Official MCP Registry descriptor, and Agent Plugin have relat
 
 Registry versions are immutable. Publishing is manual and runs only from `main`.
 
-1. In a pull request, set `server.json#version` and `plugin.json#version` to the same new version. The publish workflow refuses mismatched versions and versions already in the registry.
+1. In a pull request, set `server.json#version` and `plugin.json#version` to the same new version. The publish workflow refuses mismatched versions. It also refuses to publish a version already in the registry; a dry run only warns, so it can still test sign-in.
 2. Merge the pull request to `main`.
 3. In the Actions tab, run **Publish to MCP Registry** on `main`. Leave `dry_run` checked first: it validates, signs in to Azure and the registry, and stops before publishing. Run it again with `dry_run` unchecked to publish.
 4. Approve the run in the `mcp-registry` environment when prompted.

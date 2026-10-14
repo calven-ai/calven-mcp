@@ -70,14 +70,24 @@ jobs:
       - name: Check version is not already published
         env:
           VERSION: ${{ steps.version.outputs.version }}
+          DRY_RUN: ${{ inputs.dry_run }}
         run: |
           set -euo pipefail
           encoded_name="${SERVER_NAME//\//%2F}"
           url="$REGISTRY_URL/v0/servers/$encoded_name/versions/$VERSION"
           status="$(curl --silent --show-error --output /dev/null --write-out '%{http_code}' "$url")"
+          message="$SERVER_NAME $VERSION is already published. Registry versions are immutable; bump server.json and plugin.json."
           case "$status" in
             404) echo "$SERVER_NAME $VERSION is not in the registry yet." ;;
-            200) echo "::error::$SERVER_NAME $VERSION is already published. Registry versions are immutable; bump server.json and plugin.json."; exit 1 ;;
+            200)
+              # A dry run never publishes, so let it continue and exercise auth.
+              if [ "$DRY_RUN" = "true" ]; then
+                echo "::warning::$message"
+              else
+                echo "::error::$message"
+                exit 1
+              fi
+              ;;
             *) echo "::error::Unexpected HTTP $status from $url."; exit 1 ;;
           esac
 
