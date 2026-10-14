@@ -16,6 +16,7 @@
 </p>
 
 <p align="center">
+  <a href="https://registry.modelcontextprotocol.io/?q=ai.calven"><img src="https://img.shields.io/badge/MCP_Registry-ai.calven%2Fmcp-7C3AED" alt="MCP Registry"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-262626" alt="MIT"></a>
 </p>
 
