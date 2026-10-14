@@ -1,0 +1,5 @@
+# Regular expressions for URLs lychee must not request. Give each entry a reason.
+
+# The MCP endpoint is not a web page. Without a credential it answers 401 with a
+# WWW-Authenticate challenge by design. smoke-production.yml checks that challenge.
+^https://api\.calven\.ai/mcp$
