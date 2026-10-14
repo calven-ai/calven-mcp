@@ -16,14 +16,35 @@ The hosted server, Official MCP Registry descriptor, and Agent Plugin have relat
 
 ## Publishing to the MCP Registry
 
-Registry versions are immutable. Publishing is manual and runs only from `main`.
+Registry versions are immutable, so publishing is a manual step after the version bump is on `main`.
 
-1. In a pull request, set `server.json#version` and `plugin.json#version` to the same new version. The publish workflow refuses mismatched versions. It also refuses to publish a version already in the registry; a dry run only warns, so it can still test sign-in.
-2. Merge the pull request to `main`.
-3. In the Actions tab, run **Publish to MCP Registry** on `main`. Leave `dry_run` checked first: it validates, signs in to Azure and the registry, and stops before publishing. Run it again with `dry_run` unchecked to publish.
-4. Approve the run in the `mcp-registry` environment when prompted.
+The registry authenticates `ai.calven/mcp` with DNS auth on `calven.ai`. The TXT record holds the Ed25519 public key (`v=MCPv1; k=ed25519; p=<base64 public key>`). The matching private key is a PEM in Azure Key Vault `calven-internal01-kv` (resource group `calven-internal01-rg`), secret `mcp-registry-signing-key`. It is the only copy.
 
-The registry authenticates `ai.calven/mcp` with DNS auth on `calven.ai`. The TXT record holds the Ed25519 public key (`v=MCPv1; k=ed25519; p=<base64 public key>`). The matching private key is a PEM in Azure Key Vault `calven-internal01-kv` (resource group `calven-internal01-rg`), secret `mcp-registry-signing-key`. It is the only copy. The workflow reads it through GitHub OIDC and deletes it from the runner after login.
+You need Azure access to read that secret, OpenSSL 3, and `mcp-publisher` (`brew install mcp-publisher`). The `openssl` that ships with macOS is LibreSSL and cannot read Ed25519 keys; use `/opt/homebrew/opt/openssl@3/bin/openssl`.
+
+To publish:
+
+1. Bump `server.json#version` in a pull request and merge it to `main`.
+2. Check the version is not already published. This should return `404`:
+
+   ```bash
+   curl -s -o /dev/null -w '%{http_code}\n' "https://registry.modelcontextprotocol.io/v0/servers/ai.calven%2Fmcp/versions/$(jq -r .version server.json)"
+   ```
+
+3. From an up-to-date `main` checkout, sign in to Azure (`az login`) and read the key straight into a shell variable, so the PEM never touches disk:
+
+   ```bash
+   HEX=$(az keyvault secret show --vault-name calven-internal01-kv --name mcp-registry-signing-key --query value -o tsv | /opt/homebrew/opt/openssl@3/bin/openssl pkey -noout -text | grep -A3 'priv:' | tail -n +2 | tr -d ' :\n')
+   ```
+
+4. Sign in to the registry, then clear the variable:
+
+   ```bash
+   mcp-publisher login dns --domain calven.ai --private-key "$HEX"; unset HEX
+   ```
+
+5. Run `mcp-publisher validate`, then `mcp-publisher publish`.
+6. Run `mcp-publisher logout`.
 
 To rotate the key:
 
@@ -31,7 +52,7 @@ To rotate the key:
 2. Get the base64 public key: `openssl pkey -in key.pem -pubout -outform DER | tail -c 32 | base64`.
 3. Replace the `calven.ai` TXT record with `v=MCPv1; k=ed25519; p=<new base64 public key>` and wait for it to propagate.
 4. Store the new PEM as a new version of the `mcp-registry-signing-key` secret, then delete the local `key.pem`.
-5. Run the workflow with `dry_run` checked to confirm the new key signs in.
+5. Run steps 3 and 4 of the publish flow to confirm the new key signs in, then `mcp-publisher logout`.
 
 ## Compatibility
 
