@@ -25,6 +25,6 @@ Notable changes to the Calven MCP server's public contract, the registry descrip
 
 - First release: the registry descriptor, the Agent Plugin with workspace brief, competitive brief and persona copy review skills, and documentation.
 
-[1.2.0]: https://github.com/calven-ai/calven-mcp/compare/main...claude/mcp-plugin-marketplace-research-ejtyhj
+[1.2.0]: https://github.com/calven-ai/calven-mcp/pull/8
 [1.1.0]: https://github.com/calven-ai/calven-mcp/pull/5
 [1.0.0]: https://github.com/calven-ai/calven-mcp/commit/653dcee0c94531552e445de1ca3875840cf31e9d
