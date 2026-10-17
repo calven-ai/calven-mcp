@@ -21,9 +21,11 @@ The official MCP conformance suite is not run against the server yet.
 - `docs/tool-catalog.md` lists the 14 production tools in order, and tool counts stated in prose match it;
 - each `skills/<name>/SKILL.md` has YAML frontmatter that parses, a `name` of 1–64 characters matching `^[a-z0-9]+(-[a-z0-9]+)*$` and equal to the directory, a `description` string of 1–1024 characters, an optional `compatibility` of at most 500 characters, and backticked tool names that exist in the catalog;
 - each `use-cases/` page has the required sections, no internal sections, and working relative `.md` links;
+- `.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json` and `.cursor-plugin/plugin.json` agree with `plugin.json` on name, version and repository, the marketplace entry points at the repository root, the directory listing URLs are `https://`, and the icon and logo files exist;
+- every command, subagent and Cursor rule has a description and names only catalog tools;
 - no file contains a Calven API key, and the brand is written as plain Calven.
 
-CI also runs two workflows the local script does not:
+CI also runs `claude plugin validate --strict` on the plugin, and two workflows the local script does not:
 
 - `links.yml` checks public links in Markdown with lychee;
 - `smoke-production.yml` checks the production protected resource metadata and the anonymous `401` challenge, for both a `2025-11-25` `initialize` request and a `2026-07-28` request.

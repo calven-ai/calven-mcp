@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "calven",
+  "displayName": "Calven",
+  "version": "1.2.0",
+  "description": "Your approved ICP, positioning, messaging and competitive intel, with sources, plus workflows for deal prep, claim checks, competitive briefs, persona review and win/loss reviews.",
+  "author": {
+    "name": "Calven",
+    "email": "support@calven.ai",
+    "url": "https://calven.ai"
+  },
+  "homepage": "https://calven.ai/mcp",
+  "repository": "https://github.com/calven-ai/calven-mcp",
+  "license": "MIT",
+  "keywords": [
+    "calven",
+    "mcp",
+    "product-marketing",
+    "competitive-intelligence",
+    "win-loss",
+    "positioning",
+    "messaging",
+    "sales-enablement"
+  ],
+  "icon": "./assets/icon.png",
+  "documentationUrl": "https://github.com/calven-ai/calven-mcp#readme",
+  "supportUrl": "https://github.com/calven-ai/calven-mcp/issues/new/choose",
+  "privacyPolicyUrl": "https://calven.ai/privacy",
+  "termsOfServiceUrl": "https://calven.ai/terms"
+}

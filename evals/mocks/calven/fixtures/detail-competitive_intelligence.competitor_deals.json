@@ -1,0 +1,27 @@
+{
+ "items": [
+  {
+   "deal": "Initrode - Platform",
+   "outcome": "lost",
+   "amount_usd": 96000,
+   "loss_reason": "Pricing predictability",
+   "closed": "2026-09-12"
+  },
+  {
+   "deal": "Vandelay - Expansion",
+   "outcome": "lost",
+   "amount_usd": 120000,
+   "loss_reason": "Missing dbt Cloud integration",
+   "closed": "2026-09-30"
+  },
+  {
+   "deal": "Soylent - Platform",
+   "outcome": "won",
+   "amount_usd": 88000,
+   "win_reason": "Column-level lineage",
+   "closed": "2026-09-03"
+  }
+ ],
+ "more_available": true,
+ "note": "Rows for the requested window, newest first."
+}

@@ -1,0 +1,10 @@
+{
+ "document": {
+  "asset_id": "doc-posi",
+  "kind": "positioning",
+  "name": "Positioning",
+  "product": null,
+  "version": 3,
+  "content": "# Positioning\n\n## Category\nData observability.\n\n## Target\nData platform teams at mid-market companies running Snowflake, BigQuery or Databricks.\n\n## Differentiation\nColumn-level lineage tied to incidents, so the team sees which dashboards a broken column reaches before anyone opens them. We do not claim to be the only vendor with column-level lineage.\n"
+ }
+}

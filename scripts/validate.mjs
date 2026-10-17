@@ -1,4 +1,4 @@
-import { readFile, readdir } from 'node:fs/promises';
+import { access, readFile, readdir } from 'node:fs/promises';
 import path from 'node:path';
 import process from 'node:process';
 import Ajv from 'ajv';
@@ -60,6 +60,8 @@ async function filesUnder(directory) {
   for (const entry of entries) {
     if (entry.name === '.git' || entry.name === 'node_modules') continue;
     const absolute = path.join(directory, entry.name);
+    // Local `claude plugin eval` output; gitignored.
+    if (path.relative(ROOT, absolute) === path.join('evals', 'results')) continue;
     if (entry.isDirectory()) files.push(...(await filesUnder(absolute)));
     else files.push(absolute);
   }
@@ -142,10 +144,51 @@ async function validateSkills() {
       check(typeof compatibility === 'string' && compatibility.length >= 1 && compatibility.length <= 500, `${relative}: compatibility must be a 1-500 character string`);
     }
 
-    const mentionedTools = [...source.matchAll(/`((?:get|list|read|review)_[a-z0-9_]+)`/g)].map((match) => match[1]);
-    for (const tool of mentionedTools) {
-      check(EXPECTED_TOOLS.includes(tool), `${relative}: references unknown tool ${tool}`);
+    checkToolMentions(relative, source);
+  }
+}
+
+function checkToolMentions(relative, source) {
+  const mentionedTools = [...source.matchAll(/`((?:get|list|read|review)_[a-z0-9_]+)`/g)].map((match) => match[1]);
+  for (const tool of mentionedTools) {
+    check(EXPECTED_TOOLS.includes(tool), `${relative}: references unknown tool ${tool}`);
+  }
+}
+
+// Commands, subagents and Cursor rules ship in the plugin beside the skills: each needs a description
+// and may name only catalog tools.
+async function validatePluginComponents() {
+  let count = 0;
+  for (const [dir, extension] of [['commands', '.md'], ['agents', '.md'], ['rules', '.mdc']]) {
+    for (const absolute of await filesUnder(path.join(ROOT, dir))) {
+      const relative = path.relative(ROOT, absolute);
+      if (path.extname(relative) !== extension) continue;
+      count += 1;
+      const source = await readFile(absolute, 'utf8');
+      const frontmatter = source.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n/);
+      check(Boolean(frontmatter), `${relative}: missing YAML frontmatter`);
+      if (frontmatter) {
+        let meta;
+        try {
+          meta = parseYaml(frontmatter[1]);
+        } catch (error) {
+          failures.push(`${relative}: frontmatter is not valid YAML: ${error.message.split('\n')[0]}`);
+        }
+        check(typeof meta?.description === 'string' && meta.description.trim().length > 0, `${relative}: description must be a non-empty string`);
+        if (dir === 'agents') check(meta?.name === path.basename(relative, extension), `${relative}: name must match the file name`);
+      }
+      checkToolMentions(relative, source);
     }
+  }
+  return count;
+}
+
+async function exists(relativePath) {
+  try {
+    await access(path.join(ROOT, relativePath));
+    return true;
+  } catch {
+    return false;
   }
 }
 
@@ -361,11 +404,33 @@ check(portableMcp.mcpServers?.calven?.url === ENDPOINT, 'mcp.json: endpoint drif
 check(compatibilityMcp.mcpServers?.calven?.type === 'http', '.mcp.json: expected native http transport name');
 check(compatibilityMcp.mcpServers?.calven?.url === ENDPOINT, '.mcp.json: endpoint drift');
 
+// One plugin, three client manifests: identity and version must agree, and every listed asset must exist.
+const claudePlugin = await json('.claude-plugin/plugin.json');
+const claudeMarketplace = await json('.claude-plugin/marketplace.json');
+const cursorPlugin = await json('.cursor-plugin/plugin.json');
+for (const [file, manifest] of [['.claude-plugin/plugin.json', claudePlugin], ['.cursor-plugin/plugin.json', cursorPlugin]]) {
+  check(manifest.name === plugin.name, `${file}: name must match plugin.json (${plugin.name})`);
+  check(manifest.version === plugin.version, `${file}: version must match plugin.json (${plugin.version})`);
+  check(manifest.repository === plugin.repository, `${file}: repository drift`);
+}
+check(claudePlugin.description === cursorPlugin.description, '.cursor-plugin/plugin.json: description must match .claude-plugin/plugin.json');
+const marketplaceEntry = claudeMarketplace.plugins?.find((entry) => entry.name === plugin.name);
+check(Boolean(marketplaceEntry), `.claude-plugin/marketplace.json: no entry named ${plugin.name}`);
+check(marketplaceEntry?.source === './', '.claude-plugin/marketplace.json: the plugin source must be the repository root ("./")');
+check(marketplaceEntry?.version === undefined, '.claude-plugin/marketplace.json: leave version out; .claude-plugin/plugin.json sets it');
+for (const key of ['documentationUrl', 'supportUrl', 'privacyPolicyUrl', 'termsOfServiceUrl']) {
+  check(typeof claudePlugin[key] === 'string' && claudePlugin[key].startsWith('https://'), `.claude-plugin/plugin.json: ${key} must be an https:// URL`);
+}
+for (const [file, asset] of [['.claude-plugin/plugin.json', claudePlugin.icon], ['.cursor-plugin/plugin.json', cursorPlugin.logo]]) {
+  check(typeof asset === 'string' && (await exists(asset)), `${file}: icon or logo ${asset} does not exist`);
+}
+
 const catalog = await readFile(path.join(ROOT, 'docs/tool-catalog.md'), 'utf8');
 const catalogTools = [...catalog.matchAll(/^\| `([a-z0-9_]+)` \|/gm)].map((match) => match[1]);
 check(JSON.stringify(catalogTools) === JSON.stringify(EXPECTED_TOOLS), 'docs/tool-catalog.md: tool list or order drift');
 
 await validateSkills();
+const componentCount = await validatePluginComponents();
 await validateUseCases();
 const exampleCount = await validateExamples();
 await validatePublicText();
@@ -373,6 +438,8 @@ await validateSchemas([
   ['server.json', server],
   ['plugin.json', plugin],
   ['mcp.json', portableMcp],
+  ['.claude-plugin/plugin.json', claudePlugin],
+  ['.claude-plugin/marketplace.json', claudeMarketplace],
 ]);
 
 for (const absolute of await filesUnder(ROOT)) {
@@ -389,4 +456,4 @@ if (failures.length > 0) {
   process.exit(1);
 }
 
-console.log(`Validated ${EXPECTED_TOOLS.length} tools, 4 manifests, ${exampleCount} client examples, endpoint URLs and tool counts in public docs, the portable skills, and the use-case library.`);
+console.log(`Validated ${EXPECTED_TOOLS.length} tools, 7 manifests, ${exampleCount} client examples, endpoint URLs and tool counts in public docs, the portable skills, ${componentCount} commands, agents and rules, and the use-case library.`);

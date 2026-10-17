@@ -1,0 +1,22 @@
+---
+description: Check the Calven connection and see what your workspace can answer, with three first prompts built from your own data.
+---
+
+# Start with Calven
+
+Check that Calven is connected, then show the user what their workspace holds and what to ask first.
+
+1. Call `get_workspace_overview`.
+   - If the call fails because the Calven tools are missing, or with a sign-in or `401` error, stop. Tell the user to run `/mcp`, select `calven` and sign in to Calven in the browser, then run this command again. They need a Calven workspace: https://app.calven.ai/sign-up (14-day trial, no card).
+2. Report in a few lines:
+   - the products, or that it is a single-product workspace;
+   - which strategy documents are published (positioning, messaging, ICP, product brief) and which are missing;
+   - the populated record kinds with their counts, largest first, and the empty ones in one line;
+   - any kind marked restricted: the user's role cannot read it; that is a permission, not missing data.
+3. Suggest exactly three first prompts the user can paste, each built from what is populated. Name real competitors, personas or products from the workspace only after reading them with one `list_records` call for that kind. Prefer, in order:
+   - a competitor question, if competitors exist (for example how we win against the named competitor);
+   - a persona or customer-voice question, if personas or quotes exist;
+   - a win/loss or pipeline question, if deals or surveyed deals exist; otherwise a claim check of a draft against the product brief.
+4. If the workspace is empty or nearly empty, say so plainly and point the user to the Calven app to add sources (documents, call notes, CRM) before asking questions. Do not demonstrate with invented data.
+
+Mention the plugin's workflows in one line at the end: `/calven:deal-prep`, `/calven:claim-check`, `/calven:competitive-brief`, `/calven:persona-copy-review`, `/calven:workspace-brief` and `/calven:win-loss-review`.

@@ -146,7 +146,27 @@ Data is stored in the EU, a DPA with EU SCCs covers every plan, and the SOC 2 Ty
 
 ## The plugin
 
-The Calven plugin ([Agent Plugins 1.0](https://agent-plugins.org/)) adds three workflows on the same server: a **workspace brief**, a **competitive brief** and a **persona copy review**. Contents and requirements: [plugin](docs/plugin.md).
+The Calven plugin bundles the server connection with five workflows, two commands and a research subagent. Install it in Claude Code:
+
+```sh
+claude plugin marketplace add calven-ai/calven-mcp
+claude plugin install calven@calven
+```
+
+Then run `/calven:start` to check the connection and get three first prompts built from your workspace.
+
+| Type | Name | What you get |
+| --- | --- | --- |
+| Skill | `/calven:deal-prep` | A one-page call brief: buying group, the competitor's likely moves, the risk, the first question, the proof |
+| Skill | `/calven:claim-check` | Every claim in a draft marked supported, wrong, stale or unsupported, with accurate wording |
+| Skill | `/calven:competitive-brief` | Where you win and lose against a named competitor, with a talk track |
+| Skill | `/calven:persona-copy-review` | Your copy reviewed against your personas, findings by severity |
+| Skill | `/calven:workspace-brief` | A sourced view of your strategy and evidence |
+| Command | `/calven:start` | Connection check and what your workspace can answer |
+| Command | `/calven:win-loss-review` | A monthly or quarterly win/loss readout, every rate with its sample size |
+| Subagent | `gtm-researcher` | Gathers evidence from several Calven sources and keeps large results out of your conversation |
+
+Skills load on their own when a request matches; you can also type them. The same package installs in Cursor and in any [Agent Plugins](https://agent-plugins.org/) client. Contents, formats and how the workflows are tested: [plugin](docs/plugin.md).
 
 ## Help
 

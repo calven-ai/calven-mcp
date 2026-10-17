@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "calven",
+  "description": "The Calven plugin: sourced GTM knowledge from your Calven workspace in Claude Code.",
+  "owner": {
+    "name": "Calven",
+    "email": "support@calven.ai",
+    "url": "https://calven.ai"
+  },
+  "plugins": [
+    {
+      "name": "calven",
+      "displayName": "Calven",
+      "source": "./",
+      "description": "Your approved ICP, positioning, messaging and competitive intel, with sources, plus workflows for deal prep, claim checks, competitive briefs, persona review and win/loss reviews.",
+      "category": "productivity",
+      "tags": ["product-marketing", "sales-enablement", "competitive-intelligence", "win-loss"],
+      "homepage": "https://calven.ai/mcp"
+    }
+  ]
+}

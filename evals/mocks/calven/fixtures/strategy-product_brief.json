@@ -1,0 +1,10 @@
+{
+ "document": {
+  "asset_id": "doc-prod",
+  "kind": "product_brief",
+  "name": "Product Brief",
+  "product": null,
+  "version": 3,
+  "content": "# Product brief: Northwind Observe\n\n## What it does\nData observability for data platform teams: anomaly detection on freshness, volume and schema; column-level lineage from source to dashboard; incident routing to Slack and PagerDuty.\n\n## Integrations\nSnowflake, BigQuery, Databricks, Redshift, dbt Core, Airflow, Looker, Tableau, Slack, PagerDuty. dbt Cloud is not supported today; a dbt Cloud integration is on the roadmap for Q1 2027.\n\n## Security\nSOC 2 Type II (report available under NDA). Data processed in the EU or US region of the customer's choice.\n\n## Pricing and packaging\n- Team: $1,500/month, up to 500 monitored tables.\n- Business: $4,000/month, up to 2,000 monitored tables, SSO.\n- Enterprise: custom, unlimited tables, dedicated support.\nNo free tier. 14-day trial. The Starter plan ($500/month) was retired on 2026-09-15.\n\n## Proof\nSoylent cut time-to-detect for broken pipelines from 2 days to 40 minutes (case study, 2026).\n"
+ }
+}
