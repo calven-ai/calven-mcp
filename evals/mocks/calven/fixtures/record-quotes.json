@@ -1,0 +1,46 @@
+{
+ "records": [
+  {
+   "id": "q7a1c0d2",
+   "kind": "quotes",
+   "name": "Acme's per-table price was easier to forecast for finance.",
+   "product": [],
+   "cells": {
+    "quote": "Acme's per-table price was easier to forecast for finance.",
+    "author_name": "Head of Data, Initrode (lost)",
+    "deal_context": "lost",
+    "competitor": "Acme Monitor",
+    "sentiment": "negative",
+    "occurred_at": "2026-07-09"
+   }
+  },
+  {
+   "id": "q8b2d1e3",
+   "kind": "quotes",
+   "name": "We needed dbt Cloud on day one and Acme had it.",
+   "product": [],
+   "cells": {
+    "quote": "We needed dbt Cloud on day one and Acme had it.",
+    "author_name": "Analytics Engineer, Vandelay (lost)",
+    "deal_context": "lost",
+    "competitor": "Acme Monitor",
+    "sentiment": "negative",
+    "occurred_at": "2026-09-30"
+   }
+  },
+  {
+   "id": "q9c3e2f4",
+   "kind": "quotes",
+   "name": "Column-level lineage caught the broken pipeline before the board report went out.",
+   "product": [],
+   "cells": {
+    "quote": "Column-level lineage caught the broken pipeline before the board report went out.",
+    "author_name": "Head of Data Platform, Soylent (won)",
+    "deal_context": "won",
+    "competitor": "Acme Monitor",
+    "sentiment": "positive",
+    "occurred_at": "2026-06-21"
+   }
+  }
+ ]
+}

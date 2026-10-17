@@ -1,0 +1,10 @@
+{
+ "document": {
+  "asset_id": "doc-icp",
+  "kind": "icp",
+  "name": "Icp",
+  "product": null,
+  "version": 3,
+  "content": "# ICP\n\nMid-market companies (300 to 5,000 employees) with a data platform team of 3+ and a cloud warehouse. Trigger: a data incident reached an executive report.\n"
+ }
+}

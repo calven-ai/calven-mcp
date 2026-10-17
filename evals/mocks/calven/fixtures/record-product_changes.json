@@ -1,0 +1,16 @@
+{
+ "records": [
+  {
+   "id": "x1000001",
+   "kind": "product_changes",
+   "name": "Starter plan retired",
+   "product": [],
+   "cells": {
+    "summary": "The $500/month Starter plan was retired. New customers start on Team ($1,500/month).",
+    "change_type": "pricing",
+    "detected_at": "2026-09-15",
+    "severity": "high"
+   }
+  }
+ ]
+}

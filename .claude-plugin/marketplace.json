@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "calven",
+  "description": "Calven for Claude Code: approved GTM and product marketing context, with sources, in your AI tool.",
+  "owner": {
+    "name": "Calven",
+    "email": "support@calven.ai",
+    "url": "https://calven.ai"
+  },
+  "plugins": [
+    {
+      "name": "calven",
+      "displayName": "Calven",
+      "source": "./",
+      "description": "Approved GTM context from Calven, the AI product marketing platform: positioning, messaging, ICP, personas, competitive intel and win/loss, with sources. Plus deal prep, battlecards and claim checks.",
+      "category": "marketing",
+      "tags": [
+        "gtm",
+        "product-marketing",
+        "competitive-intelligence",
+        "battlecards",
+        "win-loss",
+        "sales-enablement",
+        "positioning",
+        "messaging"
+      ],
+      "homepage": "https://calven.ai/mcp"
+    }
+  ]
+}

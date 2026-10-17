@@ -1,0 +1,10 @@
+{
+ "document": {
+  "asset_id": "doc-mess",
+  "kind": "messaging",
+  "name": "Messaging",
+  "product": null,
+  "version": 3,
+  "content": "# Messaging\n\n## Core message\nCatch broken data before your stakeholders do.\n\n## Pillars\n1. Lineage you can act on: from a broken column to every dashboard it reaches.\n2. Alerts that respect your time: anomaly detection tuned per table.\n3. Pricing that scales by tables you choose to monitor.\n"
+ }
+}

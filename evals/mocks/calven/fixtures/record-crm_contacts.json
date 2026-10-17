@@ -1,0 +1,37 @@
+{
+ "records": [
+  {
+   "id": "n1000001",
+   "kind": "crm_contacts",
+   "name": "Dana Ruiz",
+   "product": [],
+   "cells": {
+    "account": "Globex",
+    "role": "Head of Data Platform",
+    "lifecycle_stage": "opportunity"
+   }
+  },
+  {
+   "id": "n1000002",
+   "kind": "crm_contacts",
+   "name": "Sam Okafor",
+   "product": [],
+   "cells": {
+    "account": "Globex",
+    "role": "Analytics Engineer",
+    "lifecycle_stage": "opportunity"
+   }
+  },
+  {
+   "id": "n1000003",
+   "kind": "crm_contacts",
+   "name": "Priya Shah",
+   "product": [],
+   "cells": {
+    "account": "Hooli",
+    "role": "Director of Data Engineering",
+    "lifecycle_stage": "lead"
+   }
+  }
+ ]
+}

@@ -1,0 +1,669 @@
+{
+ "tools": [
+  {
+   "name": "get_workspace_overview",
+   "title": "Workspace overview",
+   "description": "A map of everything this workspace holds: its products, which strategy documents exist (and which products have their own instance), and every record kind with its true row count.\nUse when: you do not yet know what this workspace covers or which kind holds the answer. An empty result from the kind you asked already answers for that kind.\nDo NOT use when: you already know the kind you need: call list_records or get_strategy_document directly.\nReturns: workspace { product_mode, products[], documents[], records[] }. A record kind with total 0 exists but is empty. A kind marked restricted exists but this account may not read it (workspace security settings): say so, never that it is empty.\nExample: get_workspace_overview({})",
+   "inputSchema": {
+    "type": "object",
+    "properties": {}
+   },
+   "annotations": {
+    "title": "Workspace overview",
+    "readOnlyHint": true,
+    "destructiveHint": false,
+    "idempotentHint": true,
+    "openWorldHint": false
+   }
+  },
+  {
+   "name": "list_products",
+   "title": "List products",
+   "description": "The products this workspace tracks: the names the `product` argument accepts.\nUse when: a question is about one product rather than the company as a whole, and you need the exact name.\nReturns: items[] of { id, name, description, status } plus the shared page envelope. A single-product workspace returns an empty list and a note: there is nothing to scope to, and the portfolio-level content covers everything.\nExample: list_products({})",
+   "inputSchema": {
+    "type": "object",
+    "properties": {
+     "limit": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 100,
+      "default": 25
+     },
+     "offset": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 2000
+     }
+    }
+   },
+   "annotations": {
+    "title": "List products",
+    "readOnlyHint": true,
+    "destructiveHint": false,
+    "idempotentHint": true,
+    "openWorldHint": false
+   }
+  },
+  {
+   "name": "get_strategy_document",
+   "title": "Strategy document",
+   "description": "One of the four workspace strategy documents, as published markdown. positioning = category, target, differentiation, narrative. messaging = value props, pillars and approved wording. product_brief = what the product does, its features, packaging, PRICING and plans. icp = who it is for.\nUse when: you are writing or checking anything that must match this company's position, wording, product truth or target. Our own pricing, plans or packaging: read product_brief. A competitor's pricing: get_competitor. Why deals were won or lost: get_insights (dashboard win_loss) for the totals, then list_records on surveyed_deals, survey_responses or deal_drivers.\nDo NOT use when: you want a competitor dossier, a battlecard or a persona canvas: use get_competitor, get_persona, or list_documents plus read_document.\nArgs: `product` scopes to that product's instance; if it has none, the company-wide document comes back with `scope.product` null and a note, and it still applies.\nReturns: document { asset_id, kind, name, product, version, word_count, sections[], content, part? } or null when nothing has been published.\nExample: get_strategy_document({ document: \"icp\", product: \"Billing\" })",
+   "inputSchema": {
+    "type": "object",
+    "properties": {
+     "document": {
+      "type": "string",
+      "enum": [
+       "positioning",
+       "messaging",
+       "product_brief",
+       "icp"
+      ],
+      "description": "Which strategy document to read."
+     },
+     "product": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Product name. Returns that product's own version of the document, or the company-wide one with a note when it has none."
+     },
+     "offset": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 500
+     }
+    },
+    "required": [
+     "document"
+    ]
+   },
+   "annotations": {
+    "title": "Strategy document",
+    "readOnlyHint": true,
+    "destructiveHint": false,
+    "idempotentHint": true,
+    "openWorldHint": false
+   }
+  },
+  {
+   "name": "list_documents",
+   "title": "List documents",
+   "description": "Every published document here: per-product strategy instances, per-competitor dossiers and battlecards, per-persona canvases.\nUse when: you need to know which documents exist, or you want the `asset_id` of one to read.\nDo NOT use when: you already know which strategy document you want: get_strategy_document reads it in one call.\nReturns: items[] of { asset_id, uri, kind, name, linked_to, version, updated_at }. Read one with read_document.\nExample: list_documents({ kind: \"competitor_battlecard\" })",
+   "inputSchema": {
+    "type": "object",
+    "properties": {
+     "kind": {
+      "type": "string",
+      "description": "One of: positioning, messaging, product_brief, icp, competitor_deep_dive, competitor_battlecard, persona_canvas."
+     },
+     "product": {
+      "type": "string",
+      "minLength": 1
+     },
+     "q": {
+      "type": "string",
+      "description": "Literal case-insensitive substring of the document name."
+     },
+     "limit": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 100,
+      "default": 50
+     }
+    }
+   },
+   "annotations": {
+    "title": "List documents",
+    "readOnlyHint": true,
+    "destructiveHint": false,
+    "idempotentHint": true,
+    "openWorldHint": false
+   }
+  },
+  {
+   "name": "read_document",
+   "title": "Read document",
+   "description": "The published markdown of any document, addressed by the `asset_id` on a list_documents line.\nUse when: you hold an asset_id and need the document body.\nDo NOT use when: you have no asset_id and want one of the four strategy documents: get_strategy_document addresses those by name.\nReturns: document { asset_id, kind, name, product, version, word_count, sections[], content, part? }.\nExample: read_document({ asset_id: \"...\" })",
+   "inputSchema": {
+    "type": "object",
+    "properties": {
+     "asset_id": {
+      "type": "string",
+      "description": "The 8-character id shown beside a document in results, or a full id."
+     },
+     "offset": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 500
+     }
+    },
+    "required": [
+     "asset_id"
+    ]
+   },
+   "annotations": {
+    "title": "Read document",
+    "readOnlyHint": true,
+    "destructiveHint": false,
+    "idempotentHint": true,
+    "openWorldHint": false
+   }
+  },
+  {
+   "name": "list_records",
+   "title": "List records",
+   "description": "One bounded page of a curated workspace database (`kind`): competitors, competitive and market signals, personas, trends, opportunities, analyst findings, customer-voice themes and quotes, rep (vendor) quotes, customer conversations, win/loss deal drivers, surveyed deals and survey answers, product changes and drift findings, messaging claims, CRM accounts, contacts and deals. Every result starts with that kind's filter, sort and search keys and their allowed values.\nUse when: you want a collection: a roster, a feed, everything matching a property.\nDo NOT use when: you want one row in full (get_record), or one competitor or persona (get_competitor, get_persona).\nArgs: `filter`: up to 4 AND-combined { key, op (default \"eq\"), value }. `sort`: \"<key>:asc|desc\". `product` scopes the read. Page with `offset`.\nReturns: items[] of { id, kind, name, product[], cells } plus { has_more, next_offset, total (exact count of every match) }. Pass a line's short `id:` to get_record as is.\nExample: list_records({ kind: \"quotes\", filter: [{ key: \"sentiment\", value: \"negative\" }], limit: 10 })",
+   "inputSchema": {
+    "type": "object",
+    "properties": {
+     "kind": {
+      "type": "string",
+      "enum": [
+       "competitors",
+       "competitive_signals",
+       "personas",
+       "trends",
+       "market_opportunities",
+       "analyst_findings",
+       "themes",
+       "quotes",
+       "vendor_quotes",
+       "customer_conversations",
+       "market_signals",
+       "deal_drivers",
+       "product_changes",
+       "product_drift_findings",
+       "claims",
+       "surveyed_deals",
+       "survey_responses",
+       "crm_accounts",
+       "crm_contacts",
+       "crm_deals"
+      ],
+      "description": "Which curated database to read."
+     },
+     "filter": {
+      "type": "array",
+      "maxItems": 4,
+      "items": {
+       "type": "object",
+       "properties": {
+        "key": {
+         "type": "string"
+        },
+        "op": {
+         "type": "string",
+         "enum": [
+          "eq",
+          "in",
+          "has_any",
+          "gte",
+          "gt",
+          "lte",
+          "lt"
+         ],
+         "default": "eq"
+        },
+        "value": {}
+       },
+       "required": [
+        "key",
+        "value"
+       ]
+      }
+     },
+     "q": {
+      "type": "string",
+      "description": "Literal case-insensitive substring over the kind's search columns. Not semantic: prefer one word, or `filter`."
+     },
+     "sort": {
+      "type": "string"
+     },
+     "product": {
+      "type": "string",
+      "minLength": 1
+     },
+     "include_untagged": {
+      "type": "boolean",
+      "default": false
+     },
+     "limit": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 100,
+      "default": 25
+     },
+     "offset": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 2000
+     }
+    },
+    "required": [
+     "kind"
+    ]
+   },
+   "annotations": {
+    "title": "List records",
+    "readOnlyHint": true,
+    "destructiveHint": false,
+    "idempotentHint": true,
+    "openWorldHint": false
+   }
+  },
+  {
+   "name": "get_record",
+   "title": "Get record",
+   "description": "One row with its FULL cell set. Each list_records result names the columns get_record would add; when it says none, the list line already had everything.\nUse when: you have a row id (or an exact name) and need everything the workspace knows about it.\nDo NOT use when: the row is a competitor or a persona: get_competitor and get_persona add its documents.\nArgs: Pass one of `id`, `name` or `ids`. `ids`: up to 25 rows of one kind in one call, never one call per row.\nReturns: record { id, kind, name, cells }, or records[] with `ids`.\nExample: get_record({ kind: \"trends\", name: \"AI governance\" })",
+   "inputSchema": {
+    "type": "object",
+    "properties": {
+     "kind": {
+      "type": "string",
+      "enum": [
+       "competitors",
+       "competitive_signals",
+       "personas",
+       "trends",
+       "market_opportunities",
+       "analyst_findings",
+       "themes",
+       "quotes",
+       "vendor_quotes",
+       "customer_conversations",
+       "market_signals",
+       "deal_drivers",
+       "product_changes",
+       "product_drift_findings",
+       "claims",
+       "surveyed_deals",
+       "survey_responses",
+       "crm_accounts",
+       "crm_contacts",
+       "crm_deals"
+      ]
+     },
+     "id": {
+      "type": "string"
+     },
+     "name": {
+      "type": "string"
+     },
+     "ids": {
+      "type": "array",
+      "items": {
+       "type": "string"
+      },
+      "minItems": 1,
+      "maxItems": 25
+     }
+    },
+    "required": [
+     "kind"
+    ]
+   },
+   "annotations": {
+    "title": "Get record",
+    "readOnlyHint": true,
+    "destructiveHint": false,
+    "idempotentHint": true,
+    "openWorldHint": false
+   }
+  },
+  {
+   "name": "get_competitor",
+   "title": "Get competitor",
+   "description": "One competitor in a single call: the row, its battlecard (how to sell against them: traps, objections, proof points), its most recent competitive signals, and the outline of its deep-dive dossier (pricing, packaging, positioning, strengths, weaknesses) with the call that reads the dossier whole.\nUse when: a question names a specific rival, including how they price, package, position or sell. Competitor pricing lives in their dossier, not in any product brief: read it with the read_document call the result prints.\nDo NOT use when: you want the whole roster or a filtered feed: list_records({ kind: \"competitors\" }) and list_records({ kind: \"competitive_signals\" }) do that.\nArgs: Pass `id` or `name`, not both.\nReturns: competitor { id, name, cells, battlecard, recent_signals, signals_has_more, deep_dive { asset_id, word_count, sections } }.\nExample: get_competitor({ name: \"Collibra\" })",
+   "inputSchema": {
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "string"
+     },
+     "name": {
+      "type": "string",
+      "description": "The competitor name, case-insensitive. Use instead of `id`."
+     }
+    }
+   },
+   "annotations": {
+    "title": "Get competitor",
+    "readOnlyHint": true,
+    "destructiveHint": false,
+    "idempotentHint": true,
+    "openWorldHint": false
+   }
+  },
+  {
+   "name": "get_persona",
+   "title": "Get persona",
+   "description": "One persona's row plus its deep-research canvas: pains, gains, jobs to be done, objections, messaging hooks.\nUse when: you are tailoring copy, a play or an objection response to a specific persona.\nDo NOT use when: you want the roster of personas: list_records({ kind: \"personas\" }) is the lightweight read.\nArgs: Pass `id` or `name`, not both.\nReturns: persona { id, name, cells, canvas }.\nExample: get_persona({ name: \"VP of Data\" })",
+   "inputSchema": {
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "string"
+     },
+     "name": {
+      "type": "string",
+      "description": "The persona name, case-insensitive. Use instead of `id`."
+     }
+    }
+   },
+   "annotations": {
+    "title": "Get persona",
+    "readOnlyHint": true,
+    "destructiveHint": false,
+    "idempotentHint": true,
+    "openWorldHint": false
+   }
+  },
+  {
+   "name": "get_insights",
+   "title": "Insights dashboard",
+   "description": "Any agent's Insights dashboard as data: the numbers each section of the tab shows (KPIs, rates, breakdowns, trends, rankings), computed exactly as the dashboard computes them. Each comparable KPI comes with its change against the period before.\nUse when: a question is about totals, rates, shares, trends or rankings: win rate, why we lose, which segment sells best, product gaps that cost deals, competitor momentum, customer themes, messaging drift.\nDo NOT use when: \"how are we doing\" or a periodic review across dashboards (get_insights_overview first); the individual rows behind a number (get_insight_detail, or list_records).\nArgs: dashboard + optional sections (omit for every section). Window: timeframe OR from+to, default trailing12m.\nReturns: sections[] { id, title, status, data, notes, placeholders }, the window and the period it is compared with. Placeholders are widgets with no numbers behind them: say there is no number, never estimate one. Cite the sample (n) beside every rate.\nExample: get_insights({ dashboard: \"competitive_intelligence\", sections: [\"performance\"], timeframe: \"thisQuarter\" })",
+   "inputSchema": {
+    "type": "object",
+    "properties": {
+     "dashboard": {
+      "type": "string",
+      "enum": [
+       "win_loss",
+       "win_loss_program_health",
+       "competitive_intelligence",
+       "voice_of_customer",
+       "icp",
+       "persona",
+       "positioning",
+       "messaging",
+       "market_research",
+       "product_intelligence"
+      ]
+     },
+     "sections": {
+      "type": "array",
+      "items": {
+       "type": "string",
+       "minLength": 1
+      },
+      "minItems": 1,
+      "maxItems": 12,
+      "description": "Omit for all. win_loss: scoreboard, segments, buying_group, why_won_lost, deciding_forces; competitive_intelligence: kpis, performance, showdown, market_movement; others: kpis plus their sections."
+     },
+     "product": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Product name (case-insensitive, as list_products prints it) or id: only rows tagged with it, like the dashboard's product chip. \"untagged\" alone: only rows with no product. Omit for the whole company."
+     },
+     "timeframe": {
+      "type": "string",
+      "enum": [
+       "trailing4w",
+       "trailing12m",
+       "thisQuarter",
+       "thisYear",
+       "lastMonth",
+       "lastQuarter",
+       "lastYear"
+      ],
+      "description": "Today is 2026-10-17. trailing4w / trailing12m (default) = this week / month so far plus the 3 / 11 before; thisQuarter, thisYear = so far; lastMonth, lastQuarter, lastYear = the previous complete one. Any other month or quarter (\"Q2\"): from + to."
+     },
+     "from": {
+      "type": "string",
+      "description": "First day counted, YYYY-MM-DD. Pass `to` with it."
+     },
+     "to": {
+      "type": "string",
+      "description": "Last day counted, YYYY-MM-DD (August 2026 = 2026-08-01 to 2026-08-31)."
+     },
+     "include_untagged": {
+      "type": "boolean",
+      "default": false,
+      "description": "With `product`: also count rows with no product tag (company-wide, or not yet tagged)."
+     },
+     "list": {
+      "type": "string",
+      "minLength": 1
+     },
+     "offset": {
+      "type": "integer",
+      "minimum": 0
+     }
+    },
+    "required": [
+     "dashboard"
+    ]
+   },
+   "annotations": {
+    "title": "Insights dashboard",
+    "readOnlyHint": true,
+    "destructiveHint": false,
+    "idempotentHint": true,
+    "openWorldHint": false
+   }
+  },
+  {
+   "name": "get_insights_overview",
+   "title": "Insights overview",
+   "description": "Every Insights dashboard's headline KPIs for one window, each comparable one with its change against the period before, plus what moved most in each ranked list, the current top loss reasons and product gaps, and which dashboards have no data.\nUse when: \"how are we doing\", a monthly or quarterly review, a launch readout (with product), or one headline KPI. Each item names the get_insights section to read next.\nDo NOT use when: a breakdown, trend or longer ranking (get_insights).\nReturns: kpis[] with `comparison`, movers[], top_loss_reasons, product_gaps (amount_at_risk covers won and lost deals: not lost revenue), availability, window and compared period.\nExample: get_insights_overview({ timeframe: \"lastMonth\" })",
+   "inputSchema": {
+    "type": "object",
+    "properties": {
+     "product": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Product name (case-insensitive, as list_products prints it) or id: only rows tagged with it, like the dashboard's product chip. \"untagged\" alone: only rows with no product. Omit for the whole company."
+     },
+     "timeframe": {
+      "type": "string",
+      "enum": [
+       "trailing4w",
+       "trailing12m",
+       "thisQuarter",
+       "thisYear",
+       "lastMonth",
+       "lastQuarter",
+       "lastYear"
+      ],
+      "description": "Today is 2026-10-17. trailing4w / trailing12m (default) = this week / month so far plus the 3 / 11 before; thisQuarter, thisYear = so far; lastMonth, lastQuarter, lastYear = the previous complete one. Any other month or quarter (\"Q2\"): from + to."
+     },
+     "from": {
+      "type": "string",
+      "description": "First day counted, YYYY-MM-DD. Pass `to` with it."
+     },
+     "to": {
+      "type": "string",
+      "description": "Last day counted, YYYY-MM-DD (August 2026 = 2026-08-01 to 2026-08-31)."
+     },
+     "include_untagged": {
+      "type": "boolean",
+      "default": false,
+      "description": "With `product`: also count rows with no product tag (company-wide, or not yet tagged)."
+     }
+    }
+   },
+   "annotations": {
+    "title": "Insights overview",
+    "readOnlyHint": true,
+    "destructiveHint": false,
+    "idempotentHint": true,
+    "openWorldHint": false
+   }
+  },
+  {
+   "name": "get_insight_detail",
+   "title": "Insight detail",
+   "description": "The rows behind one number on an Insights dashboard: the deals in a pricing bucket or loss outcome, the deals against one competitor, what buyers answered to one survey question, one AI assistant answer, the market-signal feed.\nUse when: get_insights returned a number and you need its evidence.\nArgs: detail is one of the listed drill-downs. Pass the same product and window as the get_insights call it drills into.\nReturns: items[] (at most `limit`, max 100) and more_available with how to narrow.\nExample: get_insight_detail({ detail: \"competitive_intelligence.competitor_deals\", competitor: \"AuditBoard\", outcome: \"lost\" })",
+   "inputSchema": {
+    "type": "object",
+    "properties": {
+     "detail": {
+      "type": "string",
+      "enum": [
+       "win_loss.verbatims",
+       "win_loss.answers",
+       "win_loss.pricing_deals",
+       "win_loss.product_deals",
+       "win_loss.loss_outcome_deals",
+       "competitive_intelligence.competitor_deals",
+       "competitive_intelligence.pricing_deals",
+       "positioning.ai_answer",
+       "market_research.signals"
+      ]
+     },
+     "competitor": {
+      "type": "string"
+     },
+     "outcome": {
+      "type": "string",
+      "enum": [
+       "won",
+       "lost"
+      ]
+     },
+     "bucket": {
+      "type": "string",
+      "enum": [
+       "competitor",
+       "in_house",
+       "no_decision",
+       "unattributed"
+      ]
+     },
+     "group": {
+      "type": "string"
+     },
+     "question": {
+      "type": "string"
+     },
+     "verdict": {
+      "type": "string"
+     },
+     "loss_reason": {
+      "type": "string"
+     },
+     "month": {
+      "type": "string"
+     },
+     "answer": {
+      "type": "string"
+     },
+     "rating": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 10
+     },
+     "product": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Product name (case-insensitive, as list_products prints it) or id: only rows tagged with it, like the dashboard's product chip. \"untagged\" alone: only rows with no product. Omit for the whole company."
+     },
+     "timeframe": {
+      "type": "string",
+      "enum": [
+       "trailing4w",
+       "trailing12m",
+       "thisQuarter",
+       "thisYear",
+       "lastMonth",
+       "lastQuarter",
+       "lastYear"
+      ],
+      "description": "Today is 2026-10-17. trailing4w / trailing12m (default) = this week / month so far plus the 3 / 11 before; thisQuarter, thisYear = so far; lastMonth, lastQuarter, lastYear = the previous complete one. Any other month or quarter (\"Q2\"): from + to."
+     },
+     "from": {
+      "type": "string",
+      "description": "First day counted, YYYY-MM-DD. Pass `to` with it."
+     },
+     "to": {
+      "type": "string",
+      "description": "Last day counted, YYYY-MM-DD (August 2026 = 2026-08-01 to 2026-08-31)."
+     },
+     "include_untagged": {
+      "type": "boolean",
+      "default": false,
+      "description": "With `product`: also count rows with no product tag (company-wide, or not yet tagged)."
+     },
+     "limit": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 100
+     },
+     "offset": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 2000
+     }
+    },
+    "required": [
+     "detail"
+    ]
+   },
+   "annotations": {
+    "title": "Insight detail",
+    "readOnlyHint": true,
+    "destructiveHint": false,
+    "idempotentHint": true,
+    "openWorldHint": false
+   }
+  },
+  {
+   "name": "review_against_personas",
+   "title": "Review against personas",
+   "description": "Starts a background review of a piece of text against this workspace's buyer, stakeholder and user personas.\nUse when: you have drafted copy, an email or a message and want it pressure-tested against the real audience.\nArgs: `scope` narrows to one persona type. `product` runs the review against that product's personas plus the company-wide ones.\nReturns: RETURNS IMMEDIATELY with { task_id, status: \"working\", poll_after_seconds }. The review is NOT in this response. Call get_task(task_id) after poll_after_seconds and repeat while status is \"working\"; at \"completed\", get_task carries the severity-rated findings.\nExample: review_against_personas({ text: \"...\" }) then get_task({ task_id: \"...\" })",
+   "inputSchema": {
+    "type": "object",
+    "properties": {
+     "text": {
+      "type": "string",
+      "minLength": 1
+     },
+     "scope": {
+      "type": "string",
+      "enum": [
+       "buyers",
+       "stakeholders",
+       "users"
+      ]
+     },
+     "product": {
+      "type": "string",
+      "minLength": 1
+     }
+    },
+    "required": [
+     "text"
+    ]
+   },
+   "annotations": {
+    "title": "Review against personas",
+    "readOnlyHint": false,
+    "destructiveHint": false,
+    "idempotentHint": true,
+    "openWorldHint": false
+   }
+  },
+  {
+   "name": "get_task",
+   "title": "Get task",
+   "description": "The status of a background task you started, and its result once it finishes.\nUse when: you hold a task_id from review_against_personas and are waiting for the result.\nArgs: Poll while status is \"working\", waiting a few seconds between calls.\nReturns: working (still running), input_required (waiting on a human in the app), completed (result is in `result`), failed (reason is in `error`).\nExample: get_task({ task_id: \"...\" })",
+   "inputSchema": {
+    "type": "object",
+    "properties": {
+     "task_id": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "task_id"
+    ]
+   },
+   "annotations": {
+    "title": "Get task",
+    "readOnlyHint": true,
+    "destructiveHint": false,
+    "idempotentHint": true,
+    "openWorldHint": false
+   }
+  }
+ ]
+}
