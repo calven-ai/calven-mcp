@@ -1,6 +1,6 @@
 ---
 name: gtm-researcher
-description: Read-only researcher that gathers sourced evidence from the connected Calven workspace (strategy documents, competitors, personas, customer quotes, win/loss and Insights, CRM) and returns a compact evidence pack. Use it when a task needs evidence from several Calven sources, so the large tool results stay out of the main conversation.
+description: "Read-only GTM researcher that gathers sourced evidence from Calven (positioning, messaging, ICP, personas, competitors and battlecards, customer quotes, win/loss and Insights dashboards, CRM deals) and returns a compact evidence pack with gaps. Use it when a product marketing, sales or leadership task needs evidence from several Calven sources, so large tool results stay out of the main conversation."
 disallowedTools: Write, Edit, NotebookEdit, Bash
 ---
 

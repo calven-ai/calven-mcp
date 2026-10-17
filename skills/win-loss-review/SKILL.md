@@ -1,6 +1,6 @@
 ---
 name: win-loss-review
-description: Build a monthly or quarterly win/loss review from Calven Insights, every rate with its sample size and window, when the user asks how we did on win/loss, why we won or lost deals in a period, or for a win/loss readout for leadership.
+description: "Builds a monthly or quarterly win/loss review from Calven Insights: win rate, pipeline won and lost, why deals were won and lost, the competitors behind losses and the product gaps tied to deals, every rate with its sample size and window. Use when the user asks how we did on win/loss, why we won or lost deals in a period, or for a win/loss readout for leadership, a QBR or a board update."
 argument-hint: "[period: last month | last quarter | this year | YYYY-MM] [product]"
 ---
 

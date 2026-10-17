@@ -1,6 +1,6 @@
 ---
 name: start
-description: Check the Calven connection and see what your workspace can answer, with three first prompts built from your own data. Run it after installing the plugin or when Calven tools seem missing.
+description: "Checks the Calven connection and shows what the GTM workspace holds, with three first prompts built from the company's own competitors, personas and deals. Run it after installing the plugin or when Calven tools seem missing."
 disable-model-invocation: true
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: claim-check
-description: Fact-check a draft against Calven's approved product brief, pricing, positioning and competitor evidence before it ships, when the user pastes copy, an email, a deck section or a page and asks to check claims, verify facts, find unsupported or risky statements, or make it accurate.
+description: "Fact-checks a draft against Calven's approved product brief, pricing, positioning, messaging and competitor evidence, and marks each claim supported, wrong, stale or unsupported with accurate wording. Use when the user pastes copy, an email, a landing page, a deck section, release notes or a press release and asks to check claims, verify facts, find unsupported or risky statements, or make it accurate before it ships."
 argument-hint: "[paste the draft]"
 ---
 

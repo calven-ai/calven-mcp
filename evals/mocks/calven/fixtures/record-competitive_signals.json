@@ -16,14 +16,14 @@
   {
    "id": "s4d5e6f7",
    "kind": "competitive_signals",
-   "name": "Acme Monitor cuts per-table price for annual plans",
+   "name": "Acme Monitor launches AI incident summaries",
    "product": [],
    "cells": {
     "competitor": "Acme Monitor",
     "severity": "medium",
-    "signal_type": "pricing_change",
+    "signal_type": "product_launch",
     "detected_at": "2026-08-14",
-    "summary": "Annual plans now 15% cheaper per monitored table."
+    "summary": "Incidents now open with an AI-written summary of the likely cause."
    }
   }
  ]

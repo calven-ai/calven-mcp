@@ -2,7 +2,7 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "ai.calven/mcp",
   "title": "Calven",
-  "description": "Connect AI agents to shared product marketing intelligence in Calven.",
+  "description": "Approved GTM context for AI tools: ICP, positioning, messaging and competitive intel, with sources.",
   "version": "1.2.0",
   "websiteUrl": "https://calven.ai/mcp",
   "icons": [

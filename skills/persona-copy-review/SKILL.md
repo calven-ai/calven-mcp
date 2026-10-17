@@ -1,6 +1,6 @@
 ---
 name: persona-copy-review
-description: Review supplied copy against Calven personas when the user asks for persona feedback, message pressure-testing, audience fit, objections, or revision priorities.
+description: "Reviews copy against the company's buyer, stakeholder and user personas in Calven and returns findings by severity: what lands, what each persona objects to, what to fix first. Use when the user asks whether buyers or a persona would respond to an email, ad, headline, landing page or message, or asks for persona feedback, audience fit or message testing."
 ---
 
 # Persona copy review

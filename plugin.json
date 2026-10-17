@@ -2,7 +2,7 @@
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "calven",
   "version": "1.2.0",
-  "description": "Connect AI agents to Calven and add sourced workflows for deal prep, claim checks, competitive briefs, persona review and workspace briefs.",
+  "description": "Approved GTM context from Calven, the AI product marketing platform: positioning, messaging, ICP, personas, competitive intel and win/loss, with sources. Plus deal prep, battlecards and claim checks.",
   "author": {
     "name": "Calven",
     "url": "https://calven.ai"
@@ -11,12 +11,21 @@
   "repository": "https://github.com/calven-ai/calven-mcp",
   "license": "MIT",
   "keywords": [
-    "calven",
-    "mcp",
+    "gtm",
+    "go-to-market",
     "product-marketing",
+    "pmm",
     "competitive-intelligence",
-    "customer-intelligence",
+    "battlecards",
+    "win-loss",
     "positioning",
-    "messaging"
+    "messaging",
+    "icp",
+    "personas",
+    "sales-enablement",
+    "voice-of-customer",
+    "deal-prep",
+    "mcp",
+    "calven"
   ]
 }

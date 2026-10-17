@@ -32,7 +32,7 @@ rows["competitors"] = [
 ]
 rows["competitive_signals"] = [
     {"id": "s0a1b2c3", "kind": "competitive_signals", "name": "Acme Monitor launches native dbt Cloud integration", "product": [], "cells": {"competitor": "Acme Monitor", "severity": "high", "signal_type": "product_launch", "detected_at": "2026-09-28", "summary": "Acme Monitor shipped a native dbt Cloud integration with one-click setup."}},
-    {"id": "s4d5e6f7", "kind": "competitive_signals", "name": "Acme Monitor cuts per-table price for annual plans", "product": [], "cells": {"competitor": "Acme Monitor", "severity": "medium", "signal_type": "pricing_change", "detected_at": "2026-08-14", "summary": "Annual plans now 15% cheaper per monitored table."}},
+    {"id": "s4d5e6f7", "kind": "competitive_signals", "name": "Acme Monitor launches AI incident summaries", "product": [], "cells": {"competitor": "Acme Monitor", "severity": "medium", "signal_type": "product_launch", "detected_at": "2026-08-14", "summary": "Incidents now open with an AI-written summary of the likely cause."}},
 ]
 rows["personas"] = [
     {"id": "p1111111", "kind": "personas", "name": "Head of Data Platform", "product": [], "cells": {"type": "buyer", "seniority": "Director", "buying_role": "Champion", "role_title": "Head of Data Platform"}},
@@ -163,7 +163,7 @@ dump("documents.json", {"items": [
     {"asset_id": "dd-acme1", "kind": "competitor_deep_dive", "name": "Acme Monitor deep dive", "linked_to": "Acme Monitor"},
     {"asset_id": "bc-acme1", "kind": "competitor_battlecard", "name": "Acme Monitor battlecard", "linked_to": "Acme Monitor"},
 ], "truncated": False})
-dump("document.json", {"document": {"asset_id": "dd-acme1", "kind": "competitor_deep_dive", "name": "Acme Monitor deep dive", "content": "# Acme Monitor\n\n## Pricing and packaging\n$12 per monitored table per month, annual plans 15% off since 2026-08-14. No platform fee.\n\n## Strengths\nNative dbt Cloud integration (since 2026-09-28). Simple per-table pricing.\n\n## Weaknesses\nTable-level lineage only; no column-level lineage. Alerting tuned per warehouse, noisy at scale.\n"}})
+dump("document.json", {"document": {"asset_id": "dd-acme1", "kind": "competitor_deep_dive", "name": "Acme Monitor deep dive", "content": "# Acme Monitor\n\n## Pricing and packaging\n$12 per monitored table per month. No platform fee.\n\n## Strengths\nNative dbt Cloud integration (since 2026-09-28). Simple per-table pricing.\n\n## Weaknesses\nTable-level lineage only; no column-level lineage. Alerting tuned per warehouse, noisy at scale.\n"}})
 
 WIN_LOSS = {"dashboard": "win_loss", "window": {"timeframe": "lastMonth", "from": "2026-09-01", "to": "2026-09-30"}, "compared_with": {"from": "2026-08-01", "to": "2026-08-31"}, "sections": [
     {"id": "scoreboard", "title": "Scoreboard", "status": "ok", "data": {

@@ -1,6 +1,6 @@
 ---
 name: deal-prep
-description: Build a one-page, sourced call brief from Calven before a sales call or deal review, when the user names a deal, account or prospect and asks to prepare, prep a call, plan next steps, handle a competitor in the deal, or find the risk and the proof point.
+description: "Builds a one-page, sourced sales call brief from Calven: the buying group and who is missing, the competitor's likely moves, the biggest deal risk, the first question to ask and the proof point to bring. Use when a seller, AE or BDR names a deal, account or prospect and asks to prep a call, plan a deal review or next steps, or handle a competitor in the deal."
 argument-hint: "<deal or account> [competitor]"
 ---
 
