@@ -176,9 +176,42 @@ async function validatePluginComponents() {
           failures.push(`${relative}: frontmatter is not valid YAML: ${error.message.split('\n')[0]}`);
         }
         check(typeof meta?.description === 'string' && meta.description.trim().length > 0, `${relative}: description must be a non-empty string`);
-        if (dir === 'agents') check(meta?.name === path.basename(relative, extension), `${relative}: name must match the file name`);
+        if (dir === 'agents') {
+          check(meta?.name === path.basename(relative, extension), `${relative}: name must match the file name`);
+          // A plugin agent's tools must be an explicit allowlist of catalog tools; without one it inherits every
+          // tool in the session, including the review action and other connected servers.
+          const tools = Array.isArray(meta?.tools) ? meta.tools : [];
+          check(tools.length > 0, `${relative}: tools must be an explicit allowlist`);
+          for (const tool of tools) {
+            const name = String(tool).replace(/^mcp__plugin_calven_calven__/, '');
+            check(String(tool).startsWith('mcp__plugin_calven_calven__') && EXPECTED_TOOLS.includes(name), `${relative}: ${tool} is not a Calven catalog tool`);
+            if (/read-only/i.test(meta?.description ?? '')) check(!ACTION_TOOLS.includes(name), `${relative}: a read-only agent may not list ${name}`);
+          }
+        }
       }
       checkToolMentions(relative, source);
+    }
+  }
+  return count;
+}
+
+// Every eval case file and grader must parse, or claude plugin eval silently drops the case.
+async function validateEvals() {
+  let count = 0;
+  if (!(await exists('evals'))) return count;
+  for (const absolute of await filesUnder(path.join(ROOT, 'evals'))) {
+    const relative = path.relative(ROOT, absolute);
+    if (relative.split(path.sep).includes('mocks')) continue;
+    if (!(relative.endsWith('prompt.md') || relative.includes(`${path.sep}graders${path.sep}`))) continue;
+    if (relative.endsWith('prompt.md')) count += 1;
+    const source = await readFile(absolute, 'utf8');
+    const frontmatter = source.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n/);
+    check(Boolean(frontmatter), `${relative}: missing YAML frontmatter`);
+    if (!frontmatter) continue;
+    try {
+      parseYaml(frontmatter[1]);
+    } catch (error) {
+      failures.push(`${relative}: frontmatter is not valid YAML: ${error.message.split('\n')[0]}`);
     }
   }
   return count;
@@ -426,12 +459,25 @@ for (const [file, asset] of [['.claude-plugin/plugin.json', claudePlugin.icon], 
   check(typeof asset === 'string' && (await exists(asset)), `${file}: icon or logo ${asset} does not exist`);
 }
 
+// OpenAI reads its listing from plugin.json extensions.com.openai. Its guidelines cap the names and forbid
+// pricing and trial language in the listing.
+const openai = plugin.extensions?.['com.openai'];
+if (openai) {
+  const ui = openai.interface ?? {};
+  check(typeof ui.displayName === 'string' && ui.displayName.length <= 30, 'plugin.json: extensions.com.openai.interface.displayName must be 1-30 characters');
+  check(typeof ui.shortDescription === 'string' && ui.shortDescription.length <= 30, 'plugin.json: extensions.com.openai.interface.shortDescription must be 1-30 characters');
+  check(typeof ui.longDescription === 'string' && !/trial|pricing|price|\$\d|free/i.test(ui.longDescription), 'plugin.json: the OpenAI long description must not mention pricing or a trial');
+  for (const key of ['logo', 'composerIcon']) check(!ui[key] || (await exists(ui[key])), `plugin.json: extensions.com.openai.interface.${key} ${ui[key]} does not exist`);
+  check(!openai.onboardingSkill || (await exists(path.join(openai.onboardingSkill, 'SKILL.md'))), `plugin.json: onboardingSkill ${openai.onboardingSkill} has no SKILL.md`);
+}
+
 const catalog = await readFile(path.join(ROOT, 'docs/tool-catalog.md'), 'utf8');
 const catalogTools = [...catalog.matchAll(/^\| `([a-z0-9_]+)` \|/gm)].map((match) => match[1]);
 check(JSON.stringify(catalogTools) === JSON.stringify(EXPECTED_TOOLS), 'docs/tool-catalog.md: tool list or order drift');
 
 await validateSkills();
 const componentCount = await validatePluginComponents();
+const evalCount = await validateEvals();
 await validateUseCases();
 const exampleCount = await validateExamples();
 await validatePublicText();
@@ -457,4 +503,4 @@ if (failures.length > 0) {
   process.exit(1);
 }
 
-console.log(`Validated ${EXPECTED_TOOLS.length} tools, 7 manifests, ${exampleCount} client examples, endpoint URLs and tool counts in public docs, the portable skills, ${componentCount} agents and rules, and the use-case library.`);
+console.log(`Validated ${EXPECTED_TOOLS.length} tools, 7 manifests, ${exampleCount} client examples, endpoint URLs and tool counts in public docs, the portable skills, ${componentCount} agents and rules, ${evalCount} eval cases, and the use-case library.`);

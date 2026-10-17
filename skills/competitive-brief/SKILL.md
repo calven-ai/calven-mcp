@@ -1,6 +1,6 @@
 ---
 name: competitive-brief
-description: "Builds a sourced competitive brief or battlecard from Calven: where we win and lose against a named competitor, their recent moves, objection handling, proof points and a talk track for reps. Use when the user asks how we compare, win, lose, position or respond against a named competitor, or wants a battlecard, competitive teardown, objection response or competitive talk track."
+description: "Builds a sourced competitive brief or sales battlecard from Calven: where we win and lose against a named competitor, their recent moves, objection handling, proof points and a talk track for reps. Use when the user asks how we compare, win, lose, position or respond against a named competitor, or wants a competitor comparison, competitive analysis, battlecard, competitive teardown, objection response or competitive talk track. Do not use to prepare for a specific deal or call (use deal-prep) or to fact-check a draft that mentions a competitor (use claim-check)."
 ---
 
 # Competitive brief

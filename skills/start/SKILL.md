@@ -9,7 +9,13 @@ disable-model-invocation: true
 Check that Calven is connected, then show the user what their workspace holds and what to ask first.
 
 1. Call `get_workspace_overview`.
-   - If the call fails because the Calven tools are missing, or with a sign-in or `401` error, stop. Tell the user to run `/mcp`, select `calven` and sign in to Calven in the browser, then run `/calven:start` again. They need a Calven workspace: https://app.calven.ai/sign-up (14-day trial, no card).
+   - If the call fails because the Calven tools are missing, or with a sign-in or `401` error, stop and tell the user how to sign in, in the client they are using:
+     - Claude Code: run `/mcp`, select `calven` and sign in to Calven in the browser.
+     - Claude (claude.ai or desktop): Customize, then Connectors, then Connect next to Calven.
+     - ChatGPT: open the Calven plugin and sign in when it asks.
+     - Cursor: open Cursor Settings, find `calven` in the MCP section and sign in.
+     - Any other client: reconnect the Calven MCP server in its settings and sign in.
+   Then ask them to run this again. They need a Calven workspace: https://app.calven.ai/sign-up
 2. Report in a few lines:
    - the products, or that it is a single-product workspace;
    - which strategy documents are published (positioning, messaging, ICP, product brief) and which are missing;

@@ -166,7 +166,7 @@ Then run `/calven:start` to check the connection and get three first prompts bui
 | Skill | `/calven:start` | Connection check and what your workspace can answer (runs only when you type it) |
 | Subagent | `gtm-researcher` | Gathers evidence from several Calven sources and keeps large results out of your conversation |
 
-Skills load on their own when a request matches, except `start`, which runs only when typed; you can type any of them. The same package installs in Cursor and in any [Agent Plugins](https://agent-plugins.org/) client. Contents, formats and how the workflows are tested: [plugin](docs/plugin.md).
+Skills load on their own when a request matches, except `start`, which runs only when typed; you can type any of them. Cursor installs it from its own manifest, and clients that implement [Agent Plugins](https://agent-plugins.org/) can import the skills and the server connection. Contents, formats and how the workflows are tested: [plugin](docs/plugin.md).
 
 ## Help
 

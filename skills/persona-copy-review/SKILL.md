@@ -1,6 +1,6 @@
 ---
 name: persona-copy-review
-description: "Reviews copy against the company's buyer, stakeholder and user personas in Calven and returns findings by severity: what lands, what each persona objects to, what to fix first. Use when the user asks whether buyers or a persona would respond to an email, ad, headline, landing page or message, or asks for persona feedback, audience fit or message testing."
+description: "Reviews copy against the company's buyer, stakeholder and user personas in Calven and returns findings by severity: what lands, what each persona objects to, what to fix first. Use when the user asks whether buyers or a persona would respond to an email, ad, headline, landing page or message, or asks for persona feedback, message testing, audience resonance, buyer feedback or copy evaluation. Do not use to check whether the facts in the copy are true (use claim-check)."
 ---
 
 # Persona copy review

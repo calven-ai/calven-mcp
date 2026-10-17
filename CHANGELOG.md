@@ -8,7 +8,9 @@ Notable changes to the Calven MCP server's public contract, the registry descrip
 - Two new skills: `deal-prep` (a one-page call brief) and `claim-check` (fact-check a draft against the approved product brief and competitor evidence).
 - Two more skills: `/calven:win-loss-review` builds a monthly or quarterly readout; `/calven:start` (typed only) checks the connection and suggests first prompts from your workspace.
 - A read-only `gtm-researcher` subagent and a Cursor rule that sends company facts to Calven.
-- Plugin evals in `evals/`, run with `claude plugin eval` against a fictional mocked workspace.
+- Plugin evals in `evals/`, run with `claude plugin eval` against a fictional mocked workspace, including skill-routing cases.
+- The `gtm-researcher` subagent's tools are an explicit allowlist of the 13 Calven read tools.
+- OpenAI listing fields and the onboarding skill in `plugin.json` under `extensions.com.openai`.
 - Listing icons and screenshots in `assets/`, and the Calven icon in the registry descriptor (`server.json` 1.2.0, `icons`).
 
 ## [1.1.0] - 2026-10-07

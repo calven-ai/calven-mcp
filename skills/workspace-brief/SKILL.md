@@ -1,6 +1,6 @@
 ---
 name: workspace-brief
-description: "Builds a sourced brief of the company's GTM strategy and evidence from Calven: positioning, messaging, ICP, personas, market trends, customer voice and win/loss. Use when the user asks who we sell to, how we position, what our messaging or ICP says, or wants company, product or market context before writing, planning or onboarding."
+description: "Builds a sourced brief of the company's GTM strategy and evidence from Calven: positioning, messaging, ICP, personas, market trends, customer voice and win/loss. Use when the user asks who we sell to, how we position, what our messaging or ICP says, or wants company context, a GTM strategy summary or a product marketing briefing before writing, planning or onboarding. Do not use for a single competitor, deal or win/loss period (use competitive-brief, deal-prep or win-loss-review)."
 ---
 
 # Workspace brief

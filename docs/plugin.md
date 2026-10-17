@@ -1,6 +1,6 @@
 # Plugin
 
-The Calven plugin packages the hosted MCP connection with workflows that turn Calven evidence into finished work. It is one package with three client manifests, so every client loads the same skills and the same server.
+The Calven plugin packages the hosted MCP connection with workflows that turn Calven evidence into finished work. It is one package with three client manifests that share the same skills and the same server.
 
 ## Install
 
@@ -27,7 +27,7 @@ After installing, run `/calven:start` in Claude Code. It checks the connection, 
 | `rules/use-calven.mdc` | Cursor rule | Sends company facts to Calven instead of model memory |
 | `assets/` | Images | Plugin icon and listing images |
 
-Skills load on their own when a request matches and can also be typed as `/calven:<name>`. `start` sets `disable-model-invocation`, so it runs only when typed. Everything is a skill rather than a legacy command so that every client that reads Agent Plugins gets it, not only Claude Code and Cursor. The subagent keeps large tool results out of the main conversation; it cannot write files or run shell commands.
+Skills load on their own when a request matches and can also be typed as `/calven:<name>`. `start` sets `disable-model-invocation`, so it runs only when typed. Everything is a skill rather than a legacy command, the format Claude Code recommends and the only one Agent Plugins defines. The subagent keeps large tool results out of the main conversation. Its tool list allows only the 13 Calven read tools, so it cannot start a persona review, write files, run commands or use other connected services.
 
 The plugin adds workflow instructions. It does not change authentication, permissions, tools or tenant boundaries. It ships no hooks and no executables, so nothing runs on your machine.
 
@@ -38,9 +38,10 @@ The plugin adds workflow instructions. It does not change authentication, permis
 | Claude Code | `.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json` | `.mcp.json` (`http`) | skills, agents |
 | Cursor | `.cursor-plugin/plugin.json` | `.mcp.json` | skills, agents, rules |
 | Agent Plugins 1.0 | `plugin.json` | `mcp.json` (`streamable-http`) | skills |
+| ChatGPT and Codex | `plugin.json`, `extensions.com.openai` (listing fields, onboarding skill `start`) | `mcp.json` | skills |
 | Official MCP Registry | `server.json` | `remotes[]` | none |
 
-Agent Plugins requires the root `mcp.json` name and its portable transport vocabulary; Claude Code and Cursor read `.mcp.json`. All three point at the same endpoint, and `npm run validate` fails if they drift, if the manifests disagree on name or version, or if a listed icon is missing. CI also runs `claude plugin validate --strict`.
+The Agent Plugins package standardizes skills and the MCP connection only. Clients that implement it can import the root package; the subagent, the Cursor rule, typed-only invocation and how a skill is invoked depend on the client, and the client-specific manifests stay available. Agent Plugins requires the root `mcp.json` name and its portable transport vocabulary; Claude Code and Cursor read `.mcp.json`. All three point at the same endpoint, and `npm run validate` fails if they drift, if the manifests disagree on name or version, or if a listed icon is missing. CI also runs `claude plugin validate --strict`.
 
 `.claude-plugin/plugin.json` carries the fields Anthropic's directory reads for the listing: `icon`, `documentationUrl`, `supportUrl`, `privacyPolicyUrl` and `termsOfServiceUrl`.
 
@@ -48,7 +49,7 @@ Agent Plugins requires the root `mcp.json` name and its portable transport vocab
 
 `evals/` holds plugin eval cases for `claude plugin eval`. They run against a mocked Calven server with a fictional workspace (`evals/mocks/calven/`), so they need no Calven account and contain no customer data. `evals/mocks/calven/_tools.json` carries the production tool descriptions and schemas, so the model sees the same tools it sees in production.
 
-Each case is a request a user would type, plus graders: an LLM rubric on the answer, and checks on which tools and skills ran. The cases cover the happy path for each workflow, an account the CRM does not hold (the answer must say so and invent nothing), a drafting request that must not trigger any workflow, and the asynchronous persona review.
+Each case is a request a user would type, plus graders: an LLM rubric on the answer, and checks on which tools and skills ran. The cases cover the happy path for each workflow, an account the CRM does not hold (the answer must say so and invent nothing), a drafting request that must not trigger any workflow, the asynchronous persona review, and the researcher subagent reading Calven with its tool allowlist. `evals/routing/` checks skill selection: three phrasings for each of four skills that sit close together (deal prep, competitive brief, claim check, persona review), each of which must load that skill and no other, plus four unrelated requests that must load none.
 
 ```sh
 claude plugin eval . --judge-model sonnet
