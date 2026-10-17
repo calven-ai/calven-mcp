@@ -14,7 +14,7 @@ Make the fewest calls that answer the brief. Skip a step when the user already g
 
 1. Find the deal. Call `list_records` with kind `crm_deals` and `q` set to the deal or account name. If several match, ask which one, or take the open one and say so. Read it in full with `get_record` only when the list line lacks stage, amount, close date or competitors.
 2. The account and its people. Call `list_records` with kind `crm_contacts` and `q` set to the account name, or the account's domain if the deal shows it. Map each contact's role to a persona with `list_records` kind `personas` (one call), then `get_persona` only for the one or two personas who matter most in this deal.
-3. The competitor. Use the competitor the user named, else the one on the deal record. Call `get_competitor` once. It returns the battlecard and recent signals. Do not read the full dossier unless the user asks about pricing or packaging.
+3. The competitor. Use the competitor the user named, else the one on the deal record. Call `get_competitor` once. It returns the battlecard and recent signals. Do not read the full dossier unless the user asks about pricing or packaging. Note the head-to-head record against this competitor (deals won and lost, with the count and the window) from the competitor record, or from `get_insights` with `dashboard: "competitive_intelligence"` if the record has none.
 4. Why deals like this are won and lost. Call `get_insight_detail` with `detail: "competitive_intelligence.competitor_deals"` and the competitor for the deals behind the head-to-head record, then `list_records` with kind `quotes` and `q` set to the competitor for the buyers' own words. If both come back empty, say there is no recorded win/loss evidence against this competitor.
 5. A proof point. Prefer a won deal or a customer quote from the same segment. If none exists, say so.
 
@@ -22,8 +22,8 @@ Make the fewest calls that answer the brief. Skip a step when the user already g
 
 Keep it to one page, in this order:
 
-1. **The deal in three lines**: stage, amount, close date, competitor, what changed last.
-2. **Buying group**: who is on it, their persona and what each cares about; who is missing from the usual buying group.
+1. **The deal in three lines**: stage, amount, close date, competitor and our head-to-head record against it with its sample size and window, what changed last.
+2. **Buying group**: who is on it, their persona and what each cares about. Then compare the contacts with the personas whose buying role is economic buyer, decision maker or champion, and name each of those roles that no contact on the account covers, such as "Missing: the economic buyer (VP Finance persona)".
 3. **What the competitor will try**: two or three moves from the battlecard or recent signals, with the counter for each.
 4. **The biggest risk**: grounded in what sank similar deals. Say whether anyone on this deal has raised it, as far as the record shows.
 5. **First question to ask, and to whom.**
