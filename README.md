@@ -146,7 +146,7 @@ Data is stored in the EU, a DPA with EU SCCs covers every plan, and the SOC 2 Ty
 
 ## The plugin
 
-The Calven plugin bundles the server connection with five workflows, two commands and a research subagent. Install it in Claude Code:
+The Calven plugin bundles the server connection with seven workflow skills and a research subagent. Install it in Claude Code:
 
 ```sh
 claude plugin marketplace add calven-ai/calven-mcp
@@ -162,11 +162,11 @@ Then run `/calven:start` to check the connection and get three first prompts bui
 | Skill | `/calven:competitive-brief` | Where you win and lose against a named competitor, with a talk track |
 | Skill | `/calven:persona-copy-review` | Your copy reviewed against your personas, findings by severity |
 | Skill | `/calven:workspace-brief` | A sourced view of your strategy and evidence |
-| Command | `/calven:start` | Connection check and what your workspace can answer |
-| Command | `/calven:win-loss-review` | A monthly or quarterly win/loss readout, every rate with its sample size |
+| Skill | `/calven:win-loss-review` | A monthly or quarterly win/loss readout, every rate with its sample size |
+| Skill | `/calven:start` | Connection check and what your workspace can answer (runs only when you type it) |
 | Subagent | `gtm-researcher` | Gathers evidence from several Calven sources and keeps large results out of your conversation |
 
-Skills load on their own when a request matches; you can also type them. The same package installs in Cursor and in any [Agent Plugins](https://agent-plugins.org/) client. Contents, formats and how the workflows are tested: [plugin](docs/plugin.md).
+Skills load on their own when a request matches, except `start`, which runs only when typed; you can type any of them. The same package installs in Cursor and in any [Agent Plugins](https://agent-plugins.org/) client. Contents, formats and how the workflows are tested: [plugin](docs/plugin.md).
 
 ## Help
 

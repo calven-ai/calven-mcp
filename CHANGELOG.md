@@ -6,7 +6,7 @@ Notable changes to the Calven MCP server's public contract, the registry descrip
 
 - The plugin installs in Claude Code from this repository (`claude plugin marketplace add calven-ai/calven-mcp`, then `claude plugin install calven@calven`) and ships a Cursor manifest. Both reuse the same skills and `.mcp.json`.
 - Two new skills: `deal-prep` (a one-page call brief) and `claim-check` (fact-check a draft against the approved product brief and competitor evidence).
-- Two commands for Claude Code and Cursor: `/calven:start` checks the connection and suggests first prompts from your workspace; `/calven:win-loss-review` builds a monthly or quarterly readout.
+- Two more skills: `/calven:win-loss-review` builds a monthly or quarterly readout; `/calven:start` (typed only) checks the connection and suggests first prompts from your workspace.
 - A read-only `gtm-researcher` subagent and a Cursor rule that sends company facts to Calven.
 - Plugin evals in `evals/`, run with `claude plugin eval` against a fictional mocked workspace.
 - Listing icons and screenshots in `assets/`.

@@ -1,5 +1,7 @@
 ---
-description: Check the Calven connection and see what your workspace can answer, with three first prompts built from your own data.
+name: start
+description: Check the Calven connection and see what your workspace can answer, with three first prompts built from your own data. Run it after installing the plugin or when Calven tools seem missing.
+disable-model-invocation: true
 ---
 
 # Start with Calven
@@ -7,7 +9,7 @@ description: Check the Calven connection and see what your workspace can answer,
 Check that Calven is connected, then show the user what their workspace holds and what to ask first.
 
 1. Call `get_workspace_overview`.
-   - If the call fails because the Calven tools are missing, or with a sign-in or `401` error, stop. Tell the user to run `/mcp`, select `calven` and sign in to Calven in the browser, then run this command again. They need a Calven workspace: https://app.calven.ai/sign-up (14-day trial, no card).
+   - If the call fails because the Calven tools are missing, or with a sign-in or `401` error, stop. Tell the user to run `/mcp`, select `calven` and sign in to Calven in the browser, then run `/calven:start` again. They need a Calven workspace: https://app.calven.ai/sign-up (14-day trial, no card).
 2. Report in a few lines:
    - the products, or that it is a single-product workspace;
    - which strategy documents are published (positioning, messaging, ICP, product brief) and which are missing;

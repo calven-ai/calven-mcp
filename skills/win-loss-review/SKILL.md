@@ -1,11 +1,12 @@
 ---
-description: Monthly or quarterly win/loss review from Calven Insights, every rate with its sample size and window.
+name: win-loss-review
+description: Build a monthly or quarterly win/loss review from Calven Insights, every rate with its sample size and window, when the user asks how we did on win/loss, why we won or lost deals in a period, or for a win/loss readout for leadership.
 argument-hint: "[period: last month | last quarter | this year | YYYY-MM] [product]"
 ---
 
 # Win/loss review
 
-Build a win/loss review for the period in the arguments: $ARGUMENTS
+Build a win/loss review for the period the user asked for: $ARGUMENTS
 
 If no period is given, use last month. Map "last month", "last quarter", "this quarter", "this year" and "last year" to the matching `timeframe`; map a named month or quarter to `from` and `to`. If a product is named, pass it as `product` on every call.
 

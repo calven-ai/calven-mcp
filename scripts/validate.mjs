@@ -160,6 +160,7 @@ function checkToolMentions(relative, source) {
 async function validatePluginComponents() {
   let count = 0;
   for (const [dir, extension] of [['commands', '.md'], ['agents', '.md'], ['rules', '.mdc']]) {
+    if (!(await exists(dir))) continue;
     for (const absolute of await filesUnder(path.join(ROOT, dir))) {
       const relative = path.relative(ROOT, absolute);
       if (path.extname(relative) !== extension) continue;
@@ -456,4 +457,4 @@ if (failures.length > 0) {
   process.exit(1);
 }
 
-console.log(`Validated ${EXPECTED_TOOLS.length} tools, 7 manifests, ${exampleCount} client examples, endpoint URLs and tool counts in public docs, the portable skills, ${componentCount} commands, agents and rules, and the use-case library.`);
+console.log(`Validated ${EXPECTED_TOOLS.length} tools, 7 manifests, ${exampleCount} client examples, endpoint URLs and tool counts in public docs, the portable skills, ${componentCount} agents and rules, and the use-case library.`);

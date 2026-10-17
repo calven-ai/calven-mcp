@@ -11,11 +11,18 @@
   "homepage": "https://calven.ai/mcp",
   "repository": "https://github.com/calven-ai/calven-mcp",
   "license": "MIT",
-  "keywords": ["calven", "mcp", "product-marketing", "competitive-intelligence", "win-loss", "positioning", "messaging"],
+  "keywords": [
+    "calven",
+    "mcp",
+    "product-marketing",
+    "competitive-intelligence",
+    "win-loss",
+    "positioning",
+    "messaging"
+  ],
   "logo": "assets/icon.png",
   "skills": "./skills/",
   "agents": "./agents/",
-  "commands": "./commands/",
   "rules": "./rules/",
   "mcpServers": "./.mcp.json"
 }
