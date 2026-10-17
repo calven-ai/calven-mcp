@@ -9,7 +9,7 @@ Notable changes to the Calven MCP server's public contract, the registry descrip
 - Two more skills: `/calven:win-loss-review` builds a monthly or quarterly readout; `/calven:start` (typed only) checks the connection and suggests first prompts from your workspace.
 - A read-only `gtm-researcher` subagent and a Cursor rule that sends company facts to Calven.
 - Plugin evals in `evals/`, run with `claude plugin eval` against a fictional mocked workspace.
-- Listing icons and screenshots in `assets/`.
+- Listing icons and screenshots in `assets/`, and the Calven icon in the registry descriptor (`server.json` 1.2.0, `icons`).
 
 ## [1.1.0] - 2026-10-07
 

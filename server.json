@@ -3,8 +3,24 @@
   "name": "ai.calven/mcp",
   "title": "Calven",
   "description": "Connect AI agents to shared product marketing intelligence in Calven.",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "websiteUrl": "https://calven.ai/mcp",
+  "icons": [
+    {
+      "src": "https://calven.ai/favicon.svg",
+      "mimeType": "image/svg+xml",
+      "sizes": [
+        "any"
+      ]
+    },
+    {
+      "src": "https://calven.ai/apple-touch-icon.png",
+      "mimeType": "image/png",
+      "sizes": [
+        "180x180"
+      ]
+    }
+  ],
   "repository": {
     "url": "https://github.com/calven-ai/calven-mcp",
     "source": "github"
