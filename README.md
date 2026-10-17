@@ -9,7 +9,7 @@
 
 <h1 align="center">Calven MCP</h1>
 
-<p align="center">Your approved GTM context, in every AI tool: ICP, personas, positioning, messaging, competitive intel and win/loss, with sources.</p>
+<p align="center">Your approved GTM context, in every AI tool: positioning, messaging, ICP, personas, competitive intel and win/loss, with sources.</p>
 
 <p align="center">
   <a href="#connect">Connect</a> · <a href="#try-it">Try it</a> · <a href="use-cases/">Use cases by team</a> · <a href="https://calven.ai/mcp">calven.ai/mcp</a> · <a href="https://app.calven.ai/sign-up">14-day trial, no card</a>
@@ -24,7 +24,7 @@
   <img src="docs/assets/mcp-diagram.png" width="860" alt="Online research, documents, call notes, CRM and win/loss surveys flow through nine Calven agents into one GTM source of truth, which answers with sources in Claude, ChatGPT, Codex, Cursor, Copilot and other MCP clients">
 </p>
 
-Calven is the AI product marketing platform. Its nine agents keep one GTM source of truth on your market, buyers, positioning and messaging. Calven MCP puts it inside Claude, ChatGPT, Codex, Cursor, Copilot and other MCP clients that sign in with OAuth (see [client support](docs/client-support.md)), so sales, marketing, product and leadership work from the same answers your team approved.
+Calven is the AI product marketing platform. Its nine agents keep one GTM source of truth on your market, buyers, positioning and messaging. Calven MCP puts it inside Claude, ChatGPT, Codex, Cursor, Copilot and other MCP clients that sign in with OAuth (see [client support](docs/client-support.md)), so sales, marketing, product and leadership work from the same answers your team approved. The plugin adds workflows for deal prep, battlecards, claim checks, persona copy review and win/loss reviews.
 
 ## Connect
 
