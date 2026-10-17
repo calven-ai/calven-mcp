@@ -1,7 +1,7 @@
 ---
 type: tool_used
 tool: Skill
-input_match: '"skill"\s*:\s*"(?:[\w-]+:)?(deal-prep|competitive-brief|persona-copy-review|win-loss-review|workspace-brief|start)"'
+input_match: '"skill"\s*:\s*"(?:[\w-]+:)?(battlecard|deal-prep|persona-copy-review|on-message-draft|customer-evidence|icp-check|icp-pipeline-review|win-loss-review|gtm-overview|start)"'
 min: 0
 max: 0
 arm: both

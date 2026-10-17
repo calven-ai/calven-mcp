@@ -1,6 +1,6 @@
 ---
 name: start
-description: "Checks the Calven connection and shows what the GTM workspace holds, with three first prompts built from the company's own competitors, personas and deals. Run it after installing the plugin or when Calven tools seem missing."
+description: "Checks the Calven connection, shows what our GTM workspace holds and suggests three first prompts built from our own competitors, personas and deals. Run it after installing the plugin or when Calven tools seem missing."
 disable-model-invocation: true
 ---
 
@@ -27,4 +27,4 @@ Check that Calven is connected, then show the user what their workspace holds an
    - a win/loss or pipeline question, if deals or surveyed deals exist; otherwise a claim check of a draft against the product brief.
 4. If the workspace is empty or nearly empty, say so plainly and point the user to the Calven app to add sources (documents, call notes, CRM) before asking questions. Do not demonstrate with invented data.
 
-Mention the plugin's workflows in one line at the end: `/calven:deal-prep`, `/calven:claim-check`, `/calven:competitive-brief`, `/calven:persona-copy-review`, `/calven:workspace-brief` and `/calven:win-loss-review`.
+Mention the plugin's workflows in one line at the end: `/calven:battlecard`, `/calven:deal-prep`, `/calven:claim-check`, `/calven:persona-copy-review`, `/calven:on-message-draft`, `/calven:customer-evidence`, `/calven:icp-check`, `/calven:icp-pipeline-review`, `/calven:win-loss-review` and `/calven:gtm-overview`.

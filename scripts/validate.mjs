@@ -448,6 +448,8 @@ for (const [file, manifest] of [['.claude-plugin/plugin.json', claudePlugin], ['
   check(manifest.repository === plugin.repository, `${file}: repository drift`);
 }
 check(claudePlugin.description === cursorPlugin.description, '.cursor-plugin/plugin.json: description must match .claude-plugin/plugin.json');
+// Anthropic's plugin directory shows at most 200 characters of the description.
+check(typeof claudePlugin.description === 'string' && claudePlugin.description.length <= 200, `.claude-plugin/plugin.json: description must be 200 characters or fewer (got ${claudePlugin.description?.length})`);
 const marketplaceEntry = claudeMarketplace.plugins?.find((entry) => entry.name === plugin.name);
 check(Boolean(marketplaceEntry), `.claude-plugin/marketplace.json: no entry named ${plugin.name}`);
 check(marketplaceEntry?.source === './', '.claude-plugin/marketplace.json: the plugin source must be the repository root ("./")');

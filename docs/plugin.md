@@ -16,18 +16,22 @@ After installing, run `/calven:start` in Claude Code. It checks the connection, 
 
 | Path | Type | Purpose |
 | --- | --- | --- |
+| `skills/battlecard/` | Skill | Sourced battlecard against a named competitor |
 | `skills/deal-prep/` | Skill | One-page, sourced call brief for one deal |
 | `skills/claim-check/` | Skill | Every claim in a draft checked against the product brief, positioning and competitor evidence |
-| `skills/competitive-brief/` | Skill | Evidence-bound competitive analysis |
 | `skills/persona-copy-review/` | Skill | Persona review task and findings |
-| `skills/workspace-brief/` | Skill | Sourced workspace orientation |
-| `skills/win-loss-review/` | Skill | Monthly or quarterly win/loss readout (`/calven:win-loss-review [period]`) |
+| `skills/on-message-draft/` | Skill | Copy from approved messaging, claim-checked and persona-reviewed |
+| `skills/customer-evidence/` | Skill | Verbatim quotes, themes and proof points on a topic |
+| `skills/icp-check/` | Skill | Accounts checked against the approved ICP |
+| `skills/icp-pipeline-review/` | Skill | Live ICP pipeline dashboard (`/calven:icp-pipeline-review [period]`) |
+| `skills/win-loss-review/` | Skill | Live monthly or quarterly win/loss dashboard (`/calven:win-loss-review [period]`) |
+| `skills/gtm-overview/` | Skill | Sourced summary of strategy and evidence |
 | `skills/start/` | Skill, typed only | Connection check and first prompts (`/calven:start`) |
 | `agents/gtm-researcher.md` | Subagent | Read-only evidence gathering across several Calven sources |
 | `rules/use-calven.mdc` | Cursor rule | Sends company facts to Calven instead of model memory |
 | `assets/` | Images | Plugin icon and listing images |
 
-Skills load on their own when a request matches and can also be typed as `/calven:<name>`. `start` sets `disable-model-invocation`, so it runs only when typed. Everything is a skill rather than a legacy command, the format Claude Code recommends and the only one Agent Plugins defines. The subagent keeps large tool results out of the main conversation. Its tool list allows only the 13 Calven read tools, so it cannot start a persona review, write files, run commands or use other connected services.
+Skills load on their own when a request matches and can also be typed as `/calven:<name>`. `start` sets `disable-model-invocation`, so it runs only when typed. Everything is a skill rather than a legacy command, the format Claude Code recommends and the only one Agent Plugins defines. `icp-pipeline-review` and `win-loss-review` deliver a live dashboard that reads Calven each time it opens, through each viewer's own sign-in: an artifact that calls the Calven connector in Claude, a workspace-private Site in ChatGPT, and the conversation in other clients. A Claude artifact can call only claude.ai connectors, so in Claude Code the page is live only when Calven is also connected on claude.ai; otherwise it is published as a dated snapshot. The subagent keeps large tool results out of the main conversation. Its tool list allows only the 13 Calven read tools, so it cannot start a persona review, write files, run commands or use other connected services.
 
 The plugin adds workflow instructions. It does not change authentication, permissions, tools or tenant boundaries. It ships no hooks and no executables, so nothing runs on your machine.
 
@@ -49,7 +53,7 @@ The Agent Plugins package standardizes skills and the MCP connection only. Clien
 
 `evals/` holds plugin eval cases for `claude plugin eval`. They run against a mocked Calven server with a fictional workspace (`evals/mocks/calven/`), so they need no Calven account and contain no customer data. `evals/mocks/calven/_tools.json` carries the production tool descriptions and schemas, so the model sees the same tools it sees in production.
 
-Each case is a request a user would type, plus graders: an LLM rubric on the answer, and checks on which tools and skills ran. The cases cover the happy path for each workflow, an account the CRM does not hold (the answer must say so and invent nothing), a drafting request that must not trigger any workflow, the asynchronous persona review, and the researcher subagent reading Calven with its tool allowlist. `evals/routing/` checks skill selection: three phrasings for each of four skills that sit close together (deal prep, competitive brief, claim check, persona review), each of which must load that skill and no other, plus four unrelated requests that must load none.
+Each case is a request a user would type, plus graders: an LLM rubric on the answer, and checks on which tools and skills ran. The cases cover the happy path for each workflow, an account the CRM does not hold (the answer must say so and invent nothing), a drafting request that must not trigger any workflow, the asynchronous persona review, and the researcher subagent reading Calven with its tool allowlist. `evals/routing/` checks skill selection: three phrasings for each of four skills that sit close together (deal prep, battlecard, claim check, persona review), one or two phrasings for each newer skill, each of which must load that skill and no other, plus four unrelated requests that must load none.
 
 ```sh
 claude plugin eval . --judge-model sonnet

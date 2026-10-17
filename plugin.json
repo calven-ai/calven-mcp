@@ -2,7 +2,7 @@
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "calven",
   "version": "1.2.0",
-  "description": "Approved GTM context from Calven, the AI product marketing platform: positioning, messaging, ICP, personas, competitive intel and win/loss, with sources. Plus deal prep, battlecards and claim checks.",
+  "description": "Approved GTM context from Calven, the AI product marketing platform: positioning, messaging, ICP and win/loss, with sources. Plus battlecards, deal prep, claim checks, ICP checks and live dashboards.",
   "author": {
     "name": "Calven",
     "url": "https://calven.ai"
@@ -25,6 +25,10 @@
     "sales-enablement",
     "voice-of-customer",
     "deal-prep",
+    "icp-check",
+    "pipeline-review",
+    "customer-evidence",
+    "copywriting",
     "mcp",
     "calven"
   ],
@@ -34,7 +38,7 @@
       "interface": {
         "displayName": "Calven",
         "shortDescription": "Your GTM context, with sources",
-        "longDescription": "Calven is the AI product marketing platform. Its nine agents keep one GTM source of truth on your market, buyers, positioning and messaging. This connector brings it into ChatGPT, so sales, marketing, product and leadership work from the answers your team approved.\n\nUse Calven when a request needs your company's own go-to-market knowledge: positioning and messaging, ICP and personas, competitive intelligence with battlecards and dossiers, win/loss and deal drivers, customer quotes and voice of customer, market trends recorded in your workspace, Insights dashboards, and CRM accounts and deals where your workspace allows it.\n\nTypical jobs for PMMs, marketing leads covering PMM, sales enablement and leadership: run deal prep for a sales call against a named competitor, build a battlecard or talk track, check a draft's claims against the approved product brief, review copy against your buyer personas, and write a win/loss readout for a QBR with every rate and its sample size.\n\nEvery answer carries its source. An empty result means nothing is recorded, and Calven says so. It does no web search and never fills gaps from model memory.\n\nThirteen read tools and one action: a persona review of your copy that returns findings. ChatGPT drafts the brief, battlecard or readout from Calven's evidence; the connector never changes your Calven workspace and sends or publishes nothing. Each user signs in with OAuth and sees only what their Calven role allows. Data is stored in the EU. Requires a Calven workspace; every plan includes MCP access.",
+        "longDescription": "Calven is the AI product marketing platform. Its nine agents keep one GTM source of truth on your market, buyers, positioning and messaging. This connector brings it into ChatGPT, so sales, marketing, product and leadership work from the answers your team approved.\n\nUse Calven when a request needs your company's own go-to-market knowledge: positioning and messaging, ICP and personas, competitive intelligence with battlecards and dossiers, win/loss and deal drivers, customer quotes and voice of customer, market trends recorded in your workspace, Insights dashboards, and CRM accounts and deals where your workspace allows it.\n\nTypical jobs for PMMs, marketing leads covering PMM, sales enablement and leadership: run deal prep for a sales call against a named competitor, build a battlecard or talk track, write copy from your approved messaging, pull customer quotes and proof, check accounts against your ICP, check a draft's claims against the approved product brief, review copy against your buyer personas, and build live win/loss and ICP pipeline dashboards as a ChatGPT Site, every rate with its sample size.\n\nEvery answer carries its source. An empty result means nothing is recorded, and Calven says so. It does no web search and never fills gaps from model memory.\n\nThirteen read tools and one action: a persona review of your copy that returns findings. ChatGPT drafts the brief, battlecard or readout from Calven's evidence; the connector never changes your Calven workspace and sends or publishes nothing. Each user signs in with OAuth and sees only what their Calven role allows. Data is stored in the EU. Requires a Calven workspace; every plan includes MCP access.",
         "developerName": "Calven",
         "category": "Business",
         "capabilities": [],
@@ -44,7 +48,7 @@
         "defaultPrompt": [
           "Build a battlecard against our top competitor from our win/loss evidence.",
           "Prep me for my next sales call: the buying group, the competitor and the first question to ask.",
-          "Check every claim in this draft against our product brief and battlecards."
+          "Build a live dashboard of how much of our pipeline fits our ICP."
         ],
         "brandColor": "#2E8BE7",
         "composerIcon": "./assets/icon.png",

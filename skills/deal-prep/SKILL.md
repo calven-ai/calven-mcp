@@ -1,6 +1,6 @@
 ---
 name: deal-prep
-description: "Builds a one-page, sourced sales call brief for one deal from Calven: the buying group and who is missing, the competitor's likely moves, the biggest deal risk, the first question to ask and the proof point to bring. Use when a seller, AE or BDR names a deal, account, prospect or meeting and asks to prepare for a call or meeting, do pre-call research, write an account briefing, review an opportunity, plan next steps or handle a competitor in that deal. Do not use for a general comparison with a competitor outside a specific deal (use competitive-brief) or to fact-check a draft (use claim-check)."
+description: "Builds a one-page, sourced brief for one deal from Calven: the buying group and who is missing, the competitor's likely moves, the biggest risk, the first question to ask and the proof point to bring. Use when a seller, AE or BDR names a deal, account or meeting and asks to prepare for a call, do pre-call research, write an account brief, review an opportunity or plan next steps. Do not use for a competitor comparison outside one deal (use battlecard) or to check whether an account fits our ICP (use icp-check)."
 argument-hint: "<deal or account> [competitor]"
 ---
 

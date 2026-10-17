@@ -1,5 +1,5 @@
 ---
-description: A plain drafting request. Neither deal-prep nor claim-check should fire.
+description: "A plain drafting request. No Calven workflow should fire, because the post does not describe the product."
 tags: [trigger, negative]
 runs: 2
 max_turns: 12

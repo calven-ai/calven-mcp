@@ -2,7 +2,7 @@
   "name": "calven",
   "displayName": "Calven",
   "version": "1.2.0",
-  "description": "Approved GTM context from Calven, the AI product marketing platform: positioning, messaging, ICP, personas, competitive intel and win/loss, with sources. Plus deal prep, battlecards and claim checks.",
+  "description": "Approved GTM context from Calven, the AI product marketing platform: positioning, messaging, ICP and win/loss, with sources. Plus battlecards, deal prep, claim checks, ICP checks and live dashboards.",
   "author": {
     "name": "Calven",
     "email": "support@calven.ai",
@@ -26,6 +26,10 @@
     "sales-enablement",
     "voice-of-customer",
     "deal-prep",
+    "icp-check",
+    "pipeline-review",
+    "customer-evidence",
+    "copywriting",
     "mcp",
     "calven"
   ],
