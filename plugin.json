@@ -2,7 +2,7 @@
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "calven",
   "version": "1.2.0",
-  "description": "Approved GTM context from Calven, the AI product marketing platform: positioning, messaging, ICP and win/loss, with sources. Plus battlecards, deal prep, quality reviews, ICP checks and dashboards.",
+  "description": "Approved GTM context from Calven, the AI product marketing platform: positioning, messaging, ICP, personas, competitive intel and win/loss, with sources. Plus battlecards, deal prep and copy reviews.",
   "author": {
     "name": "Calven",
     "url": "https://calven.ai"
