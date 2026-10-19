@@ -35,7 +35,7 @@ After installing, run `/calven:start` in Claude Code. It checks the connection, 
 
 Skills load on their own when a request matches and can also be typed as `/calven:<name>`. `start` sets `disable-model-invocation`, so it runs only when typed. Everything is a skill rather than a legacy command, the format Claude Code recommends and the only one Agent Plugins defines. `icp-pipeline-review` and `win-loss-review` deliver a live dashboard that reads Calven each time it opens, through each viewer's own sign-in: an artifact that calls the Calven connector in Claude, a workspace-private Site in ChatGPT, and the conversation in other clients. A Claude artifact can call only claude.ai connectors, so in Claude Code the page is live only when Calven is also connected on claude.ai; otherwise it is published as a dated snapshot. The subagent keeps large tool results out of the main conversation. Its tool list allows only the 13 Calven read tools, so it cannot start a persona review, write files, run commands or use other connected services.
 
-The plugin adds workflow instructions. It does not change authentication, permissions, tools or tenant boundaries. It ships no hooks and no executables, so nothing runs on your machine.
+The plugin adds workflow instructions. It does not change authentication, permissions, tools or tenant boundaries. It ships no hooks, no executables and no package dependencies, so nothing runs or installs on your machine.
 
 ## Formats
 
@@ -47,7 +47,7 @@ The plugin adds workflow instructions. It does not change authentication, permis
 | ChatGPT and Codex | `plugin.json`, `extensions.com.openai` (listing fields, onboarding skill `start`) | `mcp.json` | skills |
 | Official MCP Registry | `server.json` | `remotes[]` | none |
 
-The Agent Plugins package standardizes skills and the MCP connection only. Clients that implement it can import the root package; the subagent, the Cursor rule, typed-only invocation and how a skill is invoked depend on the client, and the client-specific manifests stay available. Agent Plugins requires the root `mcp.json` name and its portable transport vocabulary; Claude Code and Cursor read `.mcp.json`. All three point at the same endpoint, and `npm run validate` fails if they drift, if the manifests disagree on name or version, or if a listed icon is missing. CI also runs `claude plugin validate --strict`.
+The Agent Plugins package standardizes skills and the MCP connection only. Clients that implement it can import the root package; the subagent, the Cursor rule, typed-only invocation and how a skill is invoked depend on the client, and the client-specific manifests stay available. Agent Plugins requires the root `mcp.json` name and its portable transport vocabulary; Claude Code and Cursor read `.mcp.json`. All three point at the same endpoint, and `npm run validate --prefix scripts` fails if they drift, if the manifests disagree on name or version, or if a listed icon is missing. CI also runs `claude plugin validate --strict`.
 
 `.claude-plugin/plugin.json` carries the fields Anthropic's directory reads for the listing: `icon`, `documentationUrl`, `supportUrl`, `privacyPolicyUrl` and `termsOfServiceUrl`.
 
@@ -67,7 +67,7 @@ To measure what the workflows add over the bare server, run the same cases again
 
 The public `skills/` and `agents/` directories are the source of truth for portable workflow instructions. The production server is the source of truth for server behavior, schemas, resources, prompts and server-level instructions.
 
-Public workflows may reference documented tools. They must not copy private server prompts. `npm run validate` fails when a skill, agent or rule names a tool outside the public catalog.
+Public workflows may reference documented tools. They must not copy private server prompts. `npm run validate --prefix scripts` fails when a skill, agent or rule names a tool outside the public catalog.
 
 ## Versioning
 

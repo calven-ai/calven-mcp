@@ -10,9 +10,9 @@ The official MCP conformance suite is not run against the server yet.
 
 ## Public distribution
 
-`npm run validate` (`scripts/validate.mjs`) checks:
+`npm run validate --prefix scripts` (`scripts/validate.mjs`) checks:
 
-- `server.json`, `plugin.json`, and `mcp.json` against the JSON Schema named in their `$schema` (skipped by `npm run validate:offline`, which needs no network);
+- `server.json`, `plugin.json`, and `mcp.json` against the JSON Schema named in their `$schema` (skipped by `npm run validate:offline --prefix scripts`, which needs no network);
 - `server.json` names `ai.calven/mcp` and has one `streamable-http` remote; `plugin.json` names `calven` and this repository;
 - the endpoint `https://api.calven.ai/mcp` in `server.json`, `mcp.json` (`streamable-http`), and `.mcp.json` (`http`);
 - every `examples/**/*.json` file parses and every server under `mcpServers`, `servers`, or `mcp_servers` sets `url` (or `serverUrl`/`httpUrl`) to the endpoint; `url = "..."` lines in `examples/**/*.toml` match too;

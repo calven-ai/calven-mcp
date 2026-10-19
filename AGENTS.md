@@ -11,7 +11,7 @@ This repository is the public distribution surface for Calven's hosted MCP serve
 - `docs/assets/mcp-diagram.png` and `docs/assets/hero.png` are rendered from Calven's brand templates; re-render rather than edit. After re-rendering any PNG, run `python3 scripts/compress-images.py <files>`: the plugin installs the whole repository, so image weight lands on every user's disk.
 - `https://api.calven.ai/mcp` is the only production endpoint.
 
-Keep `mcp.json`, `.mcp.json`, examples, documentation, and skills aligned with that endpoint. Run `npm ci` once, then `npm run validate` after every change.
+Keep `mcp.json`, `.mcp.json`, examples, documentation, and skills aligned with that endpoint. Run `npm ci --prefix scripts` once, then `npm run validate --prefix scripts` after every change.
 
 ## Boundaries
 

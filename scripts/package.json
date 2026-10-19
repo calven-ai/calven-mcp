@@ -7,8 +7,8 @@
     "node": ">=22"
   },
   "scripts": {
-    "validate": "node scripts/validate.mjs",
-    "validate:offline": "node scripts/validate.mjs --offline"
+    "validate": "node validate.mjs",
+    "validate:offline": "node validate.mjs --offline"
   },
   "devDependencies": {
     "ajv": "8.20.0",

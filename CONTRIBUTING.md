@@ -13,11 +13,11 @@ The hosted server implementation is maintained privately. Follow [SECURITY.md](S
 5. With Node.js 22 or later, install the pinned dev dependencies and run the validator:
 
    ```sh
-   npm ci
-   npm run validate
+   npm ci --prefix scripts
+   npm run validate --prefix scripts
    ```
 
-   `npm run validate` downloads the manifest JSON Schemas. Use `npm run validate:offline` to run every other check without network access. See [conformance](docs/conformance.md) for what the validator checks.
+   `npm run validate --prefix scripts` downloads the manifest JSON Schemas. Use `npm run validate:offline --prefix scripts` to run every other check without network access. See [conformance](docs/conformance.md) for what the validator checks.
 
 6. Explain what you tested and what remains unverified.
 

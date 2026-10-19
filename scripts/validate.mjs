@@ -412,7 +412,7 @@ const PROSE_EXTENSIONS = new Set(['.md', '.json', '.yml', '.yaml', '.toml']);
 async function validatePublicText() {
   for (const absolute of await filesUnder(ROOT)) {
     const relative = path.relative(ROOT, absolute);
-    if (relative.startsWith(`use-cases${path.sep}`) || relative === 'package-lock.json' || relative === 'package.json') continue;
+    if (relative.startsWith(`use-cases${path.sep}`) || ['package-lock.json', 'package.json'].includes(path.basename(relative))) continue;
     const extension = path.extname(relative);
     if (!PROSE_EXTENSIONS.has(extension)) continue;
     const source = await readFile(absolute, 'utf8');
@@ -493,7 +493,7 @@ await validateSchemas([
 
 for (const absolute of await filesUnder(ROOT)) {
   const relative = path.relative(ROOT, absolute);
-  if (relative === 'package-lock.json' || relative === 'LICENSE') continue;
+  if (path.basename(relative) === 'package-lock.json' || relative === 'LICENSE') continue;
   const source = await readFile(absolute, 'utf8');
   check(!/cmcp_[A-Za-z0-9_-]{20,}/.test(source), `${relative}: looks like a committed Calven MCP key`);
   check(!/\bCalven\.ai\b|\bCalven AI\b/.test(source), `${relative}: use Calven as the brand name`);

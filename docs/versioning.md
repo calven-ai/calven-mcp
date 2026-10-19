@@ -10,7 +10,7 @@ The hosted server, Official MCP Registry descriptor, and Agent Plugin are versio
 
 ## Agent Plugin
 
-- Version field: `plugin.json#version`, repeated in `.claude-plugin/plugin.json` and `.cursor-plugin/plugin.json` (`npm run validate` fails if they differ)
+- Version field: `plugin.json#version`, repeated in `.claude-plugin/plugin.json` and `.cursor-plugin/plugin.json` (`npm run validate --prefix scripts` fails if they differ)
 - Tag format: `plugin-v<semver>`
 - Increment when plugin metadata or a packaged workflow skill changes.
 
