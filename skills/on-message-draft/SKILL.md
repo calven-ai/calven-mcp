@@ -20,12 +20,14 @@ Write the asset from what the company approved in Calven, then test it before ha
 
 - Build on the approved message: same claims, same proof, in the words the persona uses. Adapt the wording, never the substance.
 - State a capability, integration, number or price only if the product brief or messaging says it. Leave out anything they do not support.
+- Personas and quotes give you the buyer's words, not product facts. Never turn a persona's pain, hook or objection into a capability the product brief does not state.
+- Leave out roadmap dates and future availability unless the user asks for them. If a gap matters to the reader, say what is supported today and list the roadmap item under Gaps for the user to decide.
 - Follow the format the user asked for. If they gave none, keep it short.
 
 ## Test before handing over
 
-1. **Accuracy check**: list every factual claim in the draft and confirm each against the sources above. Fix or remove any that fail.
-2. **Persona review**: call `review_against_personas` with the draft. Set `scope` to `buyers`, `stakeholders` or `users` to match the target persona when known. The first response has no findings: wait `poll_after_seconds`, then call `get_task` until the status is not `working`. Apply high-severity findings. If the status is `input_required` or `failed`, say so and hand over the draft without it.
+1. **Persona review**: call `review_against_personas` with the draft. Set `scope` to `buyers`, `stakeholders` or `users` to match the target persona when known. The first response has no findings: wait `poll_after_seconds`, then call `get_task` until the status is not `working`. Apply high-severity findings. If the status is `input_required` or `failed`, say so and continue without it.
+2. **Accuracy check, last**: on the final text, after the persona findings are applied, list every factual claim and confirm each against the product brief, messaging or positioning. Fix or remove any that fail, including any a persona finding introduced. Nothing goes to the user that this check has not seen.
 
 ## Output
 

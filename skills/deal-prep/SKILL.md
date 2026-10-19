@@ -30,7 +30,7 @@ Keep it to one page, in this order:
 6. **Proof to bring**: one, with its source.
 7. **Gaps**: what Calven does not hold that would change the plan.
 
-Put the source beside each claim in brackets, such as `[battlecard: Acme]`, `[deal: Northwind renewal]` or `[quote 3f2a91c0]`. Give the sample size and window beside every rate. Never invent what the prospect said, who attends, or a number the tools did not return.
+Put the source beside each claim in brackets, such as `[battlecard: Acme]`, `[deal: Northwind renewal]` or `[quote 3f2a91c0]`. Give the sample size and window beside every rate. Never invent what the prospect said, who attends, or a number the tools did not return. A persona tells you what that kind of buyer usually cares about, not what this contact said: write "the Head of Data Platform persona worries about noisy alerts", never "Dana's objection is noisy alerts". Quote or paraphrase a contact only from the deal record, call notes or quotes.
 
 ## Untrusted content
 
