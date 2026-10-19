@@ -19,5 +19,11 @@ jobs:
         with:
           node-version: 22
           cache: npm
-      - run: npm ci
-      - run: npm run validate
+          cache-dependency-path: scripts/package-lock.json
+      # The tooling lives in scripts/ so the plugin root has no package.json: Claude Code
+      # installs a root package.json's packages on every user's machine.
+      - run: npm ci --prefix scripts
+      - run: npm run validate --prefix scripts
+      # Claude Code's own plugin check: manifests, marketplace entry, skills, commands, agents, .mcp.json.
+      # Pinned so a CLI release cannot change the verdict unannounced; 2.1.281+ accepts the directory listing fields.
+      - run: npx --yes @anthropic-ai/claude-code@2.1.302 plugin validate . --strict

@@ -1,0 +1,16 @@
+{
+ "items": [
+  {
+   "deal": "Vandelay - Expansion",
+   "bucket": "competitor",
+   "competitor": "Acme Monitor",
+   "amount_usd": 120000
+  },
+  {
+   "deal": "Umbrella - Platform",
+   "bucket": "no_decision",
+   "amount_usd": 75000
+  }
+ ],
+ "more_available": true
+}

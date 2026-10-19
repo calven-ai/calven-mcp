@@ -1,0 +1,29 @@
+{
+ "dashboard": "competitive_intelligence",
+ "window": {
+  "timeframe": "lastMonth"
+ },
+ "sections": [
+  {
+   "id": "performance",
+   "title": "Performance",
+   "status": "ok",
+   "data": {
+    "by_competitor": [
+     {
+      "competitor": "Acme Monitor",
+      "deals": 4,
+      "win_rate": 0.25,
+      "n": 4
+     },
+     {
+      "competitor": "Lattice Data",
+      "deals": 4,
+      "win_rate": 0.5,
+      "n": 4
+     }
+    ]
+   }
+  }
+ ]
+}

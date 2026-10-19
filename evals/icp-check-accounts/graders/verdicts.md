@@ -1,0 +1,8 @@
+---
+type: llm
+weight: 3
+---
+The fictional workspace's ICP: mid-market companies of 300 to 5,000 employees with a data platform team of 3+ and a cloud warehouse; trigger: a data incident reached an executive report. CRM accounts: Globex (globex.example, Logistics software, 1,200 employees, ICP fit tier A) and Hooli (hooli.example, Consumer internet, 8,000 employees, tier B). Stark Freight is not in the CRM; the user says about 40 employees.
+
+PASS if the reply calls Globex a fit, or a partial or likely fit that rests only on criteria it lists as unknown, and cites its recorded tier A; says Hooli misses the size criterion (8,000 is above 5,000) whatever its tier; and says Stark Freight does not fit on size. Saying that the data team and cloud warehouse are unknown for any account is fine and expected.
+FAIL only if one of these is true: it says Hooli is within the size range; it calls Stark Freight a fit; it states as fact a data team size, warehouse or funding stage for any account that the facts above do not give; or it says it changed a CRM record or tier.

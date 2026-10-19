@@ -29,3 +29,21 @@ For each supported client, record:
 - any client-specific limitation.
 
 Open a pull request with the evidence summary. Do not include credentials, tenant identifiers, customer names, or screenshots containing private workspace data.
+
+## Plugin install records
+
+### Claude Code 2.1.303, Linux, 2026-10-19
+
+- **Installation path:** fresh configuration directory, `claude plugin marketplace add calven-ai/calven-mcp` (pull request branch), then `claude plugin install calven@calven`. Installed as `calven@calven` 1.2.0, enabled.
+- **Components loaded:** 13 skills (`battlecard`, `customer-evidence`, `deal-prep`, `gtm-overview`, `icp-check`, `icp-pipeline-review`, `market-research`, `on-message-draft`, `persona-copy-review`, `product-intelligence`, `quality-review`, `start`, `win-loss-review`) and the subagent `calven:gtm-researcher`. `claude mcp list` shows `plugin:calven:calven` at `https://api.calven.ai/mcp`, needing authentication.
+- **Install size:** 4.6 MB. The plugin root has no `package.json`, so the install fetches no packages.
+- **Not yet verified:** the same sign-in steps as the 2026-10-17 record below.
+
+### Claude Code 2.1.302, Linux, 2026-10-17
+
+- **Installation path:** fresh configuration directory, `claude plugin marketplace add calven-ai/calven-mcp` (pull request branch), then `claude plugin install calven@calven`. Installed as `calven@calven` 1.2.0, enabled.
+- **Components loaded:** skills `deal-prep`, `claim-check`, `competitive-brief`, `persona-copy-review`, `win-loss-review`, `workspace-brief` (the 2026-10-17 install, before the renames to `quality-review`, `battlecard` and `gtm-overview`); `start` runs when typed; subagent `calven:gtm-researcher`. `claude mcp list` shows `plugin:calven:calven` at `https://api.calven.ai/mcp`, needing authentication.
+- **Registration method:** CIMD. Sign-in starts with `client_id=https://claude.ai/oauth/claude-code-client-metadata`, PKCE `S256`, the `resource` set to the endpoint and the published scopes; Calven's authorization server accepts the client and redirects to the sign-in page.
+- **Before sign-in:** `/calven:start` tells the user to sign in with `/mcp` and invents nothing.
+- **Not yet verified:** completing browser consent with a Calven account, tool and prompt discovery after sign-in, one sourced read workflow, and token persistence and revocation. These need a person at a browser.
+- **Install size:** about 3 MB of plugin files plus the marketplace clone.

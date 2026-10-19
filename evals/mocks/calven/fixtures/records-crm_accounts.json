@@ -1,0 +1,32 @@
+{
+ "kind": "crm_accounts",
+ "items": [
+  {
+   "id": "a1000001",
+   "kind": "crm_accounts",
+   "name": "Globex",
+   "product": [],
+   "cells": {
+    "domain": "globex.example",
+    "industry": "Logistics software",
+    "size": "1,200 employees",
+    "icp_fit_tier": "A"
+   }
+  },
+  {
+   "id": "a1000002",
+   "kind": "crm_accounts",
+   "name": "Hooli",
+   "product": [],
+   "cells": {
+    "domain": "hooli.example",
+    "industry": "Consumer internet",
+    "size": "8,000 employees",
+    "icp_fit_tier": "B"
+   }
+  }
+ ],
+ "has_more": false,
+ "next_offset": null,
+ "total": 2
+}

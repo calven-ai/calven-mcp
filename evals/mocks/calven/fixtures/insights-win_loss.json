@@ -1,0 +1,109 @@
+{
+ "dashboard": "win_loss",
+ "window": {
+  "timeframe": "lastMonth",
+  "from": "2026-09-01",
+  "to": "2026-09-30"
+ },
+ "compared_with": {
+  "from": "2026-08-01",
+  "to": "2026-08-31"
+ },
+ "sections": [
+  {
+   "id": "scoreboard",
+   "title": "Scoreboard",
+   "status": "ok",
+   "data": {
+    "competitive_win_rate": {
+     "value": 0.38,
+     "n": 21,
+     "comparison": {
+      "prior": 0.47,
+      "delta": -9,
+      "prior_n": 19
+     }
+    },
+    "pipeline_won_usd": {
+     "value": 412000,
+     "comparison": {
+      "prior": 455000,
+      "delta": -43000
+     }
+    },
+    "pipeline_lost_usd": {
+     "value": 690000,
+     "comparison": {
+      "prior": 380000,
+      "delta": 310000
+     }
+    }
+   }
+  },
+  {
+   "id": "why_won_lost",
+   "title": "Why we win and lose",
+   "status": "ok",
+   "data": {
+    "won": [
+     {
+      "reason": "Column-level lineage",
+      "deals": 5
+     },
+     {
+      "reason": "Alert quality",
+      "deals": 3
+     }
+    ],
+    "lost": [
+     {
+      "reason": "Pricing predictability",
+      "deals": 6
+     },
+     {
+      "reason": "Missing dbt Cloud integration",
+      "deals": 4
+     },
+     {
+      "reason": "No decision",
+      "deals": 3
+     }
+    ]
+   }
+  },
+  {
+   "id": "deciding_forces",
+   "title": "Deciding forces",
+   "status": "ok",
+   "data": {
+    "top": [
+     {
+      "force": "Pricing predictability",
+      "decided": 6,
+      "of": 13
+     },
+     {
+      "force": "dbt Cloud integration",
+      "decided": 4,
+      "of": 13
+     }
+    ]
+   }
+  },
+  {
+   "id": "segments",
+   "title": "Segments",
+   "status": "ok",
+   "data": {
+    "best": {
+     "segment": "Logistics software",
+     "win_rate": 0.6,
+     "n": 5
+    }
+   }
+  }
+ ],
+ "notes": [
+  "Cite n beside every rate."
+ ]
+}

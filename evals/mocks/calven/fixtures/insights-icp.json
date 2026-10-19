@@ -1,0 +1,212 @@
+{
+ "dashboard": "icp",
+ "window": {
+  "timeframe": "trailing12m",
+  "from": "2025-10-01",
+  "to": "2026-09-30"
+ },
+ "compared_with": {
+  "from": "2024-10-01",
+  "to": "2025-09-30"
+ },
+ "sections": [
+  {
+   "id": "kpis",
+   "title": "How focused is the pipeline",
+   "status": "ok",
+   "data": {
+    "kpis": [
+     {
+      "metric_id": "icp.won_share",
+      "label": "ICP share of wins",
+      "value": 0.71,
+      "n": 24,
+      "comparison": {
+       "prior": 0.62,
+       "delta": 9,
+       "prior_n": 21
+      }
+     },
+     {
+      "metric_id": "icp.fit_pipeline_share",
+      "label": "ICP-fit pipeline",
+      "value": 0.58,
+      "denominator_usd": 1240000,
+      "comparison": null,
+      "notes": "Snapshot of pipeline open today; not compared."
+     },
+     {
+      "metric_id": "icp.deal_size_lift",
+      "label": "Avg deal size",
+      "value": 1.6,
+      "unit": "ratio",
+      "n": 31,
+      "in_icp_avg_usd": 86000,
+      "out_icp_avg_usd": 54000,
+      "comparison": {
+       "prior": 1.4,
+       "delta": 0.2
+      }
+     },
+     {
+      "metric_id": "icp.sales_cycle_days",
+      "label": "Sales cycle",
+      "value": 74,
+      "unit": "days",
+      "n": 17,
+      "comparison": {
+       "prior": 81,
+       "delta": -7
+      }
+     }
+    ]
+   },
+   "notes": [
+    "ICP means fit tiers 1 and 2.",
+    "Deal size lift is a ratio, not dollars."
+   ]
+  },
+  {
+   "id": "expand_icp",
+   "title": "Where to expand the ICP",
+   "status": "ok",
+   "data": {
+    "expansion_floor": {
+     "min_deals": 10
+    },
+    "expansion_recommendations": [
+     {
+      "segment": "Fintech, 300-5,000 employees, North America",
+      "win_rate": 0.58,
+      "deals": 12,
+      "avg_deal_size_usd": 92000,
+      "open_pipeline_usd": 210000,
+      "avg_fit": 0.81,
+      "call": "expand"
+     },
+     {
+      "segment": "Logistics software, 300-5,000 employees, Europe",
+      "win_rate": 0.6,
+      "deals": 5,
+      "avg_deal_size_usd": 78000,
+      "open_pipeline_usd": 84000,
+      "avg_fit": 0.88,
+      "call": "below floor"
+     },
+     {
+      "segment": "Any industry, over 5,000 employees",
+      "win_rate": 0.18,
+      "deals": 11,
+      "avg_deal_size_usd": 64000,
+      "open_pipeline_usd": 310000,
+      "avg_fit": 0.42,
+      "call": "deprioritize"
+     }
+    ]
+   }
+  },
+  {
+   "id": "win_predictors",
+   "title": "What actually predicts a win",
+   "status": "ok",
+   "data": {
+    "win_rate_baselines": {
+     "all": 0.39,
+     "n": 44
+    },
+    "win_rate_by_attribute": [
+     {
+      "dimension": "Size",
+      "value": "300-5,000 employees",
+      "win_rate": 0.52,
+      "n": 23
+     },
+     {
+      "dimension": "Trigger",
+      "value": "Data incident reached an executive report",
+      "win_rate": 0.64,
+      "n": 11
+     },
+     {
+      "dimension": "Tech",
+      "value": "dbt Cloud",
+      "win_rate": 0.22,
+      "n": 9,
+      "below_floor": true
+     }
+    ],
+    "predictive_attributes": [
+     {
+      "attribute": "Trigger: data incident reached an executive report",
+      "lift": 1.64,
+      "n": 11
+     }
+    ],
+    "segments": {
+     "best": [
+      {
+       "segment": "Fintech, 300-5,000 employees",
+       "win_rate": 0.58,
+       "n": 12
+      }
+     ],
+     "worst": [
+      {
+       "segment": "Over 5,000 employees",
+       "win_rate": 0.18,
+       "n": 11
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "reality_check",
+   "title": "Reality check",
+   "status": "ok",
+   "data": {
+    "fit_score_distribution": [
+     {
+      "tier": "Tier 1",
+      "accounts": 14
+     },
+     {
+      "tier": "Tier 2",
+      "accounts": 22
+     },
+     {
+      "tier": "Tier 3",
+      "accounts": 31
+     },
+     {
+      "tier": "Tier 4",
+      "accounts": 18
+     }
+    ],
+    "pipeline_gap": {
+     "win_share": 0.71,
+     "pipeline_share": 0.58,
+     "notes": "win_share counts revenue won in the window; pipeline_share is pipeline open today."
+    },
+    "trends": [
+     {
+      "month": "2026-07",
+      "on_icp_usd": 640000,
+      "off_icp_usd": 420000
+     },
+     {
+      "month": "2026-08",
+      "on_icp_usd": 690000,
+      "off_icp_usd": 480000
+     },
+     {
+      "month": "2026-09",
+      "on_icp_usd": 720000,
+      "off_icp_usd": 520000
+     }
+    ]
+   }
+  }
+ ],
+ "notes": []
+}

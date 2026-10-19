@@ -4,7 +4,7 @@
 
 ## Verification
 
-- [ ] `npm run validate`
+- [ ] `npm run validate --prefix scripts`
 - [ ] No credential, tenant identifier, customer data, or private source is included
 - [ ] Client support claims include a clean-account test and exact version
 - [ ] Tool and skill changes match the production public surface

@@ -1,0 +1,40 @@
+{
+ "records": [
+  {
+   "id": "p1111111",
+   "kind": "personas",
+   "name": "Head of Data Platform",
+   "product": [],
+   "cells": {
+    "type": "buyer",
+    "seniority": "Director",
+    "buying_role": "Champion",
+    "role_title": "Head of Data Platform"
+   }
+  },
+  {
+   "id": "p2222222",
+   "kind": "personas",
+   "name": "Analytics Engineer",
+   "product": [],
+   "cells": {
+    "type": "user",
+    "seniority": "IC",
+    "buying_role": "User",
+    "role_title": "Analytics Engineer"
+   }
+  },
+  {
+   "id": "p3333333",
+   "kind": "personas",
+   "name": "VP Finance",
+   "product": [],
+   "cells": {
+    "type": "stakeholder",
+    "seniority": "VP",
+    "buying_role": "Economic buyer",
+    "role_title": "VP Finance"
+   }
+  }
+ ]
+}

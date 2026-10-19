@@ -1,0 +1,8 @@
+{
+ "kind": "customer_conversations",
+ "items": [],
+ "has_more": false,
+ "next_offset": null,
+ "total": 0,
+ "note": "No customer_conversations recorded in this workspace."
+}

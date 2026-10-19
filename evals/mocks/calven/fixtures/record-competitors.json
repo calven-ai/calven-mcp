@@ -1,0 +1,34 @@
+{
+ "records": [
+  {
+   "id": "c1a2b3c4",
+   "kind": "competitors",
+   "name": "Acme Monitor",
+   "product": [],
+   "cells": {
+    "description": "Data observability platform sold per monitored table; strong dbt Cloud story.",
+    "categories": [
+     "Direct"
+    ],
+    "size": "Enterprise",
+    "tier": "Tier 1",
+    "website": "https://acme-monitor.example"
+   }
+  },
+  {
+   "id": "c5d6e7f8",
+   "kind": "competitors",
+   "name": "Lattice Data",
+   "product": [],
+   "cells": {
+    "description": "Lineage-first data catalog with observability add-on; column-level lineage since 2025.",
+    "categories": [
+     "Adjacent"
+    ],
+    "size": "Mid-market",
+    "tier": "Tier 2",
+    "website": "https://lattice.example"
+   }
+  }
+ ]
+}

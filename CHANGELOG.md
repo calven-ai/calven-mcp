@@ -2,6 +2,21 @@
 
 Notable changes to the Calven MCP server's public contract, the registry descriptor and the Agent Plugin.
 
+## [1.2.0] - Unreleased
+
+- The plugin installs in Claude Code from this repository (`claude plugin marketplace add calven-ai/calven-mcp`, then `claude plugin install calven@calven`) and ships a Cursor manifest. Both reuse the same skills and `.mcp.json`.
+- Two new skills: `deal-prep` (a one-page call brief) and `claim-check` (fact-check a draft against the approved product brief and competitor evidence).
+- Two more skills: `/calven:win-loss-review` builds a monthly or quarterly readout; `/calven:start` (typed only) checks the connection and suggests first prompts from your workspace.
+- Four more skills: `on-message-draft` (copy from approved messaging, accuracy-checked and persona-reviewed), `customer-evidence` (verbatim quotes, themes and proof on a topic), `icp-check` (accounts checked against the approved ICP) and `icp-pipeline-review` (ICP fit of the pipeline and wins).
+- `icp-pipeline-review` and `win-loss-review` deliver a live dashboard that reads Calven when it opens: an artifact in Claude, a Site in ChatGPT.
+- Renamed `competitive-brief` to `battlecard`, `workspace-brief` to `gtm-overview` and `claim-check` to `quality-review`. `quality-review` now also checks on-message fit and staleness after product changes, and runs a persona review.
+- Two more skills: `market-research` (trends, opportunities, verticals and signals) and `product-intelligence` (product changes and the assets they left stale).
+- A read-only `gtm-researcher` subagent and a Cursor rule that sends company facts to Calven.
+- Plugin evals in `evals/`, run with `claude plugin eval` against a fictional mocked workspace, including skill-routing cases.
+- The `gtm-researcher` subagent's tools are an explicit allowlist of the 13 Calven read tools.
+- OpenAI listing fields and the onboarding skill in `plugin.json` under `extensions.com.openai`.
+- Listing icons and screenshots in `assets/`, and the Calven icon in the registry descriptor (`server.json` 1.2.0, `icons`).
+
 ## [1.1.0] - 2026-10-07
 
 - The MCP endpoint is now `https://api.calven.ai/mcp`. The previous endpoint, `https://app.calven.ai/api/mcp`, is retired: remove the old connection, add the new URL and sign in again.
@@ -16,5 +31,6 @@ Notable changes to the Calven MCP server's public contract, the registry descrip
 
 - First release: the registry descriptor, the Agent Plugin with workspace brief, competitive brief and persona copy review skills, and documentation.
 
+[1.2.0]: https://github.com/calven-ai/calven-mcp/pull/8
 [1.1.0]: https://github.com/calven-ai/calven-mcp/pull/5
 [1.0.0]: https://github.com/calven-ai/calven-mcp/commit/653dcee0c94531552e445de1ca3875840cf31e9d

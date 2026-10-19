@@ -1,0 +1,35 @@
+{
+ "records": [
+  {
+   "id": "e1000001",
+   "kind": "crm_deals",
+   "name": "Globex - Platform rollout",
+   "product": [],
+   "cells": {
+    "account": "Globex",
+    "stage": "Proposal",
+    "status": "open",
+    "amount_usd": 84000,
+    "close_date": "2026-11-20",
+    "competitors": [
+     "Acme Monitor"
+    ],
+    "last_activity": "2026-10-14: proposal sent; Dana asked how pricing scales past 500 tables."
+   }
+  },
+  {
+   "id": "e1000002",
+   "kind": "crm_deals",
+   "name": "Hooli - Pilot",
+   "product": [],
+   "cells": {
+    "account": "Hooli",
+    "stage": "Discovery",
+    "status": "open",
+    "amount_usd": 30000,
+    "close_date": "2027-01-15",
+    "competitors": []
+   }
+  }
+ ]
+}

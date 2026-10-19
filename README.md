@@ -9,7 +9,7 @@
 
 <h1 align="center">Calven MCP</h1>
 
-<p align="center">Your approved ICP, positioning, messaging and competitive intel, with sources, in the AI tool your team already uses.</p>
+<p align="center">Your approved GTM context, in every AI tool: positioning, messaging, ICP, personas, competitive intel and win/loss, with sources.</p>
 
 <p align="center">
   <a href="#connect">Connect</a> · <a href="#try-it">Try it</a> · <a href="use-cases/">Use cases by team</a> · <a href="https://calven.ai/mcp">calven.ai/mcp</a> · <a href="https://app.calven.ai/sign-up">14-day trial, no card</a>
@@ -24,7 +24,7 @@
   <img src="docs/assets/mcp-diagram.png" width="860" alt="Online research, documents, call notes, CRM and win/loss surveys flow through nine Calven agents into one GTM source of truth, which answers with sources in Claude, ChatGPT, Codex, Cursor, Copilot and other MCP clients">
 </p>
 
-Calven's nine product marketing agents keep one source of truth on your market, buyers and positioning. Calven MCP puts it inside Claude, ChatGPT, Codex, Cursor, Copilot and other MCP clients that sign in with OAuth (see [client support](docs/client-support.md)), so sales, marketing, product and leadership work from the same answers your team approved.
+Calven is the AI product marketing platform. Its nine agents keep one GTM source of truth on your market, buyers, positioning and messaging. Calven MCP puts it inside Claude, ChatGPT, Codex, Cursor, Copilot and other MCP clients that sign in with OAuth (see [client support](docs/client-support.md)), so sales, marketing, product and leadership work from the same answers your team approved. The plugin adds workflows for battlecards, deal prep, quality reviews, on-message drafts, customer evidence, ICP checks, market research, product intelligence, and live win/loss and ICP pipeline dashboards.
 
 ## Connect
 
@@ -146,7 +146,33 @@ Data is stored in the EU, a DPA with EU SCCs covers every plan, and the SOC 2 Ty
 
 ## The plugin
 
-The Calven plugin ([Agent Plugins 1.0](https://agent-plugins.org/)) adds three workflows on the same server: a **workspace brief**, a **competitive brief** and a **persona copy review**. Contents and requirements: [plugin](docs/plugin.md).
+The Calven plugin bundles the server connection with thirteen workflow skills and a research subagent. Install it in Claude Code:
+
+```sh
+claude plugin marketplace add calven-ai/calven-mcp
+claude plugin install calven@calven
+```
+
+Then run `/calven:start` to check the connection and get three first prompts built from your workspace.
+
+| Type | Name | What you get |
+| --- | --- | --- |
+| Skill | `/calven:battlecard` | Where you win and lose against a named competitor: objections, proof and a talk track |
+| Skill | `/calven:deal-prep` | A one-page call brief: buying group, the competitor's likely moves, the risk, the first question, the proof |
+| Skill | `/calven:quality-review` | An asset reviewed before it ships: every claim checked, on-message fit, what a product change left stale, and a persona review |
+| Skill | `/calven:persona-copy-review` | Your copy reviewed against your personas, findings by severity |
+| Skill | `/calven:on-message-draft` | Copy written from your approved messaging, accuracy-checked and persona-tested before you get it |
+| Skill | `/calven:customer-evidence` | Verbatim customer quotes, themes and proof points on a topic, each with its source |
+| Skill | `/calven:icp-check` | A list of accounts checked against your ICP: fit, partial or no fit, and why |
+| Skill | `/calven:icp-pipeline-review` | A live dashboard of how much of your pipeline and wins fit the ICP, and where to focus |
+| Skill | `/calven:win-loss-review` | A live win/loss dashboard for a month or quarter, every rate with its sample size |
+| Skill | `/calven:market-research` | A sourced market briefing: trends, opportunities, growing verticals and the latest signals |
+| Skill | `/calven:product-intelligence` | What changed in your product and which published assets now contradict it |
+| Skill | `/calven:gtm-overview` | A sourced summary of your positioning, messaging, ICP and evidence |
+| Skill | `/calven:start` | Connection check and what your workspace can answer (runs only when you type it) |
+| Subagent | `gtm-researcher` | Gathers evidence from several Calven sources and keeps large results out of your conversation |
+
+Skills load on their own when a request matches, except `start`, which runs only when typed; you can type any of them. The two dashboard skills publish a live page that reads Calven each time it opens: an artifact in Claude, a Site in ChatGPT. Cursor installs it from its own manifest, and clients that implement [Agent Plugins](https://agent-plugins.org/) can import the skills and the server connection. Contents, formats and how the workflows are tested: [plugin](docs/plugin.md).
 
 ## Help
 

@@ -1,0 +1,43 @@
+{
+ "records": [
+  {
+   "id": "d1000001",
+   "kind": "deal_drivers",
+   "name": "Pricing predictability",
+   "product": [],
+   "cells": {
+    "driver": "Pricing predictability",
+    "direction": "hurt",
+    "competitor": "Acme Monitor",
+    "outcome": "lost",
+    "rank": 1
+   }
+  },
+  {
+   "id": "d1000002",
+   "kind": "deal_drivers",
+   "name": "dbt Cloud integration",
+   "product": [],
+   "cells": {
+    "driver": "dbt Cloud integration",
+    "direction": "hurt",
+    "competitor": "Acme Monitor",
+    "outcome": "lost",
+    "rank": 2
+   }
+  },
+  {
+   "id": "d1000003",
+   "kind": "deal_drivers",
+   "name": "Column-level lineage",
+   "product": [],
+   "cells": {
+    "driver": "Column-level lineage",
+    "direction": "helped",
+    "competitor": "Acme Monitor",
+    "outcome": "won",
+    "rank": 1
+   }
+  }
+ ]
+}

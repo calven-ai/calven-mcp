@@ -1,0 +1,36 @@
+{
+ "records": [
+  {
+   "id": "t1000001",
+   "kind": "trends",
+   "name": "AI agents query the warehouse directly",
+   "product": [],
+   "cells": {
+    "name": "AI agents query the warehouse directly",
+    "description": "Analytics and AI agents now read warehouse tables without a human in the loop, so a broken column reaches an automated decision before anyone sees a dashboard.\n- Snowflake and Databricks both shipped agent query features this quarter (vendor announcements, Sep 2026).\nData teams will be asked to prove the data an agent read was fresh and correct.",
+    "category": "technology",
+    "severity": "High",
+    "horizon": "Now",
+    "status": "active",
+    "last_seen": "2026-10-08",
+    "state": "approved"
+   }
+  },
+  {
+   "id": "t1000002",
+   "kind": "trends",
+   "name": "EU AI Act data governance duties",
+   "product": [],
+   "cells": {
+    "name": "EU AI Act data governance duties",
+    "description": "High-risk AI systems must document the quality and lineage of their training and input data, which pulls data observability into compliance reviews for EU companies.",
+    "category": "regulatory",
+    "severity": "Medium",
+    "horizon": "6–12 months",
+    "status": "active",
+    "last_seen": "2026-09-30",
+    "state": "approved"
+   }
+  }
+ ]
+}

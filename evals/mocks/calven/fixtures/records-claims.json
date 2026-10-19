@@ -1,0 +1,20 @@
+{
+ "kind": "claims",
+ "items": [
+  {
+   "id": "k1000001",
+   "kind": "claims",
+   "name": "The only data observability platform with column-level lineage",
+   "product": [],
+   "cells": {
+    "claim": "The only data observability platform with column-level lineage",
+    "status": "flagged",
+    "concern": "Lattice Data has offered column-level lineage since 2025.",
+    "origin": "website"
+   }
+  }
+ ],
+ "has_more": false,
+ "next_offset": null,
+ "total": 1
+}
