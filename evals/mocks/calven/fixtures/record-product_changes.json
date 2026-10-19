@@ -11,6 +11,18 @@
     "detected_at": "2026-09-15",
     "severity": "high"
    }
+  },
+  {
+   "id": "x1000002",
+   "kind": "product_changes",
+   "name": "Databricks Unity Catalog lineage",
+   "product": [],
+   "cells": {
+    "summary": "Column-level lineage now reads Databricks Unity Catalog, so lineage covers Databricks tables end to end.",
+    "change_type": "capability",
+    "detected_at": "2026-10-05",
+    "severity": "medium"
+   }
   }
  ]
 }

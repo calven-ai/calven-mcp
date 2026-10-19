@@ -35,7 +35,7 @@ Open a pull request with the evidence summary. Do not include credentials, tenan
 ### Claude Code 2.1.302, Linux, 2026-10-17
 
 - **Installation path:** fresh configuration directory, `claude plugin marketplace add calven-ai/calven-mcp` (pull request branch), then `claude plugin install calven@calven`. Installed as `calven@calven` 1.2.0, enabled.
-- **Components loaded:** skills `deal-prep`, `claim-check`, `competitive-brief`, `persona-copy-review`, `win-loss-review`, `workspace-brief`; `start` runs when typed; subagent `calven:gtm-researcher`. `claude mcp list` shows `plugin:calven:calven` at `https://api.calven.ai/mcp`, needing authentication.
+- **Components loaded:** skills `deal-prep`, `claim-check`, `competitive-brief`, `persona-copy-review`, `win-loss-review`, `workspace-brief` (the 2026-10-17 install, before the renames to `quality-review`, `battlecard` and `gtm-overview`); `start` runs when typed; subagent `calven:gtm-researcher`. `claude mcp list` shows `plugin:calven:calven` at `https://api.calven.ai/mcp`, needing authentication.
 - **Registration method:** CIMD. Sign-in starts with `client_id=https://claude.ai/oauth/claude-code-client-metadata`, PKCE `S256`, the `resource` set to the endpoint and the published scopes; Calven's authorization server accepts the client and redirects to the sign-in page.
 - **Before sign-in:** `/calven:start` tells the user to sign in with `/mcp` and invents nothing.
 - **Not yet verified:** completing browser consent with a Calven account, tool and prompt discovery after sign-in, one sourced read workflow, and token persistence and revocation. These need a person at a browser.

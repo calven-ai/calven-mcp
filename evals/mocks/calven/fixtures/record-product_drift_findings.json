@@ -1,4 +1,58 @@
 {
- "record": null,
- "note": "No product_drift_findings recorded in this workspace."
+ "records": [
+  {
+   "id": "d1000001",
+   "kind": "product_drift_findings",
+   "name": "Pricing one-pager",
+   "product": [],
+   "cells": {
+    "asset_name": "Pricing one-pager",
+    "classification": "contradiction",
+    "product_change": {
+     "id": "x1000001",
+     "label": "Starter plan retired"
+    },
+    "confidence": "High",
+    "rationale": "The one-pager still lists Starter at $500/month as the entry plan. Plans now start on Team at $1,500/month.",
+    "created_at": "2026-09-16",
+    "state": "new"
+   }
+  },
+  {
+   "id": "d1000002",
+   "kind": "product_drift_findings",
+   "name": "Q3 sales deck",
+   "product": [],
+   "cells": {
+    "asset_name": "Q3 sales deck",
+    "classification": "needs_review",
+    "product_change": {
+     "id": "x1000002",
+     "label": "Databricks Unity Catalog lineage"
+    },
+    "confidence": "Medium",
+    "rationale": "Slide 9 says lineage covers Snowflake and BigQuery; it may need Databricks added now that Unity Catalog lineage shipped.",
+    "created_at": "2026-10-06",
+    "state": "new"
+   }
+  },
+  {
+   "id": "d1000003",
+   "kind": "product_drift_findings",
+   "name": "Website pricing page",
+   "product": [],
+   "cells": {
+    "asset_name": "Website pricing page",
+    "classification": "already_updated",
+    "product_change": {
+     "id": "x1000001",
+     "label": "Starter plan retired"
+    },
+    "confidence": "High",
+    "rationale": "The page lists Team, Business and Enterprise only.",
+    "created_at": "2026-09-16",
+    "state": "reviewed"
+   }
+  }
+ ]
 }

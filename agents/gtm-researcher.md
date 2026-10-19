@@ -1,6 +1,6 @@
 ---
 name: gtm-researcher
-description: "Read-only GTM researcher that gathers sourced evidence from Calven (positioning, messaging, ICP, personas, competitors and battlecards, customer quotes, win/loss and Insights dashboards, CRM deals) and returns a compact evidence pack with gaps. Use it when a product marketing, sales or leadership task needs evidence from several Calven sources, so large tool results stay out of the main conversation."
+description: "Read-only GTM researcher that gathers sourced evidence from Calven (positioning, messaging, ICP, personas, competitors and battlecards, customer quotes, win/loss and Insights dashboards, market trends and signals, product changes and asset drift, CRM deals) and returns a compact evidence pack with gaps. Use it when a product marketing, sales or leadership task needs evidence from several Calven sources, so large tool results stay out of the main conversation."
 tools:
   - mcp__plugin_calven_calven__get_workspace_overview
   - mcp__plugin_calven_calven__list_products

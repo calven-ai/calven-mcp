@@ -1,5 +1,27 @@
 {
- "items": [],
- "more_available": false,
- "note": "No rows recorded for this drill-down in the window."
+ "items": [
+  {
+   "id": "s1000001",
+   "url": "https://example.com/snowflake-agents",
+   "title": "Snowflake ships agent queries over governed tables",
+   "domain": "example.com",
+   "run_at": "2026-10-08",
+   "category": "technology",
+   "trend_id": "t1000001",
+   "trend_name": "AI agents query the warehouse directly",
+   "gtm_implication": "Buyers will ask how we catch bad data before an agent acts on it."
+  },
+  {
+   "id": "s1000002",
+   "url": "https://example.com/eu-ai-act-guidance",
+   "title": "Commission guidance on data quality duties for high-risk AI",
+   "domain": "example.com",
+   "run_at": "2026-09-30",
+   "category": "regulatory",
+   "trend_id": "t1000002",
+   "trend_name": "EU AI Act data governance duties",
+   "gtm_implication": "Lineage becomes compliance evidence for EU data teams."
+  }
+ ],
+ "more_available": false
 }

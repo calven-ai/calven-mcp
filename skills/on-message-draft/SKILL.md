@@ -1,6 +1,6 @@
 ---
 name: on-message-draft
-description: "Writes marketing or sales copy about our product from our approved messaging, positioning, product brief and personas in Calven, then runs a claim check and a persona review on the draft before handing it over. Use when the user asks to write or rewrite a landing page, launch announcement, email or nurture, ad, outreach message, one-pager, social post or campaign brief about our product, in our messaging or for a named persona. Do not use to only check an existing draft (use claim-check or persona-copy-review), or for writing that does not describe our product, such as a hiring post or an internal note."
+description: "Writes marketing or sales copy about our product from our approved messaging, positioning, product brief and personas in Calven, then runs an accuracy check and a persona review on the draft before handing it over. Use when the user asks to write or rewrite a landing page, launch announcement, email or nurture, ad, outreach message, one-pager, social post or campaign brief about our product, in our messaging or for a named persona. Do not use to only check an existing draft (use quality-review or persona-copy-review), or for writing that does not describe our product, such as a hiring post or an internal note."
 argument-hint: "<asset type> [persona] [product]"
 ---
 
@@ -24,7 +24,7 @@ Write the asset from what the company approved in Calven, then test it before ha
 
 ## Test before handing over
 
-1. **Claim check**: list every factual claim in the draft and confirm each against the sources above. Fix or remove any that fail.
+1. **Accuracy check**: list every factual claim in the draft and confirm each against the sources above. Fix or remove any that fail.
 2. **Persona review**: call `review_against_personas` with the draft. Set `scope` to `buyers`, `stakeholders` or `users` to match the target persona when known. The first response has no findings: wait `poll_after_seconds`, then call `get_task` until the status is not `working`. Apply high-severity findings. If the status is `input_required` or `failed`, say so and hand over the draft without it.
 
 ## Output

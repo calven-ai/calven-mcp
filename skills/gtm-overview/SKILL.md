@@ -1,6 +1,6 @@
 ---
 name: gtm-overview
-description: "Summarizes our go-to-market strategy from Calven, with sources: positioning, messaging, ICP, personas, market trends, customer voice and win/loss. Use when the user asks who we sell to, how we position, what our messaging or ICP says, or wants company context, a GTM summary or a product marketing briefing before writing, planning or onboarding. Do not use for one competitor, one deal or one win/loss period (use battlecard, deal-prep or win-loss-review), or to score accounts against the ICP (use icp-check)."
+description: "Summarizes our go-to-market strategy from Calven, with sources: positioning, messaging, ICP, personas, market trends, customer voice and win/loss. Use when the user asks who we sell to, how we position, what our messaging or ICP says, or wants company context, a GTM summary or a product marketing briefing before writing, planning or onboarding. Do not use for one competitor, one deal one win/loss period or market trends in depth (use battlecard, deal-prep, win-loss-review or market-research), or to score accounts against the ICP (use icp-check)."
 ---
 
 # GTM overview

@@ -1,8 +1,133 @@
 {
  "dashboard": "market_research",
- "sections": [],
- "notes": [
-  "No data: the market_research dashboard has no rows in this window."
- ],
- "availability": "no_data"
+ "title": "Market research",
+ "window": {
+  "from": "2025-11-01",
+  "to": "2026-10-17",
+  "unit": "month"
+ },
+ "compare": {
+  "from": "2024-11-01",
+  "to": "2025-10-17"
+ },
+ "sections": [
+  {
+   "id": "kpis",
+   "title": "Making an impact",
+   "status": "available",
+   "data": {
+    "kpis": [
+     {
+      "metric_id": "market_research.opportunities_surfaced",
+      "value": 1,
+      "comparison": {
+       "reason": "no_history",
+       "meaning": "No change stated: records begin after the comparison period. Not \"unchanged\"."
+      }
+     },
+     {
+      "metric_id": "market_research.opportunities_actioned",
+      "value": 0,
+      "not_compared": true
+     },
+     {
+      "metric_id": "market_research.high_impact_trends",
+      "value": 1,
+      "snapshot": true
+     },
+     {
+      "metric_id": "market_research.signals_tracked",
+      "value": 9,
+      "comparison": {
+       "reason": "no_history",
+       "meaning": "No change stated: records begin after the comparison period. Not \"unchanged\"."
+      }
+     }
+    ]
+   }
+  },
+  {
+   "id": "opportunities_trends",
+   "title": "Opportunities & trends",
+   "status": "available",
+   "data": {
+    "opportunities": {
+     "items": [
+      {
+       "id": "o1000001",
+       "name": "Observability for AI input data",
+       "impact": "High",
+       "status": "new"
+      }
+     ],
+     "total": 1
+    },
+    "trends_total": 2
+   }
+  },
+  {
+   "id": "signal_intelligence",
+   "title": "Signal intelligence",
+   "status": "available",
+   "data": {
+    "signals": {
+     "items": [
+      {
+       "id": "s1000001",
+       "url": "https://example.com/snowflake-agents",
+       "title": "Snowflake ships agent queries over governed tables",
+       "domain": "example.com",
+       "run_at": "2026-10-08",
+       "category": "technology",
+       "trend_id": "t1000001",
+       "trend_name": "AI agents query the warehouse directly",
+       "gtm_implication": "Buyers will ask how we catch bad data before an agent acts on it."
+      },
+      {
+       "id": "s1000002",
+       "url": "https://example.com/eu-ai-act-guidance",
+       "title": "Commission guidance on data quality duties for high-risk AI",
+       "domain": "example.com",
+       "run_at": "2026-09-30",
+       "category": "regulatory",
+       "trend_id": "t1000002",
+       "trend_name": "EU AI Act data governance duties",
+       "gtm_implication": "Lineage becomes compliance evidence for EU data teams."
+      }
+     ],
+     "total": 9
+    },
+    "verticals": {
+     "markets": [
+      {
+       "key": "fintech",
+       "name": "Fintech",
+       "size_tier": "large",
+       "momentum_tier": "accelerating",
+       "driver_theme": "Regulators ask for data lineage behind reported numbers",
+       "evidence_strength": "med"
+      },
+      {
+       "key": "logistics-software",
+       "name": "Logistics software",
+       "size_tier": "mid",
+       "momentum_tier": "steady",
+       "driver_theme": "Real-time tracking data feeds customer-facing ETAs",
+       "evidence_strength": "low"
+      }
+     ]
+    },
+    "signals_by_month": [
+     {
+      "period": "2026-09",
+      "signals": 4
+     },
+     {
+      "period": "2026-10",
+      "signals": 5
+     }
+    ]
+   }
+  }
+ ]
 }

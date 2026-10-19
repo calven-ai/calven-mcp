@@ -1,6 +1,6 @@
 ---
 name: battlecard
-description: "Builds a sourced battlecard against a named competitor from Calven: where we win and lose, their recent moves, objections with responses, proof points and a talk track for reps. Use when the user asks for a battlecard, competitor comparison, competitive analysis or teardown, how we win, lose or position against a competitor, or how to answer a competitor objection. Do not use to prepare for one deal (use deal-prep) or to fact-check a draft that names a competitor (use claim-check)."
+description: "Builds a sourced battlecard against a named competitor from Calven: where we win and lose, their recent moves, objections with responses, proof points and a talk track for reps. Use when the user asks for a battlecard, competitor comparison, competitive analysis or teardown, how we win, lose or position against a competitor, or how to answer a competitor objection. Do not use to prepare for one deal (use deal-prep) or to fact-check a draft that names a competitor (use quality-review)."
 ---
 
 # Battlecard

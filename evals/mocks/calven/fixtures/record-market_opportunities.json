@@ -1,4 +1,20 @@
 {
- "record": null,
- "note": "No market_opportunities recorded in this workspace."
+ "records": [
+  {
+   "id": "o1000001",
+   "kind": "market_opportunities",
+   "name": "Observability for AI input data",
+   "product": [],
+   "cells": {
+    "name": "Observability for AI input data",
+    "description": "Position column-level lineage as proof of what data an AI agent or model read, for teams under AI governance reviews.",
+    "type": "use_case",
+    "impact": "High",
+    "timeline": "6–12 months",
+    "sizing_tier": "mid",
+    "status": "new",
+    "created_at": "2026-10-09"
+   }
+  }
+ ]
 }

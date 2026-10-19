@@ -7,9 +7,10 @@ Notable changes to the Calven MCP server's public contract, the registry descrip
 - The plugin installs in Claude Code from this repository (`claude plugin marketplace add calven-ai/calven-mcp`, then `claude plugin install calven@calven`) and ships a Cursor manifest. Both reuse the same skills and `.mcp.json`.
 - Two new skills: `deal-prep` (a one-page call brief) and `claim-check` (fact-check a draft against the approved product brief and competitor evidence).
 - Two more skills: `/calven:win-loss-review` builds a monthly or quarterly readout; `/calven:start` (typed only) checks the connection and suggests first prompts from your workspace.
-- Four more skills: `on-message-draft` (copy from approved messaging, claim-checked and persona-reviewed), `customer-evidence` (verbatim quotes, themes and proof on a topic), `icp-check` (accounts checked against the approved ICP) and `icp-pipeline-review` (ICP fit of the pipeline and wins).
+- Four more skills: `on-message-draft` (copy from approved messaging, accuracy-checked and persona-reviewed), `customer-evidence` (verbatim quotes, themes and proof on a topic), `icp-check` (accounts checked against the approved ICP) and `icp-pipeline-review` (ICP fit of the pipeline and wins).
 - `icp-pipeline-review` and `win-loss-review` deliver a live dashboard that reads Calven when it opens: an artifact in Claude, a Site in ChatGPT.
-- Renamed `competitive-brief` to `battlecard` and `workspace-brief` to `gtm-overview`. Type `/calven:battlecard` and `/calven:gtm-overview`.
+- Renamed `competitive-brief` to `battlecard`, `workspace-brief` to `gtm-overview` and `claim-check` to `quality-review`. `quality-review` now also checks on-message fit and staleness after product changes, and runs a persona review.
+- Two more skills: `market-research` (trends, opportunities, verticals and signals) and `product-intelligence` (product changes and the assets they left stale).
 - A read-only `gtm-researcher` subagent and a Cursor rule that sends company facts to Calven.
 - Plugin evals in `evals/`, run with `claude plugin eval` against a fictional mocked workspace, including skill-routing cases.
 - The `gtm-researcher` subagent's tools are an explicit allowlist of the 13 Calven read tools.

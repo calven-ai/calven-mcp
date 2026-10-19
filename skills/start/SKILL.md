@@ -24,7 +24,7 @@ Check that Calven is connected, then show the user what their workspace holds an
 3. Suggest exactly three first prompts the user can paste, each built from what is populated. Name real competitors, personas or products from the workspace only after reading them with one `list_records` call for that kind. Prefer, in order:
    - a competitor question, if competitors exist (for example how we win against the named competitor);
    - a persona or customer-voice question, if personas or quotes exist;
-   - a win/loss or pipeline question, if deals or surveyed deals exist; otherwise a claim check of a draft against the product brief.
+   - a win/loss or pipeline question, if deals or surveyed deals exist; otherwise a quality review of a draft against the product brief and messaging.
 4. If the workspace is empty or nearly empty, say so plainly and point the user to the Calven app to add sources (documents, call notes, CRM) before asking questions. Do not demonstrate with invented data.
 
-Mention the plugin's workflows in one line at the end: `/calven:battlecard`, `/calven:deal-prep`, `/calven:claim-check`, `/calven:persona-copy-review`, `/calven:on-message-draft`, `/calven:customer-evidence`, `/calven:icp-check`, `/calven:icp-pipeline-review`, `/calven:win-loss-review` and `/calven:gtm-overview`.
+Mention the plugin's workflows in one line at the end: `/calven:battlecard`, `/calven:deal-prep`, `/calven:quality-review`, `/calven:persona-copy-review`, `/calven:on-message-draft`, `/calven:customer-evidence`, `/calven:icp-check`, `/calven:icp-pipeline-review`, `/calven:win-loss-review`, `/calven:market-research`, `/calven:product-intelligence` and `/calven:gtm-overview`.

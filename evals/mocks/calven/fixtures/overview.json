@@ -39,11 +39,11 @@
    },
    {
     "kind": "trends",
-    "total": 0
+    "total": 2
    },
    {
     "kind": "market_opportunities",
-    "total": 0
+    "total": 1
    },
    {
     "kind": "analyst_findings",
@@ -75,11 +75,11 @@
    },
    {
     "kind": "product_changes",
-    "total": 1
+    "total": 2
    },
    {
     "kind": "product_drift_findings",
-    "total": 0
+    "total": 3
    },
    {
     "kind": "claims",

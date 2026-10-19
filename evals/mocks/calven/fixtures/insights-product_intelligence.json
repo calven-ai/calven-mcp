@@ -1,8 +1,97 @@
 {
  "dashboard": "product_intelligence",
- "sections": [],
- "notes": [
-  "No data: the product_intelligence dashboard has no rows in this window."
- ],
- "availability": "no_data"
+ "title": "Product intelligence",
+ "window": {
+  "from": "2025-11-01",
+  "to": "2026-10-17",
+  "unit": "month"
+ },
+ "compare": {
+  "from": "2024-11-01",
+  "to": "2025-10-17"
+ },
+ "sections": [
+  {
+   "id": "kpis",
+   "title": "Proof it lands",
+   "status": "available",
+   "placeholders": [
+    "Unsupported claims",
+    "Enablement coverage"
+   ],
+   "notes": [
+    "Drift flagged is the whole open queue now, whatever the window."
+   ],
+   "data": {
+    "kpis": [
+     {
+      "metric_id": "product_intelligence.drift_flagged",
+      "value": 2,
+      "snapshot": true
+     },
+     {
+      "metric_id": "product_intelligence.assets_synced",
+      "value": 1,
+      "not_compared": true
+     }
+    ]
+   }
+  },
+  {
+   "id": "product_changes",
+   "title": "Product intelligence",
+   "status": "available",
+   "placeholders": [
+    "Strengths vs gaps",
+    "Product claims feed"
+   ],
+   "data": {
+    "change_timeline": [
+     {
+      "id": "x1000002",
+      "date": "2026-10-05",
+      "title": "Databricks Unity Catalog lineage",
+      "change_kind": "capability",
+      "severity": "Medium",
+      "confidence": "High"
+     },
+     {
+      "id": "x1000001",
+      "date": "2026-09-15",
+      "title": "Starter plan retired",
+      "change_kind": "pricing",
+      "severity": "High",
+      "confidence": "High"
+     }
+    ],
+    "change_timeline_total": 2,
+    "not_yet_in_assets": [
+     {
+      "id": "x1000002",
+      "title": "Databricks Unity Catalog lineage",
+      "change_kind": "capability",
+      "detected_at": "2026-10-05"
+     }
+    ],
+    "not_yet_in_assets_total": 1
+   }
+  },
+  {
+   "id": "outcomes",
+   "title": "Tied to outcomes",
+   "status": "available",
+   "notes": [
+    "amount_at_risk sums the deal values of won AND lost deals where the gap was cited: pipeline exposed to it, not lost revenue, and not proof the gap caused the outcome."
+   ],
+   "data": {
+    "gaps_that_cost_deals": [
+     {
+      "gap": "dbt Cloud integration",
+      "deals": 4,
+      "amount_at_risk_usd": 310000
+     }
+    ]
+   }
+  }
+ ]
 }
