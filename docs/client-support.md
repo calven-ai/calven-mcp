@@ -32,6 +32,13 @@ Open a pull request with the evidence summary. Do not include credentials, tenan
 
 ## Plugin install records
 
+### Claude Code 2.1.303, Linux, 2026-10-19
+
+- **Installation path:** fresh configuration directory, `claude plugin marketplace add calven-ai/calven-mcp` (pull request branch), then `claude plugin install calven@calven`. Installed as `calven@calven` 1.2.0, enabled.
+- **Components loaded:** 13 skills (`battlecard`, `customer-evidence`, `deal-prep`, `gtm-overview`, `icp-check`, `icp-pipeline-review`, `market-research`, `on-message-draft`, `persona-copy-review`, `product-intelligence`, `quality-review`, `start`, `win-loss-review`) and the subagent `calven:gtm-researcher`. `claude mcp list` shows `plugin:calven:calven` at `https://api.calven.ai/mcp`, needing authentication.
+- **Install size:** 4.6 MB. The plugin root has no `package.json`, so the install fetches no packages.
+- **Not yet verified:** the same sign-in steps as the 2026-10-17 record below.
+
 ### Claude Code 2.1.302, Linux, 2026-10-17
 
 - **Installation path:** fresh configuration directory, `claude plugin marketplace add calven-ai/calven-mcp` (pull request branch), then `claude plugin install calven@calven`. Installed as `calven@calven` 1.2.0, enabled.
