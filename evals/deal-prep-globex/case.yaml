@@ -1,0 +1,26 @@
+schema_version: "1.1"
+name: deal-prep-globex
+description: Deal prep for an open deal with a named competitor. The workspace holds the deal, two contacts, the Acme Monitor battlecard and head-to-head deals.
+tags: [deal-prep, sales]
+runs: 3
+execution:
+  max_turns: 25
+  allowed_tools: [Skill, Agent]
+  prompt: |-
+    I have a call with Globex tomorrow morning about the platform rollout. Acme Monitor is in the deal. Get me ready.
+graders:
+  - name: brief-quality
+    type: llm
+    weight: 2
+    criteria: |-
+      What the fictional workspace holds for this call: deal "Globex - Platform rollout", Proposal stage, $84,000, closes 2026-11-20, competitor Acme Monitor, last activity 2026-10-14 (proposal sent; Dana asked how pricing scales past 500 tables). Account Globex: logistics software, 1,200 employees, ICP tier A. Contacts: Dana Ruiz (Head of Data Platform) and Sam Okafor (Analytics Engineer); no finance or economic buyer on the account. Personas: Head of Data Platform (champion), Analytics Engineer (user, asks about dbt), VP Finance (economic buyer, wants a forecastable price). Acme battlecard, signals (dbt Cloud launch 2026-09-28; AI incident summaries launched 2026-08-14), head to head 7 deals, 3 won, 4 lost; deal rows Initrode (lost, $96,000, pricing predictability, 2026-09-12), Vandelay (lost, $120,000, dbt Cloud, 2026-09-30) and Soylent (won, $88,000, lineage, 2026-09-03; time-to-detect 2 days to 40 minutes); quotes from people at Initrode, Vandelay and Soylent; an Acme dossier; product brief pricing Team $1,500/month up to 500 tables, Business $4,000/month up to 2,000 tables.
+
+      PASS if the reply does all of: (1) states the deal's stage or amount; (2) names Dana Ruiz or Sam Okafor; (3) says a finance or economic buyer is missing; (4) names pricing predictability as a risk against Acme Monitor; (5) gives a head-to-head record against Acme Monitor with its sample: either the competitor record (7 deals, 3 of 7, 3 won and 4 lost, or a 43% win rate on 7 deals) or the Insights figure (25% on 4 deals); (6) shows a source beside at least one claim.
+      FAIL only if one of the six is missing, or one of these is true: it names a Globex attendee other than Dana Ruiz and Sam Okafor; it attributes to anyone at Globex a statement other than the recorded question about pricing past 500 tables; it gives a stage, amount or close date for the deal other than Proposal, $84,000 and 2026-11-20; or it gives a head-to-head record that matches neither 3 won and 4 lost of 7 (43%) nor 25% on 4 deals. Persona concerns that the reply labels as the persona's, and questions the reply suggests the seller ask, are not statements attributed to Globex.
+  - name: read-battlecard
+    type: tool_used
+    tool: mcp__plugin_calven_calven__get_competitor
+  - name: skill-fired
+    type: tool_used
+    tool: Skill
+    input_match: '"skill"\s*:\s*"(?:[\w-]+:)?deal-prep"'

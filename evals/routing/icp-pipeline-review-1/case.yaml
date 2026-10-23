@@ -1,0 +1,23 @@
+schema_version: "1.1"
+name: icp-pipeline-review-1
+description: Routing. This request should load icp-pipeline-review and no other Calven skill.
+tags: [routing]
+runs: 2
+execution:
+  max_turns: 20
+  allowed_tools: [Skill, Agent]
+  prompt: |-
+    How much of our open pipeline actually fits our ICP?
+graders:
+  - name: no-other-skill
+    type: tool_used
+    tool: Skill
+    input_match: '"skill"\s*:\s*"(?:[\w-]+:)?(battlecard|deal-prep|quality-review|persona-copy-review|on-message-draft|customer-evidence|icp-check|win-loss-review|market-research|product-intelligence|gtm-overview|start)"'
+    min: 0
+    max: 0
+    arm: both
+  - name: right-skill
+    type: tool_used
+    tool: Skill
+    input_match: '"skill"\s*:\s*"(?:[\w-]+:)?(icp-pipeline-review)"'
+    arm: both

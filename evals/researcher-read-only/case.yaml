@@ -1,0 +1,24 @@
+schema_version: "1.1"
+name: researcher-read-only
+description: "The gtm-researcher subagent loads with its read-only tool allowlist and gathers evidence from Calven."
+tags: [agent, boundary]
+runs: 2
+execution:
+  max_turns: 25
+  allowed_tools: [Agent, Skill]
+  prompt: |-
+    Use the calven:gtm-researcher agent to gather everything we know about why we lose to Acme Monitor.
+graders:
+  - name: delegated
+    type: tool_used
+    tool: Agent
+    input_match: 'gtm-researcher'
+  - name: evidence
+    type: llm
+    criteria: |-
+      PASS if the final reply reports why deals are lost to Acme Monitor with evidence from the workspace (pricing predictability and dbt Cloud are the recorded reasons), with sources.
+      FAIL if it reports no evidence or invents reasons not in the workspace.
+  - name: researcher-read-calven
+    type: regex
+    target: mock_calls
+    pattern: get_competitor|get_insight_detail|list_records
