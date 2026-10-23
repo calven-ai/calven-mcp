@@ -1,0 +1,17 @@
+schema_version: "1.1"
+name: start-command
+description: The onboarding command. It must report what the workspace holds and suggest prompts built from real names.
+tags: [start, onboarding]
+runs: 2
+execution:
+  max_turns: 15
+  allowed_tools: [Skill, Agent]
+  prompt: |-
+    /calven:start
+graders:
+  - name: report
+    type: llm
+    criteria: |-
+      The fictional workspace is single-product, has all four strategy documents, and holds competitors (Acme Monitor, Lattice Data), personas (Head of Data Platform, Analytics Engineer, VP Finance), quotes, deal drivers, CRM deals and more; two trends, one market opportunity, two product changes and three drift findings; analyst findings and surveyed deals are empty.
+      PASS if the reply reports which strategy documents exist, names some populated record kinds with counts, and suggests about three prompts at least one of which names Acme Monitor, Lattice Data or one of the personas.
+      FAIL if it suggests prompts naming competitors or personas that are not in the workspace, or reports no workspace contents.

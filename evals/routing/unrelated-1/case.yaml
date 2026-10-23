@@ -1,0 +1,18 @@
+schema_version: "1.1"
+name: unrelated-1
+description: "Routing. An unrelated request, so no Calven skill should load."
+tags: [routing, negative]
+runs: 2
+execution:
+  max_turns: 10
+  allowed_tools: [Skill, Agent]
+  prompt: |-
+    Write a haiku about autumn.
+graders:
+  - name: no-calven-skill
+    type: tool_used
+    tool: Skill
+    input_match: '"skill"\s*:\s*"(?:[\w-]+:)?(battlecard|deal-prep|quality-review|persona-copy-review|on-message-draft|customer-evidence|icp-check|icp-pipeline-review|win-loss-review|market-research|product-intelligence|gtm-overview|start)"'
+    min: 0
+    max: 0
+    arm: both

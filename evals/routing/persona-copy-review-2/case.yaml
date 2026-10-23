@@ -1,0 +1,23 @@
+schema_version: "1.1"
+name: persona-copy-review-2
+description: Routing. This request should load persona-copy-review and no other Calven skill.
+tags: [routing]
+runs: 2
+execution:
+  max_turns: 20
+  allowed_tools: [Skill, Agent]
+  prompt: |-
+    How would a VP Finance react to this pricing line: "Pricing that scales with you."
+graders:
+  - name: no-other-skill
+    type: tool_used
+    tool: Skill
+    input_match: '"skill"\s*:\s*"(?:[\w-]+:)?(battlecard|deal-prep|quality-review|on-message-draft|customer-evidence|icp-check|icp-pipeline-review|win-loss-review|market-research|product-intelligence|gtm-overview|start)"'
+    min: 0
+    max: 0
+    arm: both
+  - name: right-skill
+    type: tool_used
+    tool: Skill
+    input_match: '"skill"\s*:\s*"(?:[\w-]+:)?(persona-copy-review)"'
+    arm: both
