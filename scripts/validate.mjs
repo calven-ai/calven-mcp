@@ -145,7 +145,35 @@ async function validateSkills() {
     }
 
     checkToolMentions(relative, source);
+    await validateOpenAiSkillAgent(entry.name, meta);
   }
+}
+
+// ChatGPT and Codex read each skill's display text, invocation policy and MCP dependency from
+// skills/<name>/agents/openai.yaml. Shape per OpenAI's submission error reference.
+async function validateOpenAiSkillAgent(skill, skillMeta) {
+  const relative = `skills/${skill}/agents/openai.yaml`;
+  let agent;
+  try {
+    agent = parseYaml(await readFile(path.join(ROOT, relative), 'utf8'));
+  } catch (error) {
+    failures.push(`${relative}: ${error.code === 'ENOENT' ? 'missing' : `not valid YAML: ${error.message.split('\n')[0]}`}`);
+    return;
+  }
+  if (!agent || typeof agent !== 'object' || Array.isArray(agent)) {
+    failures.push(`${relative}: must be a YAML mapping`);
+    return;
+  }
+  check(Object.keys(agent).every((key) => ['interface', 'policy', 'dependencies'].includes(key)), `${relative}: only interface, policy and dependencies are supported`);
+  check(typeof agent.interface?.display_name === 'string' && agent.interface.display_name.trim().length > 0, `${relative}: interface.display_name is required`);
+  check(typeof agent.interface?.short_description === 'string' && agent.interface.short_description.trim().length > 0, `${relative}: interface.short_description is required`);
+  const implicit = agent.policy?.allow_implicit_invocation;
+  check(implicit === undefined || typeof implicit === 'boolean', `${relative}: policy.allow_implicit_invocation must be true or false`);
+  // A typed-only skill must stay typed-only in ChatGPT and Codex.
+  if (skillMeta['disable-model-invocation'] === true) check(implicit === false, `${relative}: set policy.allow_implicit_invocation to false to match disable-model-invocation`);
+  check(Object.keys(agent.dependencies ?? {}).every((key) => key === 'tools'), `${relative}: only dependencies.tools is supported`);
+  const tools = agent.dependencies?.tools ?? [];
+  check(tools.length === 1 && tools[0]?.type === 'mcp' && tools[0]?.value === 'calven' && tools[0]?.transport === 'streamable_http' && tools[0]?.url === ENDPOINT, `${relative}: dependencies.tools must be the one calven MCP server (streamable_http, ${ENDPOINT})`);
 }
 
 function checkToolMentions(relative, source) {
@@ -461,17 +489,79 @@ for (const [file, asset] of [['.claude-plugin/plugin.json', claudePlugin.icon], 
   check(typeof asset === 'string' && (await exists(asset)), `${file}: icon or logo ${asset} does not exist`);
 }
 
-// OpenAI reads its listing from plugin.json extensions.com.openai. Its guidelines cap the names and forbid
-// pricing and trial language in the listing.
-const openai = plugin.extensions?.['com.openai'];
-if (openai) {
-  const ui = openai.interface ?? {};
-  check(typeof ui.displayName === 'string' && ui.displayName.length <= 30, 'plugin.json: extensions.com.openai.interface.displayName must be 1-30 characters');
-  check(typeof ui.shortDescription === 'string' && ui.shortDescription.length <= 30, 'plugin.json: extensions.com.openai.interface.shortDescription must be 1-30 characters');
-  check(typeof ui.longDescription === 'string' && !/trial|pricing|price|\$\d|free/i.test(ui.longDescription), 'plugin.json: the OpenAI long description must not mention pricing or a trial');
-  for (const key of ['logo', 'composerIcon']) check(!ui[key] || (await exists(ui[key])), `plugin.json: extensions.com.openai.interface.${key} ${ui[key]} does not exist`);
-  check(!openai.onboardingSkill || (await exists(path.join(openai.onboardingSkill, 'SKILL.md'))), `plugin.json: onboardingSkill ${openai.onboardingSkill} has no SKILL.md`);
+// OpenAI reads its listing and review materials from plugin.json extensions.com.openai, and the server's auth
+// from mcp.json. Limits and allowed values follow OpenAI's plugin submission guide and error reference.
+const OPENAI_CATEGORIES = ['Productivity', 'Creativity', 'Developer Tools', 'Business & Operations', 'Data & Analytics', 'Communication', 'Education & Research', 'Security', 'Finance', 'Healthcare', 'Travel', 'Entertainment', 'Other'];
+// The guidelines forbid advertising pricing, plans, subscriptions, trials, discounts or promotions.
+const OPENAI_PROMOTION = /\b(trials?|pricing|prices?|plans?|subscriptions?|upgrades?|discounts?|promotions?|free)\b|\$\d/i;
+// Secrets and reviewer details go in the portal's secure form; the upload rejects them in the package.
+const OPENAI_FORBIDDEN_KEYS = new Set(['clientSecret', 'test_credentials', 'reviewer_instructions', 'headers']);
+const PREFIX = 'plugin.json: extensions.com.openai';
+const isText = (value, max) => typeof value === 'string' && value.trim().length > 0 && value.length <= max;
+const isOneLine = (value, max) => isText(value, max) && !value.includes('\n');
+
+function forbiddenKeys(file, value, trail = []) {
+  if (!value || typeof value !== 'object') return;
+  for (const [key, child] of Object.entries(value)) {
+    check(!OPENAI_FORBIDDEN_KEYS.has(key), `${file}: ${[...trail, key].join('.')} must not be in the package; enter it in the OpenAI portal`);
+    forbiddenKeys(file, child, [...trail, key]);
+  }
 }
+
+const openai = plugin.extensions?.['com.openai'];
+check(Boolean(openai), 'plugin.json: extensions.com.openai is missing');
+if (openai) {
+  check(isText(plugin.description, 1024), 'plugin.json: description must be 1-1,024 characters');
+  check(isText(plugin.author?.name, 120), 'plugin.json: author.name must be 1-120 characters');
+  const ui = openai.interface ?? {};
+  check(isOneLine(ui.displayName, 30), `${PREFIX}.interface.displayName must be one line of 1-30 characters`);
+  check(isOneLine(ui.shortDescription, 30), `${PREFIX}.interface.shortDescription must be one line of 1-30 characters`);
+  check(isText(ui.longDescription, 4000), `${PREFIX}.interface.longDescription must be 1-4,000 characters`);
+  check(isOneLine(ui.developerName, 80), `${PREFIX}.interface.developerName must be one line of 1-80 characters`);
+  check(OPENAI_CATEGORIES.includes(ui.category), `${PREFIX}.interface.category ${JSON.stringify(ui.category)} must be one of: ${OPENAI_CATEGORIES.join(', ')}`);
+  check(Array.isArray(ui.capabilities), `${PREFIX}.interface.capabilities must be an array (Codex requires it; [] for none)`);
+  for (const key of ['websiteURL', 'supportURL', 'privacyPolicyURL', 'termsOfServiceURL']) {
+    check(typeof ui[key] === 'string' && ui[key].startsWith('https://') && ui[key].length <= 1024, `${PREFIX}.interface.${key} must be an https:// URL of at most 1,024 characters (MCP review requires it)`);
+  }
+  const prompts = ui.defaultPrompt ?? [];
+  check(Array.isArray(prompts) && prompts.length <= 3 && new Set(prompts).size === prompts.length, `${PREFIX}.interface.defaultPrompt must hold at most 3 unique prompts`);
+  for (const prompt of Array.isArray(prompts) ? prompts : []) check(isOneLine(prompt, 128), `${PREFIX}.interface.defaultPrompt "${prompt}" must be one line of at most 128 characters`);
+  for (const text of [ui.displayName, ui.shortDescription, ui.longDescription, ...(Array.isArray(prompts) ? prompts : [])]) {
+    const match = typeof text === 'string' && text.match(OPENAI_PROMOTION);
+    check(!match, `${PREFIX}.interface: listing text must not mention pricing, plans or promotions (found "${match?.[0]}")`);
+  }
+  for (const key of ['brandColor', 'brandColorDark']) check(ui[key] === undefined || /^#[0-9A-Fa-f]{6}$/.test(ui[key]), `${PREFIX}.interface.${key} must be #RRGGBB`);
+  for (const key of ['logo', 'composerIcon']) check(typeof ui[key] === 'string', `${PREFIX}.interface.${key} is required`);
+  for (const key of ['logo', 'logoDark', 'composerIcon', 'composerIconDark']) {
+    if (ui[key] === undefined) continue;
+    check(ui[key].startsWith('./') && (await exists(ui[key])), `${PREFIX}.interface.${key} ${ui[key]} must be a ./ path to an existing file`);
+  }
+  // Screenshots are accepted only for a server whose tool scan reports a UI output template; Calven has none.
+  check(ui.screenshots === undefined, `${PREFIX}.interface.screenshots must be left out: OpenAI accepts them only for MCP servers with custom UI`);
+  check(!openai.onboardingSkill || (/^\.\/skills\/[^/]+\/SKILL\.md$/.test(openai.onboardingSkill) && (await exists(openai.onboardingSkill))), `${PREFIX}.onboardingSkill ${openai.onboardingSkill} must be the ./skills/<name>/SKILL.md file`);
+  check(openai.apps === undefined && openai.hooks === undefined, `${PREFIX}: apps and hooks cannot be submitted`);
+
+  const cases = openai.review?.test_cases ?? {};
+  check(Array.isArray(cases.positive) && cases.positive.length === 5, `${PREFIX}.review.test_cases.positive must hold exactly 5 cases`);
+  check(Array.isArray(cases.negative) && cases.negative.length === 3, `${PREFIX}.review.test_cases.negative must hold exactly 3 cases`);
+  for (const [kind, fields] of [['positive', ['description', 'prompt', 'tools_triggered', 'expected_behavior']], ['negative', ['description', 'prompt', 'expected_behavior']]]) {
+    for (const [index, testCase] of (Array.isArray(cases[kind]) ? cases[kind] : []).entries()) {
+      for (const field of fields) check(isText(testCase?.[field], 4000), `${PREFIX}.review.test_cases.${kind}[${index}].${field} must be a non-empty string`);
+      if (kind !== 'positive' || typeof testCase?.tools_triggered !== 'string') continue;
+      for (const tool of testCase.tools_triggered.split(',').map((name) => name.trim())) {
+        check(EXPECTED_TOOLS.includes(tool), `${PREFIX}.review.test_cases.positive[${index}].tools_triggered names unknown tool ${tool}`);
+      }
+    }
+  }
+  check(typeof openai.review?.commerce === 'boolean', `${PREFIX}.review.commerce must be true or false`);
+  check(isText(openai.publication?.release_notes, 4000), `${PREFIX}.publication.release_notes is required`);
+  check(openai.review?.demo_recording_url === undefined || String(openai.review.demo_recording_url).startsWith('https://'), `${PREFIX}.review.demo_recording_url must be an https:// URL`);
+  forbiddenKeys('plugin.json', openai, ['extensions', 'com.openai']);
+}
+
+// The OpenAI auth declaration is added to mcp.json only in the OpenAI package (package-openai.mjs): the Agent
+// Plugins schema allows no extensions on a server entry, so the repository copy stays portable.
+forbiddenKeys('mcp.json', portableMcp);
 
 const catalog = await readFile(path.join(ROOT, 'docs/tool-catalog.md'), 'utf8');
 const catalogTools = [...catalog.matchAll(/^\| `([a-z0-9_]+)` \|/gm)].map((match) => match[1]);

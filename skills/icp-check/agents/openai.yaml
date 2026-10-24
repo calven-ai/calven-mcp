@@ -1,0 +1,10 @@
+interface:
+  display_name: "ICP check"
+  short_description: "Accounts checked against the approved ICP"
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "calven"
+      description: "Calven workspace: GTM strategy, evidence and Insights"
+      transport: "streamable_http"
+      url: "https://api.calven.ai/mcp"

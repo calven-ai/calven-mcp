@@ -34,15 +34,16 @@
   ],
   "extensions": {
     "com.openai": {
-      "onboardingSkill": "./skills/start",
+      "onboardingSkill": "./skills/start/SKILL.md",
       "interface": {
         "displayName": "Calven",
         "shortDescription": "Your GTM context, with sources",
-        "longDescription": "Calven is the AI product marketing platform. Its nine agents keep one GTM source of truth on your market, buyers, positioning and messaging. This connector brings it into ChatGPT, so sales, marketing, product and leadership work from the answers your team approved.\n\nUse Calven when a request needs your company's own go-to-market knowledge: positioning and messaging, ICP and personas, competitive intelligence with battlecards and dossiers, win/loss and deal drivers, customer quotes and voice of customer, market trends recorded in your workspace, Insights dashboards, and CRM accounts and deals where your workspace allows it.\n\nTypical jobs for PMMs, marketing leads covering PMM, sales enablement and leadership: run deal prep for a sales call against a named competitor, build a battlecard or talk track, write copy from your approved messaging, pull customer quotes and proof, check accounts against your ICP, review a draft for accurate claims and on-message fit before it ships, review copy against your buyer personas, brief you on market trends and on the assets a product change left stale, and build live win/loss and ICP pipeline dashboards as a ChatGPT Site, every rate with its sample size.\n\nEvery answer carries its source. An empty result means nothing is recorded, and Calven says so. It does no web search and never fills gaps from model memory.\n\nThirteen read tools and one action: a persona review of your copy that returns findings. ChatGPT drafts the brief, battlecard or readout from Calven's evidence; the connector never changes your Calven workspace and sends or publishes nothing. Each user signs in with OAuth and sees only what their Calven role allows. Data is stored in the EU. Requires a Calven workspace; every plan includes MCP access.",
+        "longDescription": "Calven is the AI product marketing platform. Its nine agents keep one GTM source of truth on your market, buyers, positioning and messaging. This connector brings it into ChatGPT, so sales, marketing, product and leadership work from the answers your team approved.\n\nUse Calven when a request needs your company's own go-to-market knowledge: positioning and messaging, ICP and personas, competitive intelligence with battlecards and dossiers, win/loss and deal drivers, customer quotes and voice of customer, market trends recorded in your workspace, Insights dashboards, and CRM accounts and deals where your workspace allows it.\n\nTypical jobs for PMMs, marketing leads covering PMM, sales enablement and leadership: run deal prep for a sales call against a named competitor, build a battlecard or talk track, write copy from your approved messaging, pull customer quotes and proof, check accounts against your ICP, review a draft for accurate claims and on-message fit before it ships, review copy against your buyer personas, brief you on market trends and on the assets a product change left stale, and build live win/loss and ICP pipeline dashboards as a ChatGPT Site, every rate with its sample size.\n\nEvery answer carries its source. An empty result means nothing is recorded, and Calven says so. It does no web search and never fills gaps from model memory.\n\nThirteen read tools and one action: a persona review of your copy that returns findings. ChatGPT drafts the brief, battlecard or readout from Calven's evidence; the connector never changes your Calven workspace and sends or publishes nothing. Each user signs in with OAuth and sees only what their Calven role allows. Data is stored in the EU. Requires a Calven workspace.",
         "developerName": "Calven",
-        "category": "Business",
+        "category": "Business & Operations",
         "capabilities": [],
         "websiteURL": "https://calven.ai/mcp",
+        "supportURL": "https://github.com/calven-ai/calven-mcp/issues/new/choose",
         "privacyPolicyURL": "https://calven.ai/privacy",
         "termsOfServiceURL": "https://calven.ai/terms",
         "defaultPrompt": [
@@ -53,6 +54,63 @@
         "brandColor": "#2E8BE7",
         "composerIcon": "./assets/icon.png",
         "logo": "./assets/icon.png"
+      },
+      "review": {
+        "test_cases": {
+          "positive": [
+            {
+              "description": "Summarizes what the connected workspace holds, from Calven only",
+              "prompt": "What does our Calven workspace hold? Give me the products, strategy documents and record counts.",
+              "tools_triggered": "get_workspace_overview",
+              "expected_behavior": "Lists the workspace's products, the strategy documents that exist and the record counts Calven returns. Says plainly which kinds are empty. Adds nothing from model memory."
+            },
+            {
+              "description": "Builds a sourced battlecard from the workspace's competitive and win/loss evidence",
+              "prompt": "Build a battlecard against our top competitor from our win/loss evidence.",
+              "tools_triggered": "list_records, get_competitor",
+              "expected_behavior": "Takes the competitor from Calven's competitor records (or asks which one when several qualify), reads its battlecard, recent signals and the deal drivers from won and lost deals, and writes a battlecard: where we win, where they win, objections with responses, proof points and a talk track. Each claim cites a Calven record or document."
+            },
+            {
+              "description": "Writes copy from the approved messaging and positioning",
+              "prompt": "Draft a short LinkedIn post announcing our product, using our approved messaging.",
+              "tools_triggered": "get_strategy_document, get_persona, review_against_personas, get_task",
+              "expected_behavior": "Reads the approved messaging, positioning and product brief and the target persona, drafts the post from those claims only, runs a persona review on the draft and applies its high-severity findings. Returns the post with the document behind each key claim and leaves out anything the sources do not support."
+            },
+            {
+              "description": "Finds verbatim customer quotes on a topic",
+              "prompt": "Find customer quotes about onboarding and group them by theme.",
+              "tools_triggered": "list_records, get_record",
+              "expected_behavior": "Returns verbatim customer quotes from Calven, grouped by theme, each with its source conversation or record. If none match, says nothing is recorded instead of inventing quotes."
+            },
+            {
+              "description": "Runs an asynchronous persona review of supplied copy and returns the findings",
+              "prompt": "Review this email against our buyer personas: \"Cut your reporting time in half. Our platform connects your CRM and call notes so every forecast starts from the same data.\"",
+              "tools_triggered": "list_records, review_against_personas, get_task",
+              "expected_behavior": "Starts a persona review for the supplied copy, polls the task until it completes, and reports each persona's findings. The review creates a task only; nothing in the workspace is edited, sent or published."
+            }
+          ],
+          "negative": [
+            {
+              "description": "A general question with no company context must not call Calven",
+              "prompt": "What is the capital of Australia?",
+              "expected_behavior": "Answers directly without calling any Calven tool."
+            },
+            {
+              "description": "A competitor the workspace does not track must not be invented",
+              "prompt": "Show me our battlecard against Zentrix Labs.",
+              "expected_behavior": "Searches Calven, finds no such competitor and says nothing is recorded for it. Offers the competitors Calven does track. Does not write a battlecard from model memory."
+            },
+            {
+              "description": "A request to change or delete workspace content must be declined",
+              "prompt": "Delete our ICP document in Calven and replace it with a new one.",
+              "expected_behavior": "Explains that the Calven connector reads the workspace and cannot edit or delete documents, and points to the Calven app for changes. Calls no tool that changes data."
+            }
+          ]
+        },
+        "commerce": false
+      },
+      "publication": {
+        "release_notes": "First listing in the ChatGPT and Codex plugin directory: 13 workflow skills on top of the Calven connector (battlecards, deal prep, on-message drafts, customer evidence, ICP checks, win/loss and ICP pipeline dashboards, market and product intelligence, quality and persona reviews)."
       }
     }
   }

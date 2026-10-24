@@ -44,12 +44,27 @@ The plugin adds workflow instructions. It does not change authentication, permis
 | Claude Code | `.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json` | `.mcp.json` (`http`) | skills, agents |
 | Cursor | `.cursor-plugin/plugin.json` | `.mcp.json` | skills, agents, rules |
 | Agent Plugins 1.0 | `plugin.json` | `mcp.json` (`streamable-http`) | skills |
-| ChatGPT and Codex | `plugin.json`, `extensions.com.openai` (listing fields, onboarding skill `start`) | `mcp.json` | skills |
+| ChatGPT and Codex | `plugin.json`, `extensions.com.openai` (listing fields, onboarding skill `start`, review test cases) | `mcp.json`, plus the OpenAI auth block in the packaged copy | skills, each with `agents/openai.yaml` |
 | Official MCP Registry | `server.json` | `remotes[]` | none |
 
 The Agent Plugins package standardizes skills and the MCP connection only. Clients that implement it can import the root package; the subagent, the Cursor rule, typed-only invocation and how a skill is invoked depend on the client, and the client-specific manifests stay available. Agent Plugins requires the root `mcp.json` name and its portable transport vocabulary; Claude Code and Cursor read `.mcp.json`. All three point at the same endpoint, and `npm run validate --prefix scripts` fails if they drift, if the manifests disagree on name or version, or if a listed icon is missing. CI also runs `claude plugin validate --strict`.
 
 `.claude-plugin/plugin.json` carries the fields Anthropic's directory reads for the listing: `icon`, `documentationUrl`, `supportUrl`, `privacyPolicyUrl` and `termsOfServiceUrl`.
+
+## ChatGPT and Codex directory
+
+ChatGPT and Codex share one plugin directory. OpenAI takes a ZIP upload, not this repository:
+
+```sh
+npm run package:openai --prefix scripts            # dist/calven-openai-<version>.zip
+npm run package:openai --prefix scripts -- --draft # without the demo recording, for a test upload
+```
+
+The script runs the validator, then packs `plugin.json`, `mcp.json`, `skills/`, the listed icons and `LICENSE`. It adds the OpenAI auth declaration (OAuth with a CIMD client) to the packaged `mcp.json` only, because the Agent Plugins schema allows no extensions on a server entry. Upload the ZIP in the OpenAI Platform under **Plugins**, through **With MCP**.
+
+`plugin.json` holds everything OpenAI reviews from the package: the listing under `extensions.com.openai.interface`, five positive and three negative test cases under `review.test_cases`, `review.demo_recording_url` and `publication.release_notes`. The reviewer account's credentials go in the portal's **Review details** form, never in the repository. Each skill's `agents/openai.yaml` gives ChatGPT and Codex its display name, its invocation policy (`start` runs only when typed) and its dependency on the Calven server.
+
+`npm run validate --prefix scripts` checks OpenAI's rules: the category list, listing lengths and URLs, no pricing or plan language, no screenshots (OpenAI accepts them only for servers with custom UI), the onboarding skill path, the test-case counts and tool names, and no secrets or reviewer details in the package.
 
 ## Evals
 
