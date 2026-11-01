@@ -1,0 +1,23 @@
+schema_version: "1.1"
+name: icp-check-1
+description: Routing. This request should load icp-check and no other Calven skill.
+tags: [routing]
+runs: 2
+execution:
+  max_turns: 20
+  allowed_tools: [Skill, Agent]
+  prompt: |-
+    Are these accounts in our ICP? Globex, Hooli and Initrode.
+graders:
+  - name: no-other-skill
+    type: tool_used
+    tool: Skill
+    input_match: '"skill"\s*:\s*"(?:[\w-]+:)?(battlecard|deal-prep|quality-review|persona-copy-review|on-message-draft|customer-evidence|icp-pipeline-review|win-loss-review|market-research|product-intelligence|gtm-overview|start)"'
+    min: 0
+    max: 0
+    arm: both
+  - name: right-skill
+    type: tool_used
+    tool: Skill
+    input_match: '"skill"\s*:\s*"(?:[\w-]+:)?(icp-check)"'
+    arm: both

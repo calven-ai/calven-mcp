@@ -1,19 +1,20 @@
 """Shrink the repository's PNGs to a 256-colour palette (about 80% smaller).
 
 Run after re-rendering an image from the brand library:
-    python3 scripts/compress-images.py docs/assets/hero.png assets/screenshots/*.png
-Photographic or gradient-heavy images (the README hero and diagram) are dithered so
-gradients do not band; flat UI screenshots and icons are not.
+    python3 scripts/compress-images.py [--dither] <files>
+Pass --dither for photographic or gradient-heavy images (the README hero and diagram) so
+gradients do not band; leave it off for flat UI screenshots and icons.
 """
 import sys
 
 from PIL import Image
 
-DITHERED = {"hero.png", "mcp-diagram.png"}
+args = sys.argv[1:]
+dither = "--dither" in args
 
-for path in sys.argv[1:]:
+for path in (arg for arg in args if arg != "--dither"):
     image = Image.open(path)
-    if path.rsplit("/", 1)[-1] in DITHERED:
+    if dither:
         out = image.convert("RGB").quantize(256, method=Image.Quantize.MEDIANCUT, dither=Image.Dither.FLOYDSTEINBERG)
     elif image.mode == "RGBA":
         out = image.quantize(256, method=Image.Quantize.FASTOCTREE, dither=Image.Dither.NONE)

@@ -1,3 +1,4 @@
+import { execFileSync } from 'node:child_process';
 import { access, readFile, readdir } from 'node:fs/promises';
 import path from 'node:path';
 import process from 'node:process';
@@ -195,23 +196,58 @@ async function validatePluginComponents() {
   return count;
 }
 
-// Every eval case file and grader must parse, or claude plugin eval silently drops the case.
+// The plugin ships every tracked file, and Anthropic's directory holds a plugin over this many
+// files for a human reviewer on every release.
+const PLUGIN_FILE_CAP = 512;
+
+function validateFileCount() {
+  let files;
+  try {
+    files = execFileSync('git', ['ls-files', '-z'], { cwd: ROOT, encoding: 'utf8' }).split('\0').filter(Boolean);
+  } catch {
+    return null; // Not a git checkout: nothing ships from here.
+  }
+  check(files.length <= PLUGIN_FILE_CAP, `repository: ${files.length} tracked files, over the ${PLUGIN_FILE_CAP}-file plugin cap (see docs/plugin.md)`);
+  return files.length;
+}
+
+const GRADER_TYPES = new Set(['regex', 'tool_used', 'tool_order', 'file_exists', 'llm', 'baseline']);
+
+// Each case is one evals/<case>/case.yaml holding the prompt and every grader, which keeps the
+// file count down. A case that fails to parse is dropped by claude plugin eval, so check it here.
 async function validateEvals() {
   let count = 0;
   if (!(await exists('evals'))) return count;
   for (const absolute of await filesUnder(path.join(ROOT, 'evals'))) {
     const relative = path.relative(ROOT, absolute);
     if (relative.split(path.sep).includes('mocks')) continue;
-    if (!(relative.endsWith('prompt.md') || relative.includes(`${path.sep}graders${path.sep}`))) continue;
-    if (relative.endsWith('prompt.md')) count += 1;
-    const source = await readFile(absolute, 'utf8');
-    const frontmatter = source.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n/);
-    check(Boolean(frontmatter), `${relative}: missing YAML frontmatter`);
-    if (!frontmatter) continue;
+    if (path.basename(relative) === 'prompt.md' || relative.split(path.sep).includes('graders')) {
+      failures.push(`${relative}: put the prompt and graders in the case's case.yaml (one file per case; see docs/plugin.md)`);
+      continue;
+    }
+    if (path.basename(relative) !== 'case.yaml') continue;
+    count += 1;
+    let spec;
     try {
-      parseYaml(frontmatter[1]);
+      spec = parseYaml(await readFile(absolute, 'utf8'));
     } catch (error) {
-      failures.push(`${relative}: frontmatter is not valid YAML: ${error.message.split('\n')[0]}`);
+      failures.push(`${relative}: not valid YAML: ${error.message.split('\n')[0]}`);
+      continue;
+    }
+    const caseName = path.basename(path.dirname(absolute));
+    check(spec?.schema_version === '1.1', `${relative}: schema_version must be "1.1"`);
+    check(spec?.name === caseName, `${relative}: name must be the directory name, ${caseName}`);
+    check(typeof spec?.execution?.prompt === 'string' && spec.execution.prompt.trim() !== '', `${relative}: execution.prompt is missing`);
+    const graders = Array.isArray(spec?.graders) ? spec.graders : [];
+    check(graders.length > 0, `${relative}: needs at least one grader`);
+    const names = new Set();
+    for (const grader of graders) {
+      check(typeof grader?.name === 'string' && !names.has(grader.name), `${relative}: every grader needs a unique name`);
+      names.add(grader?.name);
+      check(GRADER_TYPES.has(grader?.type), `${relative}: grader ${grader?.name} has unknown type ${grader?.type}`);
+      if (['llm', 'baseline'].includes(grader?.type)) {
+        check(typeof grader.criteria === 'string' && grader.criteria.trim() !== '', `${relative}: grader ${grader.name} needs criteria`);
+      }
     }
   }
   return count;
@@ -480,6 +516,7 @@ check(JSON.stringify(catalogTools) === JSON.stringify(EXPECTED_TOOLS), 'docs/too
 await validateSkills();
 const componentCount = await validatePluginComponents();
 const evalCount = await validateEvals();
+const fileCount = validateFileCount();
 await validateUseCases();
 const exampleCount = await validateExamples();
 await validatePublicText();
@@ -505,4 +542,4 @@ if (failures.length > 0) {
   process.exit(1);
 }
 
-console.log(`Validated ${EXPECTED_TOOLS.length} tools, 7 manifests, ${exampleCount} client examples, endpoint URLs and tool counts in public docs, the portable skills, ${componentCount} agents and rules, ${evalCount} eval cases, and the use-case library.`);
+console.log(`Validated ${EXPECTED_TOOLS.length} tools, 7 manifests, ${exampleCount} client examples, endpoint URLs and tool counts in public docs, the portable skills, ${componentCount} agents and rules, ${evalCount} eval cases, and the use-case library${fileCount === null ? '' : `; ${fileCount} of ${PLUGIN_FILE_CAP} plugin files`}.`);

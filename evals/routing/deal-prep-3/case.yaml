@@ -1,0 +1,23 @@
+schema_version: "1.1"
+name: deal-prep-3
+description: Routing. This request should load deal-prep and no other Calven skill.
+tags: [routing]
+runs: 2
+execution:
+  max_turns: 20
+  allowed_tools: [Skill, Agent]
+  prompt: |-
+    Pre-call research for the Globex platform rollout opportunity, please.
+graders:
+  - name: no-other-skill
+    type: tool_used
+    tool: Skill
+    input_match: '"skill"\s*:\s*"(?:[\w-]+:)?(battlecard|quality-review|persona-copy-review|on-message-draft|customer-evidence|icp-check|icp-pipeline-review|win-loss-review|market-research|product-intelligence|gtm-overview|start)"'
+    min: 0
+    max: 0
+    arm: both
+  - name: right-skill
+    type: tool_used
+    tool: Skill
+    input_match: '"skill"\s*:\s*"(?:[\w-]+:)?(deal-prep)"'
+    arm: both

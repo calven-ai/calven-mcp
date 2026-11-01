@@ -61,7 +61,18 @@ Each case is a request a user would type, plus graders: an LLM rubric on the ans
 claude plugin eval . --judge-model sonnet
 ```
 
-To measure what the workflows add over the bare server, run the same cases against a copy of the plugin that keeps only `.claude-plugin/`, `.mcp.json` and `evals/`. Results from 2026-10-17 are in the pull request that added the evals. Regenerate the mock workspace with `python3 scripts/evals/gen_fixtures.py evals/mocks/calven` and the tool list with `python3 scripts/evals/gen_tools.py evals/mocks/calven/_tools.json`.
+To measure what the workflows add over the bare server, run the same cases against a copy of the plugin that keeps only `.claude-plugin/`, `.mcp.json` and `evals/`. Results from 2026-10-17 are in the pull request that added the evals.
+
+### Eval layout
+
+The plugin is the whole repository, so every tracked file ships to every user, and Anthropic's directory holds a plugin with more than 512 files for a reviewer on each release. The evals are therefore kept to as few files as `claude plugin eval` allows:
+
+- Each case is one `evals/<case>/case.yaml`: `schema_version: "1.1"`, `name` (the directory name), `description`, `tags` and `runs` at the top; `max_turns`, `allowed_tools` and `prompt` under `execution`; and every grader in `graders`, each with a `name`, its usual keys, and for `llm` graders the rubric in `criteria`. Do not add `prompt.md` or `graders/*.md`: the eval runner accepts them, but they cost a file per grader. `claude plugin eval` has no format for several cases in one file, so a case stays one directory.
+- `evals/mocks/calven/<tool>.md` answers one tool. A tool that always gives the same answer holds its JSON in the body. A tool whose answer depends on an argument splices in one file per value, such as `{{file:fixtures/records-{input.kind}.json}}`. Mock substitution can only insert a whole file, so these fixtures stay one file per value.
+
+`npm run validate --prefix scripts` checks each `case.yaml` and fails if the repository tracks more than 512 files.
+
+Regenerate the mock workspace (the fixtures and the fixed tool mocks) with `python3 scripts/evals/gen_fixtures.py evals/mocks/calven` and the tool list with `python3 scripts/evals/gen_tools.py evals/mocks/calven/_tools.json`. Change workspace data in the generator, not in the JSON, so the next run keeps it.
 
 ## Source boundaries
 

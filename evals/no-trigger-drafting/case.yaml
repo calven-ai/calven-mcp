@@ -1,0 +1,22 @@
+schema_version: "1.1"
+name: no-trigger-drafting
+description: "A plain drafting request. No Calven workflow should fire, because the post does not describe the product."
+tags: [trigger, negative]
+runs: 2
+execution:
+  max_turns: 12
+  allowed_tools: [Skill, Agent]
+  prompt: |-
+    Draft a two-sentence LinkedIn post announcing that our team is hiring a data engineer in Lisbon.
+graders:
+  - name: has-post
+    type: regex
+    pattern: Lisbon
+    flags: i
+  - name: no-deal-prep
+    type: tool_used
+    tool: Skill
+    input_match: 'deal-prep|quality-review|win-loss-review|on-message-draft|customer-evidence'
+    min: 0
+    max: 0
+    arm: both

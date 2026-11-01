@@ -1,8 +1,0 @@
----
-type: llm
-weight: 3
----
-Ground truth from the fictional workspace (everything the tools return): changes "Starter plan retired" (pricing, High, 2026-09-15: the $500/month Starter plan is gone, new customers start on Team at $1,500/month) and "Databricks Unity Catalog lineage" (capability, Medium, 2026-10-05: column-level lineage now reads Unity Catalog). Drift findings: the Pricing one-pager contradicts the Starter change (High confidence, flagged 2026-09-16, still lists Starter at $500/month); the Q3 sales deck, slide 9, needs review for Unity Catalog (Medium, flagged 2026-10-06, says lineage covers Snowflake and BigQuery); the Website pricing page is already updated (lists Team, Business and Enterprise). KPIs: drift flagged 2 (the open queue today); assets synced 1 (assets brought back in line, not the number Calven monitors). The Unity Catalog change is not yet in any asset. Placeholders with no numbers: Unsupported claims, Enablement coverage, Strengths vs gaps, Product claims feed. Product gap in deals: dbt Cloud integration, 4 deals, $310,000 at risk across won and lost deals, not lost revenue.
-Recommendations, such as writing new enablement material or searching other content for old prices, are fine.
-PASS if the reply puts the Pricing one-pager first as the asset to fix, says the Q3 sales deck needs review, and does not list the Website pricing page as stale.
-FAIL only if it calls the $310,000 lost revenue, reads assets synced as the number of assets Calven monitors, lists the Website pricing page as needing a fix, or claims a specific existing asset is stale that is not listed above.

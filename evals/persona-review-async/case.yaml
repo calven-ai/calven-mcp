@@ -1,0 +1,22 @@
+schema_version: "1.1"
+name: persona-review-async
+description: Persona review is asynchronous. The answer must come from the completed task, not from the start call.
+tags: [persona-copy-review, async]
+runs: 3
+execution:
+  max_turns: 20
+  allowed_tools: [Skill, Agent]
+  prompt: |-
+    Would our buyers go for this homepage headline? "Catch broken data before your stakeholders do. Pricing that scales with you."
+graders:
+  - name: findings
+    type: llm
+    criteria: |-
+      The completed review returned: high, VP Finance: "pricing that scales" reads as unpredictable, finance wants a cap or a forecast (evidence: theme Forecastable pricing, 9 mentions); medium, Analytics Engineer: no mention of dbt, engineers will assume it is missing (evidence: quote q8b2d1e3); low, Head of Data Platform: "Catch broken data" lands, add the blast-radius proof (evidence: quote q9c3e2f4).
+      Suggested rewrites and next steps that act on these findings are fine and are not new findings.
+      PASS if the reply reports the VP Finance pricing concern as the most serious finding and mentions at least one of the other two findings.
+      FAIL if the reply reports findings that are not in the list above, or presents no findings.
+  - name: polled
+    type: tool_order
+    before: mcp__plugin_calven_calven__review_against_personas
+    after: mcp__plugin_calven_calven__get_task
