@@ -1,0 +1,10 @@
+interface:
+  display_name: "GTM overview"
+  short_description: "Sourced summary of our strategy and evidence"
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "calven"
+      description: "Calven workspace: GTM strategy, evidence and Insights"
+      transport: "streamable_http"
+      url: "https://api.calven.ai/mcp"

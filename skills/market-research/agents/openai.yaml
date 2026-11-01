@@ -1,0 +1,10 @@
+interface:
+  display_name: "Market research"
+  short_description: "Trends, opportunities, verticals and signals"
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "calven"
+      description: "Calven workspace: GTM strategy, evidence and Insights"
+      transport: "streamable_http"
+      url: "https://api.calven.ai/mcp"

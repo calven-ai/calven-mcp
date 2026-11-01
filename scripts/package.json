@@ -8,7 +8,8 @@
   },
   "scripts": {
     "validate": "node validate.mjs",
-    "validate:offline": "node validate.mjs --offline"
+    "validate:offline": "node validate.mjs --offline",
+    "package:openai": "node package-openai.mjs"
   },
   "devDependencies": {
     "ajv": "8.20.0",
