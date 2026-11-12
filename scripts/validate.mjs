@@ -23,9 +23,12 @@ const EXPECTED_TOOLS = [
   'get_insight_detail',
   'review_against_personas',
   'get_task',
+  'list_my_inbox',
+  'get_inbox_item',
+  'resolve_inbox_items',
 ];
-// Tools that are not read-only. Prose such as "Thirteen read tools and one action" must agree with this split.
-const ACTION_TOOLS = ['review_against_personas'];
+// Tools that are not read-only. Prose such as "Fifteen read tools and two actions" must agree with this split.
+const ACTION_TOOLS = ['review_against_personas', 'resolve_inbox_items'];
 const READ_TOOL_COUNT = EXPECTED_TOOLS.length - ACTION_TOOLS.length;
 
 // Endpoint-looking URLs (any *.calven.ai host other than the website, with an `mcp` path segment)
@@ -149,7 +152,7 @@ async function validateSkills() {
 }
 
 function checkToolMentions(relative, source) {
-  const mentionedTools = [...source.matchAll(/`((?:get|list|read|review)_[a-z0-9_]+)`/g)].map((match) => match[1]);
+  const mentionedTools = [...source.matchAll(/`((?:get|list|read|review|resolve)_[a-z0-9_]+)`/g)].map((match) => match[1]);
   for (const tool of mentionedTools) {
     check(EXPECTED_TOOLS.includes(tool), `${relative}: references unknown tool ${tool}`);
   }

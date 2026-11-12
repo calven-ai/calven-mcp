@@ -136,7 +136,7 @@ Check every product, pricing and competitor claim in this draft against our appr
 Your assistant reads, with sources: positioning, messaging, ICP and product brief; competitor dossiers and battlecards; personas; calls, customer quotes and win/loss; market trends; Insights dashboards; and CRM accounts and deals where your workspace allows it.
 
 - **Results carry their sources.** An empty result says nothing is recorded. Calven does no web search, and its server instructions tell the model not to fill gaps from its own knowledge.
-- **Thirteen read tools and one review action**, listed in the [tool catalog](docs/tool-catalog.md), plus four server prompts. The action, `review_against_personas`, starts a review task in Calven and returns findings. No tool edits your workspace content, and nothing is published or sent.
+- **Fifteen read tools and two actions**, listed in the [tool catalog](docs/tool-catalog.md), plus four server prompts. `review_against_personas` starts a review task in Calven and returns findings. `resolve_inbox_items` decides items in your own Calven inbox when you ask it to: publish or discard a draft an agent wrote, approve or discard a record an agent proposed, answer an agent's question. Your client asks before running it. Nothing is sent outside Calven.
 - **Your permissions.** Each user signs in as themselves and sees only what their Calven role allows. Admins decide whether transcripts and pipeline are readable over MCP. Removing a user removes their MCP access.
 
 > [!IMPORTANT]
