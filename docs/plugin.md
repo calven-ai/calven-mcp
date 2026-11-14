@@ -12,6 +12,14 @@ The Calven plugin packages the hosted MCP connection with workflows that turn Ca
 
 After installing, run `/calven:start` in Claude Code. It checks the connection, reports what your workspace holds and suggests three first prompts built from it.
 
+## Claude directory bundle
+
+Claude Code's marketplace entry and the Anthropic directory use `plugins/calven/`. This folder is generated from the root skills, agent, Claude manifest, MCP configuration, README and icon. The generator copies workflow files without changing their content and includes the remote MCP configuration inline in the generated manifest.
+
+Run `npm run build:claude --prefix scripts` after changing those sources. Both validation commands check that the generated folder matches its sources, and CI validates that folder with Claude Code. Do not edit the generated files directly. Submit `plugins/calven` as the plugin path in the Anthropic developer portal.
+
+The installed Claude bundle contains Markdown, JSON, a text license and one PNG. Repository development scripts, CI, eval tooling and other clients' manifests stay outside that folder.
+
 ## Contents
 
 | Path | Type | Purpose |
@@ -41,13 +49,13 @@ The plugin adds workflow instructions. It does not change authentication, permis
 
 | Format | Manifest | MCP config | Components |
 | --- | --- | --- | --- |
-| Claude Code | `.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json` | `.mcp.json` (`http`) | skills, agents |
+| Claude Code | `.claude-plugin/marketplace.json` points to `plugins/calven/.claude-plugin/plugin.json` | Inline in the generated manifest (`http`) | skills, agents |
 | Cursor | `.cursor-plugin/plugin.json` | `.mcp.json` | skills, agents, rules |
 | Agent Plugins 1.0 | `plugin.json` | `mcp.json` (`streamable-http`) | skills |
 | ChatGPT and Codex | `plugin.json`, `extensions.com.openai` (listing fields, onboarding skill `start`) | `mcp.json` | skills |
 | Official MCP Registry | `server.json` | `remotes[]` | none |
 
-The Agent Plugins package standardizes skills and the MCP connection only. Clients that implement it can import the root package; the subagent, the Cursor rule, typed-only invocation and how a skill is invoked depend on the client, and the client-specific manifests stay available. Agent Plugins requires the root `mcp.json` name and its portable transport vocabulary; Claude Code and Cursor read `.mcp.json`. All three point at the same endpoint, and `npm run validate --prefix scripts` fails if they drift, if the manifests disagree on name or version, or if a listed icon is missing. CI also runs `claude plugin validate --strict`.
+The Agent Plugins package standardizes skills and the MCP connection only. Clients that implement it can import the root package; the subagent, the Cursor rule, typed-only invocation and how a skill is invoked depend on the client, and the client-specific manifests stay available. Agent Plugins requires the root `mcp.json` name and its portable transport vocabulary. Cursor reads `.mcp.json`; the Claude bundle embeds that same connection in its manifest. All three point at the same endpoint, and `npm run validate --prefix scripts` fails if they drift, if the manifests disagree on name or version, or if a listed icon is missing. CI also runs `claude plugin validate --strict`.
 
 `.claude-plugin/plugin.json` carries the fields Anthropic's directory reads for the listing: `icon`, `documentationUrl`, `supportUrl`, `privacyPolicyUrl` and `termsOfServiceUrl`.
 
