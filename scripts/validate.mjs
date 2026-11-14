@@ -442,6 +442,7 @@ check(compatibilityMcp.mcpServers?.calven?.url === ENDPOINT, '.mcp.json: endpoin
 const claudePlugin = await json('.claude-plugin/plugin.json');
 const claudeMarketplace = await json('.claude-plugin/marketplace.json');
 const cursorPlugin = await json('.cursor-plugin/plugin.json');
+const claudeBundle = await json('plugins/calven/.claude-plugin/plugin.json');
 for (const [file, manifest] of [['.claude-plugin/plugin.json', claudePlugin], ['.cursor-plugin/plugin.json', cursorPlugin]]) {
   check(manifest.name === plugin.name, `${file}: name must match plugin.json (${plugin.name})`);
   check(manifest.version === plugin.version, `${file}: version must match plugin.json (${plugin.version})`);
@@ -452,7 +453,7 @@ check(claudePlugin.description === cursorPlugin.description, '.cursor-plugin/plu
 check(typeof claudePlugin.description === 'string' && claudePlugin.description.length <= 200, `.claude-plugin/plugin.json: description must be 200 characters or fewer (got ${claudePlugin.description?.length})`);
 const marketplaceEntry = claudeMarketplace.plugins?.find((entry) => entry.name === plugin.name);
 check(Boolean(marketplaceEntry), `.claude-plugin/marketplace.json: no entry named ${plugin.name}`);
-check(marketplaceEntry?.source === './', '.claude-plugin/marketplace.json: the plugin source must be the repository root ("./")');
+check(marketplaceEntry?.source === './plugins/calven', '.claude-plugin/marketplace.json: the plugin source must be the generated Claude bundle ("./plugins/calven")');
 check(marketplaceEntry?.version === undefined, '.claude-plugin/marketplace.json: leave version out; .claude-plugin/plugin.json sets it');
 for (const key of ['documentationUrl', 'supportUrl', 'privacyPolicyUrl', 'termsOfServiceUrl']) {
   check(typeof claudePlugin[key] === 'string' && claudePlugin[key].startsWith('https://'), `.claude-plugin/plugin.json: ${key} must be an https:// URL`);
@@ -489,11 +490,12 @@ await validateSchemas([
   ['mcp.json', portableMcp],
   ['.claude-plugin/plugin.json', claudePlugin],
   ['.claude-plugin/marketplace.json', claudeMarketplace],
+  ['plugins/calven/.claude-plugin/plugin.json', claudeBundle],
 ]);
 
 for (const absolute of await filesUnder(ROOT)) {
   const relative = path.relative(ROOT, absolute);
-  if (path.basename(relative) === 'package-lock.json' || relative === 'LICENSE') continue;
+  if (path.basename(relative) === 'package-lock.json' || ['LICENSE', 'plugins/calven/LICENSE'].includes(relative)) continue;
   const source = await readFile(absolute, 'utf8');
   check(!/cmcp_[A-Za-z0-9_-]{20,}/.test(source), `${relative}: looks like a committed Calven MCP key`);
   check(!/\bCalven\.ai\b|\bCalven AI\b/.test(source), `${relative}: use Calven as the brand name`);
@@ -505,4 +507,4 @@ if (failures.length > 0) {
   process.exit(1);
 }
 
-console.log(`Validated ${EXPECTED_TOOLS.length} tools, 7 manifests, ${exampleCount} client examples, endpoint URLs and tool counts in public docs, the portable skills, ${componentCount} agents and rules, ${evalCount} eval cases, and the use-case library.`);
+console.log(`Validated ${EXPECTED_TOOLS.length} tools, 8 manifests, ${exampleCount} client examples, endpoint URLs and tool counts in public docs, the portable skills, ${componentCount} agents and rules, ${evalCount} eval cases, and the use-case library.`);

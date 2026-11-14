@@ -7,8 +7,9 @@
     "node": ">=22"
   },
   "scripts": {
-    "validate": "node validate.mjs",
-    "validate:offline": "node validate.mjs --offline"
+    "build:claude": "node build-claude-plugin.mjs",
+    "validate": "node build-claude-plugin.mjs --check && node validate.mjs",
+    "validate:offline": "node build-claude-plugin.mjs --check && node validate.mjs --offline"
   },
   "devDependencies": {
     "ajv": "8.20.0",

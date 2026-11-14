@@ -8,10 +8,12 @@ This repository is the public distribution surface for Calven's hosted MCP serve
 - `plugin.json`, `mcp.json`, and `skills/` are the portable Agent Plugin.
 - `docs/tool-catalog.md` documents the public tools exposed by production.
 - `use-cases/` is generated from Calven's source and replaced whole on every sync. Do not hand-edit it.
-- `docs/assets/mcp-diagram.png` and `docs/assets/hero.png` are rendered from Calven's brand templates; re-render rather than edit. After re-rendering any PNG, run `python3 scripts/compress-images.py <files>`: the plugin installs the whole repository, so image weight lands on every user's disk.
+- `docs/assets/mcp-diagram.png` and `docs/assets/hero.png` are rendered from Calven's brand templates; re-render rather than edit. After re-rendering any PNG, run `python3 scripts/compress-images.py <files>`: image weight lands on users' disks when a client installs the repository root.
 - `https://api.calven.ai/mcp` is the only production endpoint.
 
 Keep `mcp.json`, `.mcp.json`, examples, documentation, and skills aligned with that endpoint. Run `npm ci --prefix scripts` once, then `npm run validate --prefix scripts` after every change.
+
+`plugins/calven/` is the generated Claude directory bundle. Edit its root sources, then run `npm run build:claude --prefix scripts`; never edit the generated files directly. The Claude marketplace entry points to that folder.
 
 ## Boundaries
 
