@@ -4,6 +4,7 @@ Notable changes to the Calven MCP server's public contract, the registry descrip
 
 ## [1.2.0] - Unreleased
 
+- Three inbox tools, bringing the catalog to 17: `list_my_inbox` and `get_inbox_item` read the agent work waiting for your decision, and `resolve_inbox_items` applies the decisions you ask for (publish or discard a draft, approve or discard a record, answer a question). The server is no longer read-only: `resolve_inbox_items` is annotated destructive, so clients ask before running it.
 - The plugin installs in Claude Code from this repository (`claude plugin marketplace add calven-ai/calven-mcp`, then `claude plugin install calven@calven`) and ships a Cursor manifest. Both reuse the same skills and `.mcp.json`.
 - Two new skills: `deal-prep` (a one-page call brief) and `claim-check` (fact-check a draft against the approved product brief and competitor evidence).
 - Two more skills: `/calven:win-loss-review` builds a monthly or quarterly readout; `/calven:start` (typed only) checks the connection and suggests first prompts from your workspace.
