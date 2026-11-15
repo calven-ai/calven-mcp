@@ -180,4 +180,13 @@ Skills load on their own when a request matches, except `start`, which runs only
 
 This repository is the public distribution surface for Calven's hosted MCP server; the server source is private. Manifests, validation and contribution rules are in [docs/](docs/) and [CONTRIBUTING.md](CONTRIBUTING.md). Report security issues through [SECURITY.md](SECURITY.md).
 
+## More from Calven
+
+- [marketing-as-code](https://github.com/calven-ai/marketing-as-code): a template repo that keeps strategy, messaging and briefs as plain text for agents to read and write.
+- [demoverse](https://github.com/calven-ai/demoverse): synthetic B2B sales data: a fictional company's history in Salesforce, HubSpot, Google Drive and Slack.
+- [calven-migrate-from-klue](https://github.com/calven-ai/calven-migrate-from-klue): export your Klue cards and battlecards to Markdown and JSON on your machine.
+- [calven-migrate-from-crayon](https://github.com/calven-ai/calven-migrate-from-crayon): export your Crayon battlecards and win/loss stories to Markdown and JSON on your machine.
+
+All projects: [github.com/calven-ai](https://github.com/calven-ai)
+
 <p align="center"><sub>This repository is MIT licensed; the Calven service is not · <a href="https://calven.ai/privacy">Privacy</a> · <a href="https://calven.ai/terms">Terms</a></sub></p>
