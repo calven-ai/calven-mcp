@@ -15,6 +15,7 @@ Notable changes to the Calven MCP server's public contract, the registry descrip
 - Plugin evals in `evals/`, run with `claude plugin eval` against a fictional mocked workspace, including skill-routing cases.
 - The `gtm-researcher` subagent's tools are an explicit allowlist of the 13 Calven read tools.
 - OpenAI listing fields and the onboarding skill in `plugin.json` under `extensions.com.openai`.
+- Ready for the ChatGPT and Codex plugin directory: the OpenAI category is `Business & Operations`, the listing has a support URL and no plan language, the onboarding skill points to `skills/start/SKILL.md`, and `plugin.json` carries the review test cases and release notes. Each skill has an `agents/openai.yaml`, and `npm run package:openai --prefix scripts` builds the upload ZIP with the OAuth (CIMD) declaration.
 - Listing icons and screenshots in `assets/`, and the Calven icon in the registry descriptor (`server.json` 1.2.0, `icons`).
 
 ## [1.1.0] - 2026-10-07

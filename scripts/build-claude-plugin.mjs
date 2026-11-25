@@ -72,6 +72,8 @@ const skillDirectories = (await readdir(path.join(ROOT, 'skills'), { withFileTyp
   .filter(entry => entry.isDirectory()).map(entry => entry.name).sort();
 for (const skill of skillDirectories) {
   for (const file of await files(path.join(ROOT, 'skills', skill))) {
+    // ChatGPT/Codex skill metadata; Claude never reads it.
+    if (file === 'agents/openai.yaml') continue;
     const relative = `skills/${skill}/${file}`;
     expected.set(relative, await source(relative));
   }

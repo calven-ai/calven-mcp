@@ -1,0 +1,10 @@
+interface:
+  display_name: "Product intelligence"
+  short_description: "Product changes and the assets they left stale"
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "calven"
+      description: "Calven workspace: GTM strategy, evidence and Insights"
+      transport: "streamable_http"
+      url: "https://api.calven.ai/mcp"
